@@ -11,7 +11,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.nihalvaidya123.foodcrunch.feature.Model.User;
+import com.nihalvaidya123.foodcrunch.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;

@@ -1,3 +1,20 @@
 <resources>
-    <string name="app_name">Food Crunch</string>
+    <string name="app_name">FoodCrunch</string>
+    <string name="slogan">No matter the time or place we will find you and we will feed you!</string>
+    <string name="Signup">no account ? SIGN UP !</string>
+    <string name="Signin">SIGN IN and eat fresh</string>
+    <string name="enter_your_phone_number">Enter your Phone </string>
+    <string name="_7208680470">7208680470</string>
+    <string name="enter_your_name">Enter your Name</string>
+    <string name="nihal">Nihal</string>
+    <string name="enter_your_password">Enter Password</string>
+    <string name="_11111111">11111111</string>
+    <string name="test1">sign in with   .   .   .google</string>
+    <string name="test2">sign in with facebook</string>
+    <string name="test3">sign in with linkedin</string>
+    <string name="test4">sign in with twitter</string>
+    <string name="test5">sign in with github</string>
+    <string name="test6">sign in with phone</string>
+    <string name="test7">test7</string>
+    <string name="test8">test8</string>
 </resources>
