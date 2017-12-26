@@ -1,4 +1,5 @@
 package com.nihalvaidya123.foodcrunch;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -11,6 +12,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nihalvaidya123.foodcrunch.Common.Common;
 import com.nihalvaidya123.foodcrunch.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,12 +52,16 @@ public class Signin extends AppCompatActivity {
                                 //&&(user.getName().equals(edtNmae.getText().toString())) for verifying name and password
                                     ){
                                 DatabaseReference myRef = database.getReference("message");
-
                                 myRef.setValue("Hello from sign in ");
+
+                                Intent homeIntent = new Intent(Signin.this,Home.class);
+                                Common.currentUser = user;
+                                startActivity(homeIntent);
                                 Toast.makeText(Signin.this, "Firebase Sign in successfull!", Toast.LENGTH_SHORT).show();
+                                finish();
+
                             } else {
                                 DatabaseReference myRef = database.getReference("message");
-
                                 myRef.setValue("user doesnt exist check phone");
                                 Toast.makeText(Signin.this, "Sign in FAILED Check your Credentials", Toast.LENGTH_SHORT).show();
                             }
@@ -63,7 +69,6 @@ public class Signin extends AppCompatActivity {
                         else
                         {
                             DatabaseReference myRef = database.getReference("message");
-
                             myRef.setValue("user doesnt exist from sign in ");
                             Toast.makeText(Signin.this, "User Doesnt exist Please SIGN UP", Toast.LENGTH_SHORT).show();
                         }
