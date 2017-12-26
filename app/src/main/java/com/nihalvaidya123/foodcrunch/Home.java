@@ -3,6 +3,7 @@ package com.nihalvaidya123.foodcrunch;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -13,14 +14,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.nihalvaidya123.foodcrunch.Common.Common;
+import com.nihalvaidya123.foodcrunch.Interface.ItemClickListener;
+import com.nihalvaidya123.foodcrunch.Model.Category;
+import com.nihalvaidya123.foodcrunch.ViewHolder.MenuViewHolder;
+import com.squareup.picasso.Picasso;
 
-public class Home extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+
+public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     FirebaseDatabase database;
     DatabaseReference category;
     TextView txtFullName;
@@ -60,8 +68,37 @@ public class Home extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerView = navigationView.getHeaderView(0);
-        txtFullName =(TextView)findViewById(R.id.txtFullName);
+        txtFullName =(TextView)headerView.findViewById(R.id.txtFullName);
         txtFullName.setText(Common.currentUser.getName());
+
+        //load da menu
+            recycler_menu = (RecyclerView)findViewById(R.id.recycler_menu);
+            recycler_menu.setHasFixedSize(true);
+            layoutManager =new LinearLayoutManager(this);
+            recycler_menu.setLayoutManager(layoutManager);
+            
+            loadMenu();
+    }
+
+    private void loadMenu() {
+
+        FirebaseRecyclerAdapter<Category,MenuViewHolder>adapter =new FirebaseRecyclerAdapter<Category,
+                MenuViewHolder>(Category.class,R.layout.menu_item,MenuViewHolder.class,category) {
+            @Override
+            protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
+                viewHolder.txtMenuName.setText(model.getName());
+                Picasso.with(getBaseContext()).load(model.getImage())
+                        .into(viewHolder.imageView);
+                final Category clickItem = model;
+                viewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void ocClick(View v, int position, boolean isLongClick) {
+                        Toast.makeText(Home.this,""+clickItem.getName(),Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        };
+        recycler_menu.setAdapter(adapter);
     }
 
     @Override
@@ -89,9 +126,9 @@ public class Home extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -102,20 +139,15 @@ public class Home extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-//        if (id == R.id.nav_camera) {
-//            // Handle the camera action
-//        } else if (id == R.id.nav_gallery) {
-//
-//        } else if (id == R.id.nav_slideshow) {
-//
-//        } else if (id == R.id.nav_manage) {
-//
-//        } else if (id == R.id.nav_share) {
-//
-//        } else if (id == R.id.nav_send) {
-//
-//        }
+        if (id == R.id.nav_menu) {
 
+        } else if (id == R.id.nav_cart) {
+
+        } else if (id == R.id.nav_orders) {
+
+        } else if (id == R.id.nav_logout) {
+
+        }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;

@@ -57,8 +57,6 @@ public class Signin extends AppCompatActivity {
                                 Intent homeIntent = new Intent(Signin.this,Home.class);
                                 Common.currentUser = user;
                                 startActivity(homeIntent);
-                                Toast.makeText(Signin.this, "Firebase Sign in successfull!", Toast.LENGTH_SHORT).show();
-                                finish();
 
                             } else {
                                 DatabaseReference myRef = database.getReference("message");
