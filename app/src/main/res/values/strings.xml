@@ -17,4 +17,10 @@
     <string name="test6">sign in with phone</string>
     <string name="test7">test7</string>
     <string name="test8">test8</string>
+    <string name="title_activity_home">Home</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
 </resources>
