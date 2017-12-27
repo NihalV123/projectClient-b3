@@ -8,4 +8,7 @@
     <string name="cart">Cart</string>
     <string name="orders">Orders</string>
     <string name="sign_out">Sign Out</string>
+    <string name="food">Food</string>
+    <string name="food_name">Food Name</string>
+    <string name="todo">TODO</string>
 </resources>
