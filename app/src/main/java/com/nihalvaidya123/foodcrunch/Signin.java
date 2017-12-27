@@ -48,6 +48,9 @@ public class Signin extends AppCompatActivity {
                         if (dataSnapshot.child(edtPhone.getText().toString()).exists()) {
                             //get user info
                             User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+
+                            user.setPhone(edtPhone.getText().toString());
+
                             if ((user.getPassword().equals(edtPasswd.getText().toString()))
                                 //&&(user.getName().equals(edtNmae.getText().toString())) for verifying name and password
                                     ){
