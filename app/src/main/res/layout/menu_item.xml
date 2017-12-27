@@ -12,7 +12,7 @@
 
 
     <ImageView
-        android:contentDescription="Food Crunch"
+        android:contentDescription="@string/food_crunch"
         android:src="@drawable/background"
         android:id="@+id/menu_image"
         android:scaleType="centerCrop"
@@ -21,11 +21,11 @@
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
-        android:text="Name of Menu"
+        android:text="@string/name_of_menu"
         android:textColor="@android:color/white"
         android:background="@color/overlayBackground"
         android:id="@+id/menu_name"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:gravity="center"
         android:layout_alignParentBottom="true"
         android:layout_height="wrap_content" />
