@@ -6,7 +6,6 @@
     <string name="enter_your_phone_number">Enter your Phone </string>
     <string name="_7208680470">7208680470</string>
     <string name="enter_your_name">Enter your Name</string>
-    <string name="nihal">Nihal</string>
     <string name="enter_your_password">Enter Password</string>
     <string name="_11111111">11111111</string>
     <string name="test1">sign in with   .   .   .google</string>
@@ -21,11 +20,10 @@
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
-    <string name="action_settings">Settings</string>
     <string name="food_crunch">Food Crunch</string>
     <string name="name_of_food">Name of Food</string>
     <string name="name_of_menu">Name of Menu</string>
+    <string name="nihal">Nihal</string>
     <string name="menu">Menu</string>
     <string name="cart">Cart</string>
     <string name="orders">Orders</string>
@@ -33,4 +31,5 @@
     <string name="food">Food</string>
     <string name="food_name">Food Name</string>
     <string name="todo">TODO</string>
+    <string name="action_settings">Settings</string>
 </resources>
