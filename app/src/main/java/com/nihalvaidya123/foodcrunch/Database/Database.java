@@ -62,6 +62,13 @@ public class Database extends SQLiteAssetHelper{
             db.execSQL(query);
         }
 
+
+    public void clearCart(Order order)
+    {
+        SQLiteDatabase db = getReadableDatabase();
+        String query = String.format("DELETE FROM OrderDetail");
+        db.execSQL(query);
+    }
 }
 
 
