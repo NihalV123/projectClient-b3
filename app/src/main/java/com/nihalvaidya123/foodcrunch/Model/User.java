@@ -24,6 +24,14 @@ public class User {
         Name = name;
     }
 
+    public String getPhone() {
+        return Phone;
+    }
+
+    public void setPhone(String phone) {
+        Phone = phone;
+    }
+
     public String getPassword () {
         return Password;
     }

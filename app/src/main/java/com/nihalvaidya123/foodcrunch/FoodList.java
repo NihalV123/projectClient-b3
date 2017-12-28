@@ -64,7 +64,7 @@ public class FoodList extends AppCompatActivity {
                 final Food local = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
-                    public void ocClick(View v, int position, boolean isLongClick) {
+                    public void onClick(View v, int position, boolean isLongClick) {
                         //Toast.makeText(FoodList.this,""+local.getName(),Toast.LENGTH_SHORT).show();
                         //this is the third activity
                         Intent foodDetail = new Intent(FoodList.this,FoodDetail.class);

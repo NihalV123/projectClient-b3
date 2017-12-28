@@ -7,6 +7,6 @@ import android.view.View;
  */
 
 public interface ItemClickListener {
-    void ocClick(View v, int position, boolean isLongClick);
+    void onClick(View v, int position, boolean isLongClick);
 
 }

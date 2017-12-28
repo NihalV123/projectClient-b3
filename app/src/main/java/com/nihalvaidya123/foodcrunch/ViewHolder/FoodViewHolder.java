@@ -31,6 +31,6 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
     @Override
     public void onClick(View v) {
-        itemClickListener.ocClick(v,getAdapterPosition(),false);
+        itemClickListener.onClick(v,getAdapterPosition(),false);
     }
 }

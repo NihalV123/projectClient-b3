@@ -16,6 +16,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 }
 
 dependencies {
@@ -48,6 +52,7 @@ dependencies {
     implementation "com.amulyakhare:com.amulyakhare.textdrawable:1.0.1"
     implementation "com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1"
 }
+
 
 
 

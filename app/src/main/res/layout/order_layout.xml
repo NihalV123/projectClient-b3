@@ -4,8 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background"
     android:layout_margin="10dp"
+    android:background="@color/fbutton_color_transparent"
     app:cardElevation="5dp"
     >
 
@@ -28,35 +28,49 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/cart_item_name"
+                android:id="@+id/order_id"
                 android:layout_marginStart="10dp"
                 android:layout_gravity="center_vertical"
                 android:textAllCaps="true"
                 android:textStyle="bold"
-                android:text="@string/food_01"
+                android:text="@string/_11111"
                 />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/cart_item_Price"
+                android:id="@+id/order_status"
                 android:layout_marginStart="10dp"
                 android:layout_gravity="center_vertical"
                 android:textAllCaps="true"
                 android:textStyle="italic"
-                android:text="@string/_50"
+                android:text="@string/status"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/order_phone"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
+                android:textAllCaps="true"
+                android:textStyle="italic"
+                android:text="@string/_7208680470"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/order_address"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
+                android:textAllCaps="true"
+                android:textStyle="italic"
+                android:text="@string/b_604_mai_bhuvan_dadi_seth_rd_malad_west_mumbai_maharashtra"
                 />
 
         </LinearLayout>
 
-        <ImageView
-            android:layout_width="20dp"
-            android:id="@+id/cart_item_count"
-            android:layout_gravity="center_vertical"
-            android:layout_height="20dp"
-            android:layout_marginEnd="20dp"
-
-            android:contentDescription="@string/todo" />
 
 
     </LinearLayout>

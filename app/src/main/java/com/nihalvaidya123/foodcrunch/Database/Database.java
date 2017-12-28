@@ -52,14 +52,17 @@ public class Database extends SQLiteAssetHelper{
         public void addToCart(Order order)
         {
             SQLiteDatabase db = getReadableDatabase();
-            //below line important for cart
-            String query = String.format("INSERT INTO OrderDetail (ProductId,ProductName,Quantity,Price,Discount) VALUES ('%s','%s','%s','%s','%s');"+
+            //Damn bro a single comma took me 42 hours to debug sql is a bitch
+            String query = String.format("INSERT INTO OrderDetail (ProductId,ProductName,Quantity,Price,Discount) " +
+                            "VALUES ('%s','%s','%s','%s','%s');",
                     order.getProductId(),
                     order.getProductName(),
                     order.getQuantity(),
                     order.getPrice(),
                     order.getDiscount());
             db.execSQL(query);
+
+            //above code not working
         }
 
 

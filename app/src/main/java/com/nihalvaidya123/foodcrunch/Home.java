@@ -97,7 +97,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 final Category clickItem = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
-                    public void ocClick(View v, int position, boolean isLongClick) {
+                    public void onClick(View v, int position, boolean isLongClick) {
                 //category is key
                         Intent foodList = new Intent (Home.this,FoodList.class);
                         foodList.putExtra("CategoryId",adapter.getRef(position).getKey());
@@ -152,11 +152,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if (id == R.id.nav_menu) {
 
         } else if (id == R.id.nav_cart) {
-
+                Intent cartIntent = new Intent (Home.this,Cart.class);
+                startActivity(cartIntent);
         } else if (id == R.id.nav_orders) {
-
+            Intent orderIntent = new Intent (Home.this,OrderStatus.class);
+            startActivity(orderIntent);
         } else if (id == R.id.nav_logout) {
-
+            Intent signIn = new Intent (Home.this,Signin.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
