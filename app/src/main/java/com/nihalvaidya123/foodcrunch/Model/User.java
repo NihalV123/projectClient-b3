@@ -9,15 +9,12 @@ public class User {
     public User (){
     }
 
-    public User (String name, String password, String phone ) {
+    public User (String name, String password) {
         Name = name;
-        Phone = phone;
+
         Password = password;
     }
 
-    public User(String s, String s1) {
-
-    }
 
     public String getName() {
         return Name;
@@ -35,11 +32,5 @@ public class User {
         Password = password;
     }
 
-    public String getPhone() {
-        return Phone;
-    }
 
-    public void setPhone(String phone) {
-        Phone = phone;
-    }
 }

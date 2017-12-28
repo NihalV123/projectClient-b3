@@ -43,29 +43,30 @@ public class FoodDetail extends AppCompatActivity {
         foods = database.getReference("Foods");
 
         //actual view
-        numberButton = (ElegantNumberButton)findViewById(R.id.number_button);
-        btnCart = (FloatingActionButton)findViewById(R.id.btnCart);
+        numberButton = findViewById(R.id.number_button);
+        btnCart = findViewById(R.id.btnCart);
 
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Database(getBaseContext()).addToCart(new Order(
-                    foodId,
+                        foodId,
                         currentFood.getName(),
                         numberButton.getNumber(),
                         currentFood.getPrice(),
                         currentFood.getDiscount()
+
                 ));
                 Toast.makeText(FoodDetail.this,"Added to cart",Toast.LENGTH_SHORT).show();
 
             }
         });
 
-        food_description = (TextView)findViewById(R.id.food_description);
-        food_price = (TextView)findViewById(R.id.food_price);
-        food_name = (TextView)findViewById(R.id.food_name);
-        food_image= (ImageView)findViewById(R.id.img_food);
-        collapsingToolbarLayout=(CollapsingToolbarLayout)findViewById(R.id.collapsing);
+        food_description = findViewById(R.id.food_description);
+        food_price = findViewById(R.id.food_price);
+        food_name = findViewById(R.id.food_name);
+        food_image= findViewById(R.id.img_food);
+        collapsingToolbarLayout= findViewById(R.id.collapsing);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandededAppBar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
 

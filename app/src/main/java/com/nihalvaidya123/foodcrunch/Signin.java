@@ -29,10 +29,10 @@ public class Signin extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
-        edtNmae=(MaterialEditText)findViewById(R.id.edtName);
-        edtPasswd=(MaterialEditText)findViewById(R.id.edtPasswd);
-        edtPhone=(MaterialEditText)findViewById(R.id.edtPhone);
-        BtnSignin = (Button)findViewById(R.id.btnSignin);
+        edtNmae= findViewById(R.id.edtName);
+        edtPasswd= findViewById(R.id.edtPasswd);
+        edtPhone= findViewById(R.id.edtPhone);
+        BtnSignin = findViewById(R.id.btnSignin);
 
         //on with the firebase
 
@@ -49,7 +49,7 @@ public class Signin extends AppCompatActivity {
                             //get user info
                             User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
 
-                            user.setPhone(edtPhone.getText().toString());
+                           // user.setPhone(edtPhone.getText().toString());
 
                             if ((user.getPassword().equals(edtPasswd.getText().toString()))
                                 //&&(user.getName().equals(edtNmae.getText().toString())) for verifying name and password

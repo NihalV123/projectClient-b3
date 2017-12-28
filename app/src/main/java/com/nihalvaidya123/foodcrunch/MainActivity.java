@@ -30,19 +30,19 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BtnSignIn=(Button)findViewById(R.id.btnSignin);
-        BtnSignUp=(Button)findViewById(R.id.btnSignup);
+        BtnSignIn= findViewById(R.id.btnSignin);
+        BtnSignUp= findViewById(R.id.btnSignup);
 
-        btnTest1=(Button)findViewById(R.id.btntest1);
-        btnTest2=(Button)findViewById(R.id.btntest2);
-        btnTest3=(Button)findViewById(R.id.btntest3);
-        btnTest4=(Button)findViewById(R.id.btntest4);
-        btnTest5=(Button)findViewById(R.id.btntest5);
-        btnTest6=(Button)findViewById(R.id.btntest6);
-        btnTest7=(Button)findViewById(R.id.btntest7);
-        btnTest8=(Button)findViewById(R.id.btntest8);
+        btnTest1= findViewById(R.id.btntest1);
+        btnTest2= findViewById(R.id.btntest2);
+        btnTest3= findViewById(R.id.btntest3);
+        btnTest4= findViewById(R.id.btntest4);
+        btnTest5= findViewById(R.id.btntest5);
+        btnTest6= findViewById(R.id.btntest6);
+        btnTest7= findViewById(R.id.btntest7);
+        btnTest8= findViewById(R.id.btntest8);
 
-        txtSlogan=(TextView)findViewById(R.id.txtslogan);
+        txtSlogan= findViewById(R.id.txtslogan);
         Typeface face = Typeface.createFromAsset(getAssets(),"fonts/NABILA.TTF");
         txtSlogan.setTypeface(face);
 

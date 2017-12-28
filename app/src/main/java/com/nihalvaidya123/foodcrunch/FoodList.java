@@ -36,7 +36,7 @@ public class FoodList extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         foodList =database.getReference("Foods");
 
-        recycler_menu =(RecyclerView)findViewById(R.id.recycler_food);
+        recycler_menu = findViewById(R.id.recycler_food);
         recycler_menu.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);

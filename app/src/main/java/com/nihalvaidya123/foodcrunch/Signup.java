@@ -33,10 +33,10 @@ public class Signup extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        edtNmae=(MaterialEditText)findViewById(R.id.edtName);
-        edtPasswd=(MaterialEditText)findViewById(R.id.edtPasswd);
-        edtPhone=(MaterialEditText)findViewById(R.id.edtPhone);
-        BtnSignup = (Button)findViewById(R.id.btnSignup);
+        edtNmae= findViewById(R.id.edtName);
+        edtPasswd= findViewById(R.id.edtPasswd);
+        edtPhone= findViewById(R.id.edtPhone);
+        BtnSignup = findViewById(R.id.btnSignup);
 
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference usersRef = rootRef.child("User");
