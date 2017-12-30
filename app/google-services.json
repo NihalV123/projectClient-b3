@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "753189746480",
+    "firebase_url": "https://foodcrunch-d6e64.firebaseio.com",
+    "project_id": "foodcrunch-d6e64",
+    "storage_bucket": "foodcrunch-d6e64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753189746480:android:64d09084ab2420bb",
+        "android_client_info": {
+          "package_name": "com.nihalvaidya123.foodcrunch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "753189746480-nkhu03v2uvop0a9rhjtr7kp0g0r30l74.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nihalvaidya123.foodcrunch",
+            "certificate_hash": "77b7e434212a0d9bd7d08c33c071d862b7257a04"
+          }
+        },
+        {
+          "client_id": "753189746480-iq3tv9gi8rbl5cj23p0je2pqo8l4fq5v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNkTEjQGHM4ch-OICDbBogLEmwBbIiqwU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "753189746480-iq3tv9gi8rbl5cj23p0je2pqo8l4fq5v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
