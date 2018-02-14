@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context="a123.vaidya.nihal.foodcrunchclient.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:orientation="vertical"
+        android:paddingBottom="200dp"
+        android:paddingTop="10dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/appCompatImageView"
+            android:layout_width="match_parent"
+            android:layout_height="166dp"
+            android:gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"
+            android:src="@drawable/untitled" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtslogan"
+            android:layout_width="403dp"
+            android:layout_height="274dp"
+            android:gravity="center"
+            android:paddingLeft="40dp"
+            android:paddingRight="40dp"
+            android:text="@string/slogan"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:paddingBottom="60dp">
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btnSignup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="@string/Signup"
+            android:textColor="@android:color/white"
+            app:buttonColor="@color/colorAccent"
+            app:shadowColor="@android:color/black"
+            app:shadowHeight="5dp" />
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btnSignin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="@string/Signin"
+            android:textColor="@android:color/white"
+            app:shadowColor="@android:color/black"
+            app:shadowHeight="5dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:paddingBottom="5dp">
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btntest1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="@string/test1"
+            android:textColor="@android:color/white"
+            app:buttonColor="@color/colorAccent"
+            app:shadowColor="@android:color/black"
+            app:shadowHeight="5dp" />
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btntest2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="@string/test2"
+            android:textColor="@android:color/white"
+            app:shadowColor="@android:color/black"
+            app:shadowHeight="5dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="bottom"
+        android:weightSum="2"
+        android:orientation="horizontal"
+        android:paddingBottom="115dp">
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btntest3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="@string/test3"
+            android:textColor="@android:color/white"
+            app:buttonColor="@color/colorAccent"
+            app:shadowColor="@android:color/black"
+            app:shadowHeight="5dp" />
+
+        <info.hoang8f.widget.FButton
+            android:id="@+id/btntest4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="@string/test4"
+            android:textColor="@android:color/white"
+            app:shadowColor="@android:color/black"
+            app:shadowHeight="5dp" />
+
+    </LinearLayout>
+
+</RelativeLayout>
