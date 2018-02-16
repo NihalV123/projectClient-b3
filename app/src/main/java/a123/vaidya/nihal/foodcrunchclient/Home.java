@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
@@ -26,6 +27,7 @@ import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Category;
 import a123.vaidya.nihal.foodcrunchclient.Service.ListenOrder;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.MenuViewHolder;
+import io.paperdb.Paper;
 
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -45,6 +47,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setSupportActionBar(toolbar);
 
         //firebase
+        Paper.init(this);
         database=FirebaseDatabase.getInstance();
         category=database.getReference("Category");
 
@@ -82,8 +85,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         layoutManager =new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);
 
-        loadMenu();
+        if (Common.isConnectedToInternet(this)) {
 
+            loadMenu();
+        }
+        else
+        {
+            Toast.makeText(this,"Please check your internet connection",Toast.LENGTH_LONG).show();
+            return;
+        }
         //registeration of notification service
         Intent service = new Intent(Home.this, ListenOrder.class);
         startService(service);
@@ -127,23 +137,18 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-
+        if (item.getItemId() == R.id.refresh)
+        {
+            loadMenu();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -162,6 +167,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             Intent orderIntent = new Intent (Home.this,OrderStatus.class);
             startActivity(orderIntent);
         } else if (id == R.id.nav_logout) {
+            //delete remmbered user details
+            Paper.book().destroy();
             Intent signIn = new Intent (Home.this,Signin.class);
             signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(signIn);

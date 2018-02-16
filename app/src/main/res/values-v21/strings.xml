@@ -3,4 +3,6 @@
     <string name="_100">100</string>
     <string name="_0">0</string>
     <string name="ordersreport">Order Report</string>
+    <string name="refresh">Refresh</string>
+    <string name="RememberMe">Remember Me</string>
 </resources>

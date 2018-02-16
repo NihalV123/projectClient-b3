@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +21,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
+import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.FoodViewHolder;
@@ -59,7 +61,11 @@ public class FoodList extends AppCompatActivity {
             categoryId = getIntent().getStringExtra("CategoryId");
         if (!categoryId.isEmpty()&&categoryId != null)
         {
+            if (Common.isConnectedToInternet(getBaseContext()))
             loadListFood(categoryId);
+            else
+                Toast.makeText(FoodList.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
+            return;
         }
 
         //search

@@ -16,6 +16,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
@@ -71,7 +73,11 @@ public class FoodDetail extends AppCompatActivity {
             foodId=getIntent().getStringExtra("FoodId");
         if(!foodId.isEmpty())
         {
-            getDetailFood(foodId);
+            if (Common.isConnectedToInternet(getBaseContext()))
+                getDetailFood(foodId);
+            else
+                Toast.makeText(FoodDetail.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
+            return;
         }
     }
     private void getDetailFood(String foodId) {

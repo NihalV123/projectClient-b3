@@ -13,6 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
 
 public class Signup extends AppCompatActivity {
@@ -40,36 +41,40 @@ public class Signup extends AppCompatActivity {
         BtnSignup.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                table_user.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        //check if user doesnt exist in db
+                if (Common.isConnectedToInternet(getBaseContext())) {
+                    table_user.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            //check if user doesnt exist in db
 
-                        if (dataSnapshot.child(edtPhone.getText().toString()).exists()) {
-                            DatabaseReference myRef = database.getReference("message");
+                            if (dataSnapshot.child(edtPhone.getText().toString()).exists()) {
+                                DatabaseReference myRef = database.getReference("message");
 
-                            myRef.setValue("Hello from sign up");
+                                myRef.setValue("Hello from sign up");
 
-                            Toast.makeText(Signup.this, "Phone Number already registered!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Signup.this, "Phone Number already registered!", Toast.LENGTH_SHORT).show();
+
+                            } else {
+                                User user = new User(edtNmae.getText().toString(), edtPasswd.getText().toString());
+                                table_user.child(edtPhone.getText().toString()).setValue(user);
+                                DatabaseReference myRef = database.getReference("message");
+
+                                myRef.setValue("everythink ok");
+                                Toast.makeText(Signup.this, "SIGN UP successfull welcome to the crew!", Toast.LENGTH_SHORT).show();
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
 
                         }
-                        else
-                        {
-                            User user = new User(edtNmae.getText().toString(),edtPasswd.getText().toString());
-                            table_user.child(edtPhone.getText().toString()).setValue(user);
-                            DatabaseReference myRef = database.getReference("message");
-
-                            myRef.setValue("everythink ok");
-                            Toast.makeText(Signup.this, "SIGN UP successfull welcome to the crew!", Toast.LENGTH_SHORT).show();
-                            finish();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
+                    });
+                }else
+                {
+                    Toast.makeText(Signup.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
+                    return;
+                }
             }
         });
 

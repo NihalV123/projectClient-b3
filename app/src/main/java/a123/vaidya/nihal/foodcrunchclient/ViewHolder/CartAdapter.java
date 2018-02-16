@@ -3,6 +3,7 @@ package a123.vaidya.nihal.foodcrunchclient.ViewHolder;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.R;
@@ -24,7 +26,7 @@ import a123.vaidya.nihal.foodcrunchclient.R;
  * Created by nnnn on 27/12/2017.
  */
 
-class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnCreateContextMenuListener {
 
     public TextView txt_cart_name,txt_price;
     public ImageView img_cart_count;
@@ -41,7 +43,7 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
         txt_cart_name= itemView.findViewById(R.id.cart_item_name);
         txt_price= itemView.findViewById(R.id.cart_item_Price);
         img_cart_count= itemView.findViewById(R.id.cart_item_count);
-
+        itemView.setOnCreateContextMenuListener(this);
 
 
     }
@@ -49,6 +51,12 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
     @Override
     public void onClick(View v) {
 
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("Select Action");
+        menu.add(0,0,getAdapterPosition(), Common.DELETE);
     }
 }
 
