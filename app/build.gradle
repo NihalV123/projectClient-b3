@@ -23,9 +23,6 @@ android {
 
 
 dependencies {
-    implementation('com.github.ihsanbal:LoggingInterceptor:2.0.3') {
-        exclude group: 'org.json', module: 'json'
-    }
     implementation 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     implementation 'io.github.privacystreams:privacystreams-android-sdk:0.1.7'
