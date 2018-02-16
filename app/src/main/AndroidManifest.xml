@@ -12,14 +12,16 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <!--<action android:name="android.intent.action.VIEW" />-->
+                <!-- <action android:name="android.intent.action.VIEW" /> -->
 
-                <!--<category android:name="android.intent.category.DEFAULT" />-->
-                <!--<category android:name="android.intent.category.BROWSABLE" />-->
 
-                <!--<data-->
-                    <!--android:host="java-lang-programming"-->
-                    <!--android:scheme="android-app-google-plus-demo" />-->
+                <!-- <category android:name="android.intent.category.DEFAULT" /> -->
+                <!-- <category android:name="android.intent.category.BROWSABLE" /> -->
+
+
+                <!-- <data -->
+                <!-- android:host="java-lang-programming" -->
+                <!-- android:scheme="android-app-google-plus-demo" /> -->
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
@@ -33,7 +35,12 @@
         <activity android:name=".Cart" />
         <activity android:name=".FoodList" />
         <activity android:name=".FoodDetail" />
+        <activity android:name=".OrderStatus" />
 
-        <activity android:name=".OrderStatus"></activity>
+        <service
+            android:name=".Service.ListenOrder"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
+
 </manifest>

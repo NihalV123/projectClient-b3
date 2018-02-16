@@ -24,6 +24,7 @@ import com.squareup.picasso.Picasso;
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Category;
+import a123.vaidya.nihal.foodcrunchclient.Service.ListenOrder;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.MenuViewHolder;
 
 
@@ -82,6 +83,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         recycler_menu.setLayoutManager(layoutManager);
 
         loadMenu();
+
+        //registeration of notification service
+        Intent service = new Intent(Home.this, ListenOrder.class);
+        startService(service);
     }
 
     private void loadMenu() {
