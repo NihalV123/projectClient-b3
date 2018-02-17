@@ -56,17 +56,6 @@
     app:pressedTranslationZ="12dp"
     app:useCompatPadding="true" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnCart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:src="@drawable/ic_shopping_cart_black_24dp"
-        app:elevation="6dp"
-        app:layout_anchor="@+id/app_bar_layout"
-        app:layout_anchorGravity="right|bottom"
-        app:pressedTranslationZ="12dp"
-        app:useCompatPadding="true" />
 
 <android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
@@ -92,6 +81,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
+
 
             <TextView
                 android:id="@+id/food_name"
@@ -169,6 +159,43 @@
                 android:textColor="@android:color/black"
                 android:textSize="14sp"
                 />
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardUseCompatPadding="true"
+            app:cardElevation="5dp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+
+                <RatingBar
+                    android:id="@+id/ratingbar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:isIndicator="true"
+                    android:max="5"
+                    android:rating="0" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/btnRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:src="@drawable/ic_star_black_24dp"
+                    app:elevation="6dp"
+                    app:layout_anchor="@+id/app_bar_layout"
+                    app:layout_anchorGravity="bottom|center|end"
+                    app:pressedTranslationZ="12dp"
+                    app:useCompatPadding="true" />
+
+            </LinearLayout>
+
 
 
         </android.support.v7.widget.CardView>
