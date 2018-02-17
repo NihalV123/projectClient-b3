@@ -1,9 +1,13 @@
 package a123.vaidya.nihal.foodcrunchclient;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +27,10 @@ public class Signin extends AppCompatActivity {
     MaterialEditText edtNmae,edtPhone,edtPasswd;
     Button BtnSignin;
     CheckBox remember_button;
+
+    FirebaseDatabase database;
+    DatabaseReference table_user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,11 +40,23 @@ public class Signin extends AppCompatActivity {
         edtPhone= findViewById(R.id.edtPhone);
         BtnSignin = findViewById(R.id.btnSignin);
         remember_button =(CheckBox)findViewById(R.id.remember_button);
+
         //on with the firebase
         Paper.init(this);
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference table_user = database.getReference("User");
+        database = FirebaseDatabase.getInstance();
+        table_user = database.getReference("User");
+
+        TextView txtForgetPwd = (TextView) findViewById(R.id.forget_password_txt);
+        txtForgetPwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                showForgetPwdDailog();
+            }
+        });
+
         BtnSignin.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View v) {
 
                 if (Common.isConnectedToInternet(getBaseContext())) {
@@ -92,6 +112,53 @@ public class Signin extends AppCompatActivity {
             }
         });
 
+
+    }
+
+    private void showForgetPwdDailog() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Forgot Password");
+        builder.setMessage("Please enter your secure code");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View forget_view = inflater.inflate(R.layout.forgot_passowrd_layout,null);
+        builder.setView(forget_view);
+        builder.setIcon(R.drawable.ic_security_black_24dp);
+        final MaterialEditText edtPhone = (MaterialEditText)forget_view.findViewById(R.id.edtPhone);
+        final MaterialEditText edtSecureCode = (MaterialEditText)forget_view.findViewById(R.id.edtSecureCode);
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                table_user.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
+                        if(user.getSecureCode().equals(edtSecureCode.getText().toString()))
+                        {
+                            Toast.makeText(Signin.this,"Your passwrod is "+user.getPassword(),Toast.LENGTH_LONG).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(Signin.this,"WRONG SECURE CODE !!!",Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        builder.show();
 
     }
 }

@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Random;
+
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Model.Request;
 import a123.vaidya.nihal.foodcrunchclient.OrderStatus;
@@ -74,12 +76,11 @@ public class ListenOrder extends Service  implements ChildEventListener{
                 .setContentInfo("Your order was updated")
                 .setContentText("Order No " +key+"was updated to status "+ Common.convertCodeToStatus(request.getStatus()))
                 .setContentIntent(contentIntent)
-                .setContentInfo("Info")
                 .setSmallIcon(R.mipmap.ic_launcher);
 
         NotificationManager notificationManager = (NotificationManager)getBaseContext().getSystemService(Context.NOTIFICATION_SERVICE);
-        notificationManager.notify(1,builder.build());
-
+        int randomint = new Random().nextInt(9999-1)+1;
+        notificationManager.notify(randomint,builder.build());
 
     }
 

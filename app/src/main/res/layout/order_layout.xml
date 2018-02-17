@@ -26,37 +26,34 @@
             >
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/order_id"
-                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textAllCaps="true"
-                android:textStyle="bold"
+                android:layout_marginStart="10dp"
                 android:text="@string/_11111"
-                />
+                android:textAllCaps="true"
+                android:textStyle="bold" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/order_status"
-                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textAllCaps="true"
-                android:textStyle="italic"
+                android:layout_marginStart="10dp"
                 android:text="@string/status"
-                />
+                android:textAllCaps="true"
+                android:textStyle="italic" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/order_phone"
-                android:layout_marginStart="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:textAllCaps="true"
-                android:textStyle="italic"
+                android:layout_marginStart="10dp"
                 android:text="@string/_7208680470"
-                />
+                android:textAllCaps="true"
+                android:textStyle="italic" />
 
             <TextView
                 android:layout_width="wrap_content"

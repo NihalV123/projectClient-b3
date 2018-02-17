@@ -17,7 +17,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:orientation="vertical"
-        android:paddingBottom="200dp"
+        android:paddingBottom="80dp"
         android:weightSum="2">
 
 
@@ -29,7 +29,7 @@
             android:inputType="phone"
             android:text="@string/_7208680470"
             android:textColor="@android:color/white"
-            android:textSize="40sp"
+            android:textSize="36sp"
             app:met_baseColor="@android:color/white"
             app:met_floatingLabel="highlight"
             app:met_maxCharacters="11"
@@ -44,29 +44,42 @@
             android:inputType="textPersonName"
             android:text="@string/nihal"
             android:textColor="@android:color/white"
-            android:textSize="40sp"
+            android:textSize="36sp"
             app:met_baseColor="@android:color/white"
             app:met_floatingLabel="highlight"
             app:met_maxCharacters="11"
             app:met_primaryColor="@android:color/white"
             app:met_singleLineEllipsis="true" />
-
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtPasswd"
             android:layout_width="match_parent"
-            android:layout_height="132dp"
+            android:layout_height="wrap_content"
             android:hint="@string/enter_your_password"
             android:inputType="textPassword"
             android:text="@string/_11111111"
             android:textColor="@android:color/white"
-            android:textSize="40sp"
+            android:textSize="36sp"
             app:met_baseColor="@android:color/white"
             app:met_floatingLabel="highlight"
             app:met_maxCharacters="11"
             app:met_primaryColor="@android:color/white"
             app:met_singleLineEllipsis="true" />
 
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtSecureCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/SecureCode"
+            android:inputType="text"
+            android:text="@string/_11111111"
+            android:textColor="@android:color/white"
+            android:textSize="36sp"
+            app:met_baseColor="@android:color/white"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="11"
+            app:met_primaryColor="@android:color/white"
+            app:met_singleLineEllipsis="true" />
 
     </LinearLayout>
 
