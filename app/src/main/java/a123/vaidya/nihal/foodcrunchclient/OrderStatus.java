@@ -37,6 +37,7 @@ public class  OrderStatus extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
+        //do not delete may cause issues in viewing orders in client side and server side
 //        if(getIntent()==null)
 //        {
             loadOrders(Common.currentUser.getPhone());
@@ -58,8 +59,9 @@ public class  OrderStatus extends AppCompatActivity {
             protected void populateViewHolder(OrderViewHolder viewHolder, Request model, int position) {
                 viewHolder.txtOrderId.setText(adapter.getRef(position).getKey());
                 viewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(model.getStatus()));
-                viewHolder.txtOrderAddress.setText(model.getAddress());
-                viewHolder.txtOrderPhonw.setText(model.getPhone());
+                viewHolder.txtOrderAddress.setText("\n Address :"+model.getAddress());
+                viewHolder.txtOrderPhonw.setText("\n Phone No :"+model.getPhone());
+                viewHolder.txtOrderComment.setText("\n Comment :"+model.getComment());
             }
 
         };

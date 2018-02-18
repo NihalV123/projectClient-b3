@@ -35,7 +35,6 @@
     <string name="place_order">Place Order</string>
     <string name="food_01">Food 01</string>
     <string name="_90000">90000</string>
-    <string name="todo">TODO</string>
     <string name="_50">50</string>
     <string name="_9000">9000</string>
     <string name="description">description</string>
@@ -52,4 +51,7 @@
     <string name="RememberMe">Remember Me</string>
     <string name="SecureCode">Secure Code</string>
     <string name="forget_pwd"><u>Forget Password??!</u></string>
+    <string name="Please_enter_your_address">Enter Your Address</string>
+    <string name="Write_comment">Comment Here</string>
+    <string name="todo">TODO</string>
 </resources>

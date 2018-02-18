@@ -10,20 +10,22 @@ public class Request {
     private String phone;
     private String name;
     private String address;
-    private String total;
     private String status;
+    private String comment;
+    private String total;
     private List<Order>foods;
 
     public Request() {
     }
 
-    public Request(String phone, String name, String address, String total, List<Order> foods) {
+    public Request(String phone, String name, String address,String status, String comment, String total, List<Order> foods) {
         this.phone = phone;
         this.name = name;
         this.address = address;
+        this.status = "0";
+        this.comment = comment;
         this.total = total;
         this.foods = foods;
-        this.status = "0";
         //0 is placed 1 is shiping 2 is shipped
     }
 
@@ -41,6 +43,14 @@ public class Request {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public String getAddress() {

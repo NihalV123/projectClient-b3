@@ -65,6 +65,16 @@
                 android:textStyle="italic"
                 android:text="@string/b_604_mai_bhuvan_dadi_seth_rd_malad_west_mumbai_maharashtra"
                 />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/comment_details"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
+                android:textAllCaps="true"
+                android:textStyle="italic"
+                android:text="@string/Write_comment"
+                />
 
         </LinearLayout>
 

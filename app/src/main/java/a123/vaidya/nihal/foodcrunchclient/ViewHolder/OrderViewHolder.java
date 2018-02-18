@@ -13,7 +13,7 @@ import a123.vaidya.nihal.foodcrunchclient.R;
 
 public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-    public TextView txtOrderId,txtOrderStatus,txtOrderPhonw,txtOrderAddress;
+    public TextView txtOrderId,txtOrderStatus,txtOrderPhonw,txtOrderAddress,txtOrderComment;
     private ItemClickListener itemClickListener;
 
 
@@ -24,6 +24,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
         txtOrderStatus=(TextView)itemView.findViewById(R.id.order_status);
         txtOrderPhonw=(TextView)itemView.findViewById(R.id.order_phone);
         txtOrderAddress=(TextView)itemView.findViewById(R.id.order_address);
+        txtOrderComment=(TextView)itemView.findViewById(R.id.comment_details);
         itemView.setOnClickListener(this);
     }
 

@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -15,6 +16,8 @@ import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.rengwuxian.materialedittext.MaterialEditText;
+
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
@@ -25,6 +28,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.zip.Inflater;
 
 import info.hoang8f.widget.FButton;
 
@@ -78,14 +82,13 @@ public class Cart extends AppCompatActivity {
         alertdailog.setTitle("One Last Step!!");
         alertdailog.setMessage("Enter your Address :   ");
 
-        final EditText editAddress = new EditText(Cart.this);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.MATCH_PARENT
-        );
+        LayoutInflater inflater = this.getLayoutInflater();
+        View order_address_comment = inflater.inflate(R.layout.order_address_comment,null);
 
-        editAddress.setLayoutParams(lp);
-        alertdailog.setView(editAddress);
+        final MaterialEditText edtAddress = (MaterialEditText)order_address_comment.findViewById(R.id.edtAddress);
+        final MaterialEditText edtComment = (MaterialEditText)order_address_comment.findViewById(R.id.edtComment);
+
+        alertdailog.setView(order_address_comment);
         alertdailog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
 
         alertdailog.setPositiveButton("YES!", new DialogInterface.OnClickListener() {
@@ -94,7 +97,9 @@ public class Cart extends AppCompatActivity {
                 Request request = new Request(
                         Common.currentUser.getPhone(),
                         Common.currentUser.getName(),
-                        editAddress.getText().toString(),
+                        edtAddress.getText().toString(),
+                        "0",  //for status in request model
+                        edtComment.getText().toString(),
                         txtTotalPrice.getText().toString(),cart
                 );
 

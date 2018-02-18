@@ -57,16 +57,5 @@
         <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
-    <style name="Theme">Theme</style>
-
-    <style name="ThemeOverlay">ThemeOverlay</style>
-
-    <style name="Widget"></style>
-
-    <style name="Widget.AppCompat"></style>
-
-    <style name="Widget.AppCompat.Button.ButtonBar"></style>
-
-    <style name="Widget.AppCompat.Button.ButtonBar.AlertDialog"></style>
 
 </resources>
