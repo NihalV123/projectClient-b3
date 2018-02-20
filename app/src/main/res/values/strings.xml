@@ -61,4 +61,9 @@
     <string name="Your_cart">YOUR CART</string>
     <string name="Your_orders_from_Today">RECENT ORDERS</string>
     <string name="SELECT_YOUR_FOOD">SELECT YOUR FOOD !!!</string>
+    <string name="product_name">product name</string>
+    <string name="product_quantity">product quantity</string>
+    <string name="product_discount">product discount</string>
+    <string name="product_price">product price</string>
+    <string name="Details">DETAILS</string>
 </resources>
