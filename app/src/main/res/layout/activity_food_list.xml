@@ -8,12 +8,12 @@
     tools:context="a123.vaidya.nihal.foodcrunchclient.FoodList">
 
     <com.mancj.materialsearchbar.MaterialSearchBar
+        android:id="@+id/searchBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/searchBar"
         android:layout_alignParentTop="true"
-        app:mt_speechMode="false"
-        app:mt_hint="Enter the name of your food!">
+        app:mt_hint="Enter the name of your food!"
+        app:mt_speechMode="false">
 
     </com.mancj.materialsearchbar.MaterialSearchBar>
 
@@ -22,8 +22,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/searchBar"
+        android:layout_marginTop="58dp"
         android:scrollbars="vertical">
 
     </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:background="@color/transparentBlack"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="@string/SELECT_YOUR_FOOD"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
 
 </RelativeLayout>

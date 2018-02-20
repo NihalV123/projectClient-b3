@@ -7,13 +7,29 @@
     android:background="@drawable/background"
     android:padding="15dp"
     tools:context="a123.vaidya.nihal.foodcrunchclient.Cart">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtmanconesdstnthome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/Your_cart"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listCart"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:background="@android:color/transparent">
+        android:background="@android:color/transparent"
+        android:paddingBottom="120dp"
+        android:paddingTop="45dp">
 
     </android.support.v7.widget.RecyclerView>
 

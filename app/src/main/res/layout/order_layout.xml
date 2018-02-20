@@ -18,6 +18,9 @@
         android:orientation="horizontal"
         android:baselineAligned="false">
 
+
+
+
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -30,6 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:text="@string/_11111"
                 android:textAllCaps="true"
@@ -40,6 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:text="@string/status"
                 android:textAllCaps="true"
@@ -50,6 +55,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:text="@string/_7208680470"
                 android:textAllCaps="true"
@@ -60,21 +66,22 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
+                android:layout_marginEnd="10dp"
                 android:layout_marginStart="10dp"
                 android:text="@string/Write_comment"
                 android:textAllCaps="true"
                 android:textStyle="italic" />
 
             <TextView
+                android:id="@+id/order_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/order_address"
-                android:layout_marginStart="10dp"
                 android:layout_gravity="center_vertical"
-                android:textAllCaps="true"
-                android:textStyle="italic"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
                 android:text="@string/my_new_address"
-                />
+                android:textAllCaps="true"
+                android:textStyle="italic" />
 
         </LinearLayout>
 

@@ -125,6 +125,9 @@ public class Cart extends AppCompatActivity {
                 //requests.child(String.valueOf(System.currentTimeMillis()))
                         .setValue(request);
                 sendNotificatinOrder(order_number);
+                ///send the motherfucking email
+
+
                 //delete cart
                 new Database(getBaseContext()).clearCart();
 //                Toast.makeText(Cart.this,"Thank you for shopping Order placed!",

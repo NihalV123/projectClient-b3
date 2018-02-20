@@ -7,14 +7,29 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context="a123.vaidya.nihal.foodcrunchclient.OrderStatus">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/txtmanconetnthome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:text="@string/Your_orders_from_Today"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
+
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/listOrders"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/listOrders"
         android:background="@android:color/transparent"
 
-        >
+        android:paddingTop="55dp">
 
     </android.support.v7.widget.RecyclerView>
 

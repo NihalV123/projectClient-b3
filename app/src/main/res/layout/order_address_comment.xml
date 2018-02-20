@@ -29,6 +29,7 @@
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:id="@+id/edtAddress"
                 android:hint="@string/Please_enter_your_address"
                 android:textColorHint="@color/colorPrimary"
@@ -46,6 +47,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/edtComment"
+                android:gravity="center"
                 android:hint="@string/Write_comment"
                 android:textColorHint="@color/colorPrimary"
                 android:text="@string/Write_comment"

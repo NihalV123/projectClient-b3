@@ -40,10 +40,10 @@ public class MainActivity extends AppCompatActivity {
         BtnSignIn= findViewById(R.id.btnSignin);
         BtnSignUp= findViewById(R.id.btnSignup);
 
-        btnTest1= findViewById(R.id.btntest1);
-        btnTest2= findViewById(R.id.btntest2);
-        btnTest3= findViewById(R.id.btntest3);
-        btnTest4= findViewById(R.id.btntest4);
+//        btnTest1= findViewById(R.id.btntest1);
+//        btnTest2= findViewById(R.id.btntest2);
+//        btnTest3= findViewById(R.id.btntest3);
+//        btnTest4= findViewById(R.id.btntest4);
 
 
         txtSlogan= findViewById(R.id.txtslogan);
@@ -65,30 +65,30 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(Signin);
             }
         });
-        btnTest1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent Signup= new Intent(MainActivity.this,Signup.class);
-                startActivity(Signup);
-            }
-        });
-        btnTest2.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent Signin= new Intent(MainActivity.this,Signin.class);
-                startActivity(Signin);
-            }
-        });
-        btnTest3.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent Signup= new Intent(MainActivity.this,Signup.class);
-                startActivity(Signup);
-            }
-        });
-        btnTest4.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent Signin= new Intent(MainActivity.this,Signin.class);
-                startActivity(Signin);
-            }
-        });
+//        btnTest1.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent Signup= new Intent(MainActivity.this,Signup.class);
+//                startActivity(Signup);
+//            }
+//        });
+//        btnTest2.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent Signin= new Intent(MainActivity.this,Signin.class);
+//                startActivity(Signin);
+//            }
+//        });
+//        btnTest3.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent Signup= new Intent(MainActivity.this,Signup.class);
+//                startActivity(Signup);
+//            }
+//        });
+//        btnTest4.setOnClickListener(new View.OnClickListener() {
+//            public void onClick(View v) {
+//                Intent Signin= new Intent(MainActivity.this,Signin.class);
+//                startActivity(Signin);
+//            }
+//        });
         //check user details
         String user = Paper.book().read(Common.USER_KEY);
         String pwd = Paper.book().read(Common.PWD_KEY);
