@@ -5,6 +5,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
+import a123.vaidya.nihal.foodcrunchclient.Remote.APIService;
+import a123.vaidya.nihal.foodcrunchclient.Remote.RetrofitClient;
 
 /**
  * Created by nnnn on 26/12/2017.
@@ -12,6 +14,13 @@ import a123.vaidya.nihal.foodcrunchclient.Model.User;
 
 public class Common {
     public static User currentUser;
+    private static final String BASE_URL = "https://fcm.googleapis.com/";
+
+    public static APIService getFCMService()
+    {
+        return RetrofitClient.getClient(BASE_URL).create(APIService.class);
+    }
+
     public static String convertCodeToStatus(String code)
     {
         if (code.equals("0"))

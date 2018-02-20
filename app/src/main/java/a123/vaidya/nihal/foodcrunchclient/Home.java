@@ -20,12 +20,14 @@ import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.squareup.picasso.Picasso;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Category;
-import a123.vaidya.nihal.foodcrunchclient.Service.ListenOrder;
+//import a123.vaidya.nihal.foodcrunchclient.Service.ListenOrder;
+import a123.vaidya.nihal.foodcrunchclient.Model.Token;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.MenuViewHolder;
 import io.paperdb.Paper;
 
@@ -95,8 +97,17 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             return;
         }
         //registeration of notification service
-        Intent service = new Intent(Home.this, ListenOrder.class);
-        startService(service);
+        updateToken(FirebaseInstanceId.getInstance().getToken());
+//        Intent service = new Intent(Home.this, ListenOrder.class);
+//        startService(service);
+    }
+
+    private void updateToken(String token) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference tokens = db.getReference("Tokens");
+        Token data = new Token(token,false); //false as this reads frm client
+        tokens.child(Common.currentUser.getPhone()).setValue(data);
+        //tokens.child(Common.currentUser.getIsStaff());
     }
 
     private void loadMenu() {

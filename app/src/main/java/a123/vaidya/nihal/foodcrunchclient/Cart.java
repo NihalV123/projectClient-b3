@@ -14,14 +14,23 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
+import a123.vaidya.nihal.foodcrunchclient.Model.MyResponse;
+import a123.vaidya.nihal.foodcrunchclient.Model.Notification;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.Model.Request;
+import a123.vaidya.nihal.foodcrunchclient.Model.Sender;
+import a123.vaidya.nihal.foodcrunchclient.Model.Token;
+import a123.vaidya.nihal.foodcrunchclient.Remote.APIService;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.CartAdapter;
 
 import java.text.NumberFormat;
@@ -31,6 +40,9 @@ import java.util.Locale;
 import java.util.zip.Inflater;
 
 import info.hoang8f.widget.FButton;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Cart extends AppCompatActivity {
 
@@ -40,6 +52,7 @@ public class Cart extends AppCompatActivity {
     DatabaseReference requests;
     TextView txtTotalPrice;
     FButton btnPlace;
+    APIService mservice;
 
     List<Order> cart = new ArrayList<>();
     CartAdapter adapter;
@@ -51,6 +64,9 @@ public class Cart extends AppCompatActivity {
         //firebase code
         database = FirebaseDatabase.getInstance();
         requests = database.getReference("Requests");
+
+        //start service
+        mservice = Common.getFCMService();
 
         //start view
         recyclerView = findViewById(R.id.listCart);
@@ -103,14 +119,17 @@ public class Cart extends AppCompatActivity {
                         txtTotalPrice.getText().toString(),cart
                 );
 
-                //if yes submitting to the firebase using current time down to milliseconds wow!! :)
-                requests.child(String.valueOf(System.currentTimeMillis()))
+                //if yes submitting to the firebase using current time down to milliseconds!!
+                String order_number = String.valueOf(System.currentTimeMillis());
+                requests.child(order_number)
+                //requests.child(String.valueOf(System.currentTimeMillis()))
                         .setValue(request);
-
+                sendNotificatinOrder(order_number);
+                //delete cart
                 new Database(getBaseContext()).clearCart();
-                Toast.makeText(Cart.this,"Thank you for shopping Order placed!",
-                        Toast.LENGTH_SHORT).show();
-                finish();
+//                Toast.makeText(Cart.this,"Thank you for shopping Order placed!",
+//                        Toast.LENGTH_SHORT).show();
+//                finish();
             }
         });
 
@@ -122,6 +141,52 @@ public class Cart extends AppCompatActivity {
         });
 
         alertdailog.show();
+    }
+
+    private void sendNotificatinOrder(final String order_number) {
+        DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
+        Query data = tokens.orderByChild("isServerToken").equalTo(true);
+        data.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot postSnapShot:dataSnapshot.getChildren())
+                {
+                    Token serverToken = postSnapShot.getValue(Token.class);
+                    //create raw payload
+                    Notification notification = new Notification("Food-Crunch","You have new Order : "+order_number);
+                    Sender content = new Sender(serverToken.getToken(),notification);
+                    mservice.sendNotification(content)
+                            .enqueue(new Callback<MyResponse>() {
+                                @Override
+                                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                    if(response.body().success == 1)
+                                    {
+                                           Toast.makeText(Cart.this,"Thank you for shopping Order placed!",
+                                           Toast.LENGTH_SHORT).show();
+                                           finish();
+                                    }else
+                                    {
+                                        Toast.makeText(Cart.this,"PLEASE TRY AGAIN!!!",
+                                                Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<MyResponse> call, Throwable t) {
+                                    Toast.makeText(Cart.this,"Houston there's a problem!!",
+                                            Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
     private void loadListFood() {

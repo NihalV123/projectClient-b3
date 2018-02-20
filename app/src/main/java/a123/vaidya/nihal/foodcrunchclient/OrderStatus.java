@@ -57,11 +57,11 @@ public class  OrderStatus extends AppCompatActivity {
                 ) {
             @Override
             protected void populateViewHolder(OrderViewHolder viewHolder, Request model, int position) {
-                viewHolder.txtOrderId.setText(adapter.getRef(position).getKey());
-                viewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(model.getStatus()));
-                viewHolder.txtOrderAddress.setText("\n Address :"+model.getAddress());
-                viewHolder.txtOrderPhonw.setText("\n Phone No :"+model.getPhone());
-                viewHolder.txtOrderComment.setText("\n Comment :"+model.getComment());
+                viewHolder.txtOrderId.setText("Order Id : "+adapter.getRef(position).getKey());
+                viewHolder.txtOrderStatus.setText("Status : "+Common.convertCodeToStatus(model.getStatus()));
+                viewHolder.txtOrderAddress.setText("\n Address : "+model.getAddress());
+                viewHolder.txtOrderPhonw.setText("\n Phone No : "+model.getPhone());
+                viewHolder.txtOrderComment.setText("Comment : "+model.getComment());
             }
 
         };
