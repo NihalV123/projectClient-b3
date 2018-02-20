@@ -129,7 +129,7 @@ public class Cart extends AppCompatActivity {
                 new Database(getBaseContext()).clearCart();
 //                Toast.makeText(Cart.this,"Thank you for shopping Order placed!",
 //                        Toast.LENGTH_SHORT).show();
-//                finish();
+                finish();
             }
         });
 

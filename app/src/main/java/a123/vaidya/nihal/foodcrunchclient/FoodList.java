@@ -112,8 +112,8 @@ public class FoodList extends AppCompatActivity {
             @Override
             public void onSearchStateChanged(boolean enabled) {
                 //disable and enable for ui effect
-//                if(!enabled)
-//                    recycler_menu.setAdapter(adapter);
+                if(!enabled)
+                    recycler_menu.setAdapter(adapter);
             }
 
             @Override
