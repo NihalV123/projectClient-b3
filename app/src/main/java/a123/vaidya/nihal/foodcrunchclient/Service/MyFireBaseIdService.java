@@ -22,12 +22,13 @@ public class MyFireBaseIdService extends FirebaseInstanceIdService {
     }
 
     private void updateTokenToFirebase(String tokenRefreshed) {
+        if(Common.currentUser != null){
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference tokens = db.getReference("Tokens");
         Token token = new Token(tokenRefreshed,false); //false as this reads frm client
         tokens.child(Common.currentUser.getPhone()).setValue(token);
 
 
-    }
+    }}
 
 }
