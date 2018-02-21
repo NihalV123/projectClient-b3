@@ -1,15 +1,19 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
+import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Request;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.OrderViewHolder;
 
@@ -56,12 +60,30 @@ public class  OrderStatus extends AppCompatActivity {
                         //.orderByChild("phone").equalTo(phone)
                 ) {
             @Override
-            protected void populateViewHolder(OrderViewHolder viewHolder, Request model, int position) {
+            protected void populateViewHolder(OrderViewHolder viewHolder, final Request model, int position) {
                 viewHolder.txtOrderId.setText("Order Id : "+adapter.getRef(position).getKey());
                 viewHolder.txtOrderStatus.setText("Status : "+Common.convertCodeToStatus(model.getStatus()));
                 viewHolder.txtOrderAddress.setText("\n Address : "+model.getAddress());
-                viewHolder.txtOrderPhonw.setText("\n Phone No : "+model.getPhone());
-                viewHolder.txtOrderComment.setText("Comment : "+model.getComment());
+                viewHolder.txtOrderPhonw.setText("Phone No : "+model.getPhone());
+                viewHolder.txtOrderComment.setText("\n Comment : "+model.getComment());
+
+                viewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View v, int position, boolean isLongClick) {
+                        if(!isLongClick)
+                        {
+                            Intent orderDetail = new Intent(OrderStatus.this,OrderDetail.class);
+                            Common.currentRequest = model;
+                            orderDetail.putExtra("OrderId",adapter.getRef(position).getKey());
+                            startActivity(orderDetail);
+                        }
+                        else
+                        {
+                            Toast.makeText(OrderStatus.this,"Not Yet Implemeneted",Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+                });
             }
 
         };

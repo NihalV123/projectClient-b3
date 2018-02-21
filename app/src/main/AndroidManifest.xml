@@ -27,23 +27,24 @@
         <activity android:name=".FoodDetail" />
         <activity android:name=".OrderStatus" />
 
+        <service android:name=".Service.MyFireBaseIdService">
 
-        <service
-            android:name=".Service.MyFireBaseIdService">
-            <!--android:enabled="true"-->
-            <!--android:exported="true"-->
+            <!-- android:enabled="true" -->
+            <!-- android:exported="true" -->
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
-            </intent-filter>
-            </service>
-        <service
-            android:name=".Service.MyirebaseMessaging">
-            <!--android:enabled="true"-->
-            <!--android:exported="true" -->
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+        <service android:name=".Service.MyirebaseMessaging">
+
+            <!-- android:enabled="true" -->
+            <!-- android:exported="true" -->
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".OrderDetail"></activity>
     </application>
 
 </manifest>

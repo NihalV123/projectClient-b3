@@ -114,7 +114,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         Token data = new Token(token,false);//false as this reads frm client
         try {
             tokens.child(Common.currentUser.getPhone()).setValue(data);
-            Toast.makeText(Home.this,"You logged with staff account",Toast.LENGTH_LONG).show();
+            Toast.makeText(Home.this,"Welcome ",Toast.LENGTH_LONG).show();
             //tokens.child(Common.currentUser.getIsStaff());
         }
         catch(Exception e){

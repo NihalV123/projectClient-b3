@@ -4,9 +4,12 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import a123.vaidya.nihal.foodcrunchclient.Model.Request;
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
 import a123.vaidya.nihal.foodcrunchclient.Remote.APIService;
+import a123.vaidya.nihal.foodcrunchclient.Remote.FCMRetrofitClient;
 import a123.vaidya.nihal.foodcrunchclient.Remote.RetrofitClient;
+import a123.vaidya.nihal.foodcrunchclient.Remote.iGeoCoordinates;
 
 /**
  * Created by nnnn on 26/12/2017.
@@ -14,13 +17,24 @@ import a123.vaidya.nihal.foodcrunchclient.Remote.RetrofitClient;
 
 public class Common {
     public static User currentUser;
-    private static final String BASE_URL = "https://fcm.googleapis.com/";
+    public static Request currentRequest;
+
+    public static final String BASE_URL = "https://maps.googleapis.com";
+
+    public static final String fcmUrl = "https://fcm.googleapis.com";
 
     public static APIService getFCMService()
     {
-        return RetrofitClient.getClient(BASE_URL).create(APIService.class);
+        //return RetrofitClient.getClient(BASE_URL).create(APIService.class);
+        return FCMRetrofitClient.getClient(fcmUrl).create(APIService.class);
+    }
+    //extra start here
+    public static iGeoCoordinates getGeoCodeService()
+    {
+        return RetrofitClient.getClient(BASE_URL).create(iGeoCoordinates.class);
     }
 
+    //end here
     public static String convertCodeToStatus(String code)
     {
         if (code.equals("0"))

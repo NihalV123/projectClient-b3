@@ -4,7 +4,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import a123.vaidya.nihal.foodcrunchclient.Home;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.R;
 
@@ -34,5 +36,6 @@ private ItemClickListener itemClickListener;
     @Override
     public void onClick(View v) {
         itemClickListener.onClick(v,getAdapterPosition(),false);
+
     }
 }

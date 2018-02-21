@@ -133,13 +133,14 @@ public class Cart extends AppCompatActivity {
 
                 ///send the motherfucking email
 
-                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-                String[] recipients = new String[]{"nhlvcam@gmail.com.com", "",};
-                //emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,"nareshdcam@gmail.con");
-                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Test");
-                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is email's message");
-                emailIntent.setType("text/plain");
-                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+//                String[] recipients = new String[]{"nhlvcam@gmail.com.com", "",};
+//                //emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,"nareshdcam@gmail.con");
+//                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Test");
+//                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is email's message");
+//                emailIntent.setType("text/plain");
+//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                Toast.makeText(Cart.this,"Thank you for shopping\n\nYour order email has been sent!!\n\nActually not LOOOOL", Toast.LENGTH_SHORT).show();
                 finish();
 
                 //delete cart
@@ -176,6 +177,8 @@ public class Cart extends AppCompatActivity {
                             .enqueue(new Callback<MyResponse>() {
                                 @Override
                                 public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                    //crash fix only run when you see client
+                                    if(response.code() == 200){
                                     if(response.body().success == 1)
                                     {
                                            Toast.makeText(Cart.this,"Thank you for shopping Order placed!",
@@ -185,7 +188,7 @@ public class Cart extends AppCompatActivity {
                                     {
                                         Toast.makeText(Cart.this,"PLEASE TRY AGAIN!!!",
                                                 Toast.LENGTH_SHORT).show();
-                                    }
+                                    }}
                                 }
 
                                 @Override
