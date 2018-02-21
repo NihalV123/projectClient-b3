@@ -1,6 +1,8 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -51,6 +53,7 @@ public class Cart extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference requests;
     TextView txtTotalPrice;
+    MaterialEditText ediAddress;
     FButton btnPlace;
     APIService mservice;
 
@@ -76,6 +79,7 @@ public class Cart extends AppCompatActivity {
 
         txtTotalPrice = findViewById(R.id.total);
         btnPlace = findViewById(R.id.btnPlaceOrder);
+        ediAddress = findViewById(R.id.edtEmail);
 
         //getting address
         btnPlace.setOnClickListener(new View.OnClickListener() {
@@ -111,6 +115,7 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Request request = new Request(
+                        //Common.currentUser.getEmail(),
                         Common.currentUser.getPhone(),
                         Common.currentUser.getName(),
                         edtAddress.getText().toString(),
@@ -122,11 +127,20 @@ public class Cart extends AppCompatActivity {
                 //if yes submitting to the firebase using current time down to milliseconds!!
                 String order_number = String.valueOf(System.currentTimeMillis());
                 requests.child(order_number)
-                //requests.child(String.valueOf(System.currentTimeMillis()))
+                        //requests.child(String.valueOf(System.currentTimeMillis()))
                         .setValue(request);
                 sendNotificatinOrder(order_number);
+
                 ///send the motherfucking email
 
+                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+                String[] recipients = new String[]{"nhlvcam@gmail.com.com", "",};
+                //emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,"nareshdcam@gmail.con");
+                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Test");
+                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is email's message");
+                emailIntent.setType("text/plain");
+                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                finish();
 
                 //delete cart
                 new Database(getBaseContext()).clearCart();
@@ -200,13 +214,17 @@ public class Cart extends AppCompatActivity {
 
         //calculate price
         int total = 0;
+
+        //undo this sa soon as possible
+
         for(Order order:cart)
             total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
+//        //latest error 2
         Locale locale = new Locale("en","BU");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 
+        //txtTotalPrice.setText(fmt.format(total));
         txtTotalPrice.setText(fmt.format(total));
-
     }
 
     @Override

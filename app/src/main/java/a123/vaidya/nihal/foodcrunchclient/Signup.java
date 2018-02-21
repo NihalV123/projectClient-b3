@@ -19,6 +19,7 @@ import a123.vaidya.nihal.foodcrunchclient.Model.User;
 public class Signup extends AppCompatActivity {
 
     MaterialEditText edtNmae,edtPhone,edtPasswd,edtSecureCode;
+    //MaterialEditText edtEmail;
     Button BtnSignup;
     private FirebaseAuth mAuth;
 
@@ -30,6 +31,7 @@ public class Signup extends AppCompatActivity {
         edtNmae= findViewById(R.id.edtName);
         edtPasswd= findViewById(R.id.edtPasswd);
         edtPhone= findViewById(R.id.edtPhone);
+        //edtEmail= findViewById(R.id.edtEmail);
         BtnSignup = findViewById(R.id.btnSignup);
         edtSecureCode=findViewById(R.id.edtSecureCode);
 
@@ -56,7 +58,10 @@ public class Signup extends AppCompatActivity {
                                 Toast.makeText(Signup.this, "Phone Number already registered!", Toast.LENGTH_SHORT).show();
 
                             } else {
-                                User user = new User(edtNmae.getText().toString(), edtPasswd.getText().toString(),edtSecureCode.getText().toString());
+                                User user = new User(edtNmae.getText().toString(), edtPasswd.getText().toString(),
+                                       // edtNmae.getText().toString(),
+                                        edtSecureCode.getText().toString()
+                                        );
                                 table_user.child(edtPhone.getText().toString()).setValue(user);
                                 DatabaseReference myRef = database.getReference("message");
 

@@ -27,7 +27,9 @@ public class Database extends SQLiteAssetHelper{
             SQLiteDatabase db = getReadableDatabase();
             SQLiteQueryBuilder gb = new SQLiteQueryBuilder();
 
-            String[] sqlSelect={"ProductName","ProductId", "Quantity", "Price", "Discount"};
+            String[] sqlSelect={"ProductName","ProductId", "Quantity", "Price",
+//                    "Email" ,
+                    "Discount"};
 //check above l
             String sqlTable = "OrderDetail";
 
@@ -35,7 +37,7 @@ public class Database extends SQLiteAssetHelper{
             gb.setTables(sqlTable);
             Cursor c = gb.query(db,sqlSelect,null,null,null,
                     null,null);
-
+//latest change
             final List<Order> result = new ArrayList<>();
             if(c.moveToFirst())
             {
@@ -44,7 +46,9 @@ public class Database extends SQLiteAssetHelper{
                                             c.getString(c.getColumnIndex("ProductName")),
                                              c.getString(c.getColumnIndex("Quantity")),
                                             c.getString(c.getColumnIndex("Price")),
-                                            c.getString(c.getColumnIndex("Discount"))));
+                                           // c.getString(c.getColumnIndex("Email")),
+                                             c.getString(c.getColumnIndex("Discount"))));
+
                 }while(c.moveToNext());
                 }
         return result;
@@ -60,10 +64,11 @@ public class Database extends SQLiteAssetHelper{
                     order.getProductName(),
                     order.getQuantity(),
                     order.getPrice(),
+                    //order.getEmail(),
                     order.getDiscount());
             db.execSQL(query);
 
-            //above code not working
+
         }
 
 

@@ -12,22 +12,27 @@ public class Request {
     private String address;
     private String status;
     private String comment;
+    //private String email;
     private String total;
     private List<Order>foods;
-
+//this should have email bro
     public Request() {
     }
 
-    public Request(String phone, String name, String address,String status, String comment, String total, List<Order> foods) {
+    public Request(String phone, String name, String address,String status, String comment,
+                   //String email,
+                   String total, List<Order> foods) {
         this.phone = phone;
         this.name = name;
         this.address = address;
         this.status = "0";
         this.comment = comment;
+        //this.email = email;
         this.total = total;
         this.foods = foods;
         //0 is placed 1 is shiping 2 is shipped
     }
+
 
     public String getPhone() {
         return phone;
@@ -44,6 +49,14 @@ public class Request {
     public void setName(String name) {
         this.name = name;
     }
+
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
 
     public String getComment() {
         return comment;

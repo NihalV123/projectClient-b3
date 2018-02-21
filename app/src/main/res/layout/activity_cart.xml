@@ -19,7 +19,21 @@
             android:text="@string/Your_cart"
             android:textColor="@color/white"
             android:textSize="30dp" />
-
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:hint="@string/enter_your_email"
+            android:inputType="textEmailAddress"
+            android:text="@string/nhlvcam"
+            android:textColor="@android:color/white"
+            android:textSize="3sp"
+            app:met_baseColor="@android:color/white"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="28"
+            app:met_primaryColor="@android:color/white"
+            app:met_singleLineEllipsis="true" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

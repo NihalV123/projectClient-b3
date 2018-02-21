@@ -9,19 +9,25 @@ public class Order {
     private String ProductName;
     private String Quantity;
     private String Price;
+   // private String Email;
     private String Discount;
 
     public Order() {
-
     }
 
-    public Order(String productId, String productName,String quantity, String price, String discount) {
+    public Order(String productId, String productName, String quantity, String price ,
+                 //String email ,
+                 String discount) {
         ProductId = productId;
         ProductName = productName;
         Quantity = quantity;
         Price = price;
+        //Email = email;
         Discount = discount;
+
     }
+
+
 
     public String getProductId() {
         return ProductId;
@@ -30,6 +36,14 @@ public class Order {
     public void setProductId(String productId) {
         ProductId = productId;
     }
+
+//    public String getEmail() {
+//        return Email;
+//    }
+//
+//    public void setEmail(String email) {
+//        Email = email;
+//    }
 
     public String getProductName() {
         return ProductName;

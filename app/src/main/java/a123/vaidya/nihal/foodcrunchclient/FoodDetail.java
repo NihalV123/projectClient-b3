@@ -69,6 +69,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
             @Override
             public void onClick(View v) {
                 showRatingDialog();
+                btnRating.setEnabled(false);
             }
         });
 
@@ -76,9 +77,11 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
             @Override
             public void onClick(View v) {
                 //below code not working
-                new Database(getBaseContext()).addToCart(new Order(foodId, currentFood.getName(), numberButton.getNumber(), currentFood.getPrice(), currentFood.getDiscount()
+                new Database(getBaseContext()).addToCart(new Order(foodId, currentFood.getName(), numberButton.getNumber(),
+                        //currentFood.getEmail(),
+                        currentFood.getPrice(), currentFood.getDiscount()
                 ));
-                Toast.makeText(FoodDetail.this,"Added to cart",Toast.LENGTH_SHORT).show();
+                Toast.makeText(FoodDetail.this,"Added to cart",Toast.LENGTH_LONG).show();
 
             }
         });
@@ -189,12 +192,16 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                         ratingTbl.child(Common.currentUser.getPhone()).setValue(rating);
                     }
                 Toast.makeText(FoodDetail.this,"Thank you for your feedback!!",Toast.LENGTH_LONG).show();
+
                 }
+
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
 
                 }
+
+
             });
     }
 

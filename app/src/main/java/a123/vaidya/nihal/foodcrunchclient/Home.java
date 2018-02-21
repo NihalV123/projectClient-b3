@@ -7,10 +7,12 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,6 +23,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
@@ -37,6 +40,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     DatabaseReference category;
     TextView txtFullName;
     RecyclerView recycler_menu;
+    MaterialEditText edtHomeAddress,edtPassword;
     RecyclerView.LayoutManager layoutManager;
     FirebaseRecyclerAdapter<Category,MenuViewHolder> adapter;
 
@@ -83,6 +87,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         //load da menu
         recycler_menu = findViewById(R.id.recycler_menu);
+        //final MaterialEditText edtHomeAddress = (MaterialEditText) home_address_layout.findViewById(R.id.edtHomeAddress);
+        //edtPassword = findViewById(R.id.edtPasswd);
         recycler_menu.setHasFixedSize(true);
         layoutManager =new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);
@@ -105,9 +111,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private void updateToken(String token) {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference tokens = db.getReference("Tokens");
-        Token data = new Token(token,false); //false as this reads frm client
-        tokens.child(Common.currentUser.getPhone()).setValue(data);
-        //tokens.child(Common.currentUser.getIsStaff());
+        Token data = new Token(token,false);//false as this reads frm client
+        try {
+            tokens.child(Common.currentUser.getPhone()).setValue(data);
+            Toast.makeText(Home.this,"You logged with staff account",Toast.LENGTH_LONG).show();
+            //tokens.child(Common.currentUser.getIsStaff());
+        }
+        catch(Exception e){
+            Toast.makeText(Home.this,"Welcome !!!",Toast.LENGTH_LONG).show();
+        }
     }
 
     private void loadMenu() {
@@ -170,7 +182,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         int id = item.getItemId();
 
         if (id == R.id.nav_menu) {
-
+            Toast.makeText(Home.this,"You are already in main menu",Toast.LENGTH_LONG).show();
         } else if (id == R.id.nav_cart) {
             Intent cartIntent = new Intent (Home.this,Cart.class);
             startActivity(cartIntent);
@@ -178,6 +190,38 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             Intent orderIntent = new Intent (Home.this,OrderStatus.class);
             startActivity(orderIntent);
         } else if (id == R.id.nav_logout) {
+            //delete remmbered user details
+            Toast.makeText(Home.this,"Logging out",Toast.LENGTH_LONG).show();
+            Paper.book().destroy();
+            Intent signIn = new Intent (Home.this,Signin.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
+        }
+        else if (id == R.id.nav_favorites) {
+            //delete remmbered user details
+            Paper.book().destroy();
+            Intent signIn = new Intent (Home.this,Signin.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
+        }
+        else if (id == R.id.nav_homeaddress) {
+            showHomeAddressDialog();
+        }
+        else if (id == R.id.nav_emailaddress) {
+            //delete remmbered user details
+            Paper.book().destroy();
+            Intent signIn = new Intent (Home.this,Signin.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
+        }
+        else if (id == R.id.nav_password) {
+            //delete remmbered user details
+            Paper.book().destroy();
+            Intent signIn = new Intent (Home.this,Signin.class);
+            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(signIn);
+        }
+        else if (id == R.id.settings) {
             //delete remmbered user details
             Paper.book().destroy();
             Intent signIn = new Intent (Home.this,Signin.class);
@@ -187,5 +231,18 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showHomeAddressDialog() {
+        AlertDialog.Builder alertDailog = new AlertDialog.Builder(Home.this);
+        alertDailog.setTitle("CHANGE HOME ADDRESS");
+        alertDailog.setMessage("Please fill all fields");
+
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View layout_home = inflater.inflate(R.layout.home_address_layout,null);
+
+
+
     }
 }
