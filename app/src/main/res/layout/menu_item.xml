@@ -8,27 +8,27 @@
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        >
+        android:minHeight="200dp">
 
 
-    <ImageView
-        android:contentDescription="@string/food_crunch"
-        android:src="@drawable/background"
-        android:id="@+id/menu_image"
-        android:scaleType="centerCrop"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <ImageView
+            android:id="@+id/menu_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/food_crunch"
+            android:scaleType="centerCrop"
+            android:src="@drawable/background" />
 
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="match_parent"
-        android:text="@string/name_of_menu"
-        android:textColor="@android:color/white"
-        android:background="@color/overlayBackground"
-        android:id="@+id/menu_name"
-        android:textSize="20sp"
-        android:gravity="center"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content" />
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/menu_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/overlayBackground"
+            android:gravity="center"
+            android:text="@string/name_of_menu"
+            android:textColor="@android:color/white"
+            android:textSize="20sp" />
 
-</RelativeLayout>
+    </RelativeLayout>
 </android.support.v7.widget.CardView>
