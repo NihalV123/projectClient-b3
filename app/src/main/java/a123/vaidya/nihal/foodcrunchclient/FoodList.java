@@ -4,6 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -59,7 +60,7 @@ public class FoodList extends AppCompatActivity {
     List<String> suggestList = new ArrayList<>();
     MaterialSearchBar materialSearchBar;
     Database localDB;
-    RelativeLayout rootLayout;
+    SwipeRefreshLayout rootLayout;
     public ImageView fav_image,like,share;
 
     //Facebook share
@@ -118,7 +119,43 @@ public class FoodList extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);
         localDB = new Database(this);
-        rootLayout = (RelativeLayout)findViewById(R.id.rootLayout);
+        rootLayout = (SwipeRefreshLayout) findViewById(R.id.rootLayout);
+        rootLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_red_dark,
+                android.R.color.holo_blue_dark);
+        rootLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (getIntent()!=null)
+                    categoryId = getIntent().getStringExtra("CategoryId");
+                if (!categoryId.isEmpty()&&categoryId != null)
+                {
+                    if (Common.isConnectedToInternet(getBaseContext()))
+                        loadListFood(categoryId);
+                    else
+                        Toast.makeText(FoodList.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+        });
+
+        rootLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                if (getIntent()!=null)
+                    categoryId = getIntent().getStringExtra("CategoryId");
+                if (!categoryId.isEmpty()&&categoryId != null)
+                {
+                    if (Common.isConnectedToInternet(getBaseContext()))
+                        loadListFood(categoryId);
+                    else
+                        Toast.makeText(FoodList.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }
+        });
         fav_image = findViewById(R.id.fav);
         share = findViewById(R.id.share);
         like = findViewById(R.id.like);
@@ -316,6 +353,6 @@ public class FoodList extends AppCompatActivity {
         //set adapter
         recycler_menu.setAdapter(adapter);
 
-
+        rootLayout.setRefreshing(false);
     }
 }
