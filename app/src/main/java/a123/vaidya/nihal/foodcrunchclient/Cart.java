@@ -1,5 +1,6 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -24,13 +25,21 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.paypal.android.sdk.payments.PayPalConfiguration;
+import com.paypal.android.sdk.payments.PayPalPayment;
+import com.paypal.android.sdk.payments.PayPalService;
+import com.paypal.android.sdk.payments.PaymentActivity;
+import com.paypal.android.sdk.payments.PaymentConfirmation;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
+import a123.vaidya.nihal.foodcrunchclient.Common.Config;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Model.MyResponse;
 import a123.vaidya.nihal.foodcrunchclient.Model.Notification;
@@ -41,6 +50,7 @@ import a123.vaidya.nihal.foodcrunchclient.Model.Token;
 import a123.vaidya.nihal.foodcrunchclient.Remote.APIService;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.CartAdapter;
 
+import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +63,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Cart extends AppCompatActivity {
-
+    private static final int PAYPAL_REQUEST_CODE = 9999;
     RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     FirebaseDatabase database;
@@ -62,9 +72,11 @@ public class Cart extends AppCompatActivity {
 
     FButton btnPlace;
     APIService mservice;
-    //Initialize the paypal sdk!!!
+    //Config the paypal sdk!!!
         static PayPalConfiguration config = new PayPalConfiguration()
         .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
+            .clientId(Config.PAYPAL_CLIENT_ID);
+        String address,comment;
 
     List<Order> cart = new ArrayList<>();
     CartAdapter adapter;
@@ -72,6 +84,12 @@ public class Cart extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
+
+        //init the paypal sdk!!
+        Intent intent = new Intent(this, PayPalService.class);
+        intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
+        //startActivity(intent);
+
 
         //firebase code
         Twitter.initialize(this);
@@ -118,7 +136,7 @@ public class Cart extends AppCompatActivity {
         alertdailog.setTitle("One Last Step!!");
         alertdailog.setMessage("Enter your Address :   ");
 
-        LayoutInflater inflater = this.getLayoutInflater();
+        final LayoutInflater inflater = this.getLayoutInflater();
         View order_address_comment = inflater.inflate(R.layout.order_address_comment,null);
 
         final MaterialEditText edtAddress = (MaterialEditText)order_address_comment.findViewById(R.id.edtAddress);
@@ -130,40 +148,22 @@ public class Cart extends AppCompatActivity {
         alertdailog.setPositiveButton("YES!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Request request = new Request(
-                        //Common.currentUser.getEmail(),
-                        Common.currentUser.getPhone(),
-                        Common.currentUser.getName(),
-                        edtAddress.getText().toString(),
-                        "0",  //for status in request model
-                        edtComment.getText().toString(),
-                        txtTotalPrice.getText().toString(),cart
-                );
 
-                //if yes submitting to the firebase using current time down to milliseconds!!
-                String order_number = String.valueOf(System.currentTimeMillis());
-                requests.child(order_number)
-                        //requests.child(String.valueOf(System.currentTimeMillis()))
-                        .setValue(request);
-                sendNotificatinOrder(order_number);
+                address = edtAddress.getText().toString();
+                comment = edtComment.getText().toString();
 
-                ///send the motherfucking email
+                String formatAmmount = txtTotalPrice.getText().toString()
+                        .replace("¤","")
+                        .replace("$","")//replace regional barriers
+                        .replace(",","");
 
-//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-//                String[] recipients = new String[]{"nhlvcam@gmail.com.com", "",};
-//                //emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,"nareshdcam@gmail.con");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Test");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is email's message");
-//                emailIntent.setType("text/plain");
-//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                Toast.makeText(Cart.this,"Thank you for shopping\n\nYour order email has been sent!!\n\nActually not LOOOOL", Toast.LENGTH_SHORT).show();
-                finish();
+                PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
+                "USD","Food Crunch Order",PayPalPayment.PAYMENT_INTENT_SALE);
+                Intent intent =new Intent(getApplicationContext(), PaymentActivity.class);
+                intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
+                intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
+                startActivityForResult(intent,PAYPAL_REQUEST_CODE);
 
-                //delete cart
-                new Database(getBaseContext()).clearCart();
-//                Toast.makeText(Cart.this,"Thank you for shopping Order placed!",
-//                        Toast.LENGTH_SHORT).show();
-                finish();
             }
         });
 
@@ -175,6 +175,72 @@ public class Cart extends AppCompatActivity {
         });
 
         alertdailog.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == PAYPAL_REQUEST_CODE)
+        {
+            if(resultCode == RESULT_OK)
+            {
+                PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                if(confirmation != null)
+                {
+                    try
+                    {
+                        String paymentDetail = confirmation.toJSONObject().toString(4);
+                        JSONObject jsonObject = new JSONObject(paymentDetail);
+
+                Request request = new Request(
+                        Common.currentUser.getPhone(),
+                        Common.currentUser.getName(),
+                        address,
+                        txtTotalPrice.getText().toString()
+                                .replace("$","")//replace regional barriers
+                                .replace("¤","")
+                                .replace(",",""),
+                        "0",  //for status in request model
+                       comment,
+                        jsonObject.getJSONObject("response").getString("state"),
+                        cart);
+
+                //if yes submitting to the firebase using current time down to milliseconds!!
+                String order_number = String.valueOf(System.currentTimeMillis());
+                requests.child(order_number)
+                        //requests.child(String.valueOf(System.currentTimeMillis()))
+                        .setValue(request);
+                sendNotificatinOrder(order_number);
+
+                        ///send the motherfucking email
+
+//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
+//                String[] recipients = new String[]{"nhlvcam@gmail.com.com", "",};
+//                //emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,"nareshdcam@gmail.con");
+//                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Test");
+//                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is email's message");
+//                emailIntent.setType("text/plain");
+//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                        Toast.makeText(Cart.this,"Thank you for shopping\n\nYour order email has been sent!!\n\nActually not LOOOOL", Toast.LENGTH_SHORT).show();
+                        //delete cart
+                        new Database(getBaseContext()).clearCart();
+
+                        finish();
+
+
+                    }catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }else if(resultCode == Activity.RESULT_CANCELED)
+            {
+                Toast.makeText(Cart.this,"Payment canceled", Toast.LENGTH_LONG).show();
+                finish();
+            }else if(resultCode == PaymentActivity.RESULT_EXTRAS_INVALID)
+            {
+                Toast.makeText(Cart.this,"Invalid Payment Please Log in again and try", Toast.LENGTH_LONG).show();
+                finish();
+            }
+        }
     }
 
     private void sendNotificatinOrder(final String order_number) {
@@ -242,8 +308,8 @@ public class Cart extends AppCompatActivity {
         Locale locale = new Locale("en","BU");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 
-        //txtTotalPrice.setText(fmt.format(total));
         txtTotalPrice.setText(fmt.format(total));
+
     }
 
     @Override

@@ -59,7 +59,7 @@
         android:layout_centerInParent="true"
         android:gravity="bottom"
         android:orientation="horizontal"
-        android:paddingBottom="60dp"
+        android:paddingBottom="10dp"
         android:weightSum="2">
 
         <info.hoang8f.widget.FButton

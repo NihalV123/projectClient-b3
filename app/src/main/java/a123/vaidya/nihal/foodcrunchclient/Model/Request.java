@@ -10,29 +10,26 @@ public class Request {
     private String phone;
     private String name;
     private String address;
+    private String total;
     private String status;
     private String comment;
-    //private String email;
-    private String total;
-    private List<Order>foods;
-//this should have email bro
+    private String paymentState;
+    private List<Order> foods;
+
+
     public Request() {
     }
 
-    public Request(String phone, String name, String address,String status, String comment,
-                   //String email,
-                   String total, List<Order> foods) {
+    public Request(String phone, String name, String address, String total, String status, String comment, String paymentState, List<Order> foods) {
         this.phone = phone;
         this.name = name;
         this.address = address;
-        this.status = "0";
-        this.comment = comment;
-        //this.email = email;
         this.total = total;
+        this.status = status;
+        this.comment = comment;
+        this.paymentState = paymentState;
         this.foods = foods;
-        //0 is placed 1 is shiping 2 is shipped
     }
-
 
     public String getPhone() {
         return phone;
@@ -48,22 +45,6 @@ public class Request {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     public String getAddress() {
@@ -82,16 +63,32 @@ public class Request {
         this.total = total;
     }
 
-    public List<Order> getFoods() {
-        return foods;
-    }
-
     public String getStatus() {
         return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    public String getPaymentState() {
+        return paymentState;
+    }
+
+    public void setPaymentState(String paymentState) {
+        this.paymentState = paymentState;
+    }
+
+    public List<Order> getFoods() {
+        return foods;
     }
 
     public void setFoods(List<Order> foods) {
