@@ -20,8 +20,8 @@
             android:value="@string/facebook_app_id">
 
         </meta-data>
-        <meta-data android:name="com.twitter.sdk.ApplicationId" >
-        </meta-data>
+        <!--<meta-data android:name="com.twitter.sdk.ApplicationId" >-->
+        <!--</meta-data>-->
         <activity android:name=".Signin" />
         <activity android:name=".Signup" />
         <activity
@@ -39,16 +39,12 @@
 
         <service android:name=".Service.MyFireBaseIdService">
 
-            <!-- android:enabled="true" -->
-            <!-- android:exported="true" -->
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
         <service android:name=".Service.MyirebaseMessaging">
 
-            <!-- android:enabled="true" -->
-            <!-- android:exported="true" -->
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

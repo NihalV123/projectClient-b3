@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.paypal.android.sdk.payments.PayPalConfiguration;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
@@ -61,6 +62,9 @@ public class Cart extends AppCompatActivity {
 
     FButton btnPlace;
     APIService mservice;
+    //Initialize the paypal sdk!!!
+        static PayPalConfiguration config = new PayPalConfiguration()
+        .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
 
     List<Order> cart = new ArrayList<>();
     CartAdapter adapter;

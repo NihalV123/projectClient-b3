@@ -41,7 +41,7 @@ dependencies {
 
     // Facebook Share only
     implementation 'com.facebook.android:facebook-share:4.28.0'
-
+    implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
     // Facebook Places only
     implementation 'com.facebook.android:facebook-places:4.28.0'
 
