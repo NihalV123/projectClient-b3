@@ -206,15 +206,15 @@ public class FoodList extends AppCompatActivity {
                         {
                             localDB.addToFavorites(adapter.getRef(position).getKey());
                             viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
-                            Toast.makeText(FoodList.this,"The"+model.getName()+"was added to favorites",Toast.LENGTH_SHORT).show();
-                            Snackbar.make(rootLayout,"The"+model.getName()+" was added to favorites",Snackbar.LENGTH_LONG).show();
+                            Toast.makeText(FoodList.this,"The"+model.getName()+"\n was added to favorites",Toast.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout,"The"+model.getName()+" \nwas added to favorites",Snackbar.LENGTH_LONG).show();
 
                         }else
                         {
                             localDB.removeFromFavorites(adapter.getRef(position).getKey());
                             viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                            Toast.makeText(FoodList.this,"The"+model.getName()+"was removed from  favorites",Toast.LENGTH_SHORT).show();
-                            Snackbar.make(rootLayout,"The"+model.getName()+" was removed from favorites",Snackbar.LENGTH_LONG).show();
+                            Toast.makeText(FoodList.this,"The"+model.getName()+"\n was removed from  favorites",Toast.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout,"The"+model.getName()+" \nwas removed from favorites",Snackbar.LENGTH_LONG).show();
 
                         }
                     }

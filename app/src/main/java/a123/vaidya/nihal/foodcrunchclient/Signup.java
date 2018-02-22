@@ -31,7 +31,7 @@ public class Signup extends AppCompatActivity {
         edtNmae= findViewById(R.id.edtName);
         edtPasswd= findViewById(R.id.edtPasswd);
         edtPhone= findViewById(R.id.edtPhone);
-        //edtEmail= findViewById(R.id.edtEmail);
+
         BtnSignup = findViewById(R.id.btnSignup);
         edtSecureCode=findViewById(R.id.edtSecureCode);
 

@@ -81,7 +81,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                         //currentFood.getEmail(),
                         currentFood.getPrice(), currentFood.getDiscount()
                 ));
-                Toast.makeText(FoodDetail.this,"Added to cart",Toast.LENGTH_LONG).show();
+                Toast.makeText(FoodDetail.this,"Item was added to cart",Toast.LENGTH_LONG).show();
 
             }
         });
@@ -140,7 +140,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 .setNoteDescriptions(Arrays.asList("Very bad","Needs Improvement","OK","Very Good","Above Expectations"))
                 .setDefaultRating(1)
                 .setTitle("Please Rate Our Food!")
-                .setDescription("Select a star and give feedback")
+                .setDescription("Select a star and give feedback\nOne time per food item per session")
                 .setTitleTextColor(R.color.colorPrimary)
                 .setDescriptionTextColor(R.color.colorPrimary)
                 .setHint("Provide Feedback Here")

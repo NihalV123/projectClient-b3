@@ -58,13 +58,13 @@
     <string name="Please_select_a_category">SELECT CATEGORY</string>
     <string name="Todays_Speciality">TODAYS SPECIALITY</string>
     <string name="Your_cart">Long click to remove</string>
-    <string name="Your_orders_from_Today">RECENT ORDERS</string>
+    <string name="Your_orders_from_Today">TAP FOR DETAILS</string>
     <string name="SELECT_YOUR_FOOD">SELECT YOUR FOOD !!!</string>
     <string name="product_name">product name</string>
     <string name="product_quantity">product quantity</string>
     <string name="product_discount">product discount</string>
     <string name="product_price">product price</string>
-    <string name="Details">DETAILS</string>
+    <string name="Details">DETAILS OF YOUR ORDER </string>
     <string name="enter_your_email">ENTER YOUR EMAIL</string>
     <string name="nhlvcam">nhlvcam@gmail.com</string>
     <string name="enter_your_home_address">ENTER YOUR HOME ADDRESS</string>
@@ -74,4 +74,13 @@
     <string name="email_address">EMAIL ADDRESS</string>
     <string name="welcome">WELCOME !!</string>
     <string name="change_password">CHANGE PASSWORD</string>
+    <string name="Category_name">CATEGORY NAME</string>
+    <string name="SelectImage"><![CDATA[SELECT IMAGE ->]]></string>
+    <string name="UploadImage">UPLOAD IMAGE</string>
+    <string name="Food_name">FOOD NAME</string>
+    <string name="Description">DESCRIPTION</string>
+    <string name="Price">PRICE</string>
+    <string name="Discount">DISCOUNT</string>
+    <string name="enter_new_password">ENTER NEW PASSOWRD</string>
+    <string name="repeat_new_passowrd">REPEAT NEW PASSOWRD</string>
 </resources>

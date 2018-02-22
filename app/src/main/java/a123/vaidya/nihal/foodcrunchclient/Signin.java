@@ -2,7 +2,7 @@ package a123.vaidya.nihal.foodcrunchclient;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AlertDialog;
+import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +20,7 @@ import com.rey.material.widget.CheckBox;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
+import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
 
 public class Signin extends AppCompatActivity {
@@ -60,14 +61,14 @@ public class Signin extends AppCompatActivity {
             public void onClick(View v) {
 
                 if (Common.isConnectedToInternet(getBaseContext())) {
-                //save user name and password
+                //save user phone and password
                     if(remember_button.isChecked())
                     {
                         Paper.book().write(Common.USER_KEY,edtPhone.getText().toString());
                         Paper.book().write(Common.PWD_KEY,edtPasswd.getText().toString());
                     }
 
-                    table_user.addValueEventListener(new ValueEventListener() {
+                    table_user.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             //check if user doesnt exist in db
@@ -78,14 +79,18 @@ public class Signin extends AppCompatActivity {
                                 // user.setPhone(edtPhone.getText().toString());
 
                                 if ((user.getPassword().equals(edtPasswd.getText().toString()))
-                                    //&&(user.getName().equals(edtNmae.getText().toString())) for verifying name and password
+                                    //&&(Common.currentUser.getName().equals(edtNmae.getText().toString())) //for verifying name and password
                                         ) {
                                     DatabaseReference myRef = database.getReference("message");
                                     myRef.setValue("Hello from sign in ");
-
+                                    final SpotsDialog dialog = new SpotsDialog(Signin.this);
+                                    dialog.show();
                                     Intent homeIntent = new Intent(Signin.this, Home.class);
                                     Common.currentUser = user;
                                     startActivity(homeIntent);
+                                    dialog.dismiss();
+                                    finish();
+                                    table_user.removeEventListener(this);
 
                                 } else {
                                     DatabaseReference myRef = database.getReference("message");

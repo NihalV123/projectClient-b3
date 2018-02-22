@@ -3,7 +3,7 @@ package a123.vaidya.nihal.foodcrunchclient;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
+import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,7 +53,7 @@ public class Cart extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference requests;
     TextView txtTotalPrice;
-    MaterialEditText ediAddress;
+
     FButton btnPlace;
     APIService mservice;
 
@@ -79,7 +79,7 @@ public class Cart extends AppCompatActivity {
 
         txtTotalPrice = findViewById(R.id.total);
         btnPlace = findViewById(R.id.btnPlaceOrder);
-        ediAddress = findViewById(R.id.edtEmail);
+
 
         //getting address
         btnPlace.setOnClickListener(new View.OnClickListener() {

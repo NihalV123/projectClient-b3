@@ -1,5 +1,6 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,7 @@ import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Request;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.OrderViewHolder;
+import dmax.dialog.SpotsDialog;
 
 
 public class  OrderStatus extends AppCompatActivity {
@@ -72,10 +74,13 @@ public class  OrderStatus extends AppCompatActivity {
                     public void onClick(View v, int position, boolean isLongClick) {
                         if(!isLongClick)
                         {
+                            final SpotsDialog dialog = new SpotsDialog(OrderStatus.this);
+                            dialog.show();
                             Intent orderDetail = new Intent(OrderStatus.this,OrderDetail.class);
                             Common.currentRequest = model;
                             orderDetail.putExtra("OrderId",adapter.getRef(position).getKey());
                             startActivity(orderDetail);
+                            dialog.dismiss();
                         }
                         else
                         {

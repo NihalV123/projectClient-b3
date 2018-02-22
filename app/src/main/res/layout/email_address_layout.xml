@@ -13,7 +13,7 @@
         <com.rengwuxian.materialedittext.MaterialEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/edtHomeAddress"
+            android:id="@+id/edtEmailAddress"
             android:hint="@string/enter_your_email_address"
             android:text="@string/nhlvcam"
             android:textColor="@color/colorPrimary"

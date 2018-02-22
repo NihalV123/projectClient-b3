@@ -1,5 +1,6 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -20,6 +21,7 @@ import com.rengwuxian.materialedittext.MaterialEditText;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
+import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
 
 public class MainActivity extends AppCompatActivity {
@@ -55,40 +57,22 @@ public class MainActivity extends AppCompatActivity {
 
         BtnSignUp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                final SpotsDialog dialog = new SpotsDialog(MainActivity.this);
+                dialog.show();
                 Intent Signup= new Intent(MainActivity.this,Signup.class);
                 startActivity(Signup);
+                dialog.dismiss();
             }
         });
         BtnSignIn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                final SpotsDialog dialog = new SpotsDialog(MainActivity.this);
+                dialog.show();
                 Intent Signin= new Intent(MainActivity.this,Signin.class);
                 startActivity(Signin);
+                dialog.dismiss();
             }
         });
-//        btnTest1.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Intent Signup= new Intent(MainActivity.this,Signup.class);
-//                startActivity(Signup);
-//            }
-//        });
-//        btnTest2.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Intent Signin= new Intent(MainActivity.this,Signin.class);
-//                startActivity(Signin);
-//            }
-//        });
-//        btnTest3.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Intent Signup= new Intent(MainActivity.this,Signup.class);
-//                startActivity(Signup);
-//            }
-//        });
-//        btnTest4.setOnClickListener(new View.OnClickListener() {
-//            public void onClick(View v) {
-//                Intent Signin= new Intent(MainActivity.this,Signin.class);
-//                startActivity(Signin);
-//            }
-//        });
         //check user details
         String user = Paper.book().read(Common.USER_KEY);
         String pwd = Paper.book().read(Common.PWD_KEY);
@@ -121,10 +105,12 @@ public class MainActivity extends AppCompatActivity {
                         if ((user.getPassword().equals(pwd))) {
                             DatabaseReference myRef = database.getReference("message");
                             myRef.setValue("Hello from sign in ");
-
+                            final SpotsDialog dialog = new SpotsDialog(MainActivity.this);
+                            dialog.show();
                             Intent homeIntent = new Intent(MainActivity.this, Home.class);
                             Common.currentUser = user;
                             startActivity(homeIntent);
+                            dialog.dismiss();
 
                         } else {
                             DatabaseReference myRef = database.getReference("message");
