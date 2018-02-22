@@ -4,7 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.TextView;
+
+import com.twitter.sdk.android.core.DefaultLogger;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterConfig;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.OrderDetailsAdapter;
@@ -31,7 +37,13 @@ public class OrderDetail extends AppCompatActivity {
         listFood.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         listFood.setLayoutManager(layoutManager);
-
+        Twitter.initialize(this);
+        TwitterConfig config = new TwitterConfig.Builder(this)
+                .logger(new DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(new TwitterAuthConfig("6ep60jj09lvUcHncYM3yCoIMr", "WXvH93jw1urHD9IzIk6FDRmKW0X5LGZgmMCDo67XFk2uDf2LGJ"))
+                .debug(true)
+                .build();
+        Twitter.initialize(config);
         if(getIntent()!=null)
             order_id_value = getIntent().getStringExtra("OrderId");
         //set  values

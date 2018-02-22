@@ -1,16 +1,21 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.FacebookSdk;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +23,21 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.DefaultLogger;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthConfig;
+import com.twitter.sdk.android.core.TwitterAuthToken;
+import com.twitter.sdk.android.core.TwitterConfig;
+import com.twitter.sdk.android.core.TwitterCore;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterAuthClient;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
@@ -28,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
     MaterialEditText edtNmae,edtPhone,edtPasswd;
     Button BtnSignin;
-    Button BtnSignIn,BtnSignUp,btnTest1,btnTest2,btnTest3,
-            btnTest4,btnTest5,btnTest6,btnTest7,btnTest8;
+    Button BtnSignIn,BtnSignUp;
+    TwitterLoginButton twitterLoginButton;
     TextView txtSlogan;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
@@ -38,16 +58,34 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        Twitter.initialize(this);
+        TwitterConfig config = new TwitterConfig.Builder(this)
+                .logger(new DefaultLogger(Log.DEBUG))
+                .twitterAuthConfig(new TwitterAuthConfig("6ep60jj09lvUcHncYM3yCoIMr",
+                        "WXvH93jw1urHD9IzIk6FDRmKW0X5LGZgmMCDo67XFk2uDf2LGJ"))
+                .debug(true)
+                .build();
+        Twitter.initialize(config);
 
         BtnSignIn= findViewById(R.id.btnSignin);
         BtnSignUp= findViewById(R.id.btnSignup);
 
-//        btnTest1= findViewById(R.id.btntest1);
-//        btnTest2= findViewById(R.id.btntest2);
-//        btnTest3= findViewById(R.id.btntest3);
-//        btnTest4= findViewById(R.id.btntest4);
+        twitterLoginButton = (TwitterLoginButton)findViewById(R.id.twitter_login_button);
+        twitterLoginButton.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
 
+                Toast.makeText(MainActivity.this,"You are registered with twitter",Toast.LENGTH_LONG).show();
+            }
 
+            @Override
+            public void failure(TwitterException exception) {
+                Toast.makeText(MainActivity.this,"Please install twitter or try normal sign in",Toast.LENGTH_LONG).show();
+            }
+        });
+
+            printKeyHash();
         txtSlogan= findViewById(R.id.txtslogan);
         Typeface face = Typeface.createFromAsset(getAssets(),"fonts/NABILA.TTF");
         txtSlogan.setTypeface(face);
@@ -81,6 +119,30 @@ public class MainActivity extends AppCompatActivity {
             if(!user.isEmpty() && !pwd.isEmpty())
                 login(user,pwd);
         }
+    }
+//important for social logins search key in logcat for sha1
+    private void printKeyHash() {
+    try{
+        PackageInfo info =getPackageManager().getPackageInfo("a123.vaidya.nihal.foodcrunchclient",
+                PackageManager.GET_SIGNATURES);
+
+        for(Signature signature:info.signatures)
+        {
+            MessageDigest md = MessageDigest.getInstance("SHA");
+            md.update(signature.toByteArray());
+            Log.d("KeyHash", Base64.encodeToString(md.digest(),Base64.DEFAULT));
+        }
+    } catch (PackageManager.NameNotFoundException e) {
+        e.printStackTrace();
+    } catch (NoSuchAlgorithmException e) {
+        e.printStackTrace();
+    }
+    }
+
+    private void twitterlogin(TwitterSession session) {
+            String username = session.getUserName();
+        Intent Signin_twitter= new Intent(MainActivity.this,Signin.class);
+        startActivity(Signin_twitter);
     }
 
     private void login(final String phone, final String pwd) {
@@ -137,7 +199,35 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Twitter.initialize(this);
+        final TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
+        TwitterAuthToken authToken = session.getAuthToken();
+        String token = authToken.token;
+        String secret = authToken.secret;
+        TwitterAuthClient authClient = new TwitterAuthClient();
+        authClient.requestEmail(session, new Callback<String>() {
+            @Override
+            public void success(Result<String> result) {
+                // Do something with the result, which provides the email address
+                twitterlogin(session);
+                Toast.makeText(MainActivity.this,"You are registered with twitter",Toast.LENGTH_LONG).show();
 
+            }
+
+            @Override
+            public void failure(TwitterException exception) {
+                // Do something on failure
+                Toast.makeText(MainActivity.this,"Please install twitter or try normal sign in",Toast.LENGTH_LONG).show();
+
+            }
+        });
+        Toast.makeText(MainActivity.this,"You are registered w twitter",Toast.LENGTH_LONG).show();
+        // Pass the activity result to the login button.
+        twitterLoginButton.onActivityResult(requestCode, resultCode, data);
+    }
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {

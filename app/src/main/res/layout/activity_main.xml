@@ -31,6 +31,25 @@
             android:textColor="@android:color/white"
             android:textSize="25sp" />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:gravity="bottom"
+        android:orientation="horizontal"
+        android:paddingBottom="10dp"
+        android:weightSum="2">
+
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
+        android:id="@+id/twitter_login_button"
+        android:layout_gravity="center"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+            />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -40,7 +59,7 @@
         android:layout_centerInParent="true"
         android:gravity="bottom"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
+        android:paddingBottom="60dp"
         android:weightSum="2">
 
         <info.hoang8f.widget.FButton

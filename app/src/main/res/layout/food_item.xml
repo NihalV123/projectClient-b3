@@ -32,19 +32,66 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:layout_weight="8"
                 android:text="@string/name_of_food"
                 android:textColor="@android:color/white"
                 android:textSize="20sp" />
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@color/overlayBackground"
+            android:orientation="horizontal"
+            android:layout_weight="8"
+            android:weightSum="10">
+
             <ImageView
                 android:id="@+id/fav"
-                android:layout_width="match_parent"
+                android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_weight="1"
+                android:contentDescription="@string/todo"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
                 android:src="@drawable/ic_favorite_border_black_24dp"
-                android:tint="@color/white"
-                android:contentDescription="@string/todo" />
+                android:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/tweet"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/todo"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:src="@drawable/ic_favorite_border_black_24dp"
+                android:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/like"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/todo"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:src="@drawable/ic_favorite_border_black_24dp"
+                android:tint="@color/white" />
+
+            <ImageView
+                android:id="@+id/share"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/todo"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:src="@drawable/ic_favorite_border_black_24dp"
+                android:tint="@color/white" />
         </LinearLayout>
+        </LinearLayout>
+
 
 
     </RelativeLayout>

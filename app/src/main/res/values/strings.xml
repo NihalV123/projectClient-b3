@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/tools">
     <string name="app_name">Food Crunch Client</string>
     <string name="slogan">No matter the time or place we will find you and we will feed you!</string>
     <string name="Signup">no account ? SIGN UP !</string>
@@ -73,10 +73,14 @@
     <string name="home_address">HOME ADDRESS</string>
     <string name="email_address">EMAIL ADDRESS</string>
     <string name="welcome">WELCOME !!</string>
+    <string name="facebook_app_id">1841890425883573</string>
+    <string name="facebook_login_protocall_name">fb1841890425883573</string>
     <string name="change_password">CHANGE PASSWORD</string>
     <string name="Category_name">CATEGORY NAME</string>
     <string name="SelectImage"><![CDATA[SELECT IMAGE ->]]></string>
     <string name="UploadImage">UPLOAD IMAGE</string>
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">6ep60jj09lvUcHncYM3yCoIMr</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">WXvH93jw1urHD9IzIk6FDRmKW0X5LGZgmMCDo67XFk2uDf2LGJ</string>
     <string name="Food_name">FOOD NAME</string>
     <string name="Description">DESCRIPTION</string>
     <string name="Price">PRICE</string>
