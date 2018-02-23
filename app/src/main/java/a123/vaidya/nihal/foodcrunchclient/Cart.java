@@ -1,6 +1,7 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
@@ -62,6 +63,8 @@ import info.hoang8f.widget.FButton;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Cart extends AppCompatActivity {
     private static final int PAYPAL_REQUEST_CODE = 9999;
@@ -79,12 +82,23 @@ public class Cart extends AppCompatActivity {
         .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);
         String address,comment;
+//caligraphy font install
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 
     List<Order> cart = new ArrayList<>();
     CartAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //caligraphy font init
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+        .setDefaultFontPath("fonts/restaurant_font.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
+
         setContentView(R.layout.activity_cart);
 
         //init the paypal sdk!!

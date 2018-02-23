@@ -1,5 +1,6 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -20,9 +22,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -46,14 +50,21 @@ import a123.vaidya.nihal.foodcrunchclient.Model.Token;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.MenuViewHolder;
 import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     FirebaseDatabase database;
     DatabaseReference category;
     TextView txtFullName;
-    RecyclerView recycler_menu;
     MaterialEditText edtHomeAddress,edtPassword;
+    //caligraphy font install
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
+    RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
     FirebaseRecyclerAdapter<Category,MenuViewHolder> adapter;
     SwipeRefreshLayout swipeRefreshLayout;
@@ -61,6 +72,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //caligraphy font init
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/restaurant_font.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
         setContentView(R.layout.activity_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("MENU");
@@ -145,8 +161,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         //final MaterialEditText edtHomeAddress = (MaterialEditText) home_address_layout.findViewById(R.id.edtHomeAddress);
         //edtPassword = findViewById(R.id.edtPasswd);
         recycler_menu.setHasFixedSize(true);
-        layoutManager =new LinearLayoutManager(this);
-        recycler_menu.setLayoutManager(layoutManager);
+
+        //recycler menu customisation
+        //layoutManager =new LinearLayoutManager(this);
+        //recycler_menu.setLayoutManager(layoutManager);
+        recycler_menu.setLayoutManager(new GridLayoutManager(this,1));
 
         if (Common.isConnectedToInternet(this)) {
 
@@ -175,11 +194,20 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     private void loadMenu() {
+        //new firebase code
+        FirebaseRecyclerOptions<Category> options = new FirebaseRecyclerOptions.Builder<Category>()
+                .setQuery(category, Category.class)
+                .build();
 
-        adapter = new FirebaseRecyclerAdapter<Category,
-                MenuViewHolder>(Category.class,R.layout.menu_item,MenuViewHolder.class,category) {
+        adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(options) {
             @Override
-            protected void populateViewHolder(MenuViewHolder viewHolder, Category model, int position) {
+            public MenuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.menu_item,parent,false);
+                return  new MenuViewHolder(itemView);
+            }
+            @Override
+            protected void onBindViewHolder(@NonNull MenuViewHolder viewHolder, int position, @NonNull Category model) {
                 viewHolder.txtMenuName.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage())
                         .into(viewHolder.imageView);
@@ -199,8 +227,39 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 });
             }
         };
+        adapter.startListening();
         recycler_menu.setAdapter(adapter);
         swipeRefreshLayout.setRefreshing(false);
+//            @Override
+//            public MenuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//                View itemview = LayoutInflater.from(parent.getContext())
+//                        .inflate(R.layout.menu_item,parent,false);
+//                return new MenuViewHolder(itemview);
+//            }
+        };
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadMenu();
+        adapter.startListening();
+        adapter.notifyDataSetChanged();
+        recycler_menu.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        loadMenu();
+        adapter.startListening();
+        adapter.notifyDataSetChanged();
+        recycler_menu.setAdapter(adapter);
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
     @Override

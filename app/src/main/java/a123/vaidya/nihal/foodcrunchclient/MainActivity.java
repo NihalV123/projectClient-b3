@@ -1,6 +1,7 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -43,6 +44,8 @@ import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
 import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -53,10 +56,19 @@ public class MainActivity extends AppCompatActivity {
     TextView txtSlogan;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
-
+    //caligraphy font install
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //caligraphy font init
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/restaurant_font.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
         setContentView(R.layout.activity_main);
         FacebookSdk.sdkInitialize(getApplicationContext());
         Twitter.initialize(this);

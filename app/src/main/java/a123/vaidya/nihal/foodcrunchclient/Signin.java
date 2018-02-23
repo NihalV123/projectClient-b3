@@ -1,4 +1,5 @@
 package a123.vaidya.nihal.foodcrunchclient;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,8 @@ import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
 import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Signin extends AppCompatActivity {
 
@@ -36,10 +39,19 @@ public class Signin extends AppCompatActivity {
 
     FirebaseDatabase database;
     DatabaseReference table_user;
-
+    //caligraphy font install
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //caligraphy font init
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/restaurant_font.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
         setContentView(R.layout.activity_signin);
         edtNmae= findViewById(R.id.edtName);
         edtPasswd= findViewById(R.id.edtPasswd);

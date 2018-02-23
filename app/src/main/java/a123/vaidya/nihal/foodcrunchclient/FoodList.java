@@ -1,8 +1,10 @@
 package a123.vaidya.nihal.foodcrunchclient;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -11,9 +13,12 @@ import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
@@ -21,10 +26,12 @@ import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.mancj.materialsearchbar.MaterialSearchBar;
 import com.squareup.picasso.Picasso;
@@ -40,9 +47,12 @@ import java.util.List;
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
+import a123.vaidya.nihal.foodcrunchclient.Model.Category;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.FoodViewHolder;
 import de.javakaffee.kryoserializers.CollectionsEmptyMapSerializer;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class FoodList extends AppCompatActivity {
 
@@ -65,6 +75,7 @@ public class FoodList extends AppCompatActivity {
 
     //Facebook share
     CallbackManager callbackManager;
+    TextView textView;
     ShareDialog shareDialog;
 
 
@@ -95,10 +106,19 @@ public class FoodList extends AppCompatActivity {
         }
     };
 
-
+    //caligraphy font install
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //caligraphy font init
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/restaurant_font.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
         setContentView(R.layout.activity_food_list);
 
         //firebase code
@@ -174,6 +194,8 @@ public class FoodList extends AppCompatActivity {
 
         //search
         materialSearchBar = (MaterialSearchBar)findViewById(R.id.searchBar);
+        textView = findViewById(R.id.textView3);
+        textView = findViewById(R.id.textView2);
         materialSearchBar.setHint("Enter the name of your food");
 //        materialSearchBar.setSpeechMode(false);
         loadSuggest();
@@ -223,19 +245,19 @@ public class FoodList extends AppCompatActivity {
     }
 
     private void startSearch(CharSequence text) {
-        searchAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(
-                Food.class,
-                R.layout.food_item,
-                FoodViewHolder.class,
-                foodList.orderByChild("Name").equalTo(text.toString()) //used to compaire name while search
-        ) {
+        //query search by name
+        Query searchbyname =foodList.orderByChild("Name").equalTo(text.toString());
+        //options
+        FirebaseRecyclerOptions<Food> foodoptions = new FirebaseRecyclerOptions.Builder<Food>()
+                .setQuery(searchbyname,Food.class)
+                .build();
+
+        searchAdapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(foodoptions) {
             @Override
-            protected void populateViewHolder(final FoodViewHolder viewHolder, final Food model, final int position) {
+            protected void onBindViewHolder(@NonNull FoodViewHolder viewHolder, int position, @NonNull Food model) {
                 viewHolder.food_name.setText(model.getName());
                 viewHolder.food_name.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.food_image);
-
-
 
                 final Food local = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
@@ -248,13 +270,18 @@ public class FoodList extends AppCompatActivity {
                         foodDetail.putExtra("FoodId",searchAdapter.getRef(position).getKey());
                         startActivity(foodDetail);
 
-
                     }
                 });
+            }
 
+            @Override
+            public FoodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.food_item,parent,false);
+                return new FoodViewHolder(itemView);
             }
         };
-
+        searchAdapter.startListening();
         recycler_menu.setAdapter(searchAdapter);
 
 
@@ -281,13 +308,16 @@ public class FoodList extends AppCompatActivity {
 
     //select * from foods where menuid=&
     private void loadListFood(String categoryId) {
-        adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(Food.class,
-                R.layout.food_item,FoodViewHolder.class,foodList.orderByChild("menuId")
-                .equalTo(categoryId)) {
+        Query searchbyname =foodList.orderByChild("menuId").equalTo(categoryId);
+        //options
+        FirebaseRecyclerOptions<Food> foodoptions = new FirebaseRecyclerOptions.Builder<Food>()
+                .setQuery(searchbyname,Food.class)
+                .build();
+        adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(foodoptions) {
             @Override
-            protected void populateViewHolder(final FoodViewHolder viewHolder, final Food model, final int position) {
+            protected void onBindViewHolder(@NonNull final FoodViewHolder viewHolder, final int position, @NonNull final Food model) {
                 viewHolder.food_name.setText(model.getName());
-                viewHolder.food_name.setText(model.getName());
+                viewHolder.food_price.setText(String.format("INR :  %s",model.getPrice()));
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.food_image);
 
                 //change fav icon
@@ -300,7 +330,8 @@ public class FoodList extends AppCompatActivity {
                         Picasso.with(getApplicationContext())
                                 .load(model.getImage())
                                 .into(target);
-                        Toast.makeText(FoodList.this,"Getting Ready \nShare To FACEBOOK \n Unless the sdk got updated \nOne food once per session",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FoodList.this,"Getting Ready \nShare To FACEBOOK \n Unless " +
+                                "the sdk got updated \nOne food once per session",Toast.LENGTH_SHORT).show();
                     }
                 });
                 viewHolder.like.setOnClickListener(new View.OnClickListener() {
@@ -317,15 +348,19 @@ public class FoodList extends AppCompatActivity {
                         {
                             localDB.addToFavorites(adapter.getRef(position).getKey());
                             viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
-                            Toast.makeText(FoodList.this,"The"+model.getName()+"\n was added to favorites",Toast.LENGTH_SHORT).show();
-                            Snackbar.make(rootLayout,"The"+model.getName()+" \nwas added to favorites",Snackbar.LENGTH_LONG).show();
+                            Toast.makeText(FoodList.this,"The"+model.getName()+"\n was added to " +
+                                    "favorites",Toast.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout,"The"+model.getName()+" \nwas added to" +
+                                    " favorites",Snackbar.LENGTH_LONG).show();
 
                         }else
                         {
                             localDB.removeFromFavorites(adapter.getRef(position).getKey());
                             viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_border_black_24dp);
-                            Toast.makeText(FoodList.this,"The"+model.getName()+"\n was removed from  favorites",Toast.LENGTH_SHORT).show();
-                            Snackbar.make(rootLayout,"The"+model.getName()+" \nwas removed from favorites",Snackbar.LENGTH_LONG).show();
+                            Toast.makeText(FoodList.this,"The"+model.getName()+"\n was removed from " +
+                                    " favorites",Toast.LENGTH_SHORT).show();
+                            Snackbar.make(rootLayout,"The"+model.getName()+" \nwas removed from" +
+                                    " favorites",Snackbar.LENGTH_LONG).show();
 
                         }
                     }
@@ -347,12 +382,45 @@ public class FoodList extends AppCompatActivity {
                     }
                 });
 
+
+            }
+
+            @Override
+            public FoodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View itemView = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.food_item,parent,false);
+                return new FoodViewHolder(itemView);
             }
         };
+        adapter.startListening();
 
         //set adapter
         recycler_menu.setAdapter(adapter);
 
         rootLayout.setRefreshing(false);
+    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        loadListFood(categoryId);
+        adapter.startListening();
+        adapter.notifyDataSetChanged();
+        recycler_menu.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        loadListFood(categoryId);
+        adapter.startListening();
+        adapter.notifyDataSetChanged();
+        recycler_menu.setAdapter(adapter);
+
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //searchAdapter.stopListening();
+        //adapter.stopListening();
     }
 }

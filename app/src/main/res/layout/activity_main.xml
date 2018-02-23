@@ -60,6 +60,8 @@
         android:gravity="bottom"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
         android:weightSum="2">
 
         <info.hoang8f.widget.FButton
@@ -72,7 +74,8 @@
             android:textColor="@android:color/white"
             app:buttonColor="@color/colorAccent"
             app:shadowColor="@android:color/black"
-            app:shadowHeight="5dp" />
+            app:shadowHeight="5dp"
+            android:textSize="20dp"/>
 
         <info.hoang8f.widget.FButton
             android:id="@+id/btnSignin"
@@ -80,6 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
+            android:textSize="20dp"
             android:text="@string/Signin"
             android:textColor="@android:color/white"
             app:shadowColor="@android:color/black"

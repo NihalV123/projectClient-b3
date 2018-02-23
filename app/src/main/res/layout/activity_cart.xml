@@ -15,6 +15,17 @@
         android:background="@drawable/background"
         android:padding="15dp"
         >
+
+        <TextView
+            android:id="@+id/txtmanconetnthom3e"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/transparentBlack"
+            android:gravity="center"
+            android:paddingTop="100dp"
+            android:text="@string/EMPTY_LIST"
+            android:textColor="@color/white"
+            android:textSize="30dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -27,6 +38,7 @@
             android:text="@string/Your_cart"
             android:textColor="@color/white"
             android:textSize="30dp" />
+
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView

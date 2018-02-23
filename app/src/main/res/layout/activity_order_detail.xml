@@ -33,70 +33,70 @@
                 >
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/order_id"
-                    android:layout_marginStart="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textAllCaps="true"
-                    android:textStyle="bold"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:text="@string/_11111"
-                    />
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/order_total"
-                    android:layout_marginStart="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textAllCaps="true"
-                    android:textStyle="bold"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:text="@string/_0"
-                    />
+                    android:textAllCaps="true"
+                    android:textStyle="bold" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/order_status"
-                    android:layout_marginStart="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textAllCaps="true"
-                    android:textStyle="italic"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:text=""
-                    />
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/order_phone"
-                    android:layout_marginStart="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:textAllCaps="true"
-                    android:textStyle="italic"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:text="@string/_7208680470"
-                    />
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:id="@+id/order_address"
-                    android:layout_marginStart="10dp"
-                    android:layout_gravity="center_vertical"
-                    android:textAllCaps="true"
-                    android:textStyle="italic"
-                    android:text="@string/my_new_address"
-                    />
-
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/comment_details"
-                    android:layout_marginStart="10dp"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:text="@string/my_new_address"
                     android:textAllCaps="true"
-                    android:textStyle="italic"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/comment_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
                     android:text="@string/Write_comment"
-                    />
+                    android:textAllCaps="true"
+                    android:textStyle="italic" />
             </LinearLayout>
 
 
@@ -109,9 +109,9 @@
         android:id="@+id/order_info2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="300dp"
+        android:layout_below="@+id/order_info"
+        android:layout_marginTop="-10dp"
         android:orientation="vertical">
 
         <TextView
@@ -123,17 +123,17 @@
             android:textColor="@color/white"
             android:textSize="30sp" />
 
-<android.support.v4.widget.SwipeRefreshLayout
-    android:layout_width="match_parent"
-    android:id="@+id/swipe_order_det"
-    android:layout_height="wrap_content">
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/listFood"
+        <android.support.v4.widget.SwipeRefreshLayout
             android:layout_width="match_parent"
+            android:id="@+id/swipe_order_det"
             android:layout_height="wrap_content">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/listFood"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        </android.support.v7.widget.RecyclerView>
-</android.support.v4.widget.SwipeRefreshLayout>
+            </android.support.v7.widget.RecyclerView>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
 </RelativeLayout>

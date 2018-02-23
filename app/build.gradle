@@ -8,6 +8,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        resConfigs "auto"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -24,7 +25,7 @@ android {
 
 
 dependencies {
-    implementation 'com.jaredrummler:material-spinner:1.1.0'
+    implementation 'com.jaredrummler:material-spinner:1.2.4'
     implementation'com.github.d-max:spots-dialog:0.7@aar'
     implementation 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
@@ -37,8 +38,8 @@ dependencies {
     implementation 'com.facebook.android:facebook-core:4.28.0'
 
     // Facebook Login only
-    implementation 'com.facebook.android:facebook-login:4.28.0'
 
+    implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     // Facebook Share only
     implementation 'com.facebook.android:facebook-share:4.28.0'
     implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
@@ -101,7 +102,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.okhttp3:okhttp:3.9.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.0'
     implementation 'com.twitter.sdk.android:twitter:3.1.1'
     implementation 'com.twitter.sdk.android:tweet-ui:3.1.1'
@@ -116,7 +117,26 @@ dependencies {
     implementation 'com.google.firebase:firebase-appindexing:11.8.0'
     implementation 'com.google.firebase:firebase-perf:11.8.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    implementation 'com.firebaseui:firebase-ui-database:1.2.0'
+    // FirebaseUI for Firebase Realtime Database
+    implementation 'com.firebaseui:firebase-ui-database:3.2.1'
+
+// FirebaseUI for Cloud Firestore
+    implementation 'com.firebaseui:firebase-ui-firestore:3.2.1'
+
+// FirebaseUI for Firebase Auth
+    //implementation 'com.firebaseui:firebase-ui-auth:3.2.1'
+
+    // Required only if Facebook login support is required
+    // Find the latest Facebook SDK releases here: https://goo.gl/Ce5L94
+    implementation 'com.facebook.android:facebook-login:4.28.0'
+
+    // Required only if Twitter login support is required
+    // Find the latest Twitter SDK releases here: https://goo.gl/E5wZvQ
+    implementation("com.twitter.sdk.android:twitter-core:3.1.1'") { transitive = true }
+
+// FirebaseUI for Cloud Storage
+    implementation 'com.firebaseui:firebase-ui-storage:3.2.1'
+    implementation 'com.firebaseui:firebase-ui-database:3.1.2'
     implementation 'com.android.support:gridlayout-v7:27.0.2'
     implementation 'com.google.android.gms:play-services-maps:11.8.0'
     implementation 'com.google.android.gms:play-services-location:11.8.0'
@@ -127,10 +147,9 @@ dependencies {
     implementation 'com.github.hotchemi:permissionsdispatcher:2.0.7'
     implementation 'com.github.mancj:MaterialSearchBar:0.7.1'
     implementation 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
-    implementation 'com.jaredrummler:material-spinner:1.1.0'
+    implementation 'com.jaredrummler:material-spinner:1.2.4'
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'
     implementation 'com.twitter.sdk.android:twitter-mopub:3.1.1'
-    implementation 'com.twitter.sdk.android:twitter-core:3.1.1'
     implementation 'me.dm7.barcodescanner:zxing:1.9'
     implementation 'io.paperdb:paperdb:2.6'
     implementation 'com.github.rey5137:material:1.2.4'

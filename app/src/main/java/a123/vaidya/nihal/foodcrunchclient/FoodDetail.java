@@ -1,6 +1,7 @@
 
 package a123.vaidya.nihal.foodcrunchclient;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
@@ -25,6 +26,8 @@ import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.Model.Rating;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 import com.squareup.picasso.Picasso;
 import com.stepstone.apprating.AppRatingDialog;
@@ -47,6 +50,11 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
     ElegantNumberButton numberButton;
     RatingBar ratingBar;
 
+    //caligraphy font install
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
     String foodId="";
     FirebaseDatabase database;
     DatabaseReference foods;
@@ -57,6 +65,11 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //caligraphy font init
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/restaurant_font.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
         setContentView(R.layout.activity_food_detail);
 
         //Firebase code

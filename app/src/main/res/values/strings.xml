@@ -87,4 +87,5 @@
     <string name="Discount">DISCOUNT</string>
     <string name="enter_new_password">ENTER NEW PASSOWRD</string>
     <string name="repeat_new_passowrd">REPEAT NEW PASSOWRD</string>
+    <string name="EMPTY_LIST">THIS SEEMS TO BE EMPTY</string>
 </resources>

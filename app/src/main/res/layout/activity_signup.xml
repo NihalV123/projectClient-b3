@@ -104,19 +104,17 @@
     </LinearLayout>
 
     <info.hoang8f.widget.FButton
+        android:id="@+id/btnSignup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnSignup"
-        android:textColor="@android:color/white"
-        android:layout_margin="5dp"
         android:layout_alignParentBottom="true"
-        android:layout_marginRight="10dp"
-        android:layout_marginLeft="10dp"
+        android:layout_margin="5dp"
         android:text="@string/Signup"
-        app:shadowColor="@android:color/black"
+        android:textColor="@android:color/white"
+        android:textSize="20dp"
         app:buttonColor="@color/colorAccent"
-        app:shadowHeight="5dp"
-        />
+        app:shadowColor="@android:color/black"
+        app:shadowHeight="5dp" />
 
 
 

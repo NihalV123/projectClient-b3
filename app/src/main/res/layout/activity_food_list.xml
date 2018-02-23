@@ -3,12 +3,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     android:id="@+id/rootLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="a123.vaidya.nihal.foodcrunchclient.FoodList">
 <RelativeLayout
     android:layout_width="match_parent"
+    android:background="@drawable/background"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="120dp"
+        android:background="@color/transparentBlack"
+        android:gravity="center"
+        android:paddingBottom="5dp"
+        android:paddingTop="5dp"
+        android:text="@string/EMPTY_LIST"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
     <com.mancj.materialsearchbar.MaterialSearchBar
         android:id="@+id/searchBar"
         android:layout_width="match_parent"
