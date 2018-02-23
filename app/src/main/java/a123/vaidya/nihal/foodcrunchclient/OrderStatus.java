@@ -1,19 +1,25 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -21,9 +27,12 @@ import com.twitter.sdk.android.core.TwitterConfig;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
+import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.Request;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.OrderViewHolder;
 import dmax.dialog.SpotsDialog;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class  OrderStatus extends AppCompatActivity {
@@ -34,10 +43,19 @@ public class  OrderStatus extends AppCompatActivity {
     FirebaseRecyclerAdapter<Request,OrderViewHolder> adapter;
     FirebaseDatabase database;
     DatabaseReference requests;
-
+    //caligraphy font install
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //caligraphy font init
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/restaurant_font.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
         setContentView(R.layout.activity_order_status);
 
         //firebase
@@ -74,31 +92,32 @@ public class  OrderStatus extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-        //do not delete may cause issues in viewing orders in client side and server side
-//        if(getIntent()==null)
-//        {
             loadOrders(Common.currentUser.getPhone());
-//        }else
-//        {
-//            loadOrders(getIntent().getStringExtra("userPhone"));
-//        }
-
 
     }
 
     private void loadOrders(String phone) {
-        adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(
-                Request.class, R.layout.order_layout, OrderViewHolder.class,
-                requests
-                        //.orderByChild("phone").equalTo(phone)
-                ) {
+
+        Query getOrderByUserQuery = requests.orderByChild("phone").equalTo(phone);
+        FirebaseRecyclerOptions<Request> orderoptions = new FirebaseRecyclerOptions.Builder<Request>()
+                .setQuery(getOrderByUserQuery, Request.class)
+                .build();
+
+        adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(orderoptions) {
             @Override
-            protected void populateViewHolder(OrderViewHolder viewHolder, final Request model, int position) {
+            public OrderViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View itemview = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.order_layout, parent, false);
+                return new OrderViewHolder(itemview);
+            }
+
+            @Override
+            protected void onBindViewHolder(@NonNull OrderViewHolder viewHolder,@NonNull final int position, @NonNull final Request model) {
                 viewHolder.txtOrderId.setText("Order Id : "+adapter.getRef(position).getKey());
                 viewHolder.txtOrderStatus.setText("Status : "+Common.convertCodeToStatus(model.getStatus()));
-                viewHolder.txtOrderAddress.setText("\n Address : "+model.getAddress());
+                viewHolder.txtOrderAddress.setText("Address : "+model.getAddress());
                 viewHolder.txtOrderPhonw.setText("Phone No : "+model.getPhone());
-                viewHolder.txtOrderComment.setText("\n Comment : "+model.getComment());
+                viewHolder.txtOrderComment.setText("Comment : "+model.getComment());
 
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
@@ -123,8 +142,25 @@ public class  OrderStatus extends AppCompatActivity {
             }
 
         };
+        adapter.startListening();
+        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
         swipeRefreshLayout.setRefreshing(false);
+    }
+
+
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        loadOrders(Common.currentUser.getPhone());
+        adapter.startListening();
+        adapter.notifyDataSetChanged();
+    }
+    @Override
+    protected void onStop() {
+        super.onStop();
+        adapter.stopListening();
     }
 
     private String convertCodeToStatus(String status) {
