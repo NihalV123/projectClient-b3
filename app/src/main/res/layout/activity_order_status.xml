@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.v4.widget.SwipeRefreshLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/swipe_order_list"
     android:layout_height="match_parent"
     android:background="@drawable/background"
     tools:context="a123.vaidya.nihal.foodcrunchclient.OrderStatus">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -35,3 +40,4 @@
 
 
 </RelativeLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

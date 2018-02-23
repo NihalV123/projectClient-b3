@@ -123,12 +123,17 @@
             android:textColor="@color/white"
             android:textSize="30sp" />
 
+<android.support.v4.widget.SwipeRefreshLayout
+    android:layout_width="match_parent"
+    android:id="@+id/swipe_order_det"
+    android:layout_height="wrap_content">
         <android.support.v7.widget.RecyclerView
             android:id="@+id/listFood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         </android.support.v7.widget.RecyclerView>
+</android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 
 </RelativeLayout>

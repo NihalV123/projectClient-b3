@@ -3,6 +3,7 @@ package a123.vaidya.nihal.foodcrunchclient;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,7 +30,7 @@ public class  OrderStatus extends AppCompatActivity {
 
     public RecyclerView recyclerView;
     public  RecyclerView.LayoutManager layoutManager;
-
+    SwipeRefreshLayout swipeRefreshLayout;
     FirebaseRecyclerAdapter<Request,OrderViewHolder> adapter;
     FirebaseDatabase database;
     DatabaseReference requests;
@@ -40,6 +41,24 @@ public class  OrderStatus extends AppCompatActivity {
         setContentView(R.layout.activity_order_status);
 
         //firebase
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_order_list);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_red_dark,
+                android.R.color.holo_blue_dark);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadOrders(Common.currentUser.getPhone());
+            }
+        });
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                loadOrders(Common.currentUser.getPhone());
+            }
+        });
         Twitter.initialize(this);
         TwitterConfig config = new TwitterConfig.Builder(this)
                 .logger(new DefaultLogger(Log.DEBUG))
@@ -104,8 +123,8 @@ public class  OrderStatus extends AppCompatActivity {
             }
 
         };
-
         recyclerView.setAdapter(adapter);
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private String convertCodeToStatus(String status) {

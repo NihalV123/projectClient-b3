@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.app.AlertDialog;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -73,6 +74,7 @@ public class Cart extends AppCompatActivity {
     FButton btnPlace;
     APIService mservice;
     //Config the paypal sdk!!!
+    SwipeRefreshLayout swipeRefreshLayout;
         static PayPalConfiguration config = new PayPalConfiguration()
         .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);
@@ -92,7 +94,35 @@ public class Cart extends AppCompatActivity {
 
 
         //firebase code
-        Twitter.initialize(this);
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipelayout2);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_red_dark,
+                android.R.color.holo_blue_dark);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+          @Override
+           public void onRefresh() {
+              if(cart.size() > 0)
+                  showAlertDailog();
+              else
+                  Toast.makeText(Cart.this,"Your shopping cart is empty",Toast.LENGTH_LONG).show();
+
+          loadListFood();
+           }
+            }
+            );
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                if(cart.size() > 0)
+                    showAlertDailog();
+                else
+                    Toast.makeText(Cart.this,"Your shopping cart is empty",Toast.LENGTH_LONG).show();
+                loadListFood();
+            }
+        });
+                Twitter.initialize(this);
         TwitterConfig config = new TwitterConfig.Builder(this)
                 .logger(new DefaultLogger(Log.DEBUG))
                 .twitterAuthConfig(new TwitterAuthConfig("6ep60jj09lvUcHncYM3yCoIMr", "WXvH93jw1urHD9IzIk6FDRmKW0X5LGZgmMCDo67XFk2uDf2LGJ"))
@@ -158,7 +188,7 @@ public class Cart extends AppCompatActivity {
                         .replace(",","");
 
                 PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
-                "USD","Food Crunch Order",PayPalPayment.PAYMENT_INTENT_SALE);
+                "USD","Food Crunch Order in INR",PayPalPayment.PAYMENT_INTENT_SALE);
                 Intent intent =new Intent(getApplicationContext(), PaymentActivity.class);
                 intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
                 intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
@@ -308,8 +338,11 @@ public class Cart extends AppCompatActivity {
         Locale locale = new Locale("en","BU");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
 
-        txtTotalPrice.setText(fmt.format(total));
-
+        txtTotalPrice.setText(fmt.format(total)
+                .replace("$","")
+                .replace("¤","")
+                .replace(",",""));//do not add replaceor cart will not work
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
