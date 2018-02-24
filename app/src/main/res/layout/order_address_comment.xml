@@ -26,23 +26,28 @@
             android:padding="20dp"
             android:layout_weight="9"
             >
+                <fragment
+                  android:layout_width="match_parent"
+                    android:id="@+id/place_autocomplete_fragment"
+                    android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
 
-            <com.rengwuxian.materialedittext.MaterialEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:id="@+id/edtAddress"
-                android:hint="@string/Please_enter_your_address"
-                android:textColorHint="@color/colorPrimary"
-                android:text="@string/my_new_address"
-                android:textColor="@color/colorPrimary"
-                android:textSize="24sp"
-                android:inputType="text"
-                app:met_baseColor="@color/colorPrimary"
-                app:met_floatingLabel="highlight"
-                app:met_primaryColor="@color/colorPrimary"
-                app:met_singleLineEllipsis="true"
-                />
+                     android:layout_height="wrap_content"/>
+            <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:gravity="center"-->
+                <!--android:id="@+id/edtAddress"-->
+                <!--android:hint="@string/Please_enter_your_address"-->
+                <!--android:textColorHint="@color/colorPrimary"-->
+                <!--android:text="@string/my_new_address"-->
+                <!--android:textColor="@color/colorPrimary"-->
+                <!--android:textSize="24sp"-->
+                <!--android:inputType="text"-->
+                <!--app:met_baseColor="@color/colorPrimary"-->
+                <!--app:met_floatingLabel="highlight"-->
+                <!--app:met_primaryColor="@color/colorPrimary"-->
+                <!--app:met_singleLineEllipsis="true"-->
+                <!--/>-->
 
             <com.rengwuxian.materialedittext.MaterialEditText
                 android:layout_width="match_parent"

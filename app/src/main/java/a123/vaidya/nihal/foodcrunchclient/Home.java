@@ -407,11 +407,32 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         alertDailog.setMessage("One time per session");
         LayoutInflater inflater = LayoutInflater.from(this);
         View layout_email = inflater.inflate(R.layout.email_address_layout,null);
-        MaterialEditText edtEmail = layout_email.findViewById(R.id.edtEmailAddress);
+        final MaterialEditText edtEmail = layout_email.findViewById(R.id.edtEmailAddress);
         alertDailog.setView(layout_email);
         alertDailog.setPositiveButton("UPDATE!!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                final SpotsDialog dialog1 = new SpotsDialog(Home.this);
+                dialog1.show();
+                    Map <String, Object> emailUpdate = new HashMap<>();
+                    emailUpdate.put("EMAIL", edtEmail.getText().toString());
+                DatabaseReference user = FirebaseDatabase.getInstance().getReference("Requests");
+                user.child(Common.currentRequest.getEmail())
+                        .updateChildren(emailUpdate).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        dialog1.dismiss();
+                        Toast.makeText(Home.this, "Your EMAIL was updated", Toast.LENGTH_LONG).show();
+                    }
+                })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                dialog1.dismiss();
+                                Toast.makeText(Home.this, "You have problems updating your email buddy",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
 
             }
         });
@@ -430,6 +451,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     alertDialog.setMessage("One time per session");
 
         LayoutInflater inflater = LayoutInflater.from(this);
+        View email_address_layout = inflater.inflate(R.layout.email_address_layout,null);
         View layout_pwd = inflater.inflate(R.layout.change_password_layout,null);
         final MaterialEditText edtPassword = layout_pwd.findViewById(R.id.edtPassword);
         final MaterialEditText edtNewPassword = layout_pwd.findViewById(R.id.edtNewPassword);
@@ -468,7 +490,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                         @Override
                                         public void onFailure(@NonNull Exception e) {
                                             dialog1.dismiss();
-                                            Toast.makeText(Home.this, "You have a problem buddy", Toast.LENGTH_LONG).show();
+                                            Toast.makeText(Home.this, "Problem updating password buddy", Toast.LENGTH_LONG).show();
 
                                         }
                                     })

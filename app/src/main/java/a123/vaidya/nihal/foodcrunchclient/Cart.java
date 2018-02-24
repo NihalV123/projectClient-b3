@@ -15,9 +15,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
+import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
+import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -72,6 +78,7 @@ public class Cart extends AppCompatActivity {
     private FButton clear_cart;
     private FButton btnPlace;
     private APIService mservice;
+    Place shippingAddress;
     //Config the paypal sdk!!!
     private SwipeRefreshLayout swipeRefreshLayout;
         private static final PayPalConfiguration config = new PayPalConfiguration()
@@ -79,6 +86,7 @@ public class Cart extends AppCompatActivity {
             .clientId(Config.PAYPAL_CLIENT_ID);
         private String address;
     private String comment;
+    private String email;
 //caligraphy font install
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -188,9 +196,32 @@ public class Cart extends AppCompatActivity {
         alertdailog.setMessage("Enter your Address :   ");
 
         final LayoutInflater inflater = this.getLayoutInflater();
+        View email_address_layout = inflater.inflate(R.layout.email_address_layout,null);
         View order_address_comment = inflater.inflate(R.layout.order_address_comment,null);
+        PlaceAutocompleteFragment edtAddress = (PlaceAutocompleteFragment)getFragmentManager()
+                .findFragmentById(R.id.place_autocomplete_fragment);
+        //final MaterialEditText edtAddress = order_address_comment.findViewById(R.id.edtAddress);
+        //hide searchbar
+        edtAddress.getView().findViewById(R.id.place_autocomplete_search_button).setVisibility(View.GONE);
+        //hint of autocomplete
+        ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
+        .setHint("ENTER YOUR ADDRESS");
+        //set text size
+        ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
+                .setTextSize(24);
+        //set address from autocomplete
+        edtAddress.setOnPlaceSelectedListener(new PlaceSelectionListener() {
+            @Override
+            public void onPlaceSelected(Place place) {
+             shippingAddress = place;
+            }
 
-        final MaterialEditText edtAddress = order_address_comment.findViewById(R.id.edtAddress);
+            @Override
+            public void onError(Status status) {
+                Toast.makeText(Cart.this, "The place deosnt exist", Toast.LENGTH_LONG).show();
+            }
+        });
+        final MaterialEditText edtemail = email_address_layout.findViewById(R.id.edtEmailAddress);
         final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
 
         alertdailog.setView(order_address_comment);
@@ -200,8 +231,9 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                address = edtAddress.getText().toString();
+                address = shippingAddress.getAddress().toString();
                 comment = edtComment.getText().toString();
+                email = edtemail.getText().toString();
 
                 String formatAmmount = txtTotalPrice.getText().toString()
                         .replace("¤","")
@@ -249,7 +281,8 @@ public class Cart extends AppCompatActivity {
                                             .replace("¤", "")
                                             .replace(",", ""),
                                     "0",  //for status in request model
-                                    comment,
+                                    comment,email,String.format("%s,%s",shippingAddress.getLatLng()
+                                    .latitude,shippingAddress.getLatLng().longitude),
                                     jsonObject.getJSONObject("response").getString("state"),
                                     cart);
 
