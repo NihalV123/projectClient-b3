@@ -256,7 +256,9 @@ public class Cart extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
+            //remove fragment after close
+        getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
+                (R.id.place_autocomplete_fragment)).commit();
         alertdailog.show();
     }
 
