@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.app.AlertDialog;
+import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,8 +15,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
@@ -54,7 +52,8 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import java.util.zip.Inflater;
+import java.util.Objects;
+
 import info.hoang8f.widget.FButton;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -64,29 +63,30 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Cart extends AppCompatActivity {
     private static final int PAYPAL_REQUEST_CODE = 9999;
-    RecyclerView recyclerView;
-    RecyclerView.LayoutManager layoutManager;
-    FirebaseDatabase database;
-    DatabaseReference requests;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private FirebaseDatabase database;
+    private DatabaseReference requests;
     public TextView txtTotalPrice;
-    ElegantNumberButton cart_number;
-
-    FButton btnPlace;
-    APIService mservice;
+    private ElegantNumberButton cart_number;
+    private FButton clear_cart;
+    private FButton btnPlace;
+    private APIService mservice;
     //Config the paypal sdk!!!
-    SwipeRefreshLayout swipeRefreshLayout;
-        static PayPalConfiguration config = new PayPalConfiguration()
+    private SwipeRefreshLayout swipeRefreshLayout;
+        private static final PayPalConfiguration config = new PayPalConfiguration()
         .environment(PayPalConfiguration.ENVIRONMENT_SANDBOX)
             .clientId(Config.PAYPAL_CLIENT_ID);
-        String address,comment;
+        private String address;
+    private String comment;
 //caligraphy font install
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 
-    List<Order> cart = new ArrayList<>();
-    CartAdapter adapter;
+    private List<Order> cart = new ArrayList<>();
+    private CartAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,7 +105,7 @@ public class Cart extends AppCompatActivity {
 
 
         //firebase code
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipelayout2);
+        swipeRefreshLayout = findViewById(R.id.swipelayout2);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
                 android.R.color.holo_orange_dark,
@@ -115,7 +115,7 @@ public class Cart extends AppCompatActivity {
           @Override
            public void onRefresh() {
               if(cart.size() > 0)
-                  showAlertDailog();
+                 Toast.makeText(Cart.this,"Cart    Refreshed   !!!",Toast.LENGTH_SHORT).show();
               else
                   Toast.makeText(Cart.this,"Your shopping cart is empty",Toast.LENGTH_LONG).show();
 
@@ -151,10 +151,20 @@ public class Cart extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        cart_number=(ElegantNumberButton)findViewById(R.id.cart_number);
+        cart_number= findViewById(R.id.cart_number);
         txtTotalPrice = findViewById(R.id.total);
         btnPlace = findViewById(R.id.btnPlaceOrder);
+        clear_cart =findViewById(R.id.btnClerCart);
 
+        //clear cart
+        clear_cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Database(getBaseContext()).clearCart();
+                loadListFood();
+                Toast.makeText(Cart.this,"Your shopping cart is empty",Toast.LENGTH_LONG).show();
+            }
+        });
 
         //getting address
         btnPlace.setOnClickListener(new View.OnClickListener() {
@@ -180,8 +190,8 @@ public class Cart extends AppCompatActivity {
         final LayoutInflater inflater = this.getLayoutInflater();
         View order_address_comment = inflater.inflate(R.layout.order_address_comment,null);
 
-        final MaterialEditText edtAddress = (MaterialEditText)order_address_comment.findViewById(R.id.edtAddress);
-        final MaterialEditText edtComment = (MaterialEditText)order_address_comment.findViewById(R.id.edtComment);
+        final MaterialEditText edtAddress = order_address_comment.findViewById(R.id.edtAddress);
+        final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
 
         alertdailog.setView(order_address_comment);
         alertdailog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
@@ -222,37 +232,35 @@ public class Cart extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(requestCode == PAYPAL_REQUEST_CODE)
         {
-            if(resultCode == RESULT_OK)
-            {
-                PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
-                if(confirmation != null)
-                {
-                    try
-                    {
-                        String paymentDetail = confirmation.toJSONObject().toString(4);
-                        JSONObject jsonObject = new JSONObject(paymentDetail);
+            switch (resultCode) {
+                case RESULT_OK:
+                    PaymentConfirmation confirmation = data.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION);
+                    if (confirmation != null) {
+                        try {
+                            String paymentDetail = confirmation.toJSONObject().toString(4);
+                            JSONObject jsonObject = new JSONObject(paymentDetail);
 
-                Request request = new Request(
-                        Common.currentUser.getPhone(),
-                        Common.currentUser.getName(),
-                        address,
-                        txtTotalPrice.getText().toString()
-                                .replace("$","")//replace regional barriers
-                                .replace("¤","")
-                                .replace(",",""),
-                        "0",  //for status in request model
-                       comment,
-                        jsonObject.getJSONObject("response").getString("state"),
-                        cart);
+                            Request request = new Request(
+                                    Common.currentUser.getPhone(),
+                                    Common.currentUser.getName(),
+                                    address,
+                                    txtTotalPrice.getText().toString()
+                                            .replace("$", "")//replace regional barriers
+                                            .replace("¤", "")
+                                            .replace(",", ""),
+                                    "0",  //for status in request model
+                                    comment,
+                                    jsonObject.getJSONObject("response").getString("state"),
+                                    cart);
 
-                //if yes submitting to the firebase using current time down to milliseconds!!
-                String order_number = String.valueOf(System.currentTimeMillis());
-                requests.child(order_number)
-                        //requests.child(String.valueOf(System.currentTimeMillis()))
-                        .setValue(request);
-                sendNotificatinOrder(order_number);
+                            //if yes submitting to the firebase using current time down to milliseconds!!
+                            String order_number = String.valueOf(System.currentTimeMillis());
+                            requests.child(order_number)
+                                    //requests.child(String.valueOf(System.currentTimeMillis()))
+                                    .setValue(request);
+                            sendNotificatinOrder(order_number);
 
-                        ///send the motherfucking email
+                            ///send the motherfucking email
 
 //                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
 //                String[] recipients = new String[]{"nhlvcam@gmail.com.com", "",};
@@ -261,33 +269,39 @@ public class Cart extends AppCompatActivity {
 //                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is email's message");
 //                emailIntent.setType("text/plain");
 //                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                        Toast.makeText(Cart.this,"Thank you for shopping\n\nYour order email has been sent!!\n\nActually not LOOOOL", Toast.LENGTH_SHORT).show();
-                        //delete cart
-                        new Database(getBaseContext()).clearCart();
+                            Toast.makeText(Cart.this, "Thank you for shopping\nYour order email has been sent", Toast.LENGTH_SHORT).show();
+                            //delete cart
+                            new Database(getBaseContext()).clearCart();
 
-                        finish();
+                            finish();
 
 
-                    }catch (JSONException e) {
-                        e.printStackTrace();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
-            }else if(resultCode == Activity.RESULT_CANCELED)
-            {
-                Toast.makeText(Cart.this,"Payment canceled", Toast.LENGTH_LONG).show();
-                finish();
-            }else if(resultCode == PaymentActivity.RESULT_EXTRAS_INVALID)
-            {
-                Toast.makeText(Cart.this,"Invalid Payment Please Log in again and try", Toast.LENGTH_LONG).show();
-                finish();
+                    break;
+                case Activity.RESULT_CANCELED:
+                    Toast.makeText(Cart.this, "Payment canceled", Toast.LENGTH_LONG).show();
+                    finish();
+                    break;
+                case PaymentActivity.RESULT_EXTRAS_INVALID:
+                    Toast.makeText(Cart.this, "Invalid Payment Please Log in again and try", Toast.LENGTH_LONG).show();
+                    finish();
+                    break;
             }
         }
     }
 
-    private void sendNotificatinOrder(final String order_number) {
+    private void sendNotificatinOrder(final String order_number
+            //,final Request item
+                                      ) {
         DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
+       // tokens.orderByKey().equalTo(item.getPhone())//this line modified
+                //original code
         Query data = tokens.orderByChild("isServerToken").equalTo(true);
-        data.addValueEventListener(new ValueEventListener() {
+        data
+                .addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapShot:dataSnapshot.getChildren())
@@ -299,24 +313,20 @@ public class Cart extends AppCompatActivity {
                     mservice.sendNotification(content)
                             .enqueue(new Callback<MyResponse>() {
                                 @Override
-                                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                public void onResponse(@NonNull Call<MyResponse> call, @NonNull Response<MyResponse> response) {
                                     //crash fix only run when you see client
                                     if(response.code() == 200){
-                                    if(response.body().success == 1)
-                                    {
-                                           Toast.makeText(Cart.this,"Thank you for shopping Order placed!",
-                                           Toast.LENGTH_SHORT).show();
-                                           finish();
-                                    }else
-                                    {
-                                        Toast.makeText(Cart.this,"PLEASE TRY AGAIN!!!",
-                                                Toast.LENGTH_SHORT).show();
-                                    }}
+                                        if(response.body().success ==1)
+                                        {
+                                            Toast.makeText(Cart.this," Order updated notification sent",Toast.LENGTH_LONG).show();
+                                        }else{
+                                            Toast.makeText(Cart.this,"Updated but Failed to send notification",Toast.LENGTH_LONG).show();
+                                        }}
                                 }
 
                                 @Override
-                                public void onFailure(Call<MyResponse> call, Throwable t) {
-                                    Toast.makeText(Cart.this,"Houston there's a problem!!",
+                                public void onFailure(@NonNull Call<MyResponse> call, @NonNull Throwable t) {
+                                    Toast.makeText(Cart.this,"notification failure",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             });

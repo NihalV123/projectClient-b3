@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -14,7 +13,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -46,6 +44,7 @@ import com.twitter.sdk.android.core.TwitterConfig;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
@@ -60,20 +59,20 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-    FirebaseDatabase database;
-    DatabaseReference category;
-    TextView txtFullName;
+    private FirebaseDatabase database;
+    private DatabaseReference category;
+    private TextView txtFullName;
     MaterialEditText edtHomeAddress,edtPassword;
     //caligraphy font install
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
-    RecyclerView recycler_menu;
+    private RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
-    FirebaseRecyclerAdapter<Category,MenuViewHolder> adapter;
-    SwipeRefreshLayout swipeRefreshLayout;
-    CounterFab fab;
+    private FirebaseRecyclerAdapter<Category,MenuViewHolder> adapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private CounterFab fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +87,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setSupportActionBar(toolbar);
 
         //firebase
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipelayout1);
+        swipeRefreshLayout = findViewById(R.id.swipelayout1);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
         android.R.color.holo_green_dark,
         android.R.color.holo_orange_dark,
@@ -104,7 +103,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 else
                 {
                     Toast.makeText(getBaseContext(),"Please check your internet connection",Toast.LENGTH_LONG).show();
-                    return;
                 }
             }
         });
@@ -118,7 +116,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 else
                 {
                     Toast.makeText(getBaseContext(),"Please check your internet connection",Toast.LENGTH_LONG).show();
-                    return;
                 }
             }
         });
@@ -149,7 +146,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 viewHolder.txtMenuName.setText(model.getName());
                 Picasso.with(getBaseContext()).load(model.getImage())
                         .into(viewHolder.imageView);
-                final Category clickItem = model;
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View v, int position, boolean isLongClick) {
@@ -166,7 +162,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             }
         };
 
-        fab =(CounterFab) findViewById(R.id.fab);
+        fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -220,10 +216,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         try {
             tokens.child(Common.currentUser.getPhone()).setValue(data);
             Toast.makeText(Home.this,"Welcome ",Toast.LENGTH_LONG).show();
-            //tokens.child(Common.currentUser.getIsStaff());
+
         }
         catch(Exception e){
-            Toast.makeText(Home.this,"Welcome !!!",Toast.LENGTH_LONG).show();
+            Toast.makeText(Home.this,"your phone no is missing",Toast.LENGTH_LONG).show();
         }
     }
 
@@ -268,7 +264,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         //aniamtion begins
         recycler_menu.getAdapter().notifyDataSetChanged();
         recycler_menu.scheduleLayoutAnimation();
-        };
+        }
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -285,7 +282,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         loadMenu();
         if (adapter!= null){
         adapter.startListening();}
-        adapter.notifyDataSetChanged();
+        Objects.requireNonNull(adapter).notifyDataSetChanged();
         recycler_menu.setAdapter(adapter);
 
     }
@@ -325,54 +322,72 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_menu) {
-            Toast.makeText(Home.this,"You are already in main menu",Toast.LENGTH_LONG).show();
-        } else if (id == R.id.nav_cart) {
-            final SpotsDialog dialog = new SpotsDialog(Home.this);
-            Intent cartIntent = new Intent (Home.this,Cart.class);
-            dialog.dismiss();
-            startActivity(cartIntent);
-        } else if (id == R.id.nav_orders) {
-            final SpotsDialog dialog = new SpotsDialog(Home.this);
-            Intent orderIntent = new Intent (Home.this,OrderStatus.class);
-            startActivity(orderIntent);
-            dialog.dismiss();
-        } else if (id == R.id.nav_logout) {
-            //delete remmbered user details
-            final SpotsDialog dialog = new SpotsDialog(Home.this);
-            Toast.makeText(Home.this,"Logging out",Toast.LENGTH_LONG).show();
-            Paper.book().destroy();
-            Intent signIn = new Intent (Home.this,Signin.class);
-            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(signIn);
-            dialog.dismiss();
-        }
-        else if (id == R.id.nav_favorites) {
-            final SpotsDialog dialog = new SpotsDialog(Home.this);
-            Intent orderIntent = new Intent (Home.this,OrderStatus.class);
-            startActivity(orderIntent);
-            dialog.dismiss();
-        }
-        else if (id == R.id.nav_homeaddress) {
-            showHomeAddressDialog();
-        }
-        else if (id == R.id.nav_emailaddress) {
-            showEmailAddressDialog();
-        }
-        else if (id == R.id.nav_password) {
-            showChangePasswordDialog();
-        }
-        else if (id == R.id.settings) {
-            final SpotsDialog dialog = new SpotsDialog(Home.this);
-            dialog.show();
-            Intent signIn = new Intent (Home.this,Signin.class);
-            signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(signIn);
-            dialog.dismiss();
+        switch (id) {
+            case R.id.nav_menu:
+                Toast.makeText(Home.this, "You are already in main menu", Toast.LENGTH_LONG).show();
+                break;
+            case R.id.nav_cart: {
+                final SpotsDialog dialog = new SpotsDialog(Home.this);
+                Intent cartIntent = new Intent(Home.this, Cart.class);
+                dialog.dismiss();
+                startActivity(cartIntent);
+                break;
+            }
+            case R.id.nav_orders: {
+                final SpotsDialog dialog = new SpotsDialog(Home.this);
+                Intent orderIntent = new Intent(Home.this, OrderStatus.class);
+                startActivity(orderIntent);
+                dialog.dismiss();
+                break;
+            }
+            case R.id.nav_removeuser: {
+                final SpotsDialog dialog = new SpotsDialog(Home.this);
+                dialog.show();
+                Intent orderIntent = new Intent(Home.this, OrderStatus.class);
+                startActivity(orderIntent);
+                dialog.dismiss();
+                break;
+            }
+            case R.id.nav_logout: {
+                //delete remmbered user details
+                final SpotsDialog dialog = new SpotsDialog(Home.this);
+                Toast.makeText(Home.this, "Logging out", Toast.LENGTH_LONG).show();
+                Paper.book().destroy();
+                Intent signIn = new Intent(Home.this, Signin.class);
+                signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(signIn);
+                dialog.dismiss();
+                break;
+            }
+            case R.id.nav_favorites: {
+                final SpotsDialog dialog = new SpotsDialog(Home.this);
+                Intent orderIntent = new Intent(Home.this, OrderStatus.class);
+                startActivity(orderIntent);
+                dialog.dismiss();
+                break;
+            }
+            case R.id.nav_homeaddress:
+                showHomeAddressDialog();
+                break;
+            case R.id.nav_emailaddress:
+                showEmailAddressDialog();
+                break;
+            case R.id.nav_password:
+                showChangePasswordDialog();
+                break;
+            case R.id.settings: {
+                final SpotsDialog dialog = new SpotsDialog(Home.this);
+                dialog.show();
+                Intent signIn = new Intent(Home.this, Signin.class);
+                signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(signIn);
+                dialog.dismiss();
+                break;
+            }
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -385,7 +400,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         alertDailog.setMessage("One time per session");
         LayoutInflater inflater = LayoutInflater.from(this);
         View layout_email = inflater.inflate(R.layout.email_address_layout,null);
-        MaterialEditText edtEmail = (MaterialEditText)layout_email.findViewById(R.id.edtEmailAddress);
+        MaterialEditText edtEmail = layout_email.findViewById(R.id.edtEmailAddress);
         alertDailog.setView(layout_email);
         alertDailog.setPositiveButton("UPDATE!!", new DialogInterface.OnClickListener() {
             @Override
@@ -409,9 +424,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         LayoutInflater inflater = LayoutInflater.from(this);
         View layout_pwd = inflater.inflate(R.layout.change_password_layout,null);
-        final MaterialEditText edtPassword = (MaterialEditText)layout_pwd.findViewById(R.id.edtPassword);
-        final MaterialEditText edtNewPassword = (MaterialEditText)layout_pwd.findViewById(R.id.edtNewPassword);
-        final MaterialEditText edtRepeatPassword = (MaterialEditText)layout_pwd.findViewById(R.id.edtRepeatNewPassword);
+        final MaterialEditText edtPassword = layout_pwd.findViewById(R.id.edtPassword);
+        final MaterialEditText edtNewPassword = layout_pwd.findViewById(R.id.edtNewPassword);
+        final MaterialEditText edtRepeatPassword = layout_pwd.findViewById(R.id.edtRepeatNewPassword);
 
         alertDialog.setView(layout_pwd);
         alertDialog.setPositiveButton("UPDATE!!", new DialogInterface.OnClickListener() {
@@ -485,7 +500,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         alertDailog.setMessage("One time per session");
         LayoutInflater inflater = LayoutInflater.from(this);
         View layout_home = inflater.inflate(R.layout.home_address_layout,null);
-        MaterialEditText edtAddress = (MaterialEditText)layout_home.findViewById(R.id.edtHomeAddress);
+        MaterialEditText edtAddress = layout_home.findViewById(R.id.edtHomeAddress);
         alertDailog.setView(layout_home);
         alertDailog.setPositiveButton("UPDATE!!", new DialogInterface.OnClickListener() {
             @Override

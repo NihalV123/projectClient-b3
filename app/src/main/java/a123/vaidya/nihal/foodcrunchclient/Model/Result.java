@@ -1,7 +1,7 @@
 package a123.vaidya.nihal.foodcrunchclient.Model;
 
-public class Result {
-    public String message_id;
+class Result {
+    private String message_id;
 
     public Result() {
     }

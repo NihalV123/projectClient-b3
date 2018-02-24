@@ -122,7 +122,7 @@
             android:padding="10sp"
             android:text="@string/Details"
             android:textColor="@color/white"
-            android:textSize="30sp" />
+            android:textSize="35sp" />
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:layout_width="match_parent"

@@ -8,16 +8,13 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.net.Uri;
 import android.os.Build;
-import android.support.v4.app.NotificationBuilderWithBuilderAccessor;
 
-import a123.vaidya.nihal.foodcrunchclient.Model.Notification;
 import a123.vaidya.nihal.foodcrunchclient.R;
 
 public class NotificationHelper extends ContextWrapper {
     private static final String FOODCRUNCH_CHANNEL_ID = "a123.vaidya.nihal.foodcrunchclient.FOOD-CRUNCH";
     private static final String FOODCRUNCH_CHANNEL_NAME = "Food Cunch";
     private NotificationManager manager;
-
     public NotificationHelper(Context base) {
         super(base);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)

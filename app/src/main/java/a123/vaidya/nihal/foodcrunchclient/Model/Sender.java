@@ -1,8 +1,8 @@
 package a123.vaidya.nihal.foodcrunchclient.Model;
 
 public class Sender {
-    public String to;
-    public Notification notification;
+    private String to;
+    private Notification notification;
 
     public Sender() {
     }

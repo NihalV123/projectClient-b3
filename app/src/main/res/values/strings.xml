@@ -1,4 +1,4 @@
-<resources xmlns:android="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Food Crunch Client</string>
     <string name="slogan">No matter the time or place we will find you and we will feed you!</string>
     <string name="Signup">no account ? SIGN UP !</string>
@@ -88,4 +88,7 @@
     <string name="enter_new_password">ENTER NEW PASSOWRD</string>
     <string name="repeat_new_passowrd">REPEAT NEW PASSOWRD</string>
     <string name="EMPTY_LIST">THIS SEEMS TO BE EMPTY</string>
+    <string name="clear_cart">CLEAR CART</string>
+    <string name="delete_user_data">DELETE USER DATA</string>
+    <string name="_9619662497">9619662497</string>
 </resources>

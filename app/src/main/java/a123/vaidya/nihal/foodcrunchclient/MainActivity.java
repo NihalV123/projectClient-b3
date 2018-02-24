@@ -39,6 +39,7 @@ import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
@@ -49,11 +50,14 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class MainActivity extends AppCompatActivity {
 
-    MaterialEditText edtNmae,edtPhone,edtPasswd;
-    Button BtnSignin;
-    Button BtnSignIn,BtnSignUp;
-    TwitterLoginButton twitterLoginButton;
-    TextView txtSlogan;
+    private MaterialEditText edtNmae;
+    private MaterialEditText edtPhone;
+    private MaterialEditText edtPasswd;
+    private Button BtnSignin;
+    private Button BtnSignIn;
+    private Button BtnSignUp;
+    private TwitterLoginButton twitterLoginButton;
+    private TextView txtSlogan;
     private FirebaseAuth firebaseAuth;
     private ProgressDialog progressDialog;
     //caligraphy font install
@@ -83,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         BtnSignIn= findViewById(R.id.btnSignin);
         BtnSignUp= findViewById(R.id.btnSignup);
 
-        twitterLoginButton = (TwitterLoginButton)findViewById(R.id.twitter_login_button);
+        twitterLoginButton = findViewById(R.id.twitter_login_button);
         twitterLoginButton.setCallback(new Callback<TwitterSession>() {
             @Override
             public void success(Result<TwitterSession> result) {
@@ -144,9 +148,7 @@ public class MainActivity extends AppCompatActivity {
             md.update(signature.toByteArray());
             Log.d("KeyHash", Base64.encodeToString(md.digest(),Base64.DEFAULT));
         }
-    } catch (PackageManager.NameNotFoundException e) {
-        e.printStackTrace();
-    } catch (NoSuchAlgorithmException e) {
+    } catch (PackageManager.NameNotFoundException | NoSuchAlgorithmException e) {
         e.printStackTrace();
     }
     }
@@ -174,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
                         //get user info
                         User user = dataSnapshot.child(phone).getValue(User.class);
 
-                         user.setPhone(phone);
+                         Objects.requireNonNull(user).setPhone(phone);
 
                         if ((user.getPassword().equals(pwd))) {
                             DatabaseReference myRef = database.getReference("message");
@@ -206,7 +208,6 @@ public class MainActivity extends AppCompatActivity {
         }else
         {
             Toast.makeText(MainActivity.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
-            return;
         }
 
 

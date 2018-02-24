@@ -41,28 +41,31 @@ import com.twitter.sdk.android.core.TwitterConfig;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class FoodDetail extends AppCompatActivity implements RatingDialogListener{
 
-    TextView food_name,food_price,food_description;
-    ImageView food_image;
-    CollapsingToolbarLayout collapsingToolbarLayout;
-    FloatingActionButton btnRating;
-    CounterFab btnCart;
-    ElegantNumberButton numberButton;
-    RatingBar ratingBar;
+    private TextView food_name;
+    private TextView food_price;
+    private TextView food_description;
+    private ImageView food_image;
+    private CollapsingToolbarLayout collapsingToolbarLayout;
+    private FloatingActionButton btnRating;
+    private CounterFab btnCart;
+    private ElegantNumberButton numberButton;
+    private RatingBar ratingBar;
 
     //caligraphy font install
     @Override
     protected void attachBaseContext(Context newBase) {
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
-    String foodId="";
-    FirebaseDatabase database;
-    DatabaseReference foods;
-    DatabaseReference ratingTbl;
+    private String foodId="";
+    private FirebaseDatabase database;
+    private DatabaseReference foods;
+    private DatabaseReference ratingTbl;
 
-    Food currentFood;
+    private Food currentFood;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,10 +90,10 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         ratingTbl = database.getReference("Rating");
 
         //actual view
-        numberButton =(ElegantNumberButton) findViewById(R.id.number_button);
-        btnCart = (CounterFab) findViewById(R.id.btnCart);
-        btnRating = (FloatingActionButton) findViewById(R.id.btnRating);
-        ratingBar = (RatingBar) findViewById(R.id.ratingbar);
+        numberButton = findViewById(R.id.number_button);
+        btnCart = findViewById(R.id.btnCart);
+        btnRating = findViewById(R.id.btnRating);
+        ratingBar = findViewById(R.id.ratingbar);
 
         btnRating.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -130,7 +133,6 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 getRatingFood(foodId);}
             else
                 Toast.makeText(FoodDetail.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
-            return;
         }
     }
 
@@ -143,7 +145,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 for(DataSnapshot postSnapshot:dataSnapshot.getChildren())
                 {
                     Rating item = postSnapshot.getValue(Rating.class);
-                    sum+=Integer.parseInt(item.getRateValue());
+                    sum+=Integer.parseInt(Objects.requireNonNull(item).getRateValue());
                     count++;
                 }
                 if(count != 0) {

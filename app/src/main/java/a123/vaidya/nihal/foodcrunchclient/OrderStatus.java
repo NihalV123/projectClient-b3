@@ -1,6 +1,5 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
-import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,9 +24,10 @@ import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 
+import java.util.Objects;
+
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
-import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.Request;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.OrderViewHolder;
 import dmax.dialog.SpotsDialog;
@@ -37,12 +37,12 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class  OrderStatus extends AppCompatActivity {
 
-    public RecyclerView recyclerView;
-    public  RecyclerView.LayoutManager layoutManager;
-    SwipeRefreshLayout swipeRefreshLayout;
-    FirebaseRecyclerAdapter<Request,OrderViewHolder> adapter;
-    FirebaseDatabase database;
-    DatabaseReference requests;
+    private RecyclerView recyclerView;
+    private RecyclerView.LayoutManager layoutManager;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private FirebaseRecyclerAdapter<Request,OrderViewHolder> adapter;
+    private FirebaseDatabase database;
+    private DatabaseReference requests;
     //caligraphy font install
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -59,7 +59,7 @@ public class  OrderStatus extends AppCompatActivity {
         setContentView(R.layout.activity_order_status);
 
         //firebase
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_order_list);
+        swipeRefreshLayout = findViewById(R.id.swipe_order_list);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
                 android.R.color.holo_orange_dark,
@@ -87,7 +87,7 @@ public class  OrderStatus extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         requests = database.getReference("Requests");
 
-        recyclerView = (RecyclerView)findViewById(R.id.listOrders);
+        recyclerView = findViewById(R.id.listOrders);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
@@ -156,7 +156,7 @@ public class  OrderStatus extends AppCompatActivity {
         loadOrders(Common.currentUser.getPhone());
         if (adapter!= null){
             adapter.startListening();}
-        adapter.notifyDataSetChanged();
+        Objects.requireNonNull(adapter).notifyDataSetChanged();
     }
     @Override
     protected void onStop() {
@@ -165,11 +165,13 @@ public class  OrderStatus extends AppCompatActivity {
     }
 
     private String convertCodeToStatus(String status) {
-        if (status.equals("0"))
-            return "Placed";
-        else if (status.equals("1"))
-            return "Your food is on the way ";
-        else
-            return "Shipped!!";
+        switch (status) {
+            case "0":
+                return "Placed";
+            case "1":
+                return "Your food is on the way ";
+            default:
+                return "Shipped!!";
+        }
     }
-};
+}

@@ -75,7 +75,7 @@
             app:buttonColor="@color/colorAccent"
             app:shadowColor="@android:color/black"
             app:shadowHeight="5dp"
-            android:textSize="20dp"/>
+            android:textSize="20sp"/>
 
         <info.hoang8f.widget.FButton
             android:id="@+id/btnSignin"
@@ -83,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:text="@string/Signin"
             android:textColor="@android:color/white"
             app:shadowColor="@android:color/black"

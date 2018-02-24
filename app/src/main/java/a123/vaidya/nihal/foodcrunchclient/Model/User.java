@@ -7,31 +7,18 @@ public class User {
     private String Phone;
     private String IsStaff;
     private String secureCode;
-    //private String Homeaddress;
-    //private String Email;
 
     public User (){
     }
 
-    public User (String name, String password, String secureCode
-                // ,String homeaddress , String email
-    ) {
+    public User (String name, String password, String secureCode) {
         Name = name;
         Password = password;
         IsStaff="false";
         this.secureCode = secureCode;
-       // Homeaddress = homeaddress;
-        //Email = email;
+
     }
 
-//
-//    public String getHomeaddress() {
-//        return Homeaddress;
-//    }
-//
-//    public void setHomeaddress(String homeaddress) {
-//        Homeaddress = homeaddress;
-//    }
 
     public String getIsStaff() {
         return IsStaff;
@@ -44,14 +31,6 @@ public class User {
     public String getSecureCode() {
         return secureCode;
     }
-//
-//    public String getEmail() {
-//        return Email;
-//    }
-//
-//    public void setEmail(String email) {
-//        Email = email;
-//    }
 
     public void setSecureCode(String secureCode) {
         this.secureCode = secureCode;

@@ -24,6 +24,8 @@ import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 
+import java.util.Objects;
+
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
 import dmax.dialog.SpotsDialog;
@@ -33,12 +35,14 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Signin extends AppCompatActivity {
 
-    MaterialEditText edtNmae,edtPhone,edtPasswd;
-    Button BtnSignin;
-    CheckBox remember_button;
+    private MaterialEditText edtNmae;
+    private MaterialEditText edtPhone;
+    private MaterialEditText edtPasswd;
+    private Button BtnSignin;
+    private CheckBox remember_button;
 
-    FirebaseDatabase database;
-    DatabaseReference table_user;
+    private FirebaseDatabase database;
+    private DatabaseReference table_user;
     //caligraphy font install
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -57,7 +61,7 @@ public class Signin extends AppCompatActivity {
         edtPasswd= findViewById(R.id.edtPasswd);
         edtPhone= findViewById(R.id.edtPhone);
         BtnSignin = findViewById(R.id.btnSignin);
-        remember_button =(CheckBox)findViewById(R.id.remember_button);
+        remember_button = findViewById(R.id.remember_button);
 
         //firebase code
         Twitter.initialize(this);
@@ -71,7 +75,7 @@ public class Signin extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
         table_user = database.getReference("User");
 
-        TextView txtForgetPwd = (TextView) findViewById(R.id.forget_password_txt);
+        TextView txtForgetPwd = findViewById(R.id.forget_password_txt);
         txtForgetPwd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,9 +104,9 @@ public class Signin extends AppCompatActivity {
                                 //get user info
                                 User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
 
-                                // user.setPhone(edtPhone.getText().toString());
+                                user.setPhone(edtPhone.getText().toString());
 
-                                if ((user.getPassword().equals(edtPasswd.getText().toString()))
+                                if ((Objects.requireNonNull(user).getPassword().equals(edtPasswd.getText().toString()))
                                     //&&(Common.currentUser.getName().equals(edtNmae.getText().toString())) //for verifying name and password
                                         ) {
                                     DatabaseReference myRef = database.getReference("message");
@@ -136,7 +140,6 @@ public class Signin extends AppCompatActivity {
                 }else
                 {
                     Toast.makeText(Signin.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
-                    return;
                 }
             }
         });
@@ -153,8 +156,8 @@ public class Signin extends AppCompatActivity {
         View forget_view = inflater.inflate(R.layout.forgot_passowrd_layout,null);
         builder.setView(forget_view);
         builder.setIcon(R.drawable.ic_security_black_24dp);
-        final MaterialEditText edtPhone = (MaterialEditText)forget_view.findViewById(R.id.edtPhone);
-        final MaterialEditText edtSecureCode = (MaterialEditText)forget_view.findViewById(R.id.edtSecureCode);
+        final MaterialEditText edtPhone = forget_view.findViewById(R.id.edtPhone);
+        final MaterialEditText edtSecureCode = forget_view.findViewById(R.id.edtSecureCode);
 
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
@@ -163,7 +166,7 @@ public class Signin extends AppCompatActivity {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
-                        if(user.getSecureCode().equals(edtSecureCode.getText().toString()))
+                        if(Objects.requireNonNull(user).getSecureCode().equals(edtSecureCode.getText().toString()))
                         {
                             Toast.makeText(Signin.this,"Your passwrod is "+user.getPassword(),Toast.LENGTH_LONG).show();
                         }

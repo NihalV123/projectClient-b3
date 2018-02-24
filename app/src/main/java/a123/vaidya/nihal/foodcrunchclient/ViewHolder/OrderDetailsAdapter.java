@@ -12,26 +12,29 @@ import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.R;
 
 class MyViewHolder extends RecyclerView.ViewHolder{
-    public TextView name,quantity,price,discount;
+    public final TextView name;
+    public final TextView quantity;
+    public final TextView price;
+    public final TextView discount;
 
     public MyViewHolder(View itemView) {
         super(itemView);
-        name = (TextView)itemView.findViewById(R.id.product_name);
-        quantity = (TextView)itemView.findViewById(R.id.product_quantitiy);
-        price = (TextView)itemView.findViewById(R.id.product_price);
-        discount = (TextView)itemView.findViewById(R.id.product_discount);
+        name = itemView.findViewById(R.id.product_name);
+        quantity = itemView.findViewById(R.id.product_quantitiy);
+        price = itemView.findViewById(R.id.product_price);
+        discount = itemView.findViewById(R.id.product_discount);
 
     }
 }
 
 public class OrderDetailsAdapter  extends RecyclerView.Adapter<MyViewHolder>{
-    List<Order> myOrders;
+    private final List<Order> myOrders;
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.order_detail_layout,parent,false);
         return new MyViewHolder(itemView);
-    };
+    }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {

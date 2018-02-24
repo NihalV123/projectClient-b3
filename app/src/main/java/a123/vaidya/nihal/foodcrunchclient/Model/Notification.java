@@ -1,8 +1,8 @@
 package a123.vaidya.nihal.foodcrunchclient.Model;
 
 public class Notification {
-    public String body;
-    public String title;
+    private String body;
+    private String title;
 
     public Notification() {
     }

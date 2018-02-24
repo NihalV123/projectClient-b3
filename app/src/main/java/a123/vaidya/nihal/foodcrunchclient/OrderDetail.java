@@ -15,17 +15,21 @@ import com.twitter.sdk.android.core.TwitterConfig;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.OrderDetailsAdapter;
-import a123.vaidya.nihal.foodcrunchclient.Model.Request;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class OrderDetail extends AppCompatActivity {
 
-    TextView order_id,order_phone,order_address,order_total,comment_details,order_status;
-    String order_id_value ="";
-    RecyclerView listFood;
-    SwipeRefreshLayout swipeRefreshLayout;
-    RecyclerView.LayoutManager layoutManager;
+    private TextView order_id;
+    private TextView order_phone;
+    private TextView order_address;
+    private TextView order_total;
+    private TextView comment_details;
+    private TextView order_status;
+    private String order_id_value ="";
+    private RecyclerView listFood;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView.LayoutManager layoutManager;
     //caligraphy font install
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -40,13 +44,13 @@ public class OrderDetail extends AppCompatActivity {
                 .setFontAttrId(R.attr.fontPath)
                 .build());
         setContentView(R.layout.activity_order_detail);
-        order_id = (TextView)findViewById(R.id.order_id);
-        order_phone = (TextView)findViewById(R.id.order_phone);
-        order_address = (TextView)findViewById(R.id.order_address);
-        order_total = (TextView)findViewById(R.id.order_total);
-        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_order_det);
-        comment_details = (TextView)findViewById(R.id.comment_details);
-        order_status = (TextView)findViewById(R.id.order_status);
+        order_id = findViewById(R.id.order_id);
+        order_phone = findViewById(R.id.order_phone);
+        order_address = findViewById(R.id.order_address);
+        order_total = findViewById(R.id.order_total);
+        swipeRefreshLayout = findViewById(R.id.swipe_order_det);
+        comment_details = findViewById(R.id.comment_details);
+        order_status = findViewById(R.id.order_status);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
                 android.R.color.holo_orange_dark,
@@ -59,7 +63,7 @@ public class OrderDetail extends AppCompatActivity {
                 .twitterAuthConfig(new TwitterAuthConfig("6ep60jj09lvUcHncYM3yCoIMr", "WXvH93jw1urHD9IzIk6FDRmKW0X5LGZgmMCDo67XFk2uDf2LGJ"))
                 .debug(true)
                 .build();
-        listFood = (RecyclerView)findViewById(R.id.listFood);
+        listFood = findViewById(R.id.listFood);
         listFood.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         listFood.setLayoutManager(layoutManager);

@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/enter_your_phone_number"
             android:inputType="phone"
-            android:text="@string/_7208680470"
+            android:text=""
             android:textColor="@android:color/white"
             android:textSize="36sp"
             android:gravity="center"
@@ -111,7 +111,7 @@
         android:layout_margin="5dp"
         android:text="@string/Signup"
         android:textColor="@android:color/white"
-        android:textSize="20dp"
+        android:textSize="20sp"
         app:buttonColor="@color/colorAccent"
         app:shadowColor="@android:color/black"
         app:shadowHeight="5dp" />

@@ -79,7 +79,7 @@ public class Database extends SQLiteAssetHelper{
     public void clearCart()
     {
         SQLiteDatabase db = getReadableDatabase();
-        String query = String.format("DELETE FROM OrderDetail");
+        String query = "DELETE FROM OrderDetail";
         db.execSQL(query);
     }
 
@@ -114,7 +114,7 @@ public class Database extends SQLiteAssetHelper{
     public int getCountCart() {
         int count = 0;
         SQLiteDatabase db = getReadableDatabase();
-        String query = String.format("SELECT COUNT (*) FROM OrderDetail");
+        String query = "SELECT COUNT (*) FROM OrderDetail";
         Cursor cursor = db.rawQuery(query,null);
         if(cursor.moveToFirst()) {
             do {

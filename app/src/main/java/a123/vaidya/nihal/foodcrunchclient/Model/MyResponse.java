@@ -3,10 +3,10 @@ package a123.vaidya.nihal.foodcrunchclient.Model;
 import java.util.List;
 
 public class MyResponse {
-    public long multicast_id;
+    private long multicast_id;
     public int success;
-    public int failure;
-    public int canonical_ids;
+    private int failure;
+    private int canonical_ids;
 
     public MyResponse() {
     }
@@ -59,5 +59,5 @@ public class MyResponse {
         this.results = results;
     }
 
-    public List<Result> results;
+    private List<Result> results;
 }

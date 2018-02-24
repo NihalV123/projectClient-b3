@@ -26,10 +26,13 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Signup extends AppCompatActivity {
 
-    MaterialEditText edtNmae,edtPhone,edtPasswd,edtSecureCode;
+    private MaterialEditText edtNmae;
+    private MaterialEditText edtPhone;
+    private MaterialEditText edtPasswd;
+    private MaterialEditText edtSecureCode;
     //MaterialEditText edtEmail;
-    Button BtnSignup;
-    private FirebaseAuth mAuth;
+    private Button BtnSignup;
+
     //caligraphy font install
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -102,13 +105,12 @@ public class Signup extends AppCompatActivity {
                 }else
                 {
                     Toast.makeText(Signup.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
-                    return;
                 }
             }
         });
 
         //firebase debug
-        mAuth =FirebaseAuth.getInstance();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     }
 

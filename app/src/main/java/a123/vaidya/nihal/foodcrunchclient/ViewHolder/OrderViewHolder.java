@@ -4,10 +4,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
-import a123.vaidya.nihal.foodcrunchclient.OrderStatus;
 import a123.vaidya.nihal.foodcrunchclient.R;
 
 /**
@@ -18,18 +16,22 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
         View.OnLongClickListener,
         View.OnCreateContextMenuListener{
 
-    public TextView txtOrderId,txtOrderStatus,txtOrderPhonw,txtOrderAddress,txtOrderComment;
+    public final TextView txtOrderId;
+    public final TextView txtOrderStatus;
+    public final TextView txtOrderPhonw;
+    public final TextView txtOrderAddress;
+    public final TextView txtOrderComment;
     private ItemClickListener itemClickListener;
 
 
     public OrderViewHolder(View itemView) {
         super(itemView);
 
-        txtOrderId =(TextView)itemView.findViewById(R.id.order_id);
-        txtOrderStatus=(TextView)itemView.findViewById(R.id.order_status);
-        txtOrderPhonw=(TextView)itemView.findViewById(R.id.order_phone);
-        txtOrderAddress=(TextView)itemView.findViewById(R.id.order_address);
-        txtOrderComment=(TextView)itemView.findViewById(R.id.comment_details);
+        txtOrderId = itemView.findViewById(R.id.order_id);
+        txtOrderStatus= itemView.findViewById(R.id.order_status);
+        txtOrderPhonw= itemView.findViewById(R.id.order_phone);
+        txtOrderAddress= itemView.findViewById(R.id.order_address);
+        txtOrderComment= itemView.findViewById(R.id.comment_details);
 
         itemView.setOnClickListener(this);
         itemView.setOnCreateContextMenuListener(this);

@@ -28,7 +28,7 @@
                 android:id="@+id/txtmanconetnthome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="30dp"
+                android:textSize="25sp"
                 android:background="@color/white"
                 android:gravity="center"
                 android:text="@string/Todays_Speciality"
@@ -38,7 +38,8 @@
                 android:id="@+id/imageButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:srcCompat="@drawable/common_google_signin_btn_icon_dark" />
+                app:srcCompat="@drawable/common_google_signin_btn_icon_dark"
+                android:contentDescription="TODO" />
 
         </LinearLayout>
 

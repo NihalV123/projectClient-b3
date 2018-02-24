@@ -18,10 +18,10 @@ import a123.vaidya.nihal.foodcrunchclient.Remote.iGeoCoordinates;
 public class Common {
     public static User currentUser;
     public static Request currentRequest;
-    public static String PHONE_TEXT = "userPhone";
-    public static final String BASE_URL = "https://maps.googleapis.com";
+    public static final String PHONE_TEXT = "userPhone";
+    private static final String BASE_URL = "https://maps.googleapis.com";
 
-    public static final String fcmUrl = "https://fcm.googleapis.com";
+    private static final String fcmUrl = "https://fcm.googleapis.com";
 
     public static APIService getFCMService()
     {
@@ -37,12 +37,14 @@ public class Common {
     //end here
     public static String convertCodeToStatus(String code)
     {
-        if (code.equals("0"))
-            return "Placed";
-        else if (code.equals("1"))
-            return "Your food is on the way ";
-        else
-            return "Shipped!!";
+        switch (code) {
+            case "0":
+                return "Placed";
+            case "1":
+                return "Your food is on the way ";
+            default:
+                return "Shipped!!";
+        }
     }
 
     public static final String UPDATE = "Update";
@@ -56,9 +58,8 @@ public class Common {
             NetworkInfo[] info = connectivityManager.getAllNetworkInfo();
             if(info != null)
             {
-                for(int i =0; i<info.length;i++)
-                {
-                    if(info[i].getState() == NetworkInfo.State.CONNECTED)
+                for (NetworkInfo anInfo : info) {
+                    if (anInfo.getState() == NetworkInfo.State.CONNECTED)
                         return true;
 
                 }

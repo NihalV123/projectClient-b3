@@ -27,48 +27,48 @@
             android:orientation="vertical"
             android:weightSum="10">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@color/overlayBackground"
-            android:orientation="horizontal"
-            android:layout_weight="1"
-            android:weightSum="10">
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/food_name"
-                android:layout_width="196dp"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="left"
-                android:text="@string/name_of_food"
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                android:layout_alignParentBottom="true"
+                android:background="@color/overlayBackground"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:weightSum="10">
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/food_Price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentTop="true"
-                android:layout_marginEnd="23dp"
-                android:gravity="center"
-                android:text="@string/product_price"
-                android:textColor="@android:color/white"
-                android:textSize="20sp" />
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/food_name"
+                    android:layout_width="196dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="left"
+                    android:text="@string/name_of_food"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
 
-            <ImageView
-                android:id="@+id/add_to_crat"
-                android:layout_width="50dp"
-                android:layout_height="35dp"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
-                android:contentDescription="@string/todo"
-                android:gravity="right"
-                android:src="@drawable/ic_add_shopping_cart_black_24dp"
-                android:tint="@color/white" />
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/food_Price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="23dp"
+                    android:gravity="center"
+                    android:text="@string/product_price"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp" />
 
-        </RelativeLayout>
+                <ImageView
+                    android:id="@+id/add_to_crat"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:contentDescription="@string/todo"
+                    android:gravity="right"
+                    android:src="@drawable/ic_add_shopping_cart_black_24dp"
+                    android:tint="@color/white" />
+
+            </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"

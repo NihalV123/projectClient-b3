@@ -4,9 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import a123.vaidya.nihal.foodcrunchclient.Home;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.R;
 
@@ -16,8 +14,8 @@ import a123.vaidya.nihal.foodcrunchclient.R;
 
 public class MenuViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-public TextView txtMenuName;
-public ImageView imageView;
+public final TextView txtMenuName;
+public final ImageView imageView;
 private ItemClickListener itemClickListener;
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
