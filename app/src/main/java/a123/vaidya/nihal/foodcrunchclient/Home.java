@@ -32,8 +32,11 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.squareup.picasso.Picasso;
@@ -50,10 +53,18 @@ import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Category;
+import a123.vaidya.nihal.foodcrunchclient.Model.MyResponse;
+import a123.vaidya.nihal.foodcrunchclient.Model.Notification;
+import a123.vaidya.nihal.foodcrunchclient.Model.Request;
+import a123.vaidya.nihal.foodcrunchclient.Model.Sender;
 import a123.vaidya.nihal.foodcrunchclient.Model.Token;
+import a123.vaidya.nihal.foodcrunchclient.Remote.APIService;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.MenuViewHolder;
 import dmax.dialog.SpotsDialog;
 import io.paperdb.Paper;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -73,6 +84,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private FirebaseRecyclerAdapter<Category,MenuViewHolder> adapter;
     private SwipeRefreshLayout swipeRefreshLayout;
     private CounterFab fab;
+    APIService mAPIService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +97,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("MENU");
         setSupportActionBar(toolbar);
-
+        mAPIService = Common.getFCMClient();
         //firebase
         swipeRefreshLayout = findViewById(R.id.swipelayout1);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
@@ -345,11 +357,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 break;
             }
             case R.id.nav_removeuser: {
-                final SpotsDialog dialog = new SpotsDialog(Home.this);
-                dialog.show();
-                Intent orderIntent = new Intent(Home.this, OrderStatus.class);
-                startActivity(orderIntent);
-                dialog.dismiss();
                 break;
             }
             case R.id.nav_logout: {

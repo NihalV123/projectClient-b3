@@ -33,7 +33,10 @@ public class Common {
     {
         return RetrofitClient.getClient(BASE_URL).create(iGeoCoordinates.class);
     }
-
+    public static APIService getFCMClient()
+    {
+        return FCMRetrofitClient.getClient(fcmUrl).create(APIService.class);
+    }
     //end here
     public static String convertCodeToStatus(String code)
     {

@@ -4,7 +4,7 @@ public class Sender {
     private String to;
     private Notification notification;
 
-    public Sender() {
+    public Sender(Notification notification) {
     }
 
     public Sender(String to, Notification notification) {

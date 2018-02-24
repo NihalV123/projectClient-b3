@@ -256,24 +256,15 @@ public class Cart extends AppCompatActivity {
                             //if yes submitting to the firebase using current time down to milliseconds!!
                             String order_number = String.valueOf(System.currentTimeMillis());
                             requests.child(order_number)
-                                    //requests.child(String.valueOf(System.currentTimeMillis()))
+
                                     .setValue(request);
+
+                                //write code to send emial here
+
                             sendNotificatinOrder(order_number);
-
-                            ///send the motherfucking email
-
-//                Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-//                String[] recipients = new String[]{"nhlvcam@gmail.com.com", "",};
-//                //emailIntent.putExtra(android.content.Intent.EXTRA_EMAIL,"nareshdcam@gmail.con");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "Test");
-//                emailIntent.putExtra(android.content.Intent.EXTRA_TEXT, "This is email's message");
-//                emailIntent.setType("text/plain");
-//                startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                            Toast.makeText(Cart.this, "Thank you for shopping\nYour order email has been sent", Toast.LENGTH_SHORT).show();
-                            //delete cart
                             new Database(getBaseContext()).clearCart();
-
-                            finish();
+                            loadListFood();
+                           finish();
 
 
                         } catch (JSONException e) {
@@ -293,27 +284,22 @@ public class Cart extends AppCompatActivity {
         }
     }
 
-    private void sendNotificatinOrder(final String order_number
-            //,final Request item
-                                      ) {
+    private void sendNotificatinOrder(final String order_number) {
         DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");
-       // tokens.orderByKey().equalTo(item.getPhone())//this line modified
-                //original code
-        Query data = tokens.orderByChild("isServerToken").equalTo(true);
-        data
-                .addValueEventListener(new ValueEventListener() {
+        Query data = tokens.orderByChild("serverToken").equalTo(true);//chage to true later
+        data.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapShot:dataSnapshot.getChildren())
                 {
                     Token serverToken = postSnapShot.getValue(Token.class);
                     //create raw payload
-                    Notification notification = new Notification("Food-Crunch","You have new Order : "+order_number);
+                    Notification notification = new Notification("From "+Common.currentUser.getName().toString()+" tap to manage it!!!","You have new Order : "+order_number);
                     Sender content = new Sender(serverToken.getToken(),notification);
                     mservice.sendNotification(content)
                             .enqueue(new Callback<MyResponse>() {
                                 @Override
-                                public void onResponse(@NonNull Call<MyResponse> call, @NonNull Response<MyResponse> response) {
+                                public void onResponse(Call<MyResponse> call,  Response<MyResponse> response) {
                                     //crash fix only run when you see client
                                     if(response.code() == 200){
                                         if(response.body().success ==1)
@@ -325,7 +311,7 @@ public class Cart extends AppCompatActivity {
                                 }
 
                                 @Override
-                                public void onFailure(@NonNull Call<MyResponse> call, @NonNull Throwable t) {
+                                public void onFailure( Call<MyResponse> call,  Throwable t) {
                                     Toast.makeText(Cart.this,"notification failure",
                                             Toast.LENGTH_SHORT).show();
                                 }
