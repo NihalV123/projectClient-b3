@@ -8,7 +8,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        resConfigs "auto"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
     }
@@ -36,23 +36,12 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     implementation 'com.google.code.gson:gson:2.8.2'    // Facebook Core only (Analytics)
     implementation 'com.facebook.android:facebook-core:4.28.0'
-
-    // Facebook Login only
-
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
-    // Facebook Share only
     implementation 'com.facebook.android:facebook-share:4.28.0'
     implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'
-    // Facebook Places only
     implementation 'com.facebook.android:facebook-places:4.28.0'
-
-    // Facbeook Messenger only
     implementation 'com.facebook.android:facebook-messenger:4.28.0'
-
-    // Facebook App Links only
     implementation 'com.facebook.android:facebook-applinks:4.28.0'
-
-    // Facebook Android SDK (everything)
     implementation 'com.facebook.android:facebook-android-sdk:4.28.0'
     implementation 'com.birin:gridlistviewadapters:1.0.0'
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
@@ -117,24 +106,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-appindexing:11.8.0'
     implementation 'com.google.firebase:firebase-perf:11.8.0'
     implementation 'com.squareup.picasso:picasso:2.5.2'
-    // FirebaseUI for Firebase Realtime Database
     implementation 'com.firebaseui:firebase-ui-database:3.2.1'
-
-// FirebaseUI for Cloud Firestore
     implementation 'com.firebaseui:firebase-ui-firestore:3.2.1'
-
-// FirebaseUI for Firebase Auth
-    //implementation 'com.firebaseui:firebase-ui-auth:3.2.1'
-
-    // Required only if Facebook login support is required
-    // Find the latest Facebook SDK releases here: https://goo.gl/Ce5L94
     implementation 'com.facebook.android:facebook-login:4.28.0'
-
-    // Required only if Twitter login support is required
-    // Find the latest Twitter SDK releases here: https://goo.gl/E5wZvQ
     implementation("com.twitter.sdk.android:twitter-core:3.1.1'") { transitive = true }
-
-// FirebaseUI for Cloud Storage
     implementation 'com.firebaseui:firebase-ui-storage:3.2.1'
     implementation 'com.firebaseui:firebase-ui-database:3.1.2'
     implementation 'com.android.support:gridlayout-v7:27.0.2'
@@ -146,6 +121,7 @@ dependencies {
     implementation 'com.weiwangcn.betterspinner:library-material:1.1.0'
     implementation 'com.github.hotchemi:permissionsdispatcher:2.0.7'
     implementation 'com.github.mancj:MaterialSearchBar:0.7.1'
+    implementation 'com.github.andremion:counterfab:1.0.1'
     implementation 'org.jbundle.util.osgi.wrapped:org.jbundle.util.osgi.wrapped.org.apache.http.client:4.1.2'
     implementation 'com.jaredrummler:material-spinner:1.2.4'
     implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1'

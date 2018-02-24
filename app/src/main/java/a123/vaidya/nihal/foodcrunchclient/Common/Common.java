@@ -18,7 +18,7 @@ import a123.vaidya.nihal.foodcrunchclient.Remote.iGeoCoordinates;
 public class Common {
     public static User currentUser;
     public static Request currentRequest;
-
+    public static String PHONE_TEXT = "userPhone";
     public static final String BASE_URL = "https://maps.googleapis.com";
 
     public static final String fcmUrl = "https://fcm.googleapis.com";

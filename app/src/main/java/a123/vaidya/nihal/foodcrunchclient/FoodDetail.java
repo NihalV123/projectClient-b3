@@ -13,6 +13,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.andremion.counterfab.CounterFab;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -46,7 +47,8 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
     TextView food_name,food_price,food_description;
     ImageView food_image;
     CollapsingToolbarLayout collapsingToolbarLayout;
-    FloatingActionButton btnCart,btnRating;
+    FloatingActionButton btnRating;
+    CounterFab btnCart;
     ElegantNumberButton numberButton;
     RatingBar ratingBar;
 
@@ -85,8 +87,8 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         ratingTbl = database.getReference("Rating");
 
         //actual view
-        numberButton = findViewById(R.id.number_button);
-        btnCart = findViewById(R.id.btnCart);
+        numberButton =(ElegantNumberButton) findViewById(R.id.number_button);
+        btnCart = (CounterFab) findViewById(R.id.btnCart);
         btnRating = (FloatingActionButton) findViewById(R.id.btnRating);
         ratingBar = (RatingBar) findViewById(R.id.ratingbar);
 
@@ -101,16 +103,15 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //below code not working
+
                 new Database(getBaseContext()).addToCart(new Order(foodId, currentFood.getName(), numberButton.getNumber(),
-                        //currentFood.getEmail(),
                         currentFood.getPrice(), currentFood.getDiscount()
                 ));
                 Toast.makeText(FoodDetail.this,"Item was added to cart",Toast.LENGTH_LONG).show();
 
             }
         });
-
+        btnCart.setCount(new Database(this).getCountCart());
         food_description = findViewById(R.id.food_description);
         food_price = findViewById(R.id.food_price);
         food_name = findViewById(R.id.food_name);

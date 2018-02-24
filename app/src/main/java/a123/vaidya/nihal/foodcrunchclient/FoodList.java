@@ -49,6 +49,7 @@ import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Category;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
+import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.FoodViewHolder;
 import de.javakaffee.kryoserializers.CollectionsEmptyMapSerializer;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -71,7 +72,7 @@ public class FoodList extends AppCompatActivity {
     MaterialSearchBar materialSearchBar;
     Database localDB;
     SwipeRefreshLayout rootLayout;
-    public ImageView fav_image,like,share;
+    public ImageView fav_image,like,share,add_to_cart;
 
     //Facebook share
     CallbackManager callbackManager;
@@ -176,9 +177,10 @@ public class FoodList extends AppCompatActivity {
                 }
             }
         });
-        fav_image = findViewById(R.id.fav);
-        share = findViewById(R.id.share);
-        like = findViewById(R.id.like);
+        fav_image =(ImageView) findViewById(R.id.fav);
+        share = (ImageView)findViewById(R.id.share);
+        like =(ImageView) findViewById(R.id.like);
+        add_to_cart=(ImageView) findViewById(R.id.add_to_crat);
 
         //get intent
         if (getIntent()!=null)
@@ -320,6 +322,17 @@ public class FoodList extends AppCompatActivity {
                 viewHolder.food_price.setText(String.format("INR :  %s",model.getPrice()));
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.food_image);
 
+                //add to cart
+                viewHolder.add_to_cart.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new Database(getBaseContext()).addToCart(new Order(adapter.getRef(position).getKey(), model.getName(),"1",
+                                model.getPrice(), model.getDiscount()
+                        ));
+                        Toast.makeText(FoodList.this,"Item was added to cart",Toast.LENGTH_LONG).show();
+                    }
+                });
+
                 //change fav icon
                 if(localDB.isFavorites(adapter.getRef(position).getKey()))
                     viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
@@ -409,10 +422,11 @@ public class FoodList extends AppCompatActivity {
     }
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
         loadListFood(categoryId);
-        adapter.startListening();
+        if (adapter!= null){
+            adapter.startListening();}
         adapter.notifyDataSetChanged();
         recycler_menu.setAdapter(adapter);
 

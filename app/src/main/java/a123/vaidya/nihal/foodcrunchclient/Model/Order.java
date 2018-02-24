@@ -5,6 +5,7 @@ package a123.vaidya.nihal.foodcrunchclient.Model;
  */
 
 public class Order {
+    private int ID;
     private String ProductId;
     private String ProductName;
     private String Quantity;
@@ -13,6 +14,23 @@ public class Order {
     private String Discount;
 
     public Order() {
+    }
+
+    public Order(int ID, String productId, String productName, String quantity, String price, String discount) {
+        this.ID = ID;
+        ProductId = productId;
+        ProductName = productName;
+        Quantity = quantity;
+        Price = price;
+        Discount = discount;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public Order(String productId, String productName, String quantity, String price ,

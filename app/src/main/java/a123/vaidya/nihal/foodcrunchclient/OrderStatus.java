@@ -151,10 +151,11 @@ public class  OrderStatus extends AppCompatActivity {
 
 
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
         loadOrders(Common.currentUser.getPhone());
-        adapter.startListening();
+        if (adapter!= null){
+            adapter.startListening();}
         adapter.notifyDataSetChanged();
     }
     @Override

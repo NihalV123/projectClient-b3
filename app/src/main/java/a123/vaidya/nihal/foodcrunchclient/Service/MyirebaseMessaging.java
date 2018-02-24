@@ -1,5 +1,6 @@
 package a123.vaidya.nihal.foodcrunchclient.Service;
 
+import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -7,20 +8,44 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+import java.util.Random;
+
+import a123.vaidya.nihal.foodcrunchclient.Common.Common;
+import a123.vaidya.nihal.foodcrunchclient.Helper.NotificationHelper;
 import a123.vaidya.nihal.foodcrunchclient.MainActivity;
+import a123.vaidya.nihal.foodcrunchclient.OrderStatus;
 import a123.vaidya.nihal.foodcrunchclient.R;
 
 public class MyirebaseMessaging extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+            sendNotificationAPIO(remoteMessage);
+        else
         sendNotification(remoteMessage);
+    }
+
+    private void sendNotificationAPIO(RemoteMessage remoteMessage) {
+        RemoteMessage.Notification notification = remoteMessage.getNotification();
+        String title = notification.getTitle();
+        String content = notification.getBody();
+        Intent intent = new Intent(this, OrderStatus.class);//go to order status on clicking notification
+        intent.putExtra(Common.PHONE_TEXT, Common.currentUser.getPhone());
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_ONE_SHOT);
+        Uri defaultUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        NotificationHelper helper = new NotificationHelper(this);
+        Notification.Builder builder = helper.foodcrunchChannelNotification(title,content,pendingIntent,defaultUri);
+        //random id for all notificatrions
+        helper.getManager().notify(new Random().nextInt(),builder.build());
     }
 
     private void sendNotification(RemoteMessage remoteMessage) {

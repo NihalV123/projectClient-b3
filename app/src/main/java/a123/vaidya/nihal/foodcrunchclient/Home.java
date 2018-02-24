@@ -23,8 +23,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.andremion.counterfab.CounterFab;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,6 +48,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
+import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Category;
 import a123.vaidya.nihal.foodcrunchclient.Model.Token;
@@ -68,7 +73,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     RecyclerView.LayoutManager layoutManager;
     FirebaseRecyclerAdapter<Category,MenuViewHolder> adapter;
     SwipeRefreshLayout swipeRefreshLayout;
-
+    CounterFab fab;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -127,74 +132,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         Paper.init(this);
         database=FirebaseDatabase.getInstance();
         category=database.getReference("Category");
-
-
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final SpotsDialog dialog = new SpotsDialog(Home.this);
-                dialog.show();
-                Intent cartIntent = new Intent(Home.this,Cart.class);
-                startActivity(cartIntent);
-                dialog.dismiss();
-
-            }
-        });
-
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-
-        View headerView = navigationView.getHeaderView(0);
-        txtFullName = headerView.findViewById(R.id.txtFullName);
-        txtFullName.setText(Common.currentUser.getName());
-
-        //load da menu
-        recycler_menu = findViewById(R.id.recycler_menu);
-        //final MaterialEditText edtHomeAddress = (MaterialEditText) home_address_layout.findViewById(R.id.edtHomeAddress);
-        //edtPassword = findViewById(R.id.edtPasswd);
-        recycler_menu.setHasFixedSize(true);
-
-        //recycler menu customisation
-        //layoutManager =new LinearLayoutManager(this);
-        //recycler_menu.setLayoutManager(layoutManager);
-        recycler_menu.setLayoutManager(new GridLayoutManager(this,1));
-
-        if (Common.isConnectedToInternet(this)) {
-
-            loadMenu();
-        }
-        else
-        {
-            Toast.makeText(this,"Please check your internet connection",Toast.LENGTH_LONG).show();
-            return;
-        }
-        //registeration of notification service
-        updateToken(FirebaseInstanceId.getInstance().getToken());
-    }
-    private void updateToken(String token) {
-        FirebaseDatabase db = FirebaseDatabase.getInstance();
-        DatabaseReference tokens = db.getReference("Tokens");
-        Token data = new Token(token,false);//false as this reads frm client
-        try {
-            tokens.child(Common.currentUser.getPhone()).setValue(data);
-            Toast.makeText(Home.this,"Welcome ",Toast.LENGTH_LONG).show();
-            //tokens.child(Common.currentUser.getIsStaff());
-        }
-        catch(Exception e){
-            Toast.makeText(Home.this,"Welcome !!!",Toast.LENGTH_LONG).show();
-        }
-    }
-
-    private void loadMenu() {
-        //new firebase code
+        //create animation immedieately after getting database
         FirebaseRecyclerOptions<Category> options = new FirebaseRecyclerOptions.Builder<Category>()
                 .setQuery(category, Category.class)
                 .build();
@@ -227,15 +165,109 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 });
             }
         };
+
+        fab =(CounterFab) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final SpotsDialog dialog = new SpotsDialog(Home.this);
+                dialog.show();
+                Intent cartIntent = new Intent(Home.this,Cart.class);
+                startActivity(cartIntent);
+                dialog.dismiss();
+
+            }
+        });
+        fab.setCount(new Database(this).getCountCart());
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
+        View headerView = navigationView.getHeaderView(0);
+        txtFullName = headerView.findViewById(R.id.txtFullName);
+        txtFullName.setText(Common.currentUser.getName());
+
+        //load menu
+        recycler_menu = findViewById(R.id.recycler_menu);
+        recycler_menu.setHasFixedSize(true);
+        recycler_menu.setLayoutManager(new GridLayoutManager(this,1));
+        LayoutAnimationController controller = AnimationUtils.loadLayoutAnimation(recycler_menu.getContext(),
+                R.anim.layout_fall_down);
+        recycler_menu.setLayoutAnimation(controller);
+        if (Common.isConnectedToInternet(this)) {
+
+            loadMenu();
+        }
+        else
+        {
+            Toast.makeText(this,"Please check your internet connection",Toast.LENGTH_LONG).show();
+            return;
+        }
+        //registeration of notification service
+        updateToken(FirebaseInstanceId.getInstance().getToken());
+    }
+
+
+    private void updateToken(String token) {
+        FirebaseDatabase db = FirebaseDatabase.getInstance();
+        DatabaseReference tokens = db.getReference("Tokens");
+        Token data = new Token(token,false);//false as this reads frm client
+        try {
+            tokens.child(Common.currentUser.getPhone()).setValue(data);
+            Toast.makeText(Home.this,"Welcome ",Toast.LENGTH_LONG).show();
+            //tokens.child(Common.currentUser.getIsStaff());
+        }
+        catch(Exception e){
+            Toast.makeText(Home.this,"Welcome !!!",Toast.LENGTH_LONG).show();
+        }
+    }
+
+    private void loadMenu() {
+        //new firebase code
+//        FirebaseRecyclerOptions<Category> options = new FirebaseRecyclerOptions.Builder<Category>()
+//                .setQuery(category, Category.class)
+//                .build();
+//
+//        adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(options) {
+//            @Override
+//            public MenuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+//                View itemView = LayoutInflater.from(parent.getContext())
+//                        .inflate(R.layout.menu_item,parent,false);
+//                return  new MenuViewHolder(itemView);
+//            }
+//            @Override
+//            protected void onBindViewHolder(@NonNull MenuViewHolder viewHolder, int position, @NonNull Category model) {
+//                viewHolder.txtMenuName.setText(model.getName());
+//                Picasso.with(getBaseContext()).load(model.getImage())
+//                        .into(viewHolder.imageView);
+//                final Category clickItem = model;
+//                viewHolder.setItemClickListener(new ItemClickListener() {
+//                    @Override
+//                    public void onClick(View v, int position, boolean isLongClick) {
+//                        //category is key
+//                        final SpotsDialog dialog = new SpotsDialog(Home.this);
+//                        dialog.show();
+//                        Intent foodList = new Intent (Home.this,FoodList.class);
+//                        foodList.putExtra("CategoryId",adapter.getRef(position).getKey());
+//                        startActivity(foodList);
+//                        dialog.dismiss();
+//                        //Toast.makeText(Home.this,""+clickItem.getName(),Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//            }
+//        };
         adapter.startListening();
         recycler_menu.setAdapter(adapter);
         swipeRefreshLayout.setRefreshing(false);
-//            @Override
-//            public MenuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//                View itemview = LayoutInflater.from(parent.getContext())
-//                        .inflate(R.layout.menu_item,parent,false);
-//                return new MenuViewHolder(itemview);
-//            }
+
+        //aniamtion begins
+        recycler_menu.getAdapter().notifyDataSetChanged();
+        recycler_menu.scheduleLayoutAnimation();
         };
     @Override
     protected void onStart() {
@@ -245,12 +277,14 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         adapter.notifyDataSetChanged();
         recycler_menu.setAdapter(adapter);
     }
-
+//
     @Override
-    protected void onPostResume() {
-        super.onPostResume();
+    protected void onResume() {
+        super.onResume();
+        fab.setCount(new Database(this).getCountCart());
         loadMenu();
-        adapter.startListening();
+        if (adapter!= null){
+        adapter.startListening();}
         adapter.notifyDataSetChanged();
         recycler_menu.setAdapter(adapter);
 

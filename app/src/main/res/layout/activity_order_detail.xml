@@ -11,9 +11,10 @@
         android:layout_width="match_parent"
         android:id="@+id/order_info"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:background="@color/fbutton_color_transparent"
-        app:cardElevation="5dp"
+        android:layout_margin="2dp"
+        app:cardCornerRadius="25dp"
+        app:cardElevation="4dp"
         >
 
         <LinearLayout

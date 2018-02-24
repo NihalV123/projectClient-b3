@@ -1,4 +1,5 @@
 package a123.vaidya.nihal.foodcrunchclient;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,8 @@ import com.twitter.sdk.android.core.TwitterConfig;
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.OrderDetailsAdapter;
 import a123.vaidya.nihal.foodcrunchclient.Model.Request;
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class OrderDetail extends AppCompatActivity {
 
@@ -23,10 +26,19 @@ public class OrderDetail extends AppCompatActivity {
     RecyclerView listFood;
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView.LayoutManager layoutManager;
-
+    //caligraphy font install
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //caligraphy font init
+        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+                .setDefaultFontPath("fonts/restaurant_font.otf")
+                .setFontAttrId(R.attr.fontPath)
+                .build());
         setContentView(R.layout.activity_order_detail);
         order_id = (TextView)findViewById(R.id.order_id);
         order_phone = (TextView)findViewById(R.id.order_phone);

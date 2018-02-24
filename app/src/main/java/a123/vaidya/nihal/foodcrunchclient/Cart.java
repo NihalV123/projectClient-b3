@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,10 +36,8 @@ import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Common.Config;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
@@ -51,14 +49,12 @@ import a123.vaidya.nihal.foodcrunchclient.Model.Sender;
 import a123.vaidya.nihal.foodcrunchclient.Model.Token;
 import a123.vaidya.nihal.foodcrunchclient.Remote.APIService;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.CartAdapter;
-
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.zip.Inflater;
-
 import info.hoang8f.widget.FButton;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -72,7 +68,8 @@ public class Cart extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManager;
     FirebaseDatabase database;
     DatabaseReference requests;
-    TextView txtTotalPrice;
+    public TextView txtTotalPrice;
+    ElegantNumberButton cart_number;
 
     FButton btnPlace;
     APIService mservice;
@@ -154,7 +151,7 @@ public class Cart extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-
+        cart_number=(ElegantNumberButton)findViewById(R.id.cart_number);
         txtTotalPrice = findViewById(R.id.total);
         btnPlace = findViewById(R.id.btnPlaceOrder);
 
@@ -343,19 +340,16 @@ public class Cart extends AppCompatActivity {
 
         //calculate price
         int total = 0;
-
-        //undo this sa soon as possible
-
         for(Order order:cart)
             total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
-//        //latest error 2
         Locale locale = new Locale("en","BU");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
-
         txtTotalPrice.setText(fmt.format(total)
                 .replace("$","")
                 .replace("¤","")
                 .replace(",",""));//do not add replaceor cart will not work
+
+
         swipeRefreshLayout.setRefreshing(false);
     }
 
