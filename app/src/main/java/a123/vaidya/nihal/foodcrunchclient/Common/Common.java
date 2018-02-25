@@ -10,7 +10,6 @@ import a123.vaidya.nihal.foodcrunchclient.Remote.APIService;
 import a123.vaidya.nihal.foodcrunchclient.Remote.FCMRetrofitClient;
 import a123.vaidya.nihal.foodcrunchclient.Remote.RetrofitClient;
 import a123.vaidya.nihal.foodcrunchclient.Remote.iGeoCoordinates;
-import a123.vaidya.nihal.foodcrunchclient.Remote.iGoogleService;
 
 /**
  * Created by nnnn on 26/12/2017.
@@ -21,18 +20,13 @@ public class Common {
     public static Request currentRequest;
     public static final String PHONE_TEXT = "userPhone";
     private static final String BASE_URL = "https://maps.googleapis.com";
-    private static final String GOOGLE_API_URL = "https://maps.googleapis.com";
+
     private static final String fcmUrl = "https://fcm.googleapis.com";
 
     public static APIService getFCMService()
     {
         //return RetrofitClient.getClient(BASE_URL).create(APIService.class);
         return FCMRetrofitClient.getClient(fcmUrl).create(APIService.class);
-    }
-
-    public static iGoogleService getGoogleMapAPI()
-    {
-        return RetrofitClient.getGoogleClient(GOOGLE_API_URL).create(iGoogleService.class);
     }
     //extra start here
     public static iGeoCoordinates getGeoCodeService()

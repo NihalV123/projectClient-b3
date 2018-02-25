@@ -356,9 +356,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 dialog.dismiss();
                 break;
             }
-            case R.id.nav_removeuser: {
-                break;
-            }
+//            case R.id.nav_removeuser: {
+//                break;
+//            }
             case R.id.nav_logout: {
                 //delete remmbered user details
                 final SpotsDialog dialog = new SpotsDialog(Home.this);
@@ -370,31 +370,31 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 dialog.dismiss();
                 break;
             }
-            case R.id.nav_favorites: {
-                final SpotsDialog dialog = new SpotsDialog(Home.this);
-                Intent orderIntent = new Intent(Home.this, OrderStatus.class);
-                startActivity(orderIntent);
-                dialog.dismiss();
-                break;
-            }
-            case R.id.nav_homeaddress:
-                showHomeAddressDialog();
-                break;
-            case R.id.nav_emailaddress:
+//            case R.id.nav_favorites: {
+//                final SpotsDialog dialog = new SpotsDialog(Home.this);
+//                Intent orderIntent = new Intent(Home.this, OrderStatus.class);
+//                startActivity(orderIntent);
+//                dialog.dismiss();
+//                break;
+//            }
+//            case R.id.nav_homeaddress:{
+//                showHomeAddressDialog();
+//                break;}
+            case R.id.nav_emailaddress:{
                 showEmailAddressDialog();
-                break;
-            case R.id.nav_password:
+                break;}
+            case R.id.nav_password:{
                 showChangePasswordDialog();
-                break;
-            case R.id.settings: {
-                final SpotsDialog dialog = new SpotsDialog(Home.this);
-                dialog.show();
-                Intent signIn = new Intent(Home.this, Signin.class);
-                signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(signIn);
-                dialog.dismiss();
-                break;
-            }
+                break;}
+//            case R.id.settings: {
+//                final SpotsDialog dialog = new SpotsDialog(Home.this);
+//                dialog.show();
+//                Intent signIn = new Intent(Home.this, Signin.class);
+//                signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                startActivity(signIn);
+//                dialog.dismiss();
+//                break;
+//            }
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

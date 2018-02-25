@@ -25,7 +25,8 @@
             android:inputType="phone"
             app:met_baseColor="@color/colorPrimary"
             app:met_floatingLabel="highlight"
-            app:met_maxCharacters="11"
+            app:met_maxCharacters="128"
+            app:met_minCharacters="8"
             app:met_primaryColor="@color/colorPrimary"
             app:met_singleLineEllipsis="true"
             />
@@ -42,7 +43,8 @@
             android:inputType="text"
             app:met_baseColor="@color/colorPrimary"
             app:met_floatingLabel="highlight"
-            app:met_maxCharacters="11"
+            app:met_maxCharacters="128"
+            app:met_minCharacters="8"
             app:met_primaryColor="@color/colorPrimary"
             app:met_singleLineEllipsis="true"
             />

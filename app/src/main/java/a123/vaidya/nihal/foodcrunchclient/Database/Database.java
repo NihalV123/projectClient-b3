@@ -18,7 +18,7 @@ import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 
 public class Database extends SQLiteAssetHelper{
     private static final String DB_NAME="FoodCrunchDB.db";
-    private static final int DB_VER=1;
+    private static final int DB_VER=2;
     public Database(Context context) {
         super(context, DB_NAME,null,DB_VER);
     }
@@ -29,7 +29,7 @@ public class Database extends SQLiteAssetHelper{
 
             String[] sqlSelect={"ID","ProductName","ProductId", "Quantity", "Price",
 //                    "Email" ,
-                    "Discount"};
+                    "Discount","Image"};
 //check above l
             String sqlTable = "OrderDetail";
 
@@ -51,7 +51,8 @@ public class Database extends SQLiteAssetHelper{
                                              c.getString(c.getColumnIndex("Quantity")),
                                             c.getString(c.getColumnIndex("Price")),
                                            // c.getString(c.getColumnIndex("Email")),
-                                             c.getString(c.getColumnIndex("Discount"))));
+                                             c.getString(c.getColumnIndex("Discount")),
+                                    c.getString(c.getColumnIndex("Image"))));
 
                 }while(c.moveToNext());
                 }
@@ -62,14 +63,15 @@ public class Database extends SQLiteAssetHelper{
         {
             SQLiteDatabase db = getReadableDatabase();
             //Damn bro a single comma took me 42 hours to debug sql is a bitch
-            String query = String.format("INSERT INTO OrderDetail (ProductId,ProductName,Quantity,Price,Discount) " +
-                            "VALUES ('%s','%s','%s','%s','%s');",
+            String query = String.format("INSERT INTO OrderDetail (ProductId,ProductName,Quantity,Price,Discount,Image) " +
+                            "VALUES ('%s','%s','%s','%s','%s','%s');",
                     order.getProductId(),
                     order.getProductName(),
                     order.getQuantity(),
                     order.getPrice(),
                     //order.getEmail(),
-                    order.getDiscount());
+                    order.getDiscount(),
+                    order.getImage());
             db.execSQL(query);
 
 

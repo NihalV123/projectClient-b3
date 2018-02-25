@@ -13,11 +13,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_gravity="center_vertical"
-        android:layout_marginBottom="15dp"
-        android:layout_marginTop="15dp"
         android:baselineAligned="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:paddingRight="10dp">
+
+        <ImageView
+            android:id="@+id/cartimage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/todo"
+            android:src="@drawable/ic_action_name" />
 
         <LinearLayout
             android:layout_width="0dp"
@@ -29,8 +38,8 @@
                 android:id="@+id/cart_item_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
                 android:layout_marginStart="10dp"
+                android:layout_gravity="center_vertical"
                 android:text="@string/food_01"
                 android:textAllCaps="true"
                 android:textStyle="bold" />
@@ -65,16 +74,16 @@
             android:id="@+id/cart_item_count"
             android:layout_width="55dp"
             android:layout_height="55dp"
-            android:layout_gravity="center_vertical"
             android:layout_marginEnd="10dp"
+            android:layout_gravity="center_vertical"
             android:contentDescription="@string/todo" />
 
         <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
             android:id="@+id/cart_number"
             android:layout_width="150dp"
             android:layout_height="60dp"
-            android:layout_marginEnd="2dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="2dp"
             app:backGroundColor="@color/colorAccent"
             app:finalNumber="100"
             app:initialNumber="1"

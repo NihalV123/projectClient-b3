@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.andremion.counterfab.CounterFab;
 import com.facebook.CallbackManager;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
@@ -50,6 +51,7 @@ import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.FoodViewHolder;
+import dmax.dialog.SpotsDialog;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -74,7 +76,7 @@ public class FoodList extends AppCompatActivity {
     private ImageView like;
     private ImageView share;
     private ImageView add_to_cart;
-
+    private CounterFab fab;
     //Facebook share
     private CallbackManager callbackManager;
     private TextView textView;
@@ -122,7 +124,19 @@ public class FoodList extends AppCompatActivity {
                 .setFontAttrId(R.attr.fontPath)
                 .build());
         setContentView(R.layout.activity_food_list);
+        fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final SpotsDialog dialog = new SpotsDialog(FoodList.this);
+                dialog.show();
+                Intent cartIntent = new Intent(FoodList.this,Cart.class);
+                startActivity(cartIntent);
+                dialog.dismiss();
 
+            }
+        });
+        fab.setCount(new Database(this).getCountCart());
         //firebase code
         callbackManager = new CallbackManager.Factory().create();
         shareDialog = new ShareDialog(this);
@@ -325,7 +339,7 @@ public class FoodList extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         new Database(getBaseContext()).addToCart(new Order(adapter.getRef(position).getKey(), model.getName(),"1",
-                                model.getPrice(), model.getDiscount()
+                                model.getPrice(), model.getDiscount(),model.getImage()
                         ));
                         Toast.makeText(FoodList.this,"Item was added to cart",Toast.LENGTH_LONG).show();
                     }

@@ -46,6 +46,15 @@
 
     </android.support.v7.widget.RecyclerView>
 
+    <com.andremion.counterfab.CounterFab
+        android:id="@+id/fab"
+        android:layout_width="76dp"
+        android:layout_height="76dp"
+        android:layout_marginEnd="96dp"
+        android:layout_gravity="bottom|end"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/ic_shopping_cart_black_24dp" />
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"

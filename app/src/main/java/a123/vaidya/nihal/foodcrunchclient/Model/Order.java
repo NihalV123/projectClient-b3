@@ -12,17 +12,18 @@ public class Order {
     private String Price;
    // private String Email;
     private String Discount;
-
+    private String Image;
     public Order() {
     }
 
-    public Order(int ID, String productId, String productName, String quantity, String price, String discount) {
+    public Order(int ID, String productId, String productName, String quantity, String price, String discount,String image) {
         this.ID = ID;
         ProductId = productId;
         ProductName = productName;
         Quantity = quantity;
         Price = price;
         Discount = discount;
+        Image = image;
     }
 
     public void setID(int ID) {
@@ -33,15 +34,24 @@ public class Order {
         return ID;
     }
 
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
+    }
+
     public Order(String productId, String productName, String quantity, String price ,
                  //String email ,
-                 String discount) {
+                 String discount,String image) {
         ProductId = productId;
         ProductName = productName;
         Quantity = quantity;
         Price = price;
         //Email = email;
         Discount = discount;
+        Image = image;
 
     }
 
