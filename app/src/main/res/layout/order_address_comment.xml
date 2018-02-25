@@ -66,6 +66,31 @@
                 app:met_singleLineEllipsis="true"
                 />
 
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <com.rey.material.widget.RadioButton
+                    android:id="@+id/shiptoaddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="10dp"
+                    android:textColor="@color/colorAccent"
+                    android:text="@string/ship_to_this_address"
+                    android:textAllCaps="true"
+                    android:textSize="24sp" />
+
+                <com.rey.material.widget.RadioButton
+                    android:layout_width="match_parent"
+                    android:id="@+id/shiptohomeaddress"
+                    android:text="SHIP TO HOME ADDRESS"
+                    android:textColor="@color/colorAccent"
+                    android:textAllCaps="true"
+                    android:textSize="24sp"
+                    android:layout_height="wrap_content" />
+
+                </RadioGroup>
+
         </LinearLayout>
 
 

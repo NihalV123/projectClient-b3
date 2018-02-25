@@ -1,11 +1,16 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.app.AlertDialog;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,15 +20,25 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +51,7 @@ import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.rey.material.widget.RadioButton;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -67,7 +83,8 @@ import retrofit2.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
-public class Cart extends AppCompatActivity {
+public class Cart extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener,LocationListener {
     private static final int PAYPAL_REQUEST_CODE = 9999;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
@@ -87,6 +104,16 @@ public class Cart extends AppCompatActivity {
         private String address;
     private String comment;
     private String email;
+    //get current location of useer
+    private LocationRequest mLocatonRequest;
+    private GoogleApiClient mGoogleAPIClient;
+    private Location mLastLocation;
+    private static final int UPDATE_INTERVAL = 5000;
+    private static final int FASTEST_INTERVAL = 3000;
+    private static final int DISPLACEMENT = 10;
+
+    private static final int LOCATION_REQUEST_CODE = 9999;
+    private static final int PLAY_SERVICES_REQUEST = 9997;
 //caligraphy font install
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -100,11 +127,31 @@ public class Cart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //caligraphy font init
         CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-        .setDefaultFontPath("fonts/restaurant_font.otf")
+                .setDefaultFontPath("fonts/restaurant_font.otf")
                 .setFontAttrId(R.attr.fontPath)
                 .build());
 
         setContentView(R.layout.activity_cart);
+
+        //get runtime user permission
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.
+                ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.
+                ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(this,new String[]
+                    {
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_COARSE_LOCATION
+                    },LOCATION_REQUEST_CODE);
+        }else
+        {
+            if(checkPlayServices())
+            {
+                buildGoogleApiClient();
+                createLocationRequest();
+            }
+        }
 
         //init the paypal sdk!!
         Intent intent = new Intent(this, PayPalService.class);
@@ -189,6 +236,57 @@ public class Cart extends AppCompatActivity {
 
     }
 
+    private void createLocationRequest() {
+        mLocatonRequest = new LocationRequest();
+        mLocatonRequest.setInterval(UPDATE_INTERVAL);
+        mLocatonRequest.setFastestInterval(FASTEST_INTERVAL);
+        mLocatonRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        mLocatonRequest.setSmallestDisplacement(DISPLACEMENT);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode)
+        {
+            case LOCATION_REQUEST_CODE:
+                if(grantResults.length > 0 && grantResults [0] == PackageManager.PERMISSION_GRANTED)
+                {
+                    if(checkPlayServices())
+                    {
+                        buildGoogleApiClient();
+                        createLocationRequest();
+
+                        displayLocation();
+                    }
+                }
+                break;
+
+        }
+    }
+
+
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleAPIClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API).build();
+        mGoogleAPIClient.connect();
+    }
+
+    private boolean checkPlayServices() {
+        int resultcode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
+        if (resultcode != ConnectionResult.SUCCESS) {
+            if (GooglePlayServicesUtil.isUserRecoverableError(resultcode))
+                GooglePlayServicesUtil.getErrorDialog(resultcode, this, PLAY_SERVICES_REQUEST).show();
+            else {
+                Toast.makeText(this, "This device ins not supported", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+            return false;
+        }return true;
+    }
+
     private void showAlertDailog() {
 
         AlertDialog.Builder alertdailog = new AlertDialog.Builder(Cart.this);
@@ -223,6 +321,20 @@ public class Cart extends AppCompatActivity {
         });
         final MaterialEditText edtemail = email_address_layout.findViewById(R.id.edtEmailAddress);
         final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
+        //location tracking code
+        RadioButton rdShipingaddress = (RadioButton)order_address_comment.findViewById(R.id.shiptoaddress);
+        RadioButton rdHomeaddress = (RadioButton)order_address_comment.findViewById(R.id.shiptohomeaddress);
+
+        //event radio buttons
+        rdShipingaddress.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+
+                }
+            }
+        });
 
         alertdailog.setView(order_address_comment);
         alertdailog.setIcon(R.drawable.ic_shopping_cart_black_24dp);
@@ -399,6 +511,58 @@ public class Cart extends AppCompatActivity {
             new Database(this).addToCart(item);
         //refresh ui
         loadListFood();
+
+    }
+
+    @Override
+    public void onConnected(@Nullable Bundle bundle) {
+        displayLocation();
+        startLocationUpdates();
+    }
+    private void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            return;
+        }
+        LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleAPIClient,mLocatonRequest,this);
+
+    }
+    private void displayLocation() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) !=
+                PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            return;
+        }
+        mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleAPIClient);
+        if(mLastLocation != null)
+        {
+          Toast.makeText(this,"problem updating location",Toast.LENGTH_SHORT).show();
+        }
+            else
+            {
+                Toast.makeText(this,"Trying To Get Your Location ",Toast.LENGTH_LONG).show();
+
+            }
+        }
+
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        mGoogleAPIClient.connect();
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        mLastLocation = location;
+        displayLocation();
 
     }
 }
