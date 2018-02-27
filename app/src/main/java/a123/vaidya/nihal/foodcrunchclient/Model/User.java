@@ -7,18 +7,36 @@ public class User {
     private String Phone;
     private String IsStaff;
     private String secureCode;
+    private String HomeAddress;
+    private String Email;
 
     public User (){
     }
 
-    public User (String name, String password, String secureCode) {
+    public User (String name, String password, String secureCode,String homeAddress,String email) {
         Name = name;
         Password = password;
         IsStaff="false";
         this.secureCode = secureCode;
-
+        HomeAddress = homeAddress;
+        Email = email;
     }
 
+    public String getHomeAddress() {
+        return HomeAddress;
+    }
+
+    public void setHomeAddress(String homeAddress) {
+        HomeAddress = homeAddress;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
 
     public String getIsStaff() {
         return IsStaff;

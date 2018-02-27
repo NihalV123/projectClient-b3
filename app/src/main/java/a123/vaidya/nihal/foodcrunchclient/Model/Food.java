@@ -3,8 +3,8 @@ package a123.vaidya.nihal.foodcrunchclient.Model;
 
 public class Food {
     private String Name,Image,Description,Price,
-            //Email,
-    Discount,MenuId;
+    Discount,MenuId,
+    Email;
 
     public Food() {
     }
@@ -37,13 +37,13 @@ public class Food {
         return Price;
     }
 
-//    public String getEmail() {
-//        return Email;
-//    }
-//
-//    public void setEmail(String email) {
-//        Email = email;
-//    }
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
 
     public void setPrice(String price) {
         Price = price;

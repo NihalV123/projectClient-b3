@@ -30,7 +30,8 @@ public class Signup extends AppCompatActivity {
     private MaterialEditText edtPhone;
     private MaterialEditText edtPasswd;
     private MaterialEditText edtSecureCode;
-    //MaterialEditText edtEmail;
+    MaterialEditText edtEmail;
+    MaterialEditText edtHomeAddress;
     private Button BtnSignup;
 
     //caligraphy font install
@@ -47,9 +48,10 @@ public class Signup extends AppCompatActivity {
                 .setFontAttrId(R.attr.fontPath)
                 .build());
         setContentView(R.layout.activity_signup);
-
+        edtEmail= findViewById(R.id.edtEmail);
         edtNmae= findViewById(R.id.edtName);
-        edtPasswd= findViewById(R.id.edtPasswd);
+        edtHomeAddress= findViewById(R.id.edtHomeAddress);
+        edtPasswd= findViewById(R.id.edtPasswd1);
         edtPhone= findViewById(R.id.edtPhone);
         Twitter.initialize(this);
         TwitterConfig config = new TwitterConfig.Builder(this)
@@ -85,8 +87,10 @@ public class Signup extends AppCompatActivity {
 
                             } else {
                                 User user = new User(edtNmae.getText().toString(), edtPasswd.getText().toString(),
-                                       // edtNmae.getText().toString(),
-                                        edtSecureCode.getText().toString()
+                                        edtSecureCode.getText().toString(),
+                                        edtHomeAddress.getText().toString(),
+                                        edtEmail.getText().toString()
+
                                         );
                                 table_user.child(edtPhone.getText().toString()).setValue(user);
                                 DatabaseReference myRef = database.getReference("message");

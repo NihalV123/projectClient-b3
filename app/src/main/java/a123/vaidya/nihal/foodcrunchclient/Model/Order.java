@@ -10,13 +10,13 @@ public class Order {
     private String ProductName;
     private String Quantity;
     private String Price;
-   // private String Email;
     private String Discount;
     private String Image;
+    private String Email;
     public Order() {
     }
 
-    public Order(int ID, String productId, String productName, String quantity, String price, String discount,String image) {
+    public Order(int ID, String productId, String productName, String quantity, String price, String discount,String image,String email) {
         this.ID = ID;
         ProductId = productId;
         ProductName = productName;
@@ -24,6 +24,7 @@ public class Order {
         Price = price;
         Discount = discount;
         Image = image;
+        Email= email;
     }
 
     public void setID(int ID) {
@@ -43,15 +44,15 @@ public class Order {
     }
 
     public Order(String productId, String productName, String quantity, String price ,
-                 //String email ,
-                 String discount,String image) {
+                 String discount,String image,String email
+    ) {
         ProductId = productId;
         ProductName = productName;
         Quantity = quantity;
         Price = price;
-        //Email = email;
         Discount = discount;
         Image = image;
+        Email = email;
 
     }
 
@@ -65,13 +66,13 @@ public class Order {
         ProductId = productId;
     }
 
-//    public String getEmail() {
-//        return Email;
-//    }
-//
-//    public void setEmail(String email) {
-//        Email = email;
-//    }
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
 
     public String getProductName() {
         return ProductName;
@@ -104,4 +105,5 @@ public class Order {
     public void setDiscount(String discount) {
         Discount = discount;
     }
+
 }

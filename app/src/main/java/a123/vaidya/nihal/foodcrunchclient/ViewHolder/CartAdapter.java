@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -34,6 +35,7 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
     public final TextView txt_price;
     public final ImageView img_cart_count;
     public final ElegantNumberButton add_to_cart;
+    public ImageView cart_image;
     private ItemClickListener itemClickListener;
 
     public void setTxt_cart_name(TextView txt_cart_name) {
@@ -42,10 +44,11 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
 
     public CartViewHolder(View itemView) {
         super(itemView);
-        txt_cart_name= itemView.findViewById(R.id.cart_item_name);
-        txt_price= itemView.findViewById(R.id.cart_item_Price);
-        img_cart_count= itemView.findViewById(R.id.cart_item_count);
-        add_to_cart = itemView.findViewById(R.id.cart_number);
+        txt_cart_name= (TextView) itemView.findViewById(R.id.cart_item_name);
+        txt_price= (TextView) itemView.findViewById(R.id.cart_item_Price);
+        img_cart_count= (ImageView) itemView.findViewById(R.id.cart_item_count);
+        add_to_cart =(ElegantNumberButton) itemView.findViewById(R.id.cart_number);
+        cart_image = (ImageView) itemView.findViewById(R.id.cartimage);
         itemView.setOnCreateContextMenuListener(this);
     }
 
@@ -66,6 +69,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
     private List<Order> listData;
     private final Cart cart;
 
+
     public CartAdapter(List<Order> listData, Cart cart) {
         this.listData = listData;
         this.cart = cart;
@@ -80,6 +84,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
 
     @Override
     public void onBindViewHolder(CartViewHolder holder, final int position) {
+        Picasso.with(cart.getBaseContext())
+                .load(listData.get(position).getImage())
+                .resize(70,70)
+                .centerCrop()
+                .into(holder.cart_image);
+
         TextDrawable drawable = TextDrawable.builder()
                 .buildRound(""+listData.get(position).getQuantity(), Color.LTGRAY);
         holder.img_cart_count.setImageDrawable(drawable);

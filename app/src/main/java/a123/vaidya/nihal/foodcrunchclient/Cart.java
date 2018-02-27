@@ -25,6 +25,9 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -57,10 +60,13 @@ import a123.vaidya.nihal.foodcrunchclient.ViewHolder.CartAdapter;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 
+import dmax.dialog.SpotsDialog;
 import info.hoang8f.widget.FButton;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -114,7 +120,7 @@ public class Cart extends AppCompatActivity {
 
 
         //firebase code
-        swipeRefreshLayout = findViewById(R.id.swipelayout2);
+        swipeRefreshLayout =(SwipeRefreshLayout) findViewById(R.id.swipelayout2);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
                 android.R.color.holo_orange_dark,
@@ -156,11 +162,13 @@ public class Cart extends AppCompatActivity {
         mservice = Common.getFCMService();
 
         //start view
-        recyclerView = findViewById(R.id.listCart);
+        recyclerView =(RecyclerView) findViewById(R.id.listCart);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        cart_number= findViewById(R.id.cart_number);
+
+//        cart_number= findViewById(R.id.cart_number);//change layout partent all4
+
         txtTotalPrice = findViewById(R.id.total);
         btnPlace = findViewById(R.id.btnPlaceOrder);
         clear_cart =findViewById(R.id.btnClerCart);
@@ -197,7 +205,7 @@ public class Cart extends AppCompatActivity {
         alertdailog.setMessage("Enter your Address :   ");
 
         final LayoutInflater inflater = this.getLayoutInflater();
-        View email_address_layout = inflater.inflate(R.layout.email_address_layout,null);
+       View email_address_layout = inflater.inflate(R.layout.email_address_layout,null);
         View order_address_comment = inflater.inflate(R.layout.order_address_comment,null);
         PlaceAutocompleteFragment edtAddress = (PlaceAutocompleteFragment)getFragmentManager()
                 .findFragmentById(R.id.place_autocomplete_fragment);
@@ -207,6 +215,9 @@ public class Cart extends AppCompatActivity {
         //hint of autocomplete
         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
                 .setHint("ENTER YOUR ADDRESS");
+        ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
+                .setText("MY NEW ADDRESS");
+
         //set text size
         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
                 .setTextSize(24);
@@ -255,13 +266,16 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
+                //remove fragment after close
+                getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
+                        (R.id.place_autocomplete_fragment)).commit();
+
+
+
             }
         });
-
-        //remove fragment after close
-        getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
-                (R.id.place_autocomplete_fragment)).commit();
         alertdailog.show();
+
     }
 
     @Override
@@ -332,8 +346,13 @@ public class Cart extends AppCompatActivity {
                         {
                             //Common.currentUser = item;
                             Token token = postSnapshot.getValue(Token.class);
-                            String[] TO = {Common.currentUser.getName().toString()};
-                            String[] CC = {""};
+                            if(Common.currentUser.getEmail().toString() == null)
+//                                Common.currentUser.setEmail();
+                            {showEmailAddressDialog();
+
+                            }
+                            String[] TO = {Common.currentUser.getEmail().toString()};
+                            String[] CC = {Common.currentUser.getEmail().toString()};
                             Intent emailIntent = new Intent(Intent.ACTION_SEND);
 
                             emailIntent.setData(Uri.parse("mailto:"));
@@ -342,13 +361,16 @@ public class Cart extends AppCompatActivity {
                             emailIntent.putExtra(Intent.EXTRA_CC, CC);
                             emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your order has been updated");
                             emailIntent.putExtra(Intent.EXTRA_TEXT, "Here are your order details \n"+
-                                    "The order for user  \n" +
+                                    "The order for user  \t" +
                                     (Common.currentUser.getName())+
-                                    "\nwith phone no \n" +
+                                    "\nwith email  \t" +
+                                    (Common.currentUser.getEmail())+
+                                    "\nand phone no \t" +
                                     (Common.currentUser.getPhone())+
-                                    "\nhas been updated " +
-
-                                    "\nthank you for shopping");
+                                    "\n \n HAS BEEN PLACED!!  \t" +
+                                    "\n  It will be delivered to address  \t" +
+                                    (Common.currentUser.getHomeAddress())+
+                                    "\n\nTHANK YOU FOR SHOPPING WITH US!!");
                             try {
                                 startActivity(Intent.createChooser(emailIntent, "Send mail..."));
                             } catch (android.content.ActivityNotFoundException ex) {
@@ -368,8 +390,53 @@ public class Cart extends AppCompatActivity {
 
     }
 
+    private void showEmailAddressDialog() {
+        android.app.AlertDialog.Builder alertDailog = new android.app.AlertDialog.Builder(Cart.this);
+        alertDailog.setTitle("CHANGE EMAIL ADDRESS");
+        alertDailog.setIcon(R.drawable.ic_email_black_24dp);
+        alertDailog.setMessage("One time per session");
+        LayoutInflater inflater = LayoutInflater.from(Cart.this);
+        View layout_email = inflater.inflate(R.layout.email_address_layout,null);
+        final MaterialEditText edtEmail = layout_email.findViewById(R.id.edtEmailAddress);
+        alertDailog.setView(layout_email);
+        alertDailog.setPositiveButton("UPDATE!!", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final SpotsDialog dialog1 = new SpotsDialog(Cart.this);
+                dialog1.show();
+                Map<String, Object> emailUpdate = new HashMap<>();
+                emailUpdate.put("EMAIL", edtEmail.getText().toString());
+                DatabaseReference user = FirebaseDatabase.getInstance().getReference("User");
+                user.child(Common.currentUser.getEmail())
+                        .updateChildren(emailUpdate).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        dialog1.dismiss();
+                        Toast.makeText(Cart.this, "Your EMAIL was updated", Toast.LENGTH_LONG).show();
+                    }
+                })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                dialog1.dismiss();
+                                Toast.makeText(Cart.this, "You have problems updating your email buddy",
+                                        Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+            }
+        });
+        alertDailog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDailog.show();
+    }
+
     private void sendordersemailUSER(String localKey, final Request item) {
-       
+
     }
     private void sendNotificatinOrder(final String order_number) {
         DatabaseReference tokens = FirebaseDatabase.getInstance().getReference("Tokens");

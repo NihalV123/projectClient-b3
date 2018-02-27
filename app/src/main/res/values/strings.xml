@@ -92,4 +92,5 @@
     <string name="delete_user_data">DELETE USER DATA</string>
     <string name="_9619662497">9619662497</string>
     <string name="ship_to_this_address">SHIP TO THIS ADDRESS</string>
+    <string name="ship_to_home">SHIP TO HOME</string>
 </resources>

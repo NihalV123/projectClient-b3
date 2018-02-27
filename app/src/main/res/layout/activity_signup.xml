@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/enter_your_phone_number"
             android:inputType="phone"
-            android:text=""
+            android:text="@string/_9619662497"
             android:textColor="@android:color/white"
             android:textSize="36sp"
             android:gravity="center"
@@ -51,28 +51,48 @@
             app:met_baseColor="@android:color/white"
             app:met_floatingLabel="highlight"
             app:met_maxCharacters="128"
+            app:met_minCharacters="1"
+            app:met_primaryColor="@android:color/white"
+            app:met_singleLineEllipsis="true" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_your_email"
+            android:inputType="text"
+            android:text="@string/nhlvcam"
+            android:textColor="@android:color/white"
+            android:textSize="36sp"
+            android:gravity="center"
+            android:visibility="visible"
+            app:met_baseColor="@android:color/white"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="128"
+            app:met_minCharacters="1"
+            app:met_primaryColor="@android:color/white"
+            app:met_singleLineEllipsis="true" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtHomeAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_your_email"
+            android:inputType="text"
+            android:text="@string/my_new_address"
+            android:textColor="@android:color/white"
+            android:textSize="36sp"
+            android:gravity="center"
+            android:visibility="visible"
+            app:met_baseColor="@android:color/white"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="128"
             app:met_minCharacters="8"
             app:met_primaryColor="@android:color/white"
             app:met_singleLineEllipsis="true" />
 
-        <!--<com.rengwuxian.materialedittext.MaterialEditText-->
-            <!--android:id="@+id/edtEmail"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:gravity="center"-->
-            <!--android:hint="@string/enter_your_email"-->
-            <!--android:inputType="textEmailAddress"-->
-            <!--android:text="@string/nhlvcam"-->
-            <!--android:textColor="@android:color/white"-->
-            <!--android:textSize="36sp"-->
-            <!--app:met_baseColor="@android:color/white"-->
-            <!--app:met_floatingLabel="highlight"-->
-            <!--app:met_maxCharacters="28"-->
-            <!--app:met_primaryColor="@android:color/white"-->
-            <!--app:met_singleLineEllipsis="true" />-->
-
         <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/edtPasswd"
+            android:id="@+id/edtPasswd1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_your_password"

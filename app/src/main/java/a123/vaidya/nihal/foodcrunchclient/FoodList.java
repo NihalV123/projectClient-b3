@@ -339,7 +339,7 @@ public class FoodList extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         new Database(getBaseContext()).addToCart(new Order(adapter.getRef(position).getKey(), model.getName(),"1",
-                                model.getPrice(), model.getDiscount(),model.getImage()
+                                model.getPrice(), model.getDiscount(),model.getImage(),model.getEmail()
                         ));
                         Toast.makeText(FoodList.this,"Item was added to cart",Toast.LENGTH_LONG).show();
                     }

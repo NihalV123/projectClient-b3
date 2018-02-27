@@ -370,16 +370,16 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 dialog.dismiss();
                 break;
             }
-//            case R.id.nav_favorites: {
-//                final SpotsDialog dialog = new SpotsDialog(Home.this);
-//                Intent orderIntent = new Intent(Home.this, OrderStatus.class);
-//                startActivity(orderIntent);
-//                dialog.dismiss();
-//                break;
-//            }
-//            case R.id.nav_homeaddress:{
-//                showHomeAddressDialog();
-//                break;}
+            case R.id.nav_favorites: {
+                final SpotsDialog dialog = new SpotsDialog(Home.this);
+                Intent orderIntent = new Intent(Home.this, OrderStatus.class);
+                startActivity(orderIntent);
+                dialog.dismiss();
+                break;
+            }
+            case R.id.nav_homeaddress:{
+                showHomeAddressDialog();
+                break;}
             case R.id.nav_emailaddress:{
                 showEmailAddressDialog();
                 break;}
@@ -404,6 +404,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private void showEmailAddressDialog() {
         android.app.AlertDialog.Builder alertDailog = new android.app.AlertDialog.Builder(Home.this);
         alertDailog.setTitle("CHANGE EMAIL ADDRESS");
+        alertDailog.setIcon(R.drawable.ic_email_black_24dp);
         alertDailog.setMessage("One time per session");
         LayoutInflater inflater = LayoutInflater.from(this);
         View layout_email = inflater.inflate(R.layout.email_address_layout,null);
@@ -448,6 +449,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private void showChangePasswordDialog() {
     AlertDialog.Builder alertDialog = new AlertDialog.Builder(Home.this);
     alertDialog.setTitle("CHANGE PASSWORD");
+    alertDialog.setIcon(R.drawable.ic_security_black_24dp);
     alertDialog.setMessage("One time per session");
 
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -526,6 +528,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private void showHomeAddressDialog() {
         AlertDialog.Builder alertDailog = new AlertDialog.Builder(Home.this);
         alertDailog.setTitle("CHANGE HOME ADDRESS");
+        alertDailog.setIcon(R.drawable.ic_home_black_24dp);
         alertDailog.setMessage("One time per session");
         LayoutInflater inflater = LayoutInflater.from(this);
         View layout_home = inflater.inflate(R.layout.home_address_layout,null);
@@ -534,7 +537,19 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         alertDailog.setPositiveButton("UPDATE!!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                dialog.dismiss();
+                //set new home address
+                Common.currentUser.setHomeAddress(edtHomeAddress.getText().toString());
+                //update database
+                FirebaseDatabase.getInstance().getReference("User")//this is how to remove user try in future
+                        .child(Common.currentUser.getPhone())
+                        .setValue(Common.currentUser)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(getBaseContext(),"Update address successful",Toast.LENGTH_LONG).show();
+                            }
+                        });
             }
         });
         alertDailog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {

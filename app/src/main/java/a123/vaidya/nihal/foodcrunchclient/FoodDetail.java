@@ -108,7 +108,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
             public void onClick(View v) {
 
                 new Database(getBaseContext()).addToCart(new Order(foodId, currentFood.getName(), numberButton.getNumber(),
-                        currentFood.getPrice(), currentFood.getDiscount(),currentFood.getImage()
+                        currentFood.getPrice(), currentFood.getDiscount(),currentFood.getImage(),currentFood.getEmail()
                 ));
                 Toast.makeText(FoodDetail.this,"Item was added to cart",Toast.LENGTH_LONG).show();
 

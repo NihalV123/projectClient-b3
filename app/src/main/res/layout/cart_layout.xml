@@ -23,7 +23,7 @@
         <ImageView
             android:id="@+id/cartimage"
             android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_height="80dp"
             android:layout_weight="1"
             android:contentDescription="@string/todo"
             android:src="@drawable/ic_action_name" />
@@ -81,7 +81,7 @@
         <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
             android:id="@+id/cart_number"
             android:layout_width="150dp"
-            android:layout_height="60dp"
+            android:layout_height="75dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="2dp"
             app:backGroundColor="@color/colorAccent"
