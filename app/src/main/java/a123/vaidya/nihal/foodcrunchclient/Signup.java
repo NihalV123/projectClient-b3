@@ -35,18 +35,18 @@ public class Signup extends AppCompatActivity {
     private Button BtnSignup;
 
     //caligraphy font install
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //caligraphy font init
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/restaurant_font.otf")
-                .setFontAttrId(R.attr.fontPath)
-                .build());
+//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+//                .setDefaultFontPath("fonts/restaurant_font.otf")
+//                .setFontAttrId(R.attr.fontPath)
+//                .build());
         setContentView(R.layout.activity_signup);
         edtEmail= findViewById(R.id.edtEmail);
         edtNmae= findViewById(R.id.edtName);
@@ -96,8 +96,8 @@ public class Signup extends AppCompatActivity {
                                 DatabaseReference myRef = database.getReference("message");
 
                                 myRef.setValue("everythink ok");
-                                Toast.makeText(Signup.this, "SIGN UP successfull welcome to the crew!", Toast.LENGTH_SHORT).show();
-                                finish();
+                                Toast.makeText(Signup.this, "SIGN UP successfull Please log in!!", Toast.LENGTH_SHORT).show();
+                              //  finish();
                             }
                         }
 

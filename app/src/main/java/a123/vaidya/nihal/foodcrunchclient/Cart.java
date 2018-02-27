@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -188,9 +190,9 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(cart.size() > 0)
-                    showAlertDailog();
-                else
-                    Toast.makeText(Cart.this,"Your shopping cart is empty",Toast.LENGTH_LONG).show();
+                { showAlertDailog();}
+                else{
+                    Toast.makeText(Cart.this,"Your shopping cart is empty",Toast.LENGTH_LONG).show();}
             }
         });
 
@@ -203,12 +205,15 @@ public class Cart extends AppCompatActivity {
         AlertDialog.Builder alertdailog = new AlertDialog.Builder(Cart.this);
         alertdailog.setTitle("One Last Step!!");
         alertdailog.setMessage("Enter your Address :   ");
+        alertdailog.setCancelable(false);
 
         final LayoutInflater inflater = this.getLayoutInflater();
        View email_address_layout = inflater.inflate(R.layout.email_address_layout,null);
+
         View order_address_comment = inflater.inflate(R.layout.order_address_comment,null);
         PlaceAutocompleteFragment edtAddress = (PlaceAutocompleteFragment)getFragmentManager()
                 .findFragmentById(R.id.place_autocomplete_fragment);
+
         //final MaterialEditText edtAddress = order_address_comment.findViewById(R.id.edtAddress);
         //hide searchbar
         edtAddress.getView().findViewById(R.id.place_autocomplete_search_button).setVisibility(View.GONE);
@@ -216,8 +221,7 @@ public class Cart extends AppCompatActivity {
         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
                 .setHint("ENTER YOUR ADDRESS");
         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
-                .setText("MY NEW ADDRESS");
-
+                .setText("");
         //set text size
         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
                 .setTextSize(24);
@@ -226,6 +230,7 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onPlaceSelected(Place place) {
                 shippingAddress = place;
+
             }
 
             @Override
@@ -243,21 +248,25 @@ public class Cart extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                address = shippingAddress.getAddress().toString();
-                comment = edtComment.getText().toString();
-                email = edtemail.getText().toString();
+                if(shippingAddress.toString() != null)
+                {
+                    address = shippingAddress.getAddress().toString();
 
-                String formatAmmount = txtTotalPrice.getText().toString()
-                        .replace("¤","")
-                        .replace("$","")//replace regional barriers
-                        .replace(",","");
+                    comment = edtComment.getText().toString();
+                    email = edtemail.getText().toString();
 
-                PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
-                        "USD","Food Crunch Order in INR",PayPalPayment.PAYMENT_INTENT_SALE);
-                Intent intent =new Intent(getApplicationContext(), PaymentActivity.class);
-                intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
-                intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
-                startActivityForResult(intent,PAYPAL_REQUEST_CODE);
+                    String formatAmmount = txtTotalPrice.getText().toString()
+                            .replace("¤","")
+                            .replace("$","")//replace regional barriers
+                            .replace(",","");
+
+                    PayPalPayment payPalPayment = new PayPalPayment(new BigDecimal(formatAmmount),
+                            "USD","Food Crunch Order in INR",PayPalPayment.PAYMENT_INTENT_SALE);
+                    Intent intent =new Intent(getApplicationContext(), PaymentActivity.class);
+                    intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
+                    intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
+                    startActivityForResult(intent,PAYPAL_REQUEST_CODE);
+                }
 
             }
         });
@@ -269,8 +278,6 @@ public class Cart extends AppCompatActivity {
                 //remove fragment after close
                 getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
                         (R.id.place_autocomplete_fragment)).commit();
-
-
 
             }
         });
@@ -393,6 +400,7 @@ public class Cart extends AppCompatActivity {
     private void showEmailAddressDialog() {
         android.app.AlertDialog.Builder alertDailog = new android.app.AlertDialog.Builder(Cart.this);
         alertDailog.setTitle("CHANGE EMAIL ADDRESS");
+        alertDailog.setCancelable(false);
         alertDailog.setIcon(R.drawable.ic_email_black_24dp);
         alertDailog.setMessage("One time per session");
         LayoutInflater inflater = LayoutInflater.from(Cart.this);

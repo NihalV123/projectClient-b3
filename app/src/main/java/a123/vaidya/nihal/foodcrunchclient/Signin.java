@@ -44,18 +44,18 @@ public class Signin extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference table_user;
     //caligraphy font install
-    @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
-    }
+//    @Override
+//    protected void attachBaseContext(Context newBase) {
+//        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+//    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //caligraphy font init
-        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
-                .setDefaultFontPath("fonts/restaurant_font.otf")
-                .setFontAttrId(R.attr.fontPath)
-                .build());
+//        CalligraphyConfig.initDefault(new CalligraphyConfig.Builder()
+//                .setDefaultFontPath("fonts/restaurant_font.otf")
+//                .setFontAttrId(R.attr.fontPath)
+//                .build());
         setContentView(R.layout.activity_signin);
         edtNmae= findViewById(R.id.edtName);
         edtPasswd= findViewById(R.id.edtPasswd);
@@ -150,6 +150,7 @@ public class Signin extends AppCompatActivity {
     private void showForgetPwdDailog() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Forgot Password");
+        builder.setCancelable(false);
         builder.setMessage("Please enter your secure code");
 
         LayoutInflater inflater = this.getLayoutInflater();
