@@ -221,6 +221,10 @@ public class Cart extends AppCompatActivity {
         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
                 .setHint("ENTER YOUR ADDRESS");
         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
+                .setHintTextColor(0xFF00FF00);
+        ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
+                .setBackgroundColor(0xFFFF0000);
+        ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
                 .setText("");
         //set text size
         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))

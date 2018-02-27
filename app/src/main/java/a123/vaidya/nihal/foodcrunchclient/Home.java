@@ -3,6 +3,7 @@ package a123.vaidya.nihal.foodcrunchclient;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
@@ -302,7 +303,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onStop() {
         super.onStop();
-        adapter.stopListening();
+        //adapter.stopListening();
     }
 
     @Override
@@ -356,9 +357,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 dialog.dismiss();
                 break;
             }
-//            case R.id.nav_removeuser: {
-//                break;
-//            }
+            case R.id.nav_send_login_details: {
+                sendemailUSER();
+                break;
+            }
             case R.id.nav_logout: {
                 //delete remmbered user details
                 final SpotsDialog dialog = new SpotsDialog(Home.this);
@@ -377,28 +379,48 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 dialog.dismiss();
                 break;
             }
-            case R.id.nav_homeaddress:{
-                showHomeAddressDialog();
-                break;}
+//            case R.id.nav_homeaddress:{
+//                showHomeAddressDialog();
+//                break;}
             case R.id.nav_emailaddress:{
                 showEmailAddressDialog();
                 break;}
             case R.id.nav_password:{
                 showChangePasswordDialog();
                 break;}
-//            case R.id.settings: {
-//                final SpotsDialog dialog = new SpotsDialog(Home.this);
-//                dialog.show();
-//                Intent signIn = new Intent(Home.this, Signin.class);
-//                signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity(signIn);
-//                dialog.dismiss();
-//                break;
-//            }
+
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void sendemailUSER() {
+        Toast.makeText(Home.this,"Please select the way you want tor recieve detaisl",Toast.LENGTH_LONG).show();
+        String[] TO = {Common.currentUser.getEmail().toString()};
+        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+        emailIntent.setData(Uri.parse("mailto:"));
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+        //emailIntent.putExtra(Intent.EXTRA_CC, CC);
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "You have created a staff account with FoodCrunch the anytime shopping app");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "Here are your account details \n"+
+                "The new account is created for the staff member \t" +
+                (Common.currentUser.getName().toString())+
+                "\n with email \t" +
+                (Common.currentUser.getEmail().toString())+
+                "\nand has been linked to your phone number \n" +
+                "\n \n Your password is  \t" +
+                (Common.currentUser.getPassword().toString())+
+                "\n \n and your secure code is \t" +
+                (Common.currentUser.getSecureCode().toString())+
+                "\n\nPlease write down your secure code. \nIt will be used to recover your password");
+        try {
+            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+        } catch (android.content.ActivityNotFoundException ex) {
+             Toast.makeText(Home.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void showEmailAddressDialog() {

@@ -103,6 +103,7 @@
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
                     android:contentDescription="@string/todo"
+                    android:visibility="gone"
                     android:src="@drawable/ic_thumb_up_black_24dp"
                     android:tint="@color/white" />
 
@@ -110,6 +111,7 @@
                     android:id="@+id/share"
                     android:layout_width="50dp"
                     android:layout_height="35dp"
+                    android:visibility="gone"
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentTop="true"
                     android:layout_marginEnd="39dp"

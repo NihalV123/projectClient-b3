@@ -94,4 +94,7 @@
     <string name="ship_to_this_address">SHIP TO THIS ADDRESS</string>
     <string name="ship_to_home">SHIP TO HOME</string>
     <string name="sweety_4august_yahoo_com">sweety_4august@yahoo.com</string>
+    <string name="resend_login_details">RESEND LOGIN</string>
+    <string name="chanhe_email_address">CHANGE EMAIL ADDRESS</string>
+    <string name="MY_favorites">MY FAVORITES</string>
 </resources>

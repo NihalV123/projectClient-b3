@@ -161,7 +161,7 @@ public class  OrderStatus extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        adapter.stopListening();
+        //adapter.stopListening();
     }
 
     private String convertCodeToStatus(String status) {

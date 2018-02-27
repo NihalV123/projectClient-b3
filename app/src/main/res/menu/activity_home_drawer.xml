@@ -12,15 +12,15 @@
         <item
             android:id="@+id/nav_favorites"
             android:icon="@drawable/ic_star_half_black_24dp"
-            android:title="@string/favorites" />
-        <item
-            android:id="@+id/nav_homeaddress"
-            android:icon="@drawable/ic_home_black_24dp"
-            android:title="@string/home_address" />
+            android:title="@string/MY_favorites" />
+        <!--<item-->
+            <!--android:id="@+id/nav_homeaddress"-->
+            <!--android:icon="@drawable/ic_home_black_24dp"-->
+            <!--android:title="@string/MY_home_address" />-->
         <item
             android:id="@+id/nav_emailaddress"
             android:icon="@drawable/ic_email_black_24dp"
-            android:title="@string/email_address" />
+            android:title="@string/chanhe_email_address" />
         <item
             android:id="@+id/nav_password"
             android:icon="@drawable/ic_security_black_24dp"
@@ -41,10 +41,10 @@
             android:icon="@drawable/ic_exit_to_app_black_24dp"
             android:title="@string/sign_out" />
 
-        <!--<item-->
-            <!--android:id="@+id/settings"-->
-            <!--android:icon="@drawable/ic_power_settings_new_black_24dp"-->
-            <!--android:title="@string/action_settings" />-->
+        <item
+            android:id="@+id/nav_send_login_details"
+            android:icon="@drawable/ic_supervisor_account_black_24dp"
+            android:title="RESEND LOGIN" />
 
         <!--<item-->
             <!--android:id="@+id/nav_removeuser"-->
