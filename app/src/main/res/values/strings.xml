@@ -97,4 +97,6 @@
     <string name="resend_login_details">RESEND LOGIN</string>
     <string name="chanhe_email_address">CHANGE EMAIL ADDRESS</string>
     <string name="MY_favorites">MY FAVORITES</string>
+    <string name="ship_to_Current">SHIP TO HERE</string>
+    <string name="ship_to_CurrentLocation">SHIP TO CURRENT LOCATION</string>
 </resources>

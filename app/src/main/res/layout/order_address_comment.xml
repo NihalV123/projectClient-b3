@@ -76,7 +76,7 @@
                     android:textColorHint="@color/colorPrimary"
                     android:text="@string/ship_to_home"
                     android:textSize="24sp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:textColor="@color/colorPrimary"
                     android:id="@+id/rbhomeaddress"
                     android:layout_height="wrap_content" />
@@ -85,9 +85,9 @@
                     android:layout_width="match_parent"
                     android:gravity="center"
                     android:textColorHint="@color/colorPrimary"
-                    android:text="@string/ship_to_home"
+                    android:text="@string/ship_to_CurrentLocation"
                     android:textSize="24sp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:textColor="@color/colorPrimary"
                     android:id="@+id/rbcurentaddress"
                     android:layout_height="wrap_content" />
