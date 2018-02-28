@@ -85,10 +85,12 @@ public class Signup extends AppCompatActivity {
 
                                 myRef.setValue("Hello from sign up");
 
-                                Toast.makeText(Signup.this, "Phone Number already registered!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Signup.this, "Phone Number already registered!",
+                                        Toast.LENGTH_SHORT).show();
 
                             } else {
-                                Toast.makeText(Signup.this, "Select the way you want to be notified", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Signup.this, "Select the way you want to be notified",
+                                        Toast.LENGTH_SHORT).show();
                                 User user = new User(edtNmae.getText().toString(), edtPasswd.getText().toString(),
                                         edtSecureCode.getText().toString(),
                                         edtHomeAddress.getText().toString(),

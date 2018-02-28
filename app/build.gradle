@@ -26,7 +26,7 @@ android {
 
 dependencies {
     implementation 'com.jaredrummler:material-spinner:1.2.4'
-    implementation'com.github.d-max:spots-dialog:0.7@aar'
+    implementation 'com.github.d-max:spots-dialog:0.7@aar'
     implementation 'com.jakewharton:butterknife:8.4.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     implementation 'io.github.privacystreams:privacystreams-android-sdk:0.1.7'
@@ -36,6 +36,7 @@ dependencies {
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
     implementation 'com.google.code.gson:gson:2.8.2'    // Facebook Core only (Analytics)
     implementation 'com.facebook.android:facebook-core:4.28.0'
+    implementation 'com.github.medyo:android-about-page:1.2.2'
     implementation 'uk.co.chrisjenx:calligraphy:2.3.0'
     implementation 'com.facebook.android:facebook-share:4.28.0'
     implementation 'com.paypal.sdk:paypal-android-sdk:2.16.0'

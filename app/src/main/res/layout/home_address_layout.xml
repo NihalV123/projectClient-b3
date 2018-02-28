@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/edtHomeAddress"
             android:hint="@string/enter_your_home_address"
-            android:text="@string/my_new_address"
+            android:text=""
             android:textColor="@color/colorPrimary"
             android:textSize="36sp"
             android:gravity="center"

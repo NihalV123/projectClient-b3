@@ -16,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -73,8 +74,8 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 public class Home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private FirebaseDatabase database;
     private DatabaseReference category;
-    private TextView txtFullName;
-    MaterialEditText edtHomeAddress,edtPassword;
+    private TextView txtFullName,txtemail,txtPhone;
+    MaterialEditText edtHomeAddress,edtPassword,edtEmail;
     //caligraphy font install
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -199,8 +200,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
         View headerView = navigationView.getHeaderView(0);
         txtFullName = headerView.findViewById(R.id.txtFullName);
-        txtFullName.setText(Common.currentUser.getName());
-
+        txtemail = headerView.findViewById(R.id.txtEmail);
+        txtPhone = headerView.findViewById(R.id.txtPhone);
+        txtFullName.setText(Common.currentUser.getName());//slider name
+        txtemail.setText(Common.currentUser.getEmail());
+        txtPhone.setText(Common.currentUser.getPhone());
         //load menu
         recycler_menu = findViewById(R.id.recycler_menu);
         recycler_menu.setHasFixedSize(true);
@@ -361,6 +365,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 sendemailUSER();
                 break;
             }
+            case R.id.nav_about: {
+                final SpotsDialog dialog = new SpotsDialog(Home.this);
+                Intent about = new Intent(Home.this, About.class);
+                startActivity(about);
+                dialog.dismiss();
+                break;
+            }
             case R.id.nav_logout: {
                 //delete remmbered user details
                 final SpotsDialog dialog = new SpotsDialog(Home.this);
@@ -379,9 +390,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 dialog.dismiss();
                 break;
             }
-//            case R.id.nav_homeaddress:{
-//                showHomeAddressDialog();
-//                break;}
+            case R.id.nav_homeaddress:{
+                showHomeAddressDialog();
+                break;}
             case R.id.nav_emailaddress:{
                 showEmailAddressDialog();
                 break;}
@@ -424,37 +435,29 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     }
 
     private void showEmailAddressDialog() {
-        android.app.AlertDialog.Builder alertDailog = new android.app.AlertDialog.Builder(Home.this);
+        AlertDialog.Builder alertDailog = new AlertDialog.Builder(Home.this);
         alertDailog.setTitle("CHANGE EMAIL ADDRESS");
         alertDailog.setCancelable(false);
         alertDailog.setIcon(R.drawable.ic_email_black_24dp);
         alertDailog.setMessage("One time per session");
         LayoutInflater inflater = LayoutInflater.from(this);
-        View layout_email = inflater.inflate(R.layout.email_address_layout,null);
-        final MaterialEditText edtEmail = layout_email.findViewById(R.id.edtEmailAddress);
-        alertDailog.setView(layout_email);
+        View layout_home = inflater.inflate(R.layout.email_address_layout,null);
+        final MaterialEditText edtEmail = layout_home.findViewById(R.id.edtEmailAddress);
+        alertDailog.setView(layout_home);
         alertDailog.setPositiveButton("UPDATE!!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                final SpotsDialog dialog1 = new SpotsDialog(Home.this);
-                dialog1.show();
-                    Map <String, Object> emailUpdate = new HashMap<>();
-                    emailUpdate.put("EMAIL", edtEmail.getText().toString());
-                DatabaseReference user = FirebaseDatabase.getInstance().getReference("Requests");
-                user.child(Common.currentRequest.getEmail())
-                        .updateChildren(emailUpdate).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        dialog1.dismiss();
-                        Toast.makeText(Home.this, "Your EMAIL was updated", Toast.LENGTH_LONG).show();
-                    }
-                })
-                        .addOnFailureListener(new OnFailureListener() {
+                dialog.dismiss();
+                //set new home address
+                Common.currentUser.setEmail(edtEmail.getText().toString());
+                //update database
+                FirebaseDatabase.getInstance().getReference("User")//this is how to remove user try in future
+                        .child(Common.currentUser.getPhone())
+                        .setValue(Common.currentUser)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
-                            public void onFailure(@NonNull Exception e) {
-                                dialog1.dismiss();
-                                Toast.makeText(Home.this, "You have problems updating your email buddy",
-                                        Toast.LENGTH_LONG).show();
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(getBaseContext(),"Update address successful",Toast.LENGTH_LONG).show();
                             }
                         });
 
@@ -557,25 +560,31 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         alertDailog.setMessage("One time per session");
         LayoutInflater inflater = LayoutInflater.from(this);
         View layout_home = inflater.inflate(R.layout.home_address_layout,null);
-        MaterialEditText edtAddress = layout_home.findViewById(R.id.edtHomeAddress);
+        final MaterialEditText edtHomeAddress = layout_home.findViewById(R.id.edtHomeAddress);
         alertDailog.setView(layout_home);
         alertDailog.setPositiveButton("UPDATE!!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
                 //set new home address
-                Common.currentUser.setHomeAddress(edtHomeAddress.getText().toString());
-                //update database
-                FirebaseDatabase.getInstance().getReference("User")//this is how to remove user try in future
-                        .child(Common.currentUser.getPhone())
-                        .setValue(Common.currentUser)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(getBaseContext(),"Update address successful",Toast.LENGTH_LONG).show();
-                            }
-                        });
-            }
+             //   if((edtHomeAddress.getText().toString() != null) &&(!TextUtils.isEmpty((CharSequence) edtHomeAddress)) ){
+                    Common.currentUser.setHomeAddress(edtHomeAddress.getText().toString());
+                    //update database
+                    FirebaseDatabase.getInstance().getReference("User")//this is how to remove user try in future
+                            .child(Common.currentUser.getPhone())
+                            .setValue(Common.currentUser)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    Toast.makeText(getBaseContext(), "Update address successful", Toast.LENGTH_LONG).show();
+                                }
+                            });
+//            }else
+//                {
+//                    Toast.makeText(getBaseContext(), "Email cannot be empty!!", Toast.LENGTH_LONG).show();
+//
+//                }
+                   }
         });
         alertDailog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override

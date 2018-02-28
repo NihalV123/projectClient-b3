@@ -112,7 +112,8 @@ public class  OrderStatus extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull OrderViewHolder viewHolder,@NonNull final int position, @NonNull final Request model) {
+            protected void onBindViewHolder(@NonNull OrderViewHolder viewHolder,@NonNull final int position,
+                                            @NonNull final Request model) {
                 viewHolder.txtOrderId.setText("Order Id : "+adapter.getRef(position).getKey());
                 viewHolder.txtOrderStatus.setText("Status : "+Common.convertCodeToStatus(model.getStatus()));
                 viewHolder.txtOrderAddress.setText("EMAIL : "+model.getEmail());

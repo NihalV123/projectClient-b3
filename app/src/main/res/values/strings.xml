@@ -99,4 +99,11 @@
     <string name="MY_favorites">MY FAVORITES</string>
     <string name="ship_to_Current">SHIP TO HERE</string>
     <string name="ship_to_CurrentLocation">SHIP TO CURRENT LOCATION</string>
+    <string name="enter_your_email_addressil">EMAIL ENTER</string>
+    <string name="MY_home_address">UPDATE HOME ADDRESS</string>
+    <string name="shopping_list">TO DO LIST</string>
+    <string name="about">ABOUT</string>
+    <string name="chat">CHAT</string>
+    <string name="utilities">UTILITIES</string>
+    <string name="tips_and_tricks">TIPS AND TRICKS</string>
 </resources>

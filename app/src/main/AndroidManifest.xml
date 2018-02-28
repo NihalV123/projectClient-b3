@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="a123.vaidya.nihal.foodcrunchclient">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -25,7 +26,7 @@
             android:value="AIzaSyAVZ4gEt0JQ1AWYOXw4XLdyWjbTlyedMwU" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id"></meta-data>
+            android:value="@string/facebook_app_id" />
         <!-- <meta-data android:name="com.twitter.sdk.ApplicationId" > -->
         <!-- </meta-data> -->
         <activity android:name=".Signin" />
@@ -60,7 +61,14 @@
         <service
             android:name=".Remote.RetrofitGoogleApi"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".ShowComment" />
+        <activity android:name=".ShowFavorites" />
+        <activity android:name=".Utilities" />
+        <activity android:name=".ChatActivity" />
+        <activity android:name=".About" />
+        <activity android:name=".TodoList"></activity>
     </application>
 
 </manifest>

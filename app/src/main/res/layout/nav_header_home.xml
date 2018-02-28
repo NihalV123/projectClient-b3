@@ -22,10 +22,26 @@
         android:layout_width="match_parent"
         android:id="@+id/txtFullName"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:gravity="left"
         android:textColor="@android:color/white"
         android:text="@string/nihal"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/txtPhone"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textColor="@android:color/white"
+        android:text="@string/enter_your_phone_number"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:id="@+id/txtEmail"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textColor="@android:color/white"
+        android:text="@string/enter_your_email_addressil"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
 </LinearLayout>

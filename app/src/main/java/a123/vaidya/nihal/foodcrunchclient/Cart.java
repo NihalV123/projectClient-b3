@@ -250,22 +250,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
             @Override
             public void onClick(View v) {
-                long currentClickTime=SystemClock.uptimeMillis();
-                long elapsedTime=currentClickTime-mLastClickTime;
-
-                mLastClickTime=currentClickTime;
-
-                if(elapsedTime<=MIN_CLICK_INTERVAL)
-                    return;
-                if(!isViewClicked){
-                    isViewClicked = true;
-                    startTimer();
-                } else {
-                    return;
-                }
-
-                    Toast.makeText(Cart.this,"Please enter options or address",Toast.LENGTH_LONG).show();
-
                     if (cart.size() > 0) {
                     showAlertDailog();
                 } else {
@@ -278,16 +262,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
     }
 
-    private void startTimer() {
-        Handler handler = new Handler();
-
-        handler.postDelayed(new Runnable() {
-
-            @Override
-            public void run() {
-                isViewClicked = false;
-            }
-        }, 600);}
 
     private boolean checkPlayService() {
         int resultCode = GooglePlayServicesUtil.isGooglePlayServicesAvailable(this);
@@ -345,7 +319,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
         AlertDialog.Builder alertdailog = new AlertDialog.Builder(Cart.this);
         alertdailog.setTitle("One Last Step!!");
-        alertdailog.setMessage("Please enter address or select options ");
+        alertdailog.setMessage("Please enter address or select options  ");
         alertdailog.setCancelable(false);
 
         final LayoutInflater inflater = this.getLayoutInflater();
@@ -386,12 +360,33 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
         final RadioButton rbshiphere =(RadioButton)order_address_comment.findViewById(R.id.rbcurentaddress);
         final RadioButton rbshiphome =(RadioButton)order_address_comment.findViewById(R.id.rbhomeaddress);
+        rbshiphome.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked)
+                {
+                    if((Common.currentUser.getHomeAddress() != null )|| (!TextUtils.isEmpty(Common.currentUser.getHomeAddress())))
+                    //home address not null or not empty
+
+
+                    { address =Common.currentUser.getHomeAddress();
+                    ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
+                            .setText(address);}
+                    else
+                        Toast.makeText(Cart.this,"Please  update your home address",Toast.LENGTH_LONG).show();
+
+                }
+            }
+        });
+
         rbshiphere.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
                 {
- mGoogleMApService.getAddresName(String.format("https://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false",
+                    Toast.makeText(Cart.this,"Trying to get your location Please wait!!",Toast.LENGTH_LONG).show();
+
+                    mGoogleMApService.getAddresName(String.format("https://maps.googleapis.com/maps/api/geocode/json?latlng=%f,%f&sensor=false",
                             mLastLocation.getLatitude(),mLastLocation.getLongitude()))
                             .enqueue(new Callback<String>() {
                                 @Override
@@ -435,15 +430,15 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                     address = shippingAddress.getAddress().toString();
                 else
                 {
-                    Toast.makeText(Cart.this,"Please enter options or address",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Cart.this,"ADDRESS CANNOT BE EMPTY ",Toast.LENGTH_LONG).show();
                     getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
                             (R.id.place_autocomplete_fragment)).commit();
                     return;
 
                 }
-                if(!TextUtils.isEmpty(address))
+                if(TextUtils.isEmpty(address))
                 {
-                    Toast.makeText(Cart.this,"Please enter options or address",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Cart.this,"Please enter options or address from text utils",Toast.LENGTH_LONG).show();
                     getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
                             (R.id.place_autocomplete_fragment)).commit();
                     return;

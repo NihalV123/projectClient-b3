@@ -2,11 +2,21 @@ package a123.vaidya.nihal.foodcrunchclient.Model;
 
 
 public class Food {
-    private String Name,Image,Description,Price,
-    Discount,MenuId,
-    Email;
+    private String Name,Image,Description,Price,Discount,MenuId,Email,Video,Recepixes;
 
     public Food() {
+    }
+
+    public Food(String name, String image, String description, String price, String discount, String menuId, String email, String video, String recepixes) {
+        Name = name;
+        Image = image;
+        Description = description;
+        Price = price;
+        Discount = discount;
+        MenuId = menuId;
+        Email = email;
+        Video = video;
+        Recepixes = recepixes;
     }
 
     public String getName() {
@@ -37,14 +47,6 @@ public class Food {
         return Price;
     }
 
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String email) {
-        Email = email;
-    }
-
     public void setPrice(String price) {
         Price = price;
     }
@@ -65,18 +67,27 @@ public class Food {
         MenuId = menuId;
     }
 
-    public Food(String name, String image, String description, String price,
-                //String email,
-                String discount, String menuId) {
-        Name = name;
-        Image = image;
-        Description = description;
-        Price = price;
-        //Email = email;
-        Discount = discount;
-        MenuId = menuId;
-
+    public String getEmail() {
+        return Email;
     }
 
+    public void setEmail(String email) {
+        Email = email;
+    }
 
+    public String getVideo() {
+        return Video;
+    }
+
+    public void setVideo(String video) {
+        Video = video;
+    }
+
+    public String getRecepixes() {
+        return Recepixes;
+    }
+
+    public void setRecepixes(String recepixes) {
+        Recepixes = recepixes;
+    }
 }
