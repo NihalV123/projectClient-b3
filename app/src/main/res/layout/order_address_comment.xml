@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    app:cardCornerRadius="2dp"
+    android:background="@color/fbutton_color_transparent"
+    app:cardElevation="5dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginBottom="15dp"
+        android:orientation="vertical"
+        android:baselineAligned="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:layout_weight="9"
+            >
+            <fragment
+                android:layout_width="match_parent"
+                android:id="@+id/place_autocomplete_fragment"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+
+                android:layout_height="wrap_content"/>
+            <!--<com.rengwuxian.materialedittext.MaterialEditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:gravity="center"-->
+            <!--android:id="@+id/edtAddress"-->
+            <!--android:hint="@string/Please_enter_your_address"-->
+            <!--android:textColorHint="@color/colorPrimary"-->
+            <!--android:text="@string/my_new_address"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:textSize="24sp"-->
+            <!--android:inputType="text"-->
+            <!--app:met_baseColor="@color/colorPrimary"-->
+            <!--app:met_floatingLabel="highlight"-->
+            <!--app:met_primaryColor="@color/colorPrimary"-->
+            <!--app:met_singleLineEllipsis="true"-->
+            <!--/>-->
+
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtComment"
+                android:gravity="center"
+                android:hint="@string/Write_comment"
+                android:textColorHint="@color/colorPrimary"
+                android:text="@string/Write_comment"
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                app:met_minCharacters="2"
+                android:inputType="textMultiLine"
+                app:met_baseColor="@color/colorPrimary"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="@color/colorPrimary"
+                app:met_singleLineEllipsis="true"
+                />
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textColorHint="@color/colorPrimary"
+                    android:text="@string/ship_to_home"
+                    android:textSize="24sp"
+                    android:visibility="visible"
+                    android:textColor="@color/colorPrimary"
+                    android:id="@+id/rbhomeaddress"
+                    android:layout_height="wrap_content" />
+
+                <android.support.v7.widget.AppCompatRadioButton
+                    android:layout_width="match_parent"
+                    android:gravity="center"
+                    android:textColorHint="@color/colorPrimary"
+                    android:text="@string/ship_to_CurrentLocation"
+                    android:textSize="24sp"
+                    android:visibility="visible"
+                    android:textColor="@color/colorPrimary"
+                    android:id="@+id/rbcurentaddress"
+                    android:layout_height="wrap_content" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
