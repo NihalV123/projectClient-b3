@@ -371,6 +371,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 startActivity(orderIntent);
                 dialog.dismiss();
                 break;}
+            case R.id.nav_chat: {
+                final SpotsDialog dialog = new SpotsDialog(Home.this);
+                Intent about = new Intent(Home.this, ChatActivity.class);
+                startActivity(about);
+                dialog.dismiss();
+                break;
+            }
             case R.id.nav_about: {
                 final SpotsDialog dialog = new SpotsDialog(Home.this);
                 Intent about = new Intent(Home.this, About.class);
