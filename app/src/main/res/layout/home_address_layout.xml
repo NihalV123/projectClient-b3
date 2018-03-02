@@ -20,7 +20,7 @@
             android:hint="@string/enter_your_home_address"
             android:text=""
             android:textColor="@color/colorPrimary"
-            android:textSize="36sp"
+            android:textSize="24sp"
             android:gravity="center"
             android:inputType="textMultiLine"
             app:met_baseColor="@color/colorPrimary"

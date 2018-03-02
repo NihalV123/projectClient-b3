@@ -41,7 +41,7 @@
                 android:gravity="center"
                 android:hint="@string/Write_comment"
                 android:textColorHint="@color/colorPrimary"
-                android:text="@string/Write_comment"
+                android:text=""
                 android:textColor="@color/colorPrimary"
                 android:textSize="24sp"
                 app:met_minCharacters="2"

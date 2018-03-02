@@ -110,11 +110,11 @@
     <string name="MY_NEW_FOOD">ADD TASK</string>
     <string name="GORCERYLIST">YOUR GROCERY LIST</string>
     <string name="delete">DELETE</string>
-    <string name="CLEARLIST">CLEAR LIST</string>
+    <string name="CLEARLIST">CLEAR ALL LIST</string>
     <string name="enter_your_message">Enter your message</string>
     <string name="chatbot">CHAT BOT</string>
     <string name="double_press">TAP SEND AGAIN IN CASE NO RESPONSE</string>
-    <string name="Shoecomments">SHOW COMMENTS</string>
+    <string name="Shoecomments">SHOW REVIEWS</string>
     <string name="ifyouseeblank">IF YOU SEE BLANK REPLY YOU EXPIRED QUOTA OF DAY</string>
     <string name="resend_login">RESEND LOGIN</string>
     <string name="change_name">CHANGE NAME</string>
@@ -129,4 +129,6 @@
     <string name="cash_on_delivery">CASH ON DELIVERY</string>
     <string name="paypal">PAYPAL</string>
     <string name="food_crunch_balance_points">FOOD CRUNCH BALANCE POINTS</string>
+    <string name="example">Example</string>
+    <string name="enter_your_USERNAME">ENTER USER NAME</string>
 </resources>

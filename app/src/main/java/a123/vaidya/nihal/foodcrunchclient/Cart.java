@@ -547,6 +547,20 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        new Database(getBaseContext()).clearCart();
+        Toast.makeText(Cart.this, "onpause clear caryt engaged!!", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        new Database(getBaseContext()).clearCart();
+    }
+
     private void sendordersemailUSER(String order_number) {
         DatabaseReference tokens = database.getReference("Tokens");
         tokens.orderByKey().equalTo(Common.currentUser.getPhone())

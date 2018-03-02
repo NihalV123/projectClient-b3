@@ -30,7 +30,16 @@
             android:textColor="@color/white"
             android:textSize="25sp" />
     </android.support.v7.widget.Toolbar>
-
+    <!--<info.hoang8f.widget.FButton-->
+        <!--android:id="@+id/btndeletetask"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:textColorHighlight="@color/fbutton_color_orange"-->
+        <!--android:text="@string/delete"-->
+        <!--android:textColor="@android:color/white"-->
+        <!--app:shadowColor="@android:color/black"-->
+        <!--app:shadowHeight="5dp" />-->
     <ListView
         android:id="@+id/lstTask"
         android:layout_width="wrap_content"

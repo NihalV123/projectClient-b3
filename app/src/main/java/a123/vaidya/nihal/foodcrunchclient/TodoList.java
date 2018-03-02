@@ -11,9 +11,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -26,11 +28,15 @@ import info.hoang8f.widget.FButton;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
+import static a123.vaidya.nihal.foodcrunchclient.R.layout.row;
+
 public class TodoList extends AppCompatActivity {
     DbHelper dbHelper;
     ArrayAdapter<String> mAdapter;
     ListView lstTask;
+    TextView taskTextView;
     info.hoang8f.widget.FButton buttonclear;
+
     private FloatingActionButton fabSettings;
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -48,13 +54,16 @@ public class TodoList extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar23);
         setSupportActionBar(toolbar);
 
-
         dbHelper = new DbHelper(this);
         buttonclear = (FButton)findViewById(R.id.btndeletelist);
+
         lstTask = (ListView)findViewById(R.id.lstTask);
+
         buttonclear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View v) {
+                if(!mAdapter.isEmpty())
+                {
                 AlertDialog dialog = new AlertDialog.Builder(TodoList.this)
                         .setTitle("WANT TO DELETE ALL ITEMS IN LIST?")
                         .setCancelable(false)
@@ -72,15 +81,22 @@ public class TodoList extends AppCompatActivity {
                         .setNegativeButton("CANCEL",null)
                         .create();
                 dialog.show();
+            }else
+                {
+                    Toast.makeText(TodoList.this,"The list is empty!",
+                            Toast.LENGTH_LONG).show();
+                    return;
+                }
             }
         });
         loadTaskList();
+
     }
 
     private void loadTaskList() {
         ArrayList<String> taskList = dbHelper.getTaskList();
         if(mAdapter==null){
-            mAdapter = new ArrayAdapter<String>(this,R.layout.row,R.id.task_title,taskList);
+            mAdapter = new ArrayAdapter<String>(this, row,R.id.task_title,taskList);
             lstTask.setAdapter(mAdapter);
         }
         else{
@@ -117,11 +133,17 @@ public class TodoList extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String task = String.valueOf(taskEditText.getText());
-                                dbHelper.insertNewTask(task);
-                                loadTaskList();
-                                Toast.makeText(TodoList.this,"The item    "+task+"    was added!!",
-                                        Toast.LENGTH_LONG).show();
-                            }
+                                if(task.isEmpty())
+                                {
+                                    Toast.makeText(TodoList.this, "The item cannot be empty!",
+                                            Toast.LENGTH_LONG).show();
+                                    return;
+                                }else {
+                                    dbHelper.insertNewTask(task);
+                                    loadTaskList();
+                                    Toast.makeText(TodoList.this, "The item    " + task + "    was added!!",
+                                            Toast.LENGTH_LONG).show();
+                                }  }
                         })
                         .setNegativeButton("Cancel",null)
                         .create();
@@ -131,28 +153,31 @@ public class TodoList extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void deleteTask(final View view){
-        AlertDialog dialog = new AlertDialog.Builder(this)
-                .setTitle("ARE YOU SURE YOU WANT TO DELETE?")
-                .setCancelable(false)
-                .setIcon(R.drawable.ic_delete_forever_black_24dp)
-                .setMessage("THIS CANNOT BE UNDONE ")
-                .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        View parent = (View)view.getParent();
-                        TextView taskTextView = (TextView)parent.findViewById(R.id.task_title);
-                        Log.e("String", (String) taskTextView.getText());
-                        String task = String.valueOf(taskTextView.getText());
-                        dbHelper.deleteTask(task);
-                        loadTaskList();
-                        Toast.makeText(TodoList.this,"The item    "+task+"    was deleted!!",
-                                Toast.LENGTH_LONG).show();
-                    }
-                })
-                .setNegativeButton("CANCEL",null)
-                .create();
-        dialog.show();
+    public void deleteTask(View view){
+        View parent = (View)view.getParent();
+        TextView taskTextView = (TextView)parent.findViewById(R.id.task_title);
+           // Log.e("String", (String) taskTextView.getText());
+            String task = String.valueOf(taskTextView.getText());
+        if(!(taskTextView == null)){
+            dbHelper.deleteTask(task);
+            loadTaskList();}else
+        {
+            Toast.makeText(TodoList.this, "The item cannot be empty!",
+                    Toast.LENGTH_LONG).show();
+        }
 
     }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        dbHelper.clearTask();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        dbHelper.clearTask();
+    }
+
 }
