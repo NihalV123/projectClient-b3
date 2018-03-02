@@ -34,12 +34,12 @@
                 android:text="@string/Todays_Speciality"
                 android:textColor="@color/colorAccent" />
 
-            <ImageButton
-                android:id="@+id/imageButton"
+            <com.daimajia.slider.library.SliderLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_whatshot_black_24dp"
-                android:contentDescription="TODO" />
+                android:id="@+id/slider"
+                android:layout_height="200dp">
+
+            </com.daimajia.slider.library.SliderLayout>
 
         </LinearLayout>
 

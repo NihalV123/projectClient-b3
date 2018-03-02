@@ -29,6 +29,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andremion.counterfab.CounterFab;
+import com.daimajia.slider.library.Animations.DescriptionAnimation;
+import com.daimajia.slider.library.SliderLayout;
+import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,6 +45,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.rey.material.widget.Slider;
 import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
@@ -54,6 +59,7 @@ import java.util.Objects;
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
+import a123.vaidya.nihal.foodcrunchclient.Model.Banner;
 import a123.vaidya.nihal.foodcrunchclient.Model.Category;
 import a123.vaidya.nihal.foodcrunchclient.Model.MyResponse;
 import a123.vaidya.nihal.foodcrunchclient.Model.Notification;
@@ -87,6 +93,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private SwipeRefreshLayout swipeRefreshLayout;
     private CounterFab fab;
     APIService mAPIService;
+    //slider
+    HashMap<String,String>img_list;
+    SliderLayout mslider;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,6 +105,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 .setFontAttrId(R.attr.fontPath)
                 .build());
         setContentView(R.layout.activity_home);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("MENU");
         setSupportActionBar(toolbar);
@@ -223,6 +233,70 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }
         //registeration of notification service
         updateToken(FirebaseInstanceId.getInstance().getToken());
+
+        //set slider call last after inti database or carsh
+        setupSlider();
+
+    }
+
+    private void setupSlider() {
+        mslider =(SliderLayout)findViewById(R.id.slider);
+        img_list = new HashMap<>();
+
+        final DatabaseReference banners = database.getReference("Banner");
+        banners.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot postSnapshot:dataSnapshot.getChildren())
+                {
+                    Banner banner = postSnapshot.getValue(Banner.class);
+
+                    img_list.put(banner.getName()+"@@@"+banner.getId(),banner.getImage());
+                }
+                for(String key:img_list.keySet())
+                {
+                    String[] keysplit = key.split("@@@");
+                    String nameofFoood = keysplit[0];
+                    String idofthefood = keysplit[1];
+                    //name of image is name_foodid
+
+                    //create slider
+                    final TextSliderView textSliderView =new TextSliderView(getBaseContext());
+                    textSliderView.description(nameofFoood)
+                            .image(img_list.get(key))
+                            .setScaleType(BaseSliderView.ScaleType.Fit)
+                            .setOnSliderClickListener(new BaseSliderView.OnSliderClickListener() {
+                                @Override
+                                public void onSliderClick(BaseSliderView slider) {
+                               Intent intent = new Intent(Home.this,FoodDetail.class);
+                               //pass food id to inetnt
+                                  intent.putExtras(textSliderView.getBundle());
+                                  startActivity(intent);
+                                }
+                            });
+                    //add extra bundle to intent
+                    textSliderView.bundle(new Bundle());
+                    textSliderView.getBundle().putString("FoodId",idofthefood);
+                    mslider.addSlider(textSliderView);
+
+                    //remove after finish
+                    banners.removeEventListener(this);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        mslider.setPresetTransformer(SliderLayout.Transformer.Background2Foreground);
+        mslider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
+        mslider.setCustomAnimation(new DescriptionAnimation());
+        mslider.setDuration(4000);
+
+
     }
 
 
@@ -307,6 +381,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onStop() {
         super.onStop();
+        mslider.stopAutoCycle();
         //adapter.stopListening();
     }
 
