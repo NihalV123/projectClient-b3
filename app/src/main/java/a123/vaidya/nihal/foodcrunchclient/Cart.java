@@ -360,6 +360,11 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
         final RadioButton rbshiphere =(RadioButton)order_address_comment.findViewById(R.id.rbcurentaddress);
         final RadioButton rbshiphome =(RadioButton)order_address_comment.findViewById(R.id.rbhomeaddress);
+
+        final RadioButton rbsmpaypal =(RadioButton)order_address_comment.findViewById(R.id.paypalpm);
+        final RadioButton rbsmcod =(RadioButton)order_address_comment.findViewById(R.id.codpm);
+        final RadioButton rbsmfcb =(RadioButton)order_address_comment.findViewById(R.id.foodcrunchbalance);
+
         rbshiphome.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -444,6 +449,11 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                     return;
                 }
                     comment = edtComment.getText().toString();
+
+
+
+
+
                     email = edtemail.getText().toString();
 
                     String formatAmmount = txtTotalPrice.getText().toString()
@@ -500,7 +510,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                                             .replace("¤", "")
                                             .replace(",", ""),
                                     "0",  //for status in request model
-                                    comment,email,String.format("%s,%s",shippingAddress.getLatLng()
+                                    comment,"PayPal",email,String.format("%s,%s",shippingAddress.getLatLng()
                                     .latitude,shippingAddress.getLatLng().longitude),
                                     jsonObject.getJSONObject("response").getString("state"),
                                     cart);

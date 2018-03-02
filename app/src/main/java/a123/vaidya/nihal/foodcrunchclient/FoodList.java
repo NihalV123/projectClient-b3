@@ -179,6 +179,7 @@ public class FoodList extends AppCompatActivity {
         rootLayout.post(new Runnable() {
             @Override
             public void run() {
+                //get intent and search from here
                 if (getIntent()!=null)
                     categoryId = getIntent().getStringExtra("CategoryId");
                 if (!categoryId.isEmpty())
@@ -187,34 +188,17 @@ public class FoodList extends AppCompatActivity {
                         loadListFood(categoryId);
                     else
                         Toast.makeText(FoodList.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
+                    return;
                 }
-            }
-        });
-        fav_image = findViewById(R.id.fav);
-        share = findViewById(R.id.share);
-        like = findViewById(R.id.like);
-        add_to_cart= findViewById(R.id.add_to_crat);
 
-        //get intent
-        if (getIntent()!=null)
-            categoryId = getIntent().getStringExtra("CategoryId");
-        if (!categoryId.isEmpty())
-        {
-            if (Common.isConnectedToInternet(getBaseContext()))
-            loadListFood(categoryId);
-            else
-                Toast.makeText(FoodList.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        //search
+                        //search
         materialSearchBar = findViewById(R.id.searchBar);
         textView = findViewById(R.id.textView3);
         textView = findViewById(R.id.textView2);
         materialSearchBar.setHint("Enter the name of your food");
 //        materialSearchBar.setSpeechMode(false);
         loadSuggest();
-        materialSearchBar.setLastSuggestions(suggestList);
+       // materialSearchBar.setLastSuggestions(suggestList);
         materialSearchBar.setCardViewElevation(10);
         materialSearchBar.addTextChangeListener(new TextWatcher() {
             @Override
@@ -257,11 +241,32 @@ public class FoodList extends AppCompatActivity {
 
             }
         });
+
+            }
+        });
+        fav_image = findViewById(R.id.fav);
+        share = findViewById(R.id.share);
+        like = findViewById(R.id.like);
+        add_to_cart= findViewById(R.id.add_to_crat);
+
+        //get intent
+        if (getIntent()!=null)
+            categoryId = getIntent().getStringExtra("CategoryId");
+        if (!categoryId.isEmpty())
+        {
+            if (Common.isConnectedToInternet(getBaseContext()))
+            loadListFood(categoryId);
+            else
+                Toast.makeText(FoodList.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+
     }
 
     private void startSearch(CharSequence text) {
         //query search by name
-        Query searchbyname =foodList.orderByChild("Name").equalTo(text.toString());
+        Query searchbyname =foodList.orderByChild("name").equalTo(text.toString());
         //options
         FirebaseRecyclerOptions<Food> foodoptions = new FirebaseRecyclerOptions.Builder<Food>()
                 .setQuery(searchbyname,Food.class)
@@ -311,6 +316,7 @@ public class FoodList extends AppCompatActivity {
                             Food item = postDnapshot.getValue(Food.class);
                             suggestList.add(Objects.requireNonNull(item).getName());
                         }
+                        materialSearchBar.setLastSuggestions(suggestList);
                     }
 
                     @Override

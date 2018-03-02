@@ -20,7 +20,7 @@ public class Common {
     public static Request currentRequest;
     public static final String PHONE_TEXT = "userPhone";
     private static final String BASE_URL = "https://maps.googleapis.com";
-
+    public static final String INTENT_FOOD_ID="FoodId";
     private static final String fcmUrl = "https://fcm.googleapis.com";
 
     public static APIService getFCMService()

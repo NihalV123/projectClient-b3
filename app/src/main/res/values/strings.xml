@@ -114,4 +114,19 @@
     <string name="enter_your_message">Enter your message</string>
     <string name="chatbot">CHAT BOT</string>
     <string name="double_press">TAP SEND AGAIN IN CASE NO RESPONSE</string>
+    <string name="Shoecomments">SHOW COMMENTS</string>
+    <string name="ifyouseeblank">IF YOU SEE BLANK REPLY YOU EXPIRED QUOTA OF DAY</string>
+    <string name="resend_login">RESEND LOGIN</string>
+    <string name="change_name">CHANGE NAME</string>
+    <string name="update">UPDATE</string>
+    <string name="order">ORDER</string>
+    <string name="share">Share</string>
+    <string name="send">Send</string>
+    <string name="misc">MISC</string>
+    <string name="log_out">LOG OUT</string>
+    <string name="shipping_method">SHIPPING METHOD</string>
+    <string name="payment_method">PAYMENT METHOD</string>
+    <string name="cash_on_delivery">CASH ON DELIVERY</string>
+    <string name="paypal">PAYPAL</string>
+    <string name="food_crunch_balance_points">FOOD CRUNCH BALANCE POINTS</string>
 </resources>

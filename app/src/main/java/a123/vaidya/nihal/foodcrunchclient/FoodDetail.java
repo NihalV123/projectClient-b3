@@ -2,7 +2,9 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 
 import com.andremion.counterfab.CounterFab;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,6 +31,7 @@ import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.Model.Rating;
+import info.hoang8f.widget.FButton;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
@@ -63,6 +68,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
     private String foodId="";
     private FirebaseDatabase database;
     private DatabaseReference foods;
+    FButton btnSohowComment;
     private DatabaseReference ratingTbl;
 
     private Food currentFood;
@@ -76,6 +82,16 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 .setFontAttrId(R.attr.fontPath)
                 .build());
         setContentView(R.layout.activity_food_detail);
+
+        btnSohowComment = (FButton)findViewById(R.id.bthshowcomments);
+        btnSohowComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FoodDetail.this,ShowComment.class);
+                intent.putExtra(Common.INTENT_FOOD_ID,foodId);
+                        startActivity(intent);
+            }
+        });
 
         //Firebase code
         Twitter.initialize(this);
@@ -99,7 +115,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
             @Override
             public void onClick(View v) {
                 showRatingDialog();
-                btnRating.setEnabled(false);
+
             }
         });
 
@@ -206,31 +222,42 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         //upload rating to firebase
         final Rating rating = new Rating(Common.currentUser.getName(),
                 foodId,String.valueOf(value),comments);
-            ratingTbl.child(Common.currentUser.getPhone()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.child(Common.currentUser.getPhone()).exists())
-                    {
-                        //remove old and update
-                        ratingTbl.child(Common.currentUser.getPhone()).removeValue();
-                        ratingTbl.child(Common.currentUser.getPhone()).setValue(rating);
-
-                    }else
-                    {
-                        ratingTbl.child(Common.currentUser.getPhone()).setValue(rating);
+        ratingTbl.push()
+                .setValue(rating)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Toast.makeText(FoodDetail.this,"Thank you for your feedback!!",Toast.LENGTH_LONG).show();
                     }
-                Toast.makeText(FoodDetail.this,"Thank you for your feedback!!",Toast.LENGTH_LONG).show();
-
-                }
+                });
 
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-
-
-            });
+//old code user can rate only once
+//            ratingTbl.child(Common.currentUser.getPhone()).addValueEventListener(new ValueEventListener() {
+//                @Override
+//                public void onDataChange(DataSnapshot dataSnapshot) {
+//                    if(dataSnapshot.child(Common.currentUser.getPhone()).exists())
+//                    {
+//                        //remove old and update
+//                        ratingTbl.child(Common.currentUser.getPhone()).removeValue();
+//                        ratingTbl.child(Common.currentUser.getPhone()).setValue(rating);
+//
+//                    }else
+//                    {
+//                        ratingTbl.child(Common.currentUser.getPhone()).setValue(rating);
+//                    }
+//
+//
+//                }
+//
+//
+//                @Override
+//                public void onCancelled(DatabaseError databaseError) {
+//
+//                }
+//
+//
+//            });
     }
 
     @Override
