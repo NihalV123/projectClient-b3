@@ -171,7 +171,7 @@ public class TodoList extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        dbHelper.clearTask();
+//        dbHelper.clearTask();
     }
 
     @Override

@@ -550,8 +550,8 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
     @Override
     protected void onPause() {
         super.onPause();
-        new Database(getBaseContext()).clearCart();
-        Toast.makeText(Cart.this, "onpause clear caryt engaged!!", Toast.LENGTH_LONG).show();
+//        new Database(getBaseContext()).clearCart();
+//        Toast.makeText(Cart.this, "onpause clear caryt engaged!!", Toast.LENGTH_LONG).show();
 
     }
 

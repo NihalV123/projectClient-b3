@@ -34,12 +34,18 @@
                 android:layout_weight="1"
                 android:background="@color/overlayBackground"
                 android:orientation="horizontal"
+                android:paddingBottom="3dp"
+                android:paddingTop="3dp"
                 android:weightSum="10">
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/food_name"
-                    android:layout_width="196dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/add_to_crat"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
                     android:gravity="left"
                     android:text="@string/name_of_food"
                     android:textColor="@android:color/white"
@@ -47,13 +53,13 @@
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/food_Price"
-                    android:layout_width="wrap_content"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="23dp"
+                    android:layout_marginEnd="12dp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentEnd="true"
                     android:gravity="center"
-                    android:text="@string/product_price"
+                    android:text="@string/GO_IN"
                     android:textColor="@android:color/white"
                     android:textSize="20sp" />
 
@@ -68,6 +74,16 @@
                     android:src="@drawable/ic_add_shopping_cart_black_24dp"
                     android:tint="@color/white" />
 
+                <ImageView
+                    android:id="@+id/fav"
+                    android:layout_width="50dp"
+                    android:layout_height="35dp"
+                    android:layout_toEndOf="@+id/add_to_crat"
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="@string/todo"
+                    android:src="@drawable/ic_favorite_border_black_24dp"
+                    android:tint="@color/white" />
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -77,47 +93,39 @@
                 android:background="@color/overlayBackground"
                 android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/fav"
-                    android:layout_width="50dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="39dp"
-                    android:contentDescription="@string/todo"
-                    android:src="@drawable/ic_favorite_border_black_24dp"
-                    android:tint="@color/white" />
-
                 <!--<ImageView-->
-                <!--android:id="@+id/tweet"-->
-                <!--android:layout_width="100dp"-->
+                <!--android:id="@+id/fav"-->
+                <!--android:layout_width="50dp"-->
                 <!--android:layout_height="35dp"-->
+                <!--android:layout_alignParentStart="true"-->
+                <!--android:layout_alignParentTop="true"-->
+                <!--android:layout_marginStart="39dp"-->
                 <!--android:contentDescription="@string/todo"-->
-                <!--android:src="@drawable/ic_add_to_photos_black_24dp"-->
+                <!--android:src="@drawable/ic_favorite_border_black_24dp"-->
                 <!--android:tint="@color/white" />-->
 
-                <ImageView
-                    android:id="@+id/like"
-                    android:layout_width="50dp"
-                    android:layout_height="35dp"
+                <RatingBar
+                    android:id="@+id/ratingbarrr"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="39dp"
                     android:layout_alignParentTop="true"
-                    android:layout_centerHorizontal="true"
-                    android:contentDescription="@string/todo"
-                    android:visibility="gone"
-                    android:src="@drawable/ic_thumb_up_black_24dp"
-                    android:tint="@color/white" />
+                    android:layout_alignParentEnd="true"
+                    android:rating="3"
+                    android:visibility="gone" />
 
                 <ImageView
                     android:id="@+id/share"
                     android:layout_width="50dp"
                     android:layout_height="35dp"
-                    android:visibility="gone"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentTop="true"
                     android:layout_marginEnd="39dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true"
                     android:contentDescription="@string/todo"
                     android:src="@drawable/ic_share_black_24dp"
-                    android:tint="@color/white" />
+                    android:tint="@color/white"
+                    android:visibility="gone" />
 
             </RelativeLayout>
 

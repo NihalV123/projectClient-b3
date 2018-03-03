@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +51,7 @@ import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
+import a123.vaidya.nihal.foodcrunchclient.Model.Rating;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.FoodViewHolder;
 import dmax.dialog.SpotsDialog;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -75,6 +77,7 @@ public class FoodList extends AppCompatActivity {
     private ImageView fav_image;
     private ImageView like;
     private ImageView share;
+    private RatingBar ratingbar;
     private ImageView add_to_cart;
     private CounterFab fab;
     //Facebook share
@@ -149,11 +152,6 @@ public class FoodList extends AppCompatActivity {
         Twitter.initialize(config);
         database = FirebaseDatabase.getInstance();
         foodList =database.getReference("Foods");
-
-        recycler_menu = findViewById(R.id.recycler_food);
-        recycler_menu.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recycler_menu.setLayoutManager(layoutManager);
         localDB = new Database(this);
         rootLayout = findViewById(R.id.rootLayout);
         rootLayout.setColorSchemeResources(R.color.colorPrimary,
@@ -187,66 +185,72 @@ public class FoodList extends AppCompatActivity {
                     if (Common.isConnectedToInternet(getBaseContext()))
                         loadListFood(categoryId);
                     else
-                        Toast.makeText(FoodList.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
-                    return;
+                    {Toast.makeText(FoodList.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
+                    return;}
                 }
-
-                        //search
-        materialSearchBar = findViewById(R.id.searchBar);
-        textView = findViewById(R.id.textView3);
-        textView = findViewById(R.id.textView2);
-        materialSearchBar.setHint("Enter the name of your food");
+                //search
+                materialSearchBar = findViewById(R.id.searchBar);
+                textView = findViewById(R.id.textView3);
+                textView = findViewById(R.id.textView2);
+                materialSearchBar.setHint("Enter the name of your food");
 //        materialSearchBar.setSpeechMode(false);
-        loadSuggest();
-       // materialSearchBar.setLastSuggestions(suggestList);
-        materialSearchBar.setCardViewElevation(10);
-        materialSearchBar.addTextChangeListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                loadSuggest();
+                 materialSearchBar.setLastSuggestions(suggestList);
+                materialSearchBar.setCardViewElevation(10);
+                materialSearchBar.addTextChangeListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
+                    }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                List<String> suggest = new ArrayList<>();
-                for(String search:suggestList)
-                {
-                    if (search.toLowerCase().contains(materialSearchBar.getText().toLowerCase()))
-                        suggest.add(search);
-                }
-                materialSearchBar.setLastSuggestions(suggest);
-            }
+                    @Override
+                    public void onTextChanged(CharSequence s, int start, int before, int count) {
+                        List<String> suggest = new ArrayList<>();
+                        for(String search:suggestList)
+                        {
+                            if (search.toLowerCase().contains(materialSearchBar.getText().toLowerCase()))
+                                suggest.add(search);
+                        }
+                        materialSearchBar.setLastSuggestions(suggest);
+                    }
 
-            @Override
-            public void afterTextChanged(Editable s) {
+                    @Override
+                    public void afterTextChanged(Editable s) {
+
+                    }
+                });
+
+                materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
+                    @Override
+                    public void onSearchStateChanged(boolean enabled) {
+                        //disable and enable for ui effect
+                        if(!enabled)
+                            recycler_menu.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onSearchConfirmed(CharSequence text) {
+                        startSearch(text);
+                    }
+
+                    @Override
+                    public void onButtonClicked(int buttonCode) {
+
+                    }
+                });
+
 
             }
         });
 
-        materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
-            @Override
-            public void onSearchStateChanged(boolean enabled) {
-                //disable and enable for ui effect
-                if(!enabled)
-                    recycler_menu.setAdapter(adapter);
-            }
-
-            @Override
-            public void onSearchConfirmed(CharSequence text) {
-                startSearch(text);
-            }
-
-            @Override
-            public void onButtonClicked(int buttonCode) {
-
-            }
-        });
-
-            }
-        });
+        recycler_menu = findViewById(R.id.recycler_food);
+        recycler_menu.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(this);
+        recycler_menu.setLayoutManager(layoutManager);
         fav_image = findViewById(R.id.fav);
-        share = findViewById(R.id.share);
-        like = findViewById(R.id.like);
+//        share = findViewById(R.id.share);
+        ratingbar = findViewById(R.id.ratingbarrr);
+//        like = findViewById(R.id.like);
         add_to_cart= findViewById(R.id.add_to_crat);
 
         //get intent
@@ -317,6 +321,15 @@ public class FoodList extends AppCompatActivity {
                             suggestList.add(Objects.requireNonNull(item).getName());
                         }
                         materialSearchBar.setLastSuggestions(suggestList);
+//                        {
+//                            Rating item = postSnapshot.getValue(Rating.class);
+//                            sum+=Integer.parseInt(Objects.requireNonNull(item).getRateValue());
+//                            count++;
+//                        }
+//                        if(count != 0) {
+//                            float average = sum / count;
+//                            ratingBar.setRating(average);
+//                        }
                     }
 
                     @Override
@@ -338,6 +351,7 @@ public class FoodList extends AppCompatActivity {
             protected void onBindViewHolder(@NonNull final FoodViewHolder viewHolder, final int position, @NonNull final Food model) {
                 viewHolder.food_name.setText(model.getName());
                 viewHolder.food_price.setText(String.format("INR :  %s",model.getPrice()));
+                //viewHolder.ratingbar.setRating(Float.parseFloat(.getRateValue()));
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.food_image);
 
                 //add to cart
@@ -355,22 +369,24 @@ public class FoodList extends AppCompatActivity {
                 if(localDB.isFavorites(adapter.getRef(position).getKey()))
                     viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
 
-                viewHolder.share.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Picasso.with(getApplicationContext())
-                                .load(model.getImage())
-                                .into(target);
-                        Toast.makeText(FoodList.this,"Getting Ready \nShare To FACEBOOK \n Unless " +
-                                "the sdk got updated \nOne food once per session",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                viewHolder.like.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(FoodList.this,"Comming soon!",Toast.LENGTH_SHORT).show();
-                    }
-                });
+//                viewHolder.share.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Picasso.with(getApplicationContext())
+//                                .load(model.getImage())
+//                                .into(target);
+//                        Toast.makeText(FoodList.this,"Getting Ready \nShare To FACEBOOK \n Unless " +
+//                                "the sdk got updated \nOne food once per session",Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//                viewHolder.like.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        Toast.makeText(FoodList.this,"Comming soon!",Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
+
 
                 viewHolder.fav_image.setOnClickListener(new View.OnClickListener() {
                     @Override

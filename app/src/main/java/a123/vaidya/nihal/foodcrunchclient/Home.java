@@ -96,6 +96,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     //slider
     HashMap<String,String>img_list;
     SliderLayout mslider;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

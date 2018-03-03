@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:background="@color/transparentBlack"
         android:gravity="center"
-        android:paddingTop="65dp"
+        android:paddingTop="60dp"
         android:text="@string/EMPTY_LIST"
         android:textColor="@color/white"
         android:textSize="25sp" />
@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="51dp"
+        android:paddingTop="49dp"
         android:scrollbars="vertical"
         tools:layout_editor_absoluteY="300dp">
 
