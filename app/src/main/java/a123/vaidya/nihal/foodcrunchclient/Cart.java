@@ -319,7 +319,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
         AlertDialog.Builder alertdailog = new AlertDialog.Builder(Cart.this);
         alertdailog.setTitle("One Last Step!!");
-        alertdailog.setMessage("Please enter address or select options  ");
+        alertdailog.setMessage("Enter address or select option");
         alertdailog.setCancelable(false);
 
         final LayoutInflater inflater = this.getLayoutInflater();
@@ -449,13 +449,16 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                     return;
                 }
                     comment = edtComment.getText().toString();
-
-
-
-
-
-                    email = edtemail.getText().toString();
-
+                email = edtemail.getText().toString();
+                        //check payment
+                if(!rbsmpaypal.isChecked() && !rbsmcod.isChecked())
+                {
+                    Toast.makeText(Cart.this,"Please payment options ",Toast.LENGTH_LONG).show();
+                    //remove fragment after close
+                    getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
+                            (R.id.place_autocomplete_fragment)).commit();
+                }else if(rbsmpaypal.isChecked())
+                {
                     String formatAmmount = txtTotalPrice.getText().toString()
                             .replace("¤","")
                             .replace("$","")//replace regional barriers
@@ -467,7 +470,45 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                     intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
                     intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
                     startActivityForResult(intent,PAYPAL_REQUEST_CODE);
-//                }
+                    try{
+                        //remove fragment after close
+                        getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
+                                (R.id.place_autocomplete_fragment)).commit();
+                    }catch (Exception exception){
+
+                    }
+       } else
+           if(rbsmcod.isChecked())
+           {
+               Request request = new Request(
+                       Common.currentUser.getPhone(),
+                       Common.currentUser.getName(),
+                       address,
+                       txtTotalPrice.getText().toString()
+                               .replace("$", "")//replace regional barriers
+                               .replace("¤", "")
+                               .replace(",", ""),
+                       "0",  //for status in request model
+                       comment,"COD",email,String.format("%s,%s",mLastLocation.getLatitude(),
+                       mLastLocation.getLongitude()),
+                       "UNAPAID",
+                       cart);
+
+               //if yes submitting to the firebase using current time down to milliseconds!!
+               String order_number = String.valueOf(System.currentTimeMillis());
+               requests.child(order_number)
+
+                       .setValue(request);
+
+               //write code to send emial here
+
+               sendNotificatinOrder(order_number);
+               sendordersemailUSER(order_number);
+               new Database(getBaseContext()).clearCart();
+               loadListFood();
+               finish();
+
+           }
                 //remove fragment after close
                 getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
                         (R.id.place_autocomplete_fragment)).commit();
@@ -593,8 +634,8 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                                     "\nand phone no \t" +
                                     (Common.currentUser.getPhone())+
                                     "\n \n HAS BEEN PLACED!!  \t" +
-                                    "\n  It will be delivered to address  \t" +
-                                    (Common.currentUser.getHomeAddress())+
+//                                    "\n  It will be delivered to address  \t" +
+//                                    (Common.currentUser.getHomeAddress())+
                                     "\n\nTHANK YOU FOR SHOPPING WITH US!!");
                             try {
                                 startActivity(Intent.createChooser(emailIntent, "Send mail..."));

@@ -24,7 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"
-            android:padding="2dp"
+            android:padding="10dp"
             android:layout_weight="9"
             tools:ignore="UselessParent">
 
@@ -43,7 +43,7 @@
                 android:textColorHint="@color/colorPrimary"
                 android:text=""
                 android:textColor="@color/colorPrimary"
-                android:textSize="24sp"
+                android:textSize="15sp"
                 app:met_minCharacters="2"
                 android:inputType="textMultiLine"
                 app:met_baseColor="@color/colorPrimary"
@@ -61,7 +61,7 @@
                 android:text="@string/shipping_method"
                 android:textColor="@color/colorPrimary"
                 android:textColorHint="@color/colorPrimary"
-                android:textSize="24sp" />
+                android:textSize="15sp" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                     android:text="@string/ship_to_home"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/colorPrimary"
-                    android:textSize="24sp"
+                    android:textSize="15sp"
                     android:visibility="visible" />
 
                 <android.support.v7.widget.AppCompatRadioButton
@@ -88,7 +88,7 @@
                     android:text="@string/ship_to_CurrentLocation"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/colorPrimary"
-                    android:textSize="24sp"
+                    android:textSize="15sp"
                     android:visibility="visible" />
 
             </RadioGroup>
@@ -102,7 +102,7 @@
                 android:text="@string/payment_method"
                 android:textColor="@color/colorPrimary"
                 android:textColorHint="@color/colorPrimary"
-                android:textSize="24sp" />
+                android:textSize="15sp" />
 
             <RadioGroup
                 android:layout_width="match_parent"
@@ -117,7 +117,7 @@
                     android:text="@string/cash_on_delivery"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/colorPrimary"
-                    android:textSize="24sp"
+                    android:textSize="15sp"
                     android:visibility="visible" />
 
                 <android.support.v7.widget.AppCompatRadioButton
@@ -129,7 +129,7 @@
                     android:text="@string/paypal"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/colorPrimary"
-                    android:textSize="24sp"
+                    android:textSize="15sp"
                     android:visibility="visible" />
 
                 <android.support.v7.widget.AppCompatRadioButton
@@ -141,7 +141,7 @@
                     android:text="@string/food_crunch_balance_points"
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/colorPrimary"
-                    android:textSize="24sp"
+                    android:textSize="15sp"
                     android:visibility="visible" />
 
             </RadioGroup>
