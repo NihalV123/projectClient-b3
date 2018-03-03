@@ -210,8 +210,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerView = navigationView.getHeaderView(0);
-        txtFullName = headerView.findViewById(R.id.txtFullName);
-        txtemail = headerView.findViewById(R.id.txtEmail);
+        txtFullName = headerView.findViewById(R.id.txtFullName);try{
+        txtemail = headerView.findViewById(R.id.txtEmail);}catch (Exception e){}
         txtPhone = headerView.findViewById(R.id.txtPhone);
         txtFullName.setText(Common.currentUser.getName());//slider name
         txtemail.setText(Common.currentUser.getEmail());

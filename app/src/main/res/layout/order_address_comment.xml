@@ -51,7 +51,24 @@
                 app:met_primaryColor="@color/colorPrimary"
                 app:met_singleLineEllipsis="true"
                 />
-
+            <com.rengwuxian.materialedittext.MaterialEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtemail22"
+                android:gravity="center"
+                android:hint="@string/enter_your_email"
+                android:textColorHint="@color/colorPrimary"
+                android:text=""
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                app:met_minCharacters="8"
+                app:met_maxCharacters="128"
+                android:inputType="textMultiLine"
+                app:met_baseColor="@color/colorPrimary"
+                app:met_floatingLabel="highlight"
+                app:met_primaryColor="@color/colorPrimary"
+                app:met_singleLineEllipsis="true"
+                />
             <TextView
                 android:id="@+id/sm1"
                 android:layout_width="wrap_content"

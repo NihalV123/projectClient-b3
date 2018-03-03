@@ -356,7 +356,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                 Toast.makeText(Cart.this, "The place deosnt exist", Toast.LENGTH_LONG).show();
             }
         });
-        final MaterialEditText edtemail = email_address_layout.findViewById(R.id.edtEmailAddress);
+        final MaterialEditText edtemail = order_address_comment.findViewById(R.id.edtemail22);
         final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
         final RadioButton rbshiphere =(RadioButton)order_address_comment.findViewById(R.id.rbcurentaddress);
         final RadioButton rbshiphome =(RadioButton)order_address_comment.findViewById(R.id.rbhomeaddress);
@@ -401,9 +401,9 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                                     JSONObject jsonObject = new JSONObject(response.body().toString());
                                         JSONArray resultArray = jsonObject.getJSONArray("results");
                                         JSONObject firstObject = resultArray.getJSONObject(0);
-                                        address = firstObject.getString("formatted_address");
+                                        address = firstObject.getString("formatted_address");try{
                                         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
-                                                .setText(address);
+                                                .setText(address);}catch(Exception e){}
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -430,6 +430,8 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         alertdailog.setPositiveButton("YES!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                comment = edtComment.getText().toString();
+                email = edtemail.getText().toString();
                 if(!rbshiphere.isChecked()&&!rbshiphome.isChecked())
                 if(shippingAddress != null)
                     address = shippingAddress.getAddress().toString();
@@ -448,8 +450,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                             (R.id.place_autocomplete_fragment)).commit();
                     return;
                 }
-                    comment = edtComment.getText().toString();
-                email = edtemail.getText().toString();
+
                         //check payment
                 if(!rbsmpaypal.isChecked() && !rbsmcod.isChecked())
                 {

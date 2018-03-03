@@ -33,6 +33,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -361,11 +362,11 @@ public class TrackingOrder extends FragmentActivity implements OnMapReadyCallbac
                 }
 
                 lineOptions.addAll(points);
-                lineOptions.width(12);
-                lineOptions.color(Color.BLUE);
+                lineOptions.width(15);
+                lineOptions.color(Color.BLUE);//change color of order road
                 lineOptions.geodesic(true);
-            }
-                mMap.addPolyline(lineOptions);
+            }try{
+                mMap.addPolyline(lineOptions);}catch (Exception e){}
         }
     }
 }
