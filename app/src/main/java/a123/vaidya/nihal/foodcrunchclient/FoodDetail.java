@@ -135,6 +135,8 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         btnCart.setCount(new Database(this).getCountCart());
         food_description = findViewById(R.id.food_description);
         food_price = findViewById(R.id.food_price);
+        food_video = findViewById(R.id.food_video);
+        food_recepie = findViewById(R.id.food_recepie);
         food_name = findViewById(R.id.food_name);
         food_image= findViewById(R.id.img_food);
         collapsingToolbarLayout= findViewById(R.id.collapsing);
@@ -209,6 +211,8 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 food_price.setText(currentFood.getPrice());
                 food_name.setText(currentFood.getName ());
                 food_description.setText(currentFood.getDescription());
+                food_video.setText(currentFood.getVideo ());
+                food_recepie.setText(currentFood.getRecepixes());
 
 
             }
