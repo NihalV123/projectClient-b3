@@ -133,4 +133,6 @@
     <string name="enter_your_USERNAME">ENTER USER NAME</string>
     <string name="ordefoodcrunchbalance">FOOD CRUNCH BALANCE</string>
     <string name="GO_IN">GO IN</string>
+    <string name="recepie">Recepie</string>
+    <string name="decsription_n">decsription</string>
 </resources>

@@ -366,7 +366,7 @@ public class FoodList extends AppCompatActivity {
                 });
 
                 //change fav icon
-                if(localDB.isFavorites(adapter.getRef(position).getKey()))
+                if(localDB.isFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone()))
                     viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
 
 //                viewHolder.share.setOnClickListener(new View.OnClickListener() {
@@ -391,9 +391,9 @@ public class FoodList extends AppCompatActivity {
                 viewHolder.fav_image.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if(!localDB.isFavorites(adapter.getRef(position).getKey()))
+                        if(!localDB.isFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone()))
                         {
-                            localDB.addToFavorites(adapter.getRef(position).getKey());
+                            localDB.addToFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone());
                             viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
                             Toast.makeText(FoodList.this,"The"+model.getName()+"\n was added to " +
                                     "favorites",Toast.LENGTH_SHORT).show();
@@ -402,7 +402,7 @@ public class FoodList extends AppCompatActivity {
 
                         }else
                         {
-                            localDB.removeFromFavorites(adapter.getRef(position).getKey());
+                            localDB.removeFromFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone());
                             viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                             Toast.makeText(FoodList.this,"The"+model.getName()+"\n was removed from " +
                                     " favorites",Toast.LENGTH_SHORT).show();

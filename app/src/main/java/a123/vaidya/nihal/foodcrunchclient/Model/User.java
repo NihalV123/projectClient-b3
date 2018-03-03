@@ -9,17 +9,24 @@ public class User {
     private String secureCode;
     private String HomeAddress;
     private String Email;
+    private Double Balance;
+    private String Extra;
 
     public User (){
     }
 
-    public User (String name, String password, String secureCode,String homeAddress,String email) {
+    public User (String name, String password, String secureCode,String homeAddress,String email,
+    //Double balance,
+                 String extra
+    ) {
         Name = name;
         Password = password;
         IsStaff="false";
         this.secureCode = secureCode;
         HomeAddress = homeAddress;
         Email = email;
+      //  balance = balance;
+        Extra = extra;
     }
 
     public String getHomeAddress() {
@@ -78,5 +85,19 @@ public class User {
         Password = password;
     }
 
+    public Double getBalance() {
+        return Balance;
+    }
 
+    public String getExtra() {
+        return Extra;
+    }
+
+    public void setExtra(String extra) {
+        Extra = extra;
+    }
+
+    public void setBalance(Double balance) {
+        Balance = balance;
+    }
 }

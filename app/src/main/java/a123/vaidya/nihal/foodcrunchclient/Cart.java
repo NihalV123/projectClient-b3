@@ -598,9 +598,15 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        new Database(getBaseContext()).clearCart();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
-        new Database(getBaseContext()).clearCart();
+      //  new Database(getBaseContext()).clearCart();
     }
 
     private void sendordersemailUSER(String order_number) {
@@ -636,7 +642,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                                     (Common.currentUser.getPhone())+
                                     "\n \n HAS BEEN PLACED!!  \t" +
 //                                    "\n  It will be delivered to address  \t" +
-//                                    (Common.currentUser.getHomeAddress())+
+//                                    (Common.currentUser.get)+
                                     "\n\nTHANK YOU FOR SHOPPING WITH US!!");
                             try {
                                 startActivity(Intent.createChooser(emailIntent, "Send mail..."));

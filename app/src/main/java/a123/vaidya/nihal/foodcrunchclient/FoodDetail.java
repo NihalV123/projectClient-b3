@@ -53,6 +53,8 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
     private TextView food_name;
     private TextView food_price;
     private TextView food_description;
+    private TextView food_video;
+    private TextView food_recepie;
     private ImageView food_image;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private FloatingActionButton btnRating;

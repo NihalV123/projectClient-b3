@@ -117,8 +117,8 @@ public class  OrderStatus extends AppCompatActivity {
                 viewHolder.txtOrderId.setText("Order Id : "+adapter.getRef(position).getKey());
                 viewHolder.txtOrderStatus.setText("Status : "+Common.convertCodeToStatus(model.getStatus()));
                 viewHolder.txtOrderAddress.setText("EMAIL : "+model.getEmail());
-              //  viewHolder.txtOrderPhonw.setText("Phone No : "+model.getPhone());
-                //viewHolder.txtOrderComment.setText("Comment : "+model.getComment());
+               viewHolder.txtOrderPhonw.setText("Phone No : "+model.getPaymentState());
+                viewHolder.txtOrderComment.setText("Comment : "+model.getPaymentmethod());
 
                 viewHolder.setItemClickListener(new ItemClickListener() {
                     @Override

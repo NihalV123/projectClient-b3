@@ -159,7 +159,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textColorHint="@color/colorPrimary"
                     android:textSize="15sp"
-                    android:visibility="visible" />
+                    android:visibility="gone" />
 
             </RadioGroup>
 
