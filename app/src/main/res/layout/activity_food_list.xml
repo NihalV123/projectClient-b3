@@ -68,7 +68,7 @@
             android:gravity="center"
             android:paddingBottom="5dp"
             android:paddingTop="5dp"
-            android:text="@string/SELECT_YOUR_FOOD"
+            android:text="@string/add_to_cart_fav_list_quickly"
             android:textColor="@color/white"
             android:textSize="25sp" />
     </RelativeLayout>

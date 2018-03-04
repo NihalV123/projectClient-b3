@@ -245,7 +245,24 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
             public void onClick(View v) {
                 new Database(getBaseContext()).clearCart(Common.currentUser.getPhone());
                 loadListFood();
-                Toast.makeText(Cart.this, "Your shopping cart is empty", Toast.LENGTH_LONG).show();
+                for(Order order:cart) {
+                    Integer.parseInt(order.getQuantity());
+                    //calculate price
+//                    int total = 0;
+//                    for(Order order:cart)
+//                        total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
+////        Request orderm=;
+////        (Integer.parseInt(order.getQuantity()))
+//                    //add substraction code here
+//
+//                    Locale locale = new Locale("en","BU");
+//                    NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
+//                    txtTotalPrice.setText(fmt.format(total)
+//                            .replace("$","")
+//                            .replace("¤","")
+//                            .replace(",",""));//do not add replaceor cart will not work
+                }
+                Toast.makeText(Cart.this, "Your shopping cart is empty\n Inventory updated", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -703,7 +720,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Toast.makeText(Cart.this, " CART CLEARED ", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(Cart.this, " CART CLEARED ", Toast.LENGTH_SHORT).show();
       //  new Database(getBaseContext()).clearCart(Common.currentUser.getPhone());
     }
 

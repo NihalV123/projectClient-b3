@@ -139,4 +139,5 @@
     <string name="GORCERYLISTS">NOTE : GROCERY LIST CLEARED ON BACK PRESS AND ADD USING + </string>
     <string name="subscribe_to_news_and_offers">SUBSCRIBE TO NEWS AND OFFERS</string>
     <string name="settings">SETTINGS</string>
+    <string name="add_to_cart_fav_list_quickly">ADD TO CART/FAV LIST QUICKLY</string>
 </resources>

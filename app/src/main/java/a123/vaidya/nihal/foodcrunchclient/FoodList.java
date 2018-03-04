@@ -360,68 +360,70 @@ public class FoodList extends AppCompatActivity {
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.food_image);
 
                 //quick cart button here
-                if(new Database(getBaseContext()).checkFoodExist(adapter.getRef(position).getKey(),Common.currentUser.getPhone()));
-                viewHolder.add_to_cart.setOnClickListener(new View.OnClickListener() {
-                    int clickcount=0;
-                    @Override
-                    public void onClick(View v) {
-                        new Database(getBaseContext()).addToCart(new Order(Common.currentUser.getPhone(),
-                                adapter.getRef(position).getKey(),//this gets the random id of food id this took me 2 days to debug lol
-                                model.getName(),
-                                "1",
-                                model.getPrice(),
-                                model.getDiscount(),
-                                model.getImage(),
-                                model.getEmail()
-                        ));
-                        clickcount=clickcount+1;
-                        if(model.getQuantity() > clickcount )
-                        {
-                            double balance = model.getQuantity() - clickcount;
-                            //set to database
-                            Map<String ,Object> update_balance = new HashMap<>();
-                            update_balance.put("quantity",balance);
-                           // foodId = model.getName();
-                            foodId = adapter.getRef(position).getKey();
-                            //get instance and put
-                            FirebaseDatabase.getInstance().getReference("Foods")
-//                            foodId =adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
-                                    .child(foodId)
-                                    //.equalTo() //if doesnt work try get curent category id
-                                    .updateChildren(update_balance)
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful())
-                                            {
-                                                //get instance and update
-                                                FirebaseDatabase.getInstance().getReference("Foods")
-                                                        .child(foodId)
-                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
-                                                            @Override
-                                                            public void onDataChange(DataSnapshot dataSnapshot) {
-//                                                        food_price.setText(currentFood.getPrice());
-                                                                Toast.makeText(FoodList.this, "INVENTORY UPDATED",
-                                                                        Toast.LENGTH_LONG).show();
-                                                               Food model = dataSnapshot.getValue(Food.class);
+                    viewHolder.add_to_cart.setOnClickListener(new View.OnClickListener() {
+                        int clickcount = 0;
+                        @Override
+                        public void onClick(View v) {
+                            boolean isExist =new Database(getBaseContext()).checkFoodExist(adapter.getRef(position).getKey(),Common.currentUser.getPhone());
+                            //clicker code strt
+                            clickcount = clickcount + 1;
+                            if (model.getQuantity() > clickcount) {
+                                double balance = model.getQuantity() - clickcount;
+                                Map<String, Object> update_balance = new HashMap<>();
+                                update_balance.put("quantity", balance);
+                                foodId = adapter.getRef(position).getKey();
+                                FirebaseDatabase.getInstance().getReference("Foods")
+                                        .child(foodId)
+                                        .updateChildren(update_balance)
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if (task.isSuccessful()) {
+                                                    FirebaseDatabase.getInstance().getReference("Foods")
+                                                            .child(foodId)
+                                                            .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                    Toast.makeText(FoodList.this, "INVENTORY UPDATED",
+                                                                            Toast.LENGTH_LONG).show();
+                                                                    Food model = dataSnapshot.getValue(Food.class);
 
-                                                            }
+                                                                }
 
-                                                            @Override
-                                                            public void onCancelled(DatabaseError databaseError) {
+                                                                @Override
+                                                                public void onCancelled(DatabaseError databaseError) {
 
-                                                            }
-                                                        });
+                                                                }
+                                                            });
+                                                }
                                             }
-                                        }
-                                    });
-                            Toast.makeText(FoodList.this,"Item was added to cart",Toast.LENGTH_LONG).show();
-                        }else {
-                            Toast.makeText(FoodList.this, "INVENTORY EMPTY", Toast.LENGTH_LONG).show();
+                                        });
+                                Toast.makeText(FoodList.this, "Item was added to cart", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(FoodList.this, "INVENTORY EMPTY", Toast.LENGTH_LONG).show();
+                            }
+                            if (!isExist) {
+                                new Database(getBaseContext()).addToCart(new Order(Common.currentUser.getPhone(),
+                                        adapter.getRef(position).getKey(),//this gets the random id of food id this took me 2 days to debug lol
+                                        model.getName(),
+                                        "1",
+                                        model.getPrice(),
+                                        model.getDiscount(),
+                                        model.getImage(),
+                                        model.getEmail()
+                                ));
+
+                            }//isexist end here
+                            else {
+                                new Database(getBaseContext()).increaseCart(Common.currentUser.getPhone(), adapter.getRef(position).getKey());
+
+                            }
+
                         }
-//
-                    }
-                });
+                    });
+
+
+
                 //change fav icon
                 if(localDB.isFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone()))
                     viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
