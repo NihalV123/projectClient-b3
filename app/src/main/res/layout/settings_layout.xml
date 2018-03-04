@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="2dp"
-    app:cardCornerRadius="25dp"
+    app:cardCornerRadius="5dp"
     android:background="@color/fbutton_color_transparent"
     app:cardElevation="5dp"
     >
@@ -18,7 +18,7 @@
        <CheckBox
            android:layout_width="wrap_content"
            android:id="@+id/chk_subscribe"
-           android:textSize="30dp"
+           android:textSize="25dp"
            android:text="@string/subscribe_to_news_and_offers"
            android:layout_height="wrap_content" />
 
