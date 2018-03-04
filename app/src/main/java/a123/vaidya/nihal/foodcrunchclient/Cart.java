@@ -32,6 +32,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -76,11 +77,13 @@ import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.Model.Request;
 import a123.vaidya.nihal.foodcrunchclient.Model.Sender;
 import a123.vaidya.nihal.foodcrunchclient.Model.Token;
+import a123.vaidya.nihal.foodcrunchclient.Model.User;
 import a123.vaidya.nihal.foodcrunchclient.Remote.APIService;
 import a123.vaidya.nihal.foodcrunchclient.Remote.iGeoCoordinates;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.CartAdapter;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -376,8 +379,8 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
 
                     { address =Common.currentUser.getHomeAddress();
-                    ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
-                            .setText(address);}
+                        ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
+                                .setText(address);}
                     else
                         Toast.makeText(Cart.this,"Please  update your home address",Toast.LENGTH_LONG).show();
 
@@ -444,6 +447,15 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                     return;
 
                 }
+//                if(rbshiphome.isChecked() && shippingAddress == null)
+//                {
+//                    Toast.makeText(Cart.this,"ADDRESS CANNOT BE EMPTY ",Toast.LENGTH_LONG).show();
+//                    getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
+//                            (R.id.place_autocomplete_fragment)).commit();
+//                    return;
+
+//                }
+
                 if(TextUtils.isEmpty(address))
                 {
                     Toast.makeText(Cart.this,"Please enter options or address from text utils",Toast.LENGTH_LONG).show();
@@ -453,7 +465,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                 }
 
                         //check payment
-                if(!rbsmpaypal.isChecked() && !rbsmcod.isChecked())
+                if(!rbsmpaypal.isChecked() && !rbsmcod.isChecked() && !rbsmfcb.isChecked())
                 {
                     Toast.makeText(Cart.this,"Please payment options ",Toast.LENGTH_LONG).show();
                     //remove fragment after close
@@ -472,6 +484,15 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                     intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
                     intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
                     startActivityForResult(intent,PAYPAL_REQUEST_CODE);
+
+//                    String order_number = String.valueOf(System.currentTimeMillis());
+//                    requests.child(order_number)
+//
+//                            .setValue(request);
+//                    sendNotificatinOrder(order_number);
+//                    sendordersemailUSER(order_number);
+//                    new Database(getBaseContext()).clearCart();
+//                    loadListFood();
                     try{
                         //remove fragment after close
                         getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
@@ -492,7 +513,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                        "0",  //for status in request model
                        comment,"COD",email,String.format("%s,%s",mLastLocation.getLatitude(),
                        mLastLocation.getLongitude()),
-                       "UNAPAID",
+                       "UNPAID",
                        cart);
 
                //if yes submitting to the firebase using current time down to milliseconds!!
@@ -512,7 +533,83 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
            }else if(rbsmfcb.isChecked())
                 {
                     double ammount = 0;//local avriable to store ammount
-                  //  ammount =
+                    // ammount = Common.formatCurrency(txtTotalPrice.getText().toString(),Locale.US).doubleValue();
+                    ammount = Double.valueOf(txtTotalPrice.getText().toString());
+                    //compare with balance
+                    if(Common.currentUser.getBalance() >  ammount)
+//                    if(Common.currentUser.getBalance() >= ammount)
+                    {
+
+                        Request request = new Request(
+                                Common.currentUser.getPhone(),
+                                Common.currentUser.getName(),
+                                address,
+                                txtTotalPrice.getText().toString()
+                                        .replace("$", "")//replace regional barriers
+                                        .replace("¤", "")
+                                        .replace(",", ""),
+                                "0",  //for status in request model
+                                comment,"FOOD CRUNCH BALANCE POINTS",email,String.format("%s,%s",mLastLocation.getLatitude(),
+                                mLastLocation.getLongitude()),
+                                "PAID",
+                                cart);
+
+                        //if yes submitting to the firebase using current time down to milliseconds!!
+                        final String order_number = String.valueOf(System.currentTimeMillis());
+                        requests.child(order_number)
+
+                                .setValue(request);
+
+                        //write code to send emial here
+
+                        sendNotificatinOrder(order_number);
+                        sendordersemailUSER(order_number);
+                        new Database(getBaseContext()).clearCart();
+                        loadListFood();
+                       //update balance
+                        double balance = Common.currentUser.getBalance() - ammount;
+                        //set to database
+                        Map<String ,Object> update_balance = new HashMap<>();
+                        update_balance.put("balance",balance);
+
+                        //get instance and put
+                        FirebaseDatabase.getInstance().getReference("User")
+                                .child(Common.currentUser.getPhone())
+                                .updateChildren(update_balance)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                   if(task.isSuccessful())
+                                   {
+                                       //get instance and update
+                                       FirebaseDatabase.getInstance().getReference("User")
+                                               .child(Common.currentUser.getPhone())
+                                               .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                   @Override
+                                                   public void onDataChange(DataSnapshot dataSnapshot) {
+                                                       Common.currentUser = dataSnapshot.getValue(User.class);
+                                                       sendNotificatinOrder(order_number);
+                                                   }
+
+                                                   @Override
+                                                   public void onCancelled(DatabaseError databaseError) {
+
+                                                   }
+                                               });
+
+                                   }
+                                    }
+                                });
+
+
+
+                    }else
+                    {
+                        Toast.makeText(Cart.this, "YOU HAVE INSUFFICIENT BALANCE FOR THIS" +
+                                        " TRANSACTION \n PLEASE CHOOSE ANOTHER PAYMENT OPTION!!!",
+                                Toast.LENGTH_LONG).show();
+
+                    }
                 }
                 //remove fragment after close
                 getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
@@ -556,8 +653,10 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                                             .replace("¤", "")
                                             .replace(",", ""),
                                     "0",  //for status in request model
-                                    comment,"PayPal",email,String.format("%s,%s",shippingAddress.getLatLng()
-                                    .latitude,shippingAddress.getLatLng().longitude),
+                                    comment,"PayPal",email,
+                                    //error solve now
+                                    String.format("%s,%s",mLastLocation.getLatitude(),
+                                            mLastLocation.getLongitude()),
                                     jsonObject.getJSONObject("response").getString("state"),
                                     cart);
 

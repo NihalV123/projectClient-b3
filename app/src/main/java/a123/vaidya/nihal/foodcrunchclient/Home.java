@@ -504,7 +504,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         alertDialog.setTitle("CHANGE NAME");
         alertDialog.setCancelable(false);
         alertDialog.setIcon(R.drawable.ic_child_care_black_24dp);
-        alertDialog.setMessage("One time per session");
+        alertDialog.setMessage("LOG OUT FOR EFFECT");
 //        final SpotsDialog dialog1 = new SpotsDialog(Home.this);
 //        dialog1.show();
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -573,7 +573,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         alertDailog.setTitle("CHANGE EMAIL ADDRESS");
         alertDailog.setCancelable(false);
         alertDailog.setIcon(R.drawable.ic_email_black_24dp);
-        alertDailog.setMessage("One time per session");
+        alertDailog.setMessage("LOG OUT FOR EFFECT");
         LayoutInflater inflater = LayoutInflater.from(this);
 //        final SpotsDialog dialog1 = new SpotsDialog(Home.this);
 //        dialog1.show();
@@ -615,7 +615,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     alertDialog.setTitle("CHANGE PASSWORD");
     alertDialog.setCancelable(false);
     alertDialog.setIcon(R.drawable.ic_security_black_24dp);
-    alertDialog.setMessage("One time per session");
+    alertDialog.setMessage("LOG OUT FOR EFFECT");
 
         LayoutInflater inflater = LayoutInflater.from(this);
         View email_address_layout = inflater.inflate(R.layout.email_address_layout,null);
@@ -695,7 +695,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         alertDailog.setTitle("CHANGE HOME ADDRESS");
         alertDailog.setCancelable(false);
         alertDailog.setIcon(R.drawable.ic_home_black_24dp);
-        alertDailog.setMessage("One time per session");
+        alertDailog.setMessage("LOG OUT FOR EFFECT");
         LayoutInflater inflater = LayoutInflater.from(this);
         View layout_home = inflater.inflate(R.layout.home_address_layout,null);
 //        final SpotsDialog dialog1 = new SpotsDialog(Home.this);

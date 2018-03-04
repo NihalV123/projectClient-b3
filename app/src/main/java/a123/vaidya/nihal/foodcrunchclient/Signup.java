@@ -103,6 +103,7 @@ public class Signup extends AppCompatActivity {
 
                                 );
                                 user.setBalance(100.0);
+                                //user.setBalance(100.0);
                                 user.setPhone(edtPhone.getText().toString());
                                 user.setExtra("EXTRA");
                                 table_user.child(edtPhone.getText().toString()).setValue(user);
