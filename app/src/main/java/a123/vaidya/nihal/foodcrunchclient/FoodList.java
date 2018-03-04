@@ -375,9 +375,11 @@ public class FoodList extends AppCompatActivity {
                             //set to database
                             Map<String ,Object> update_balance = new HashMap<>();
                             update_balance.put("quantity",balance);
-
+                            foodId = model.getName();
+//                            foodId = model
                             //get instance and put
                             FirebaseDatabase.getInstance().getReference("Foods")
+//                            foodId =adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
                                     .child(foodId)
                                     //.equalTo() //if doesnt work try get curent category id
                                     .updateChildren(update_balance)
@@ -393,7 +395,7 @@ public class FoodList extends AppCompatActivity {
                                                             @Override
                                                             public void onDataChange(DataSnapshot dataSnapshot) {
 //                                                        food_price.setText(currentFood.getPrice());
-                                                                Toast.makeText(FoodList.this, "INVENTORY CALLED",
+                                                                Toast.makeText(FoodList.this, "INVENTORY UPDATED",
                                                                         Toast.LENGTH_LONG).show();
                                                                Food model = dataSnapshot.getValue(Food.class);
 
@@ -411,8 +413,8 @@ public class FoodList extends AppCompatActivity {
                         }else {
                             Toast.makeText(FoodList.this, "INVENTORY EMPTY", Toast.LENGTH_LONG).show();
                         }
-
-
+                        Toast.makeText(FoodList.this, "ITEM CAN BE QUICKLY ADDED ONLY ONCE \n TO ADD MORE TIMES CLICK ON THE  ITEM", Toast.LENGTH_LONG).show();
+                        v.setOnClickListener(null);
                     }
                 });
                 //change fav icon
