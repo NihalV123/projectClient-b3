@@ -243,7 +243,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         clear_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new Database(getBaseContext()).clearCart();
+                new Database(getBaseContext()).clearCart(Common.currentUser.getPhone());
                 loadListFood();
                 Toast.makeText(Cart.this, "Your shopping cart is empty", Toast.LENGTH_LONG).show();
             }
@@ -526,7 +526,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
                sendNotificatinOrder(order_number);
                sendordersemailUSER(order_number);
-               new Database(getBaseContext()).clearCart();
+               new Database(getBaseContext()).clearCart(Common.currentUser.getPhone());
                loadListFood();
                finish();
 
@@ -564,7 +564,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
                         sendNotificatinOrder(order_number);
                         sendordersemailUSER(order_number);
-                        new Database(getBaseContext()).clearCart();
+                        new Database(getBaseContext()).clearCart(Common.currentUser.getPhone());
                         loadListFood();
                        //update balance
                         double balance = Common.currentUser.getBalance() - ammount;
@@ -670,7 +670,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
                             sendNotificatinOrder(order_number);
                             sendordersemailUSER(order_number);
-                            new Database(getBaseContext()).clearCart();
+                            new Database(getBaseContext()).clearCart(Common.currentUser.getPhone());
                             loadListFood();
                             finish();
 
@@ -704,7 +704,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
     protected void onDestroy() {
         super.onDestroy();
         Toast.makeText(Cart.this, " CART CLEARED ", Toast.LENGTH_SHORT).show();
-        new Database(getBaseContext()).clearCart();
+      //  new Database(getBaseContext()).clearCart(Common.currentUser.getPhone());
     }
 
     @Override
@@ -867,7 +867,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
     }
 
     private void loadListFood() {
-        cart = new Database(this).getCarts();
+        cart = new Database(this).getCarts(Common.currentUser.getPhone());
         adapter = new CartAdapter(cart,this);
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
@@ -900,7 +900,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
     private void deleteCart(int position) {
         cart.remove(position);//remove from ui
-        new Database(this).clearCart();//remove from firebase
+        new Database(this).clearCart(Common.currentUser.getPhone());//remove from firebase
         //update database
         for(Order item:cart)
             new Database(this).addToCart(item);

@@ -201,7 +201,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
             }
         });
-        fab.setCount(new Database(this).getCountCart());
+        fab.setCount(new Database(this).getCountCart(Common.currentUser.getPhone()));
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -372,7 +372,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onResume() {
         super.onResume();
-        fab.setCount(new Database(this).getCountCart());
+        fab.setCount(new Database(this).getCountCart(Common.currentUser.getPhone()));
         loadMenu();
         if (adapter!= null){
         adapter.startListening();}

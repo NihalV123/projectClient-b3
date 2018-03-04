@@ -129,7 +129,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
             @Override
             public void onClick(View v) {
 
-                new Database(getBaseContext()).addToCart(new Order(foodId, currentFood.getName(), numberButton.getNumber(),
+                new Database(getBaseContext()).addToCart(new Order(Common.currentUser.getPhone(),foodId, currentFood.getName(), numberButton.getNumber(),
                         currentFood.getPrice(), currentFood.getDiscount(),currentFood.getImage(),currentFood.getEmail()
                 ));
                 if(currentFood.getQuantity() > Integer.valueOf(numberButton.getNumber()) )
@@ -178,7 +178,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
             }
         });
 //        currentFood.getQuantity()-1.0;
-        btnCart.setCount(new Database(this).getCountCart());
+        btnCart.setCount(new Database(this).getCountCart(Common.currentUser.getPhone()));
         food_description = findViewById(R.id.food_description);
         food_price = findViewById(R.id.food_price);
         food_video = findViewById(R.id.food_video);

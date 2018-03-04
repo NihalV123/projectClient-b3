@@ -144,7 +144,7 @@ public class FoodList extends AppCompatActivity {
 
             }
         });
-        fab.setCount(new Database(this).getCountCart());
+        fab.setCount(new Database(this).getCountCart(Common.currentUser.getPhone()));
         //firebase code
         callbackManager = new CallbackManager.Factory().create();
         shareDialog = new ShareDialog(this);
@@ -359,24 +359,30 @@ public class FoodList extends AppCompatActivity {
                 //viewHolder.ratingbar.setRating(Float.parseFloat(.getRateValue()));
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.food_image);
 
-                //add to cart
+                //quick cart button here
+                if(new Database(getBaseContext()).checkFoodExist(adapter.getRef(position).getKey(),Common.currentUser.getPhone()));
                 viewHolder.add_to_cart.setOnClickListener(new View.OnClickListener() {
+                    int clickcount=0;
                     @Override
                     public void onClick(View v) {
-                        int clickcount=0;       //count no of times button was pressed
-                        clickcount=clickcount+1;
-                        new Database(getBaseContext()).addToCart(new Order(adapter.getRef(position).getKey(), model.getName(),"1",
-                                model.getPrice(), model.getDiscount(),model.getImage(),model.getEmail()
+                        new Database(getBaseContext()).addToCart(new Order(Common.currentUser.getPhone(),
+                                adapter.getRef(position).getKey(),//this gets the random id of food id this took me 2 days to debug lol
+                                model.getName(),
+                                "1",
+                                model.getPrice(),
+                                model.getDiscount(),
+                                model.getImage(),
+                                model.getEmail()
                         ));
-
+                        clickcount=clickcount+1;
                         if(model.getQuantity() > clickcount )
                         {
                             double balance = model.getQuantity() - clickcount;
                             //set to database
                             Map<String ,Object> update_balance = new HashMap<>();
                             update_balance.put("quantity",balance);
-                            foodId = model.getName();
-//                            foodId = model
+                           // foodId = model.getName();
+                            foodId = adapter.getRef(position).getKey();
                             //get instance and put
                             FirebaseDatabase.getInstance().getReference("Foods")
 //                            foodId =adapter.getRef(item.getOrder()).getKey(),adapter.getItem(item.getOrder()));
@@ -413,32 +419,12 @@ public class FoodList extends AppCompatActivity {
                         }else {
                             Toast.makeText(FoodList.this, "INVENTORY EMPTY", Toast.LENGTH_LONG).show();
                         }
-                        Toast.makeText(FoodList.this, "ITEM CAN BE QUICKLY ADDED ONLY ONCE \n TO ADD MORE TIMES CLICK ON THE  ITEM", Toast.LENGTH_LONG).show();
-                        v.setOnClickListener(null);
+//
                     }
                 });
                 //change fav icon
                 if(localDB.isFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone()))
                     viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
-
-//                viewHolder.share.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Picasso.with(getApplicationContext())
-//                                .load(model.getImage())
-//                                .into(target);
-//                        Toast.makeText(FoodList.this,"Getting Ready \nShare To FACEBOOK \n Unless " +
-//                                "the sdk got updated \nOne food once per session",Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-//                viewHolder.like.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Toast.makeText(FoodList.this,"Comming soon!",Toast.LENGTH_SHORT).show();
-//                    }
-//                });
-
-
 
                 viewHolder.fav_image.setOnClickListener(new View.OnClickListener() {
                     @Override
