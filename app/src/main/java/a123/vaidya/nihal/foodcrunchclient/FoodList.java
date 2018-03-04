@@ -28,6 +28,8 @@ import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,7 +45,9 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
@@ -76,6 +80,7 @@ public class FoodList extends AppCompatActivity {
     private SwipeRefreshLayout rootLayout;
     private ImageView fav_image;
     private ImageView like;
+    private String foodId="";
     private ImageView share;
     private RatingBar ratingbar;
     private ImageView add_to_cart;
@@ -358,13 +363,58 @@ public class FoodList extends AppCompatActivity {
                 viewHolder.add_to_cart.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        int clickcount=0;       //count no of times button was pressed
+                        clickcount=clickcount+1;
                         new Database(getBaseContext()).addToCart(new Order(adapter.getRef(position).getKey(), model.getName(),"1",
                                 model.getPrice(), model.getDiscount(),model.getImage(),model.getEmail()
                         ));
-                        Toast.makeText(FoodList.this,"Item was added to cart",Toast.LENGTH_LONG).show();
+
+                        if(model.getQuantity() > clickcount )
+                        {
+                            double balance = model.getQuantity() - clickcount;
+                            //set to database
+                            Map<String ,Object> update_balance = new HashMap<>();
+                            update_balance.put("quantity",balance);
+
+                            //get instance and put
+                            FirebaseDatabase.getInstance().getReference("Foods")
+                                    .child(foodId)
+                                    //.equalTo() //if doesnt work try get curent category id
+                                    .updateChildren(update_balance)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if(task.isSuccessful())
+                                            {
+                                                //get instance and update
+                                                FirebaseDatabase.getInstance().getReference("Foods")
+                                                        .child(foodId)
+                                                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                            @Override
+                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+//                                                        food_price.setText(currentFood.getPrice());
+                                                                Toast.makeText(FoodList.this, "INVENTORY CALLED",
+                                                                        Toast.LENGTH_LONG).show();
+                                                               Food model = dataSnapshot.getValue(Food.class);
+
+                                                            }
+
+                                                            @Override
+                                                            public void onCancelled(DatabaseError databaseError) {
+
+                                                            }
+                                                        });
+                                            }
+                                        }
+                                    });
+                            Toast.makeText(FoodList.this,"Item was added to cart",Toast.LENGTH_LONG).show();
+                        }else {
+                            Toast.makeText(FoodList.this, "INVENTORY EMPTY", Toast.LENGTH_LONG).show();
+                        }
+
+
                     }
                 });
-
                 //change fav icon
                 if(localDB.isFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone()))
                     viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);

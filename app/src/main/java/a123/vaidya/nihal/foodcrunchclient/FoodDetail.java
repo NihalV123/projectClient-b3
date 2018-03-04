@@ -132,8 +132,6 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 new Database(getBaseContext()).addToCart(new Order(foodId, currentFood.getName(), numberButton.getNumber(),
                         currentFood.getPrice(), currentFood.getDiscount(),currentFood.getImage(),currentFood.getEmail()
                 ));
-                //delete if probems
-                //inventory rough code not useful
                 if(currentFood.getQuantity() > Integer.valueOf(numberButton.getNumber()) )
                 {
                     double balance = currentFood.getQuantity() - Integer.valueOf(numberButton.getNumber());
