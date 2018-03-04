@@ -24,13 +24,14 @@
             android:textColor="@android:color/white"
             app:shadowColor="@android:color/black"
             app:shadowHeight="5dp" />
+
         <TextView
             android:id="@+id/txtmanconetnthom3e"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/transparentBlack"
             android:gravity="center"
-            android:paddingTop="100dp"
+            android:paddingTop="150dp"
             android:text="@string/EMPTY_LIST"
             android:textColor="@color/white"
             android:textSize="25sp" />
@@ -45,7 +46,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="@string/Your_cart"
+                android:text="@string/Your_cartS"
                 android:textColor="@color/white"
                 android:textSize="25sp" />
 
@@ -58,7 +59,7 @@
             android:layout_centerInParent="true"
             android:background="@android:color/transparent"
             android:paddingBottom="130dp"
-            android:paddingTop="100dp">
+            android:paddingTop="145dp">
 
         </android.support.v7.widget.RecyclerView>
 

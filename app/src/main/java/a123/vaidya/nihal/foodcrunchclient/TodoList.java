@@ -175,9 +175,22 @@ public class TodoList extends AppCompatActivity {
     }
 
     @Override
+    protected void onPostResume() {
+        super.onPostResume();
+     //  loadTaskList();
+    }
+
+    protected void onDestroy() {
+        super.onDestroy();
+        Toast.makeText(TodoList.this,"The list was cleared!",
+                Toast.LENGTH_LONG).show();
+        dbHelper.clearTask();
+    }
+
+    @Override
     protected void onStop() {
         super.onStop();
-        dbHelper.clearTask();
+       // dbHelper.clearTask();
     }
 
 }

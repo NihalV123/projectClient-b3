@@ -69,6 +69,7 @@ import org.json.JSONObject;
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Common.Config;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
+import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.MyResponse;
 import a123.vaidya.nihal.foodcrunchclient.Model.Notification;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
@@ -432,7 +433,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
             public void onClick(DialogInterface dialog, int which) {
                 comment = edtComment.getText().toString();
                 email = edtemail.getText().toString();
-                if(!rbshiphere.isChecked()&&!rbshiphome.isChecked())
+                if(!rbshiphere.isChecked()&&!rbshiphome.isChecked()&&!rbsmfcb.isChecked())
                 if(shippingAddress != null)
                     address = shippingAddress.getAddress().toString();
                 else
@@ -478,8 +479,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                     }catch (Exception exception){
 
                     }
-       } else
-           if(rbsmcod.isChecked())
+       } else if(rbsmcod.isChecked())
            {
                Request request = new Request(
                        Common.currentUser.getPhone(),
@@ -509,7 +509,11 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                loadListFood();
                finish();
 
-           }
+           }else if(rbsmfcb.isChecked())
+                {
+                    double ammount = 0;//local avriable to store ammount
+                  //  ammount =
+                }
                 //remove fragment after close
                 getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
                         (R.id.place_autocomplete_fragment)).commit();
@@ -600,7 +604,14 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        Toast.makeText(Cart.this, " CART CLEARED ", Toast.LENGTH_SHORT).show();
         new Database(getBaseContext()).clearCart();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+       // loadListFood();
     }
 
     @Override
@@ -766,6 +777,10 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         int total = 0;
         for(Order order:cart)
             total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
+//        Request orderm=;
+//        (Integer.parseInt(order.getQuantity()))
+        //add substraction code here
+
         Locale locale = new Locale("en","BU");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
         txtTotalPrice.setText(fmt.format(total)
