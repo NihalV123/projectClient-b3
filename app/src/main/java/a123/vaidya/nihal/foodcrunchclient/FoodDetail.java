@@ -31,6 +31,7 @@ import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.Model.Rating;
+import a123.vaidya.nihal.foodcrunchclient.Model.User;
 import info.hoang8f.widget.FButton;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
@@ -46,6 +47,8 @@ import com.twitter.sdk.android.core.TwitterConfig;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class FoodDetail extends AppCompatActivity implements RatingDialogListener{
@@ -68,6 +71,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
     private String foodId="";
+    String categoryId ="";
     private FirebaseDatabase database;
     private DatabaseReference foods;
     FButton btnSohowComment;
@@ -128,10 +132,54 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 new Database(getBaseContext()).addToCart(new Order(foodId, currentFood.getName(), numberButton.getNumber(),
                         currentFood.getPrice(), currentFood.getDiscount(),currentFood.getImage(),currentFood.getEmail()
                 ));
-                Toast.makeText(FoodDetail.this,"Item was added to cart",Toast.LENGTH_LONG).show();
+                //delete if probems
+                //inventory rough code not useful
+                if(currentFood.getQuantity() > Integer.valueOf(numberButton.getNumber()) )
+                {
+                    double balance = currentFood.getQuantity() - Integer.valueOf(numberButton.getNumber());
+                    //set to database
+                    Map<String ,Object> update_balance = new HashMap<>();
+                    update_balance.put("quantity",balance);
+
+                    //get instance and put
+                    FirebaseDatabase.getInstance().getReference("Foods")
+                            .child(foodId)
+                            //.equalTo() //if doesnt work try get curent category id
+                            .updateChildren(update_balance)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful())
+                                    {
+                                        //get instance and update
+                                        FirebaseDatabase.getInstance().getReference("Foods")
+                                                .child(foodId)
+                                                .addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(DataSnapshot dataSnapshot) {
+//                                                        food_price.setText(currentFood.getPrice());
+                Toast.makeText(FoodDetail.this, "INVENTORY UPDATED", Toast.LENGTH_LONG).show();
+                                                        currentFood = dataSnapshot.getValue(Food.class);
+
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(DatabaseError databaseError) {
+
+                                                    }
+                                                });
+                                    }
+                                }
+                            });
+                    Toast.makeText(FoodDetail.this,"Item was added to cart",Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(FoodDetail.this, "INVENTORY EMPTY", Toast.LENGTH_LONG).show();
+                }
+
 
             }
         });
+//        currentFood.getQuantity()-1.0;
         btnCart.setCount(new Database(this).getCountCart());
         food_description = findViewById(R.id.food_description);
         food_price = findViewById(R.id.food_price);
@@ -143,7 +191,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandededAppBar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
 
-        //get food id
+
         if (getIntent()!= null)
             foodId=getIntent().getStringExtra("FoodId");
         if(!foodId.isEmpty())
@@ -200,6 +248,8 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 .show();
 
     }
+
+
 
     private void getDetailFood(String foodId) {
         foods.child(foodId).addValueEventListener(new ValueEventListener() {

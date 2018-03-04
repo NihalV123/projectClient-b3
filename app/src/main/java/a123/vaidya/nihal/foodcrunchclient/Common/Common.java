@@ -23,6 +23,7 @@ import a123.vaidya.nihal.foodcrunchclient.Remote.iGeoCoordinates;
 
 public class Common {
     public static User currentUser;
+    public static String topicName = "News";
     public static Request currentRequest;
     public static final String PHONE_TEXT = "userPhone";
     private static final String BASE_URL = "https://maps.googleapis.com";

@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +45,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rey.material.widget.Slider;
 import com.squareup.picasso.Picasso;
@@ -480,6 +482,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 dialog.dismiss();
                 break;
             }
+            case R.id.nav_settings: {
+                showSettingsDailog();
+                break;
+            }
             case R.id.nav_homeaddress:{
                 showHomeAddressDialog();
                 break;}
@@ -497,6 +503,54 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showSettingsDailog() {
+
+        AlertDialog.Builder alertDailog = new AlertDialog.Builder(Home.this);
+        alertDailog.setTitle("SETTINGS");
+        alertDailog.setCancelable(false);
+        alertDailog.setIcon(R.drawable.ic_power_settings_new_black_24dp);
+        alertDailog.setMessage("TAKE THE APP IN YOUR CONTROL");
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View layout_setting = inflater.inflate(R.layout.settings_layout,null);
+//        final SpotsDialog dialog1 = new SpotsDialog(Home.this);
+//        dialog1.show();
+//        final MaterialEditText edtHomeAddress = layout_home.findViewById(R.id.edtHomeAddress);
+        final CheckBox chk_sub = (CheckBox)layout_setting.findViewById(R.id.chk_subscribe);
+        //remember state of checkbox
+        Paper.init(this);
+        String isSubscribed = Paper.book().read("sub_new");
+        if(isSubscribed == null || TextUtils.isEmpty(isSubscribed) || isSubscribed.equals("false"))  //can cause crash if no text utils
+            chk_sub.setChecked(false);
+        else
+            chk_sub.setChecked(true);
+
+
+        alertDailog.setView(layout_setting);
+        alertDailog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+
+                if(chk_sub.isChecked())
+                {
+                    FirebaseMessaging.getInstance().subscribeToTopic(Common.topicName);
+                    Paper.book().write("sub_new","true");//written converted to string
+                }else{
+                    FirebaseMessaging.getInstance().unsubscribeFromTopic(Common.topicName);
+                Paper.book().write("sub_new","false");//written converted to string
+                     }
+
+            }
+        });
+        alertDailog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDailog.show();
     }
 
     private void showChangeNameDialog() {

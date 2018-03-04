@@ -137,4 +137,6 @@
     <string name="decsription_n">decsription</string>
     <string name="Your_cartS">NOTE : LONG CLICK/SWIPE TO REMOVE AND CART EMPTY WHEN BACK PRESSED</string>
     <string name="GORCERYLISTS">NOTE : GROCERY LIST CLEARED ON BACK PRESS AND ADD USING + </string>
+    <string name="subscribe_to_news_and_offers">SUBSCRIBE TO NEWS AND OFFERS</string>
+    <string name="settings">SETTINGS</string>
 </resources>
