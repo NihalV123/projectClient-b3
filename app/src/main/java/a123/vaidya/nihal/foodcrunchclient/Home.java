@@ -411,6 +411,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if (item.getItemId() == R.id.refresh)
         {
             loadMenu();
+        }else if (item.getItemId() == R.id.menu_search)
+        {
+            startActivity(new Intent(Home.this,SearchActivity.class));
+        }else if (item.getItemId() == R.id.menu_info)
+        {
+                      Toast.makeText(Home.this, "THIS IS THE TUTORIAL FOR MAIN MENU", Toast.LENGTH_LONG).show();
         }
         return super.onOptionsItemSelected(item);
     }

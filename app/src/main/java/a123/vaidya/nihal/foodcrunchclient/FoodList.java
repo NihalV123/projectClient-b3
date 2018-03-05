@@ -72,11 +72,19 @@ public class FoodList extends AppCompatActivity {
 
     private FirebaseRecyclerAdapter<Food,FoodViewHolder> adapter;
 
-    //for searching firebase
+    //for searching items in category
     private FirebaseRecyclerAdapter<Food,FoodViewHolder> searchAdapter;
     private final List<String> suggestList = new ArrayList<>();
     private MaterialSearchBar materialSearchBar;
+
+    //favorite cache in search
     private Database localDB;
+
+    //Facebook share
+    private CallbackManager callbackManager;
+    private TextView textView;
+    private ShareDialog shareDialog;
+
     private SwipeRefreshLayout rootLayout;
     private ImageView fav_image;
     private ImageView like;
@@ -85,11 +93,6 @@ public class FoodList extends AppCompatActivity {
     private RatingBar ratingbar;
     private ImageView add_to_cart;
     private CounterFab fab;
-    //Facebook share
-    private CallbackManager callbackManager;
-    private TextView textView;
-    private ShareDialog shareDialog;
-
 
     //create bitmap from picaso
     private final Target target = new Target() {
@@ -145,9 +148,13 @@ public class FoodList extends AppCompatActivity {
             }
         });
         fab.setCount(new Database(this).getCountCart(Common.currentUser.getPhone()));
-        //firebase code
-        callbackManager = new CallbackManager.Factory().create();
+
+        //init facebook
+        new CallbackManager.Factory();
+        callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
+
+        //twitter init
         Twitter.initialize(this);
         TwitterConfig config = new TwitterConfig.Builder(this)
                 .logger(new DefaultLogger(Log.DEBUG))
@@ -155,9 +162,14 @@ public class FoodList extends AppCompatActivity {
                 .debug(true)
                 .build();
         Twitter.initialize(config);
+
+        //firebase
         database = FirebaseDatabase.getInstance();
         foodList =database.getReference("Foods");
+        //loacal db for search
         localDB = new Database(this);
+
+
         rootLayout = findViewById(R.id.rootLayout);
         rootLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
@@ -224,7 +236,6 @@ public class FoodList extends AppCompatActivity {
 
                     }
                 });
-
                 materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
                     @Override
                     public void onSearchStateChanged(boolean enabled) {

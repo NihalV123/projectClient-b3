@@ -140,4 +140,6 @@
     <string name="subscribe_to_news_and_offers">SUBSCRIBE TO NEWS AND OFFERS</string>
     <string name="settings">SETTINGS</string>
     <string name="add_to_cart_fav_list_quickly">ADD TO CART/FAV LIST QUICKLY</string>
+    <string name="SEARCH">SEARCH ALL</string>
+    <string name="TUTORIAL">TUTORIAL</string>
 </resources>

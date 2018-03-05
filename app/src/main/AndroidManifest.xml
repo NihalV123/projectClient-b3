@@ -68,7 +68,8 @@
         <activity android:name=".Utilities" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".About" />
-        <activity android:name=".TodoList"></activity>
+        <activity android:name=".TodoList" />
+        <activity android:name=".SearchActivity"></activity>
     </application>
 
 </manifest>
