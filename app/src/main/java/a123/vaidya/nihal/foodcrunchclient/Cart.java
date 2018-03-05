@@ -7,18 +7,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.app.AlertDialog;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -59,6 +62,7 @@ import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
 import com.rengwuxian.materialedittext.MaterialEditText;
+import com.stepstone.apprating.AppRatingDialog;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -70,6 +74,8 @@ import org.json.JSONObject;
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Common.Config;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
+import a123.vaidya.nihal.foodcrunchclient.Helper.RecyclerItemTouchHelper;
+import a123.vaidya.nihal.foodcrunchclient.Interface.RecyclerItemTouchHelperListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.MyResponse;
 import a123.vaidya.nihal.foodcrunchclient.Model.Notification;
@@ -91,6 +97,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
+import a123.vaidya.nihal.foodcrunchclient.ViewHolder.CartViewHolder;
 import dmax.dialog.SpotsDialog;
 import info.hoang8f.widget.FButton;
 import retrofit2.Call;
@@ -100,7 +107,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Cart extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-        LocationListener,GoogleApiClient.OnConnectionFailedListener {
+        LocationListener,GoogleApiClient.OnConnectionFailedListener, RecyclerItemTouchHelperListener {
     private static final int PAYPAL_REQUEST_CODE = 9999;
     private RecyclerView recyclerView;
     iGeoCoordinates mGoogleMApService;
@@ -233,7 +240,10 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-//        cart_number= findViewById(R.id.cart_number);//change layout partent all4
+//       swipe to delete view init
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new
+                RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,this);
+            new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
 
         txtTotalPrice = findViewById(R.id.total);
         btnPlace = findViewById(R.id.btnPlaceOrder);
@@ -983,5 +993,57 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         displayLocation();
 
 
+    }
+
+    @Override
+    public void onSwipe(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        if(viewHolder instanceof CartViewHolder)
+        {
+            String name = ((CartAdapter)recyclerView.getAdapter()).getItem(viewHolder.getAdapterPosition()).getProductName();
+
+            final Order deleteItem = ((CartAdapter)recyclerView.getAdapter()).getItem(viewHolder.getAdapterPosition());
+            final int deleteIndex = viewHolder.getAdapterPosition();
+
+            adapter.removeitem(deleteIndex);
+            new Database(getBaseContext()).removeFromCart(deleteItem.getProductId(),Common.currentUser.getPhone());
+
+            //update total on button press
+            int total = 0;
+            List<Order> orders = new Database(getBaseContext()).getCarts(Common.currentUser.getPhone());
+            for(Order item:orders)
+                total+=(Integer.parseInt(item.getPrice()))*(Integer.parseInt(item.getQuantity()));
+            Locale locale = new Locale("en","BU");
+            NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
+            txtTotalPrice.setText(fmt.format(total)
+                    .replace("$","")
+                    .replace("¤","")
+                    .replace(",",""));//do not add replaceor cart will not work
+
+            //snackbar with undo
+            Snackbar snackbar = Snackbar.make(swipeRefreshLayout,name+"  was removed from cart ",Snackbar.LENGTH_LONG);
+            snackbar.setAction("UNDO", new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    adapter.restoreitem(deleteItem,deleteIndex);
+                    //add to cart
+                    new Database(getBaseContext()).addToCart(deleteItem);
+                    //update total on button press
+                    int total = 0;
+                    List<Order> orders = new Database(getBaseContext()).getCarts(Common.currentUser.getPhone());
+                    for(Order item:orders)
+                        total+=(Integer.parseInt(item.getPrice()))*(Integer.parseInt(item.getQuantity()));
+                    Locale locale = new Locale("en","BU");
+                    NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
+                    txtTotalPrice.setText(fmt.format(total)
+                            .replace("$","")
+                            .replace("¤","")
+                            .replace(",",""));//do not add replaceor cart will not work
+                }
+            });
+            snackbar.setActionTextColor(Color.CYAN);
+            snackbar.show();
+
+
+        }
     }
 }
