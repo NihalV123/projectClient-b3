@@ -146,9 +146,10 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                                 currentFood.getName(),
                                 numberButton.getNumber(),
                         currentFood.getPrice(),
+                                currentFood.getEmail(),
                                 currentFood.getDiscount(),
-                                currentFood.getImage(),
-                                currentFood.getEmail()
+                                currentFood.getImage()
+
                 ));
                 if(currentFood.getQuantity() > Integer.valueOf(numberButton.getNumber()) )
                 {

@@ -47,7 +47,7 @@ public class Database extends SQLiteAssetHelper{
             SQLiteQueryBuilder gb = new SQLiteQueryBuilder();
 
             String[] sqlSelect={"UserPhone","ProductName","ProductId", "Quantity", "Price",
-                    "Discount","Image","Email" };
+                    "Email", "Discount","Image" };
 //check above l
             String sqlTable = "OrderDetail";
 
@@ -66,9 +66,10 @@ public class Database extends SQLiteAssetHelper{
                                             c.getString(c.getColumnIndex("ProductName")),
                                              c.getString(c.getColumnIndex("Quantity")),
                                             c.getString(c.getColumnIndex("Price")),
+                                                     c.getString(c.getColumnIndex("Email")),
                                              c.getString(c.getColumnIndex("Discount")),
-                                            c.getString(c.getColumnIndex("Image")),
-                                           c.getString(c.getColumnIndex("Email"))));
+                                            c.getString(c.getColumnIndex("Image"))
+                                           ));
 
                 }while(c.moveToNext());
                 }
@@ -79,15 +80,17 @@ public class Database extends SQLiteAssetHelper{
         {
             SQLiteDatabase db = getReadableDatabase();
             //Damn bro a single comma took me 42 hours to debug sql is a bitch
-            String query = String.format("INSERT OR REPLACE INTO OrderDetail (UserPhone,ProductId,ProductName,Quantity,Price,Discount,Image,Email) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s');",
+            String query = String.format("INSERT OR REPLACE INTO OrderDetail (UserPhone,ProductId,ProductName,Quantity,Price,Email,Discount,Image)" +
+                            " VALUES ('%s','%s','%s','%s','%s','%s','%s','%s');",
                     order.getUserPhone(),
                     order.getProductId(),
                     order.getProductName(),
                     order.getQuantity(),
                     order.getPrice(),
+                    order.getEmail(),
                     order.getDiscount(),
-                    order.getImage(),
-                    order.getEmail()
+                    order.getImage()
+
                     );
             db.execSQL(query);
 

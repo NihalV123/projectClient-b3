@@ -422,9 +422,10 @@ public class FoodList extends AppCompatActivity {
                                         model.getName(),
                                         "1",
                                         model.getPrice(),
+                                        model.getEmail(),
                                         model.getDiscount(),
-                                        model.getImage(),
-                                        model.getEmail()
+                                        model.getImage()
+
                                 ));
 
                             }//isexist end here
