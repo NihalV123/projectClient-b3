@@ -42,7 +42,7 @@ public class About extends AppCompatActivity {
 
     private Element createCopyRight() {
         Element copyright = new Element();
-        final String cpoyrightstring = String.format("Copyright free since %d by Nihal Vaidya", Calendar.getInstance().get(Calendar.YEAR));
+        final String cpoyrightstring = String.format("No Copyright all free since %d by Nihal Vaidya", Calendar.getInstance().get(Calendar.YEAR));
         copyright.setTitle(cpoyrightstring);
      copyright.setIconDrawable(R.drawable.ic_child_care_black_24dp);
      copyright.setGravity(Gravity.CENTER);

@@ -95,6 +95,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
 
     public Order getItem(int position)
     {
+//        return favoritesList.size();
         return listData.get(position);
     }
 

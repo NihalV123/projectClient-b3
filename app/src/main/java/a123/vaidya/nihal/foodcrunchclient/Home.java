@@ -483,7 +483,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             }
             case R.id.nav_favorites: {
                 final SpotsDialog dialog = new SpotsDialog(Home.this);
-                Intent orderIntent = new Intent(Home.this, OrderStatus.class);
+                Intent orderIntent = new Intent(Home.this, ShowFavorites.class);
                 startActivity(orderIntent);
                 dialog.dismiss();
                 break;

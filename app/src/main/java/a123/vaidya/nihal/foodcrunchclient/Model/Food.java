@@ -8,7 +8,7 @@ public class Food {
     }
 
     public Food(String foodId,String name, String image, String description, String price, String discount,
-                String menuId, String email, String video, String recepixes,String rateValue,
+                String menuId, String email, String video, String recepixes,
                 Double quantity
     ) {
         FoodId = foodId;
@@ -21,7 +21,6 @@ public class Food {
         Email = email;
         Video = video;
         Recepixes = recepixes;
-        rateValue = rateValue;
         Quantity = quantity;
 
     }

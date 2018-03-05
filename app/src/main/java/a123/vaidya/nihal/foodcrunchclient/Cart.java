@@ -563,7 +563,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                     // ammount = Common.formatCurrency(txtTotalPrice.getText().toString(),Locale.US).doubleValue();
                     ammount = Double.valueOf(txtTotalPrice.getText().toString());
                     //compare with balance
-                    if(Common.currentUser.getBalance() >  ammount)
+                    if(Double.parseDouble(Common.currentUser.getBalance().toString()) >  ammount)
 //                    if(Common.currentUser.getBalance() >= ammount)
                     {
 
@@ -594,7 +594,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                         new Database(getBaseContext()).clearCart(Common.currentUser.getPhone());
                         loadListFood();
                        //update balance
-                        double balance = Common.currentUser.getBalance() - ammount;
+                        double balance = Double.parseDouble(Common.currentUser.getBalance().toString()) - ammount;
                         //set to database
                         Map<String ,Object> update_balance = new HashMap<>();
                         update_balance.put("balance",balance);

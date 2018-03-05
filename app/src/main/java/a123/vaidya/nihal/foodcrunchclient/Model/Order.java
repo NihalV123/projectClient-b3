@@ -10,22 +10,23 @@ public class Order {
     private String ProductName;
     private String Quantity;
     private String Price;
+    private String Email;
     private String Discount;
     private String Image;
-    private String Email;
 
     public Order() {
     }
 
-    public Order(String userPhone, String productId, String productName, String quantity, String price, String discount, String image, String email) {
+    public Order(String userPhone, String productId, String productName, String quantity, String price, String email,String discount, String image) {
         UserPhone = userPhone;
         ProductId = productId;
         ProductName = productName;
         Quantity = quantity;
         Price = price;
+        Email = email;
         Discount = discount;
         Image = image;
-        Email = email;
+
     }
 
     public String getUserPhone() {

@@ -53,6 +53,7 @@ import java.util.Objects;
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
+import a123.vaidya.nihal.foodcrunchclient.Model.Favorites;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.Model.Rating;
@@ -364,7 +365,8 @@ public class FoodList extends AppCompatActivity {
                 .build();
         adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(foodoptions) {
             @Override
-            protected void onBindViewHolder(@NonNull final FoodViewHolder viewHolder, final int position, @NonNull final Food model) {
+            protected void onBindViewHolder(@NonNull final FoodViewHolder viewHolder,
+                                            final int position, @NonNull final Food model) {
                 viewHolder.food_name.setText(model.getName());
                 viewHolder.food_price.setText(String.format("INR :  %s",model.getPrice()));
                 //viewHolder.ratingbar.setRating(Float.parseFloat(.getRateValue()));
@@ -414,7 +416,8 @@ public class FoodList extends AppCompatActivity {
                                 Toast.makeText(FoodList.this, "INVENTORY EMPTY", Toast.LENGTH_LONG).show();
                             }
                             if (!isExist) {
-                                new Database(getBaseContext()).addToCart(new Order(Common.currentUser.getPhone(),
+                                new Database(getBaseContext()).addToCart(new Order(
+                                        Common.currentUser.getPhone(),
                                         adapter.getRef(position).getKey(),//this gets the random id of food id this took me 2 days to debug lol
                                         model.getName(),
                                         "1",
@@ -442,9 +445,22 @@ public class FoodList extends AppCompatActivity {
                 viewHolder.fav_image.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        Favorites favorites = new Favorites();
+                        favorites.setFoodId(adapter.getRef(position).getKey());
+                        favorites.setFoodName(model.getName());
+                        favorites.setFoodDescription(model.getDescription());
+                        favorites.setFoodDiscount(model.getDiscount());
+                        favorites.setFoodImage(model.getImage());
+                        favorites.setFoodMenuId(model.getMenuId());
+                        favorites.setUserPhone(Common.currentUser.getPhone());
+                        favorites.setFoodPrice(model.getPrice());
+
+
+
                         if(!localDB.isFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone()))
                         {
-                            localDB.addToFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone());
+                            localDB.addToFavorites(favorites);
                             viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
                             Toast.makeText(FoodList.this,"The"+model.getName()+"\n was added to " +
                                     "favorites",Toast.LENGTH_SHORT).show();

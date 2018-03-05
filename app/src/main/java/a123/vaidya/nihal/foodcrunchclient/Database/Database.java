@@ -10,6 +10,7 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import java.util.ArrayList;
 import java.util.List;
 
+import a123.vaidya.nihal.foodcrunchclient.Model.Favorites;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 
 /**
@@ -78,9 +79,7 @@ public class Database extends SQLiteAssetHelper{
         {
             SQLiteDatabase db = getReadableDatabase();
             //Damn bro a single comma took me 42 hours to debug sql is a bitch
-            String query = String.format("INSERT OR REPLACE INTO OrderDetail (UserPhone,ProductId," +
-                            "ProductName,Quantity,Price,Discount,Image,Email) " +
-                            "VALUES ('%s','%s','%s','%s','%s','%s','%s','%s');",
+            String query = String.format("INSERT OR REPLACE INTO OrderDetail (UserPhone,ProductId,ProductName,Quantity,Price,Discount,Image,Email) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s');",
                     order.getUserPhone(),
                     order.getProductId(),
                     order.getProductName(),
@@ -88,7 +87,8 @@ public class Database extends SQLiteAssetHelper{
                     order.getPrice(),
                     order.getDiscount(),
                     order.getImage(),
-                    order.getEmail());
+                    order.getEmail()
+                    );
             db.execSQL(query);
 
 
@@ -102,12 +102,59 @@ public class Database extends SQLiteAssetHelper{
     }
 
     //favorites query
-    public void addToFavorites(String foodId,String userPhone)
+    public void addToFavorites(Favorites food)
     {
         SQLiteDatabase db = getReadableDatabase();
-        String query = String.format("INSERT INTO Favorites(FoodId,UserPhone)VALUES('%s','%s');",foodId,userPhone);
+        String query = String.format("INSERT INTO Favorites(FoodId,FoodName,FoodPrice,FoodMenuId,FoodImage,FoodDiscount,FoodDescription,UserPhone)" +
+                "VALUES('%s','%s','%s','%s','%s','%s','%s','%s');",
+                food.getFoodId(),
+                food.getFoodName(),
+                food.getFoodPrice(),
+                food.getFoodMenuId(),
+                food.getFoodImage(),
+                food.getFoodDiscount(),
+                food.getFoodDescription(),
+                food.getUserPhone()
+
+                );
         db.execSQL(query);
     }
+
+    public List <Favorites> getAllFavorites(String userPhone)
+    {
+        SQLiteDatabase db = getReadableDatabase();
+        SQLiteQueryBuilder gb = new SQLiteQueryBuilder();
+
+        String[] sqlSelect={"UserPhone","FoodId","FoodName","FoodPrice", "FoodMenuId", "FoodImage","FoodDiscount","FoodDescription"};
+
+        String sqlTable = "Favorites";
+
+
+        gb.setTables(sqlTable);
+        Cursor c = gb.query(db,sqlSelect,"UserPhone=?",new String[]{userPhone},null,
+                null,null);
+//latest change
+        final List<Favorites> result = new ArrayList<>();
+        if(c.moveToFirst())
+        {
+            do{
+                result.add( new Favorites
+                                (c.getString(c.getColumnIndex("FoodId")),
+                                c.getString(c.getColumnIndex("FoodName")),
+                                c.getString(c.getColumnIndex("FoodPrice")),
+                                c.getString(c.getColumnIndex("FoodMenuId")),
+                                c.getString(c.getColumnIndex("FoodImage")),
+                                c.getString(c.getColumnIndex("FoodDiscount")),
+                                c.getString(c.getColumnIndex("FoodDescription")),
+                                c.getString(c.getColumnIndex("UserPhone"))
+                                ));
+
+            }while(c.moveToNext());
+        }
+        return result;
+    }
+
+
     public void removeFromFavorites(String foodId,String userPhone)
     {
         SQLiteDatabase db = getReadableDatabase();

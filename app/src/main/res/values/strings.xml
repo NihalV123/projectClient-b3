@@ -142,4 +142,5 @@
     <string name="add_to_cart_fav_list_quickly">ADD TO CART/FAV LIST QUICKLY</string>
     <string name="SEARCH">SEARCH ALL</string>
     <string name="TUTORIAL">TUTORIAL</string>
+    <string name="add_to_cart">QUICK ADD CART SWIPE TO DELETE</string>
 </resources>

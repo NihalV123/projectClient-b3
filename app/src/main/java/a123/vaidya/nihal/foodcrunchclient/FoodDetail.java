@@ -129,8 +129,26 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
             @Override
             public void onClick(View v) {
 
-                new Database(getBaseContext()).addToCart(new Order(Common.currentUser.getPhone(),foodId, currentFood.getName(), numberButton.getNumber(),
-                        currentFood.getPrice(), currentFood.getDiscount(),currentFood.getImage(),currentFood.getEmail()
+//               Common.currentUser.getPhone(),
+//                                        adapter.getRef(position).getKey(),//this gets the random id of food id this took me 2 days to debug lol
+//                                        model.getName(),
+//                                        "1",
+//                                        model.getPrice(),
+//                                        model.getDiscount(),
+//                                        model.getImage(),
+//                                        model.getEmail()
+
+                new Database(getBaseContext()).addToCart(new Order
+                        (Common.currentUser.getPhone(),
+                                foodId,
+                        //below one cgets last one item updated if multiple items added on food details fab add tp cart
+//                                currentFood.getFoodId(),
+                                currentFood.getName(),
+                                numberButton.getNumber(),
+                        currentFood.getPrice(),
+                                currentFood.getDiscount(),
+                                currentFood.getImage(),
+                                currentFood.getEmail()
                 ));
                 if(currentFood.getQuantity() > Integer.valueOf(numberButton.getNumber()) )
                 {

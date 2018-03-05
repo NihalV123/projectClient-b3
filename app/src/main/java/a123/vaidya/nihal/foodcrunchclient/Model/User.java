@@ -9,7 +9,7 @@ public class User {
     private String secureCode;
     private String HomeAddress;
     private String Email;
-    private Double balance;
+    private Object balance;
     private String Extra;
 
     public User (){
@@ -94,11 +94,11 @@ public class User {
         Extra = extra;
     }
 
-    public Double getBalance() {
+    public Object getBalance() {
         return balance;
     }
 
-    public void setBalance(Double balance) {
+    public void setBalance(Object balance) {
         this.balance = balance;
     }
 }
