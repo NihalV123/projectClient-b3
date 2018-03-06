@@ -23,7 +23,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal">
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:background="@color/white"
+                android:paddingLeft="20dp"
+                android:src="@drawable/ic_whatshot_black_24dp"
+                android:layout_height="match_parent" />
             <TextView
                 android:id="@+id/txtmanconetnthome"
                 android:layout_width="match_parent"
@@ -33,7 +43,7 @@
                 android:gravity="center"
                 android:text="@string/Todays_Speciality"
                 android:textColor="@color/colorAccent" />
-
+        </LinearLayout>
             <com.daimajia.slider.library.SliderLayout
                 android:layout_width="match_parent"
                 android:id="@+id/slider"

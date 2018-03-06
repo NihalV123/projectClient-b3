@@ -3,6 +3,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -23,6 +24,10 @@ import android.widget.Toast;
 
 import com.andremion.counterfab.CounterFab;
 import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
@@ -226,6 +231,7 @@ public class FoodList extends AppCompatActivity {
                         List<String> suggest = new ArrayList<>();
                         for(String search:suggestList)
                         {
+                          //  for debuging only works fine add later
                             if (search.toLowerCase().contains(materialSearchBar.getText().toLowerCase()))
                                 suggest.add(search);
                         }
@@ -264,11 +270,10 @@ public class FoodList extends AppCompatActivity {
         recycler_menu.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);
-        fav_image = findViewById(R.id.fav);
-//        share = findViewById(R.id.share);
-        ratingbar = findViewById(R.id.ratingbarrr);
-//        like = findViewById(R.id.like);
-        add_to_cart= findViewById(R.id.add_to_crat);
+        fav_image =(ImageView) findViewById(R.id.fav);
+        share = (ImageView)findViewById(R.id.share);
+       // like =(ImageView) findViewById(R.id.like);
+        add_to_cart=(ImageView) findViewById(R.id.add_to_crat);
 
         //get intent
         if (getIntent()!=null)
@@ -372,6 +377,47 @@ public class FoodList extends AppCompatActivity {
                 //viewHolder.ratingbar.setRating(Float.parseFloat(.getRateValue()));
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.food_image);
 
+
+                viewHolder.share.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+                            @Override
+                            public void onSuccess(Sharer.Result result) {
+                                Toast.makeText(FoodList.this,"SHARE SUCCESS ",Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void onCancel() {
+                                Toast.makeText(FoodList.this,"SHARE CANCEL ",Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void onError(FacebookException error) {
+                                Toast.makeText(FoodList.this,"SOMETHING IS NOT RIGHT ",Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+                        Picasso.with(getApplicationContext())
+                                .load(model.getImage())
+                                .into(target);
+                        ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                                .setQuote("SENT FROM FOOD CRUNCH")
+                                .setContentUrl(Uri.parse("https://www.youtube.com/channel/UCRZ7xBsehvpfquJtWpvSY1w"))
+                                .build();
+                        if(ShareDialog.canShow(ShareLinkContent.class))
+                        {
+                            shareDialog.show(linkContent);
+                        }
+
+
+                        Toast.makeText(FoodList.this,"Getting Ready ",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
                 //quick cart button here
                     viewHolder.add_to_cart.setOnClickListener(new View.OnClickListener() {
                         int clickcount = 0;
@@ -442,6 +488,7 @@ public class FoodList extends AppCompatActivity {
                 //change fav icon
                 if(localDB.isFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone()))
                     viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
+
 
                 viewHolder.fav_image.setOnClickListener(new View.OnClickListener() {
                     @Override

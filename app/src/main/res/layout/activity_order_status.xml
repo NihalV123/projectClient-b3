@@ -10,32 +10,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background">
+        ">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparentBlack"
+                android:orientation="horizontal">
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:background="@color/transparentBlack"
+                    android:paddingLeft="20dp"
+                    android:src="@drawable/ic_access_time_black_24dp"
+                    android:tint="@color/white"
+                    android:layout_height="match_parent" />
+                <TextView
+                    android:id="@+id/txtmanconetnthome"
+                    android:layout_width="match_parent"
+                    android:background="@color/transparentBlack"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/Your_orders_from_Today"
+                    android:textColor="@color/white"
+                    android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/txtmanconetnthom3e"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/transparentBlack"
-            android:gravity="center"
-            android:paddingTop="100dp"
-            android:text="@string/EMPTY_LIST"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtmanconetnthome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingTop="10dp"
-            android:text="@string/Your_orders_from_Today"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
-
-    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listOrders"
@@ -43,7 +42,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
 
-        android:paddingTop="55dp">
+        android:paddingTop="45dp">
 
     </android.support.v7.widget.RecyclerView>
 

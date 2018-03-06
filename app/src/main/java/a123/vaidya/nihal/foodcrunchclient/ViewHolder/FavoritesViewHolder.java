@@ -18,7 +18,7 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder implements View
    // public final ImageView fav_image;
     public RelativeLayout viewBackground;
     public RelativeLayout view_foreground2;
-    //    public final ImageView share;
+        public final ImageView share;
 //    public final ImageView like;
    // public final RatingBar ratingbar;
     public final ImageView add_to_cart;
@@ -35,7 +35,7 @@ public class FavoritesViewHolder extends RecyclerView.ViewHolder implements View
 
         food_name = itemView.findViewById(R.id.food_name);
         food_image = itemView.findViewById(R.id.food_image);
-//        share = itemView.findViewById(R.id.share);
+        share = itemView.findViewById(R.id.share);
        // ratingbar = itemView.findViewById(R.id.ratingbarrr);
 //        like = itemView.findViewById(R.id.like);
         add_to_cart= itemView.findViewById(R.id.add_to_crat);

@@ -76,12 +76,13 @@ import a123.vaidya.nihal.foodcrunchclient.Common.Config;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Helper.RecyclerItemTouchHelper;
 import a123.vaidya.nihal.foodcrunchclient.Interface.RecyclerItemTouchHelperListener;
+import a123.vaidya.nihal.foodcrunchclient.Model.DataMessage;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.MyResponse;
-import a123.vaidya.nihal.foodcrunchclient.Model.Notification;
+//import a123.vaidya.nihal.foodcrunchclient.Model.Notification;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.Model.Request;
-import a123.vaidya.nihal.foodcrunchclient.Model.Sender;
+//import a123.vaidya.nihal.foodcrunchclient.Model.Sender;
 import a123.vaidya.nihal.foodcrunchclient.Model.Token;
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
 import a123.vaidya.nihal.foodcrunchclient.Remote.APIService;
@@ -859,9 +860,14 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                 {
                     Token serverToken = postSnapShot.getValue(Token.class);
                     //create raw payload
-                    Notification notification = new Notification("From "+Common.currentUser.getName().toString()+" tap to manage it!!!","You have new Order : "+order_number);
-                    Sender content = new Sender(serverToken.getToken(),notification);
-                    mservice.sendNotification(content)
+//                    Notification notification = new Notification("From "+Common.currentUser.getName().toString()+" tap to manage it!!!","You have new Order : "+order_number);
+//                    Sender content = new Sender(serverToken.getToken(),notification);
+                    Map<String,String> datasend = new HashMap<>();
+                    datasend.put("title","From "+Common.currentUser.getName().toString()+" tap to manage it!!!");
+                    datasend.put("message","You have new Order : "+order_number);
+                    DataMessage dataMessage = new DataMessage(serverToken.getToken(),datasend);
+
+                    mservice.sendNotification(dataMessage)
                             .enqueue(new Callback<MyResponse>() {
                                 @Override
                                 public void onResponse(Call<MyResponse> call,  Response<MyResponse> response) {

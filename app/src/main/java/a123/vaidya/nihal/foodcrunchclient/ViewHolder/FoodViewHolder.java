@@ -19,7 +19,7 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public final TextView food_price;
     public final ImageView food_image;
     public final ImageView fav_image;
-//    public final ImageView share;
+    public final ImageView share;
 //    public final ImageView like;
     public final RatingBar ratingbar;
     public final ImageView add_to_cart;
@@ -36,7 +36,7 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         food_name = itemView.findViewById(R.id.food_name);
         food_image = itemView.findViewById(R.id.food_image);
-//        share = itemView.findViewById(R.id.share);
+        share = itemView.findViewById(R.id.share);
         ratingbar = itemView.findViewById(R.id.ratingbarrr);
 //        like = itemView.findViewById(R.id.like);
         add_to_cart= itemView.findViewById(R.id.add_to_crat);

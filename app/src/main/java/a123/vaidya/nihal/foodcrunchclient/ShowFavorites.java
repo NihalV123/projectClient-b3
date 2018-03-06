@@ -10,7 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.facebook.CallbackManager;
+import com.facebook.share.widget.ShareDialog;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,7 +38,10 @@ public class ShowFavorites extends AppCompatActivity implements RecyclerItemTouc
 
     private RecyclerView recycler_menu;
     private RecyclerView.LayoutManager layoutManager;
-
+    private Context context;
+    private ShareDialog shareDialog;
+    private CallbackManager callbackManager;
+    private TextView textView;
     FavoritesAdapter adapter;
     RelativeLayout rootlayout;
     @Override
@@ -56,7 +62,12 @@ public class ShowFavorites extends AppCompatActivity implements RecyclerItemTouc
         recycler_menu.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(this);
         recycler_menu.setLayoutManager(layoutManager);
-        //       swipe to delete view init
+        new CallbackManager.Factory();
+        callbackManager = CallbackManager.Factory.create();
+        shareDialog = new ShareDialog(this);
+
+
+
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new
                 RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,this);
         new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recycler_menu);

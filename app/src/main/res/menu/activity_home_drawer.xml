@@ -58,10 +58,10 @@
                     android:icon="@drawable/ic_access_time_black_24dp"
                     android:title="@string/ordersreport" />
 
-    <item
-        android:id="@+id/nav_fcb"
-        android:icon="@drawable/ic_action_name"
-        android:title="@string/ordefoodcrunchbalance" />
+    <!--<item-->
+        <!--android:id="@+id/nav_fcb"-->
+        <!--android:icon="@drawable/ic_action_name"-->
+        <!--android:title="@string/ordefoodcrunchbalance" />-->
 </menu></item>
     <item android:id="@+id/nav_menu4"
         android:iconTint="@color/white"

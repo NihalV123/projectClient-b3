@@ -149,12 +149,9 @@ public class SearchActivity extends AppCompatActivity {
                 List<String> suggest = new ArrayList<>();
                 for(String search:suggestList)
                 {
-
-//                    Food item = postDnapshot.getValue(Food.class);
-//                    suggestList.add(Objects.requireNonNull(item).getName());
-                    try{if (search.toUpperCase().contains(materialSearchBar.getText().toUpperCase()))
-                        suggest.add(search);
-                    else return;}catch (Exception e){}
+                    try{//  for debuging only works fine add later
+                    if (search.toLowerCase().contains(materialSearchBar.getText().toLowerCase()))
+                        suggest.add(search);}catch(Exception e){Toast.makeText(SearchActivity.this,"",Toast.LENGTH_LONG);}
                 }
                 materialSearchBar.setLastSuggestions(suggest);
             }
