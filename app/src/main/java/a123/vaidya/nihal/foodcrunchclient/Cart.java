@@ -863,8 +863,8 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 //                    Notification notification = new Notification("From "+Common.currentUser.getName().toString()+" tap to manage it!!!","You have new Order : "+order_number);
 //                    Sender content = new Sender(serverToken.getToken(),notification);
                     Map<String,String> datasend = new HashMap<>();
-                    datasend.put("title","From "+Common.currentUser.getName().toString()+" tap to manage it!!!");
-                    datasend.put("message","You have new Order : "+order_number);
+                    datasend.put("title","You have new Order : "+order_number);
+                    datasend.put("message","From "+Common.currentUser.getName().toString()+" tap to manage it!!!");
                     DataMessage dataMessage = new DataMessage(serverToken.getToken(),datasend);
 
                     mservice.sendNotification(dataMessage)
