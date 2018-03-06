@@ -144,4 +144,5 @@
     <string name="TUTORIAL">TUTORIAL</string>
     <string name="add_to_cart">ADD CART/SHARE TO FACEBOOK AND SWIPE FROM RIGHT TO LEFT TO DELETE</string>
     <string name="favoritelist">YOUR FAVORITES</string>
+    <string name="search_all_food_at_once">SEARCH ALL FOOD AT ONCE</string>
 </resources>

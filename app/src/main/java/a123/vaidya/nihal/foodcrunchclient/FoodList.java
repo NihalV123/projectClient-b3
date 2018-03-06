@@ -75,6 +75,7 @@ public class FoodList extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference foodList;
     private String categoryId="";
+    private String categoryId2="";
 
     private FirebaseRecyclerAdapter<Food,FoodViewHolder> adapter;
 
@@ -207,11 +208,39 @@ public class FoodList extends AppCompatActivity {
                 {
                     if (Common.isConnectedToInternet(getBaseContext()))
                         loadListFood(categoryId);
+
                     else
                     {Toast.makeText(FoodList.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
                     return;}
                 }
-                //search
+
+
+//                FirebaseDatabase.getInstance().getReference("Category")
+//                        .child(categoryId)
+//                        .getRef("name")
+//                        .addListenerForSingleValueEvent(new ValueEventListener() {
+//                            @Override
+//                            public void onDataChange(DataSnapshot dataSnapshot) {
+//                                Toast.makeText(context, "INVENTORY UPDATED",
+//                                        Toast.LENGTH_LONG).show();
+//                                Food model = dataSnapshot.getValue(Food.class);
+//
+//                            }
+//trying to get cat idd name
+//                            @Override
+//                            public void onCancelled(DatabaseError databaseError) {
+//
+//                            }
+//                        });
+
+
+                categoryId2 = getIntent().getStringExtra("CategoryId");
+           //  Toast.makeText(FoodList.this,"You are in "+categoryId2,Toast.LENGTH_LONG).show();
+
+
+
+
+             //search
                 materialSearchBar = findViewById(R.id.searchBar);
                 textView = findViewById(R.id.textView3);
                 textView = findViewById(R.id.textView2);
@@ -322,7 +351,7 @@ public class FoodList extends AppCompatActivity {
             @Override
             public FoodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.food_item,parent,false);
+                        .inflate(R.layout.food_item_plain,parent,false);
                 return new FoodViewHolder(itemView);
             }
         };

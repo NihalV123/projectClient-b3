@@ -1,5 +1,7 @@
 package a123.vaidya.nihal.foodcrunchclient.ViewHolder;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -11,6 +13,8 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+import com.facebook.CallbackManager;
+import com.facebook.share.widget.ShareDialog;
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
@@ -33,6 +37,10 @@ import a123.vaidya.nihal.foodcrunchclient.R;
 
 public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
     private List<Order> listData;
+    private ShareDialog shareDialog;
+    private Context context;
+    private CallbackManager callbackManager;
+    private TextView textView;
     private final Cart cart;
 
     public CartAdapter(List<Order> listData, Cart cart) {
@@ -44,6 +52,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
     public CartViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(cart);
         View itemView = inflater.inflate(R.layout.cart_layout,parent,false);
+//        new CallbackManager.Factory();
+//        callbackManager = CallbackManager.Factory.create();
+//        shareDialog = new ShareDialog((Activity) context);
         return new CartViewHolder(itemView);
     }
 

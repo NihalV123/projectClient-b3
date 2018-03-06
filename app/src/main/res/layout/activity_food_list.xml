@@ -51,7 +51,7 @@
             android:id="@+id/fab"
             android:layout_width="76dp"
             android:layout_height="55dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="100dp"
             android:layout_gravity="bottom|end"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
@@ -74,7 +74,7 @@
             android:layout_height="match_parent" />
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textViewcatid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/transparentBlack"

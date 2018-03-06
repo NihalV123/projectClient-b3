@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.share.Sharer;
+import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
@@ -64,6 +69,7 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     private String foodId="";
     private FirebaseDatabase database;
+
     private DatabaseReference foodList;
     private String categoryId="";
 
@@ -197,6 +203,51 @@ public class SearchActivity extends AppCompatActivity {
                 viewHolder.food_price.setText(String.format("INR :  %s",model.getPrice()));
                 //viewHolder.ratingbar.setRating(Float.parseFloat(.getRateValue()));
                 Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.food_image);
+
+                viewHolder.share.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
+                            @Override
+                            public void onSuccess(Sharer.Result result) {
+                                Toast.makeText(SearchActivity.this,"SHARE SUCCESS ",Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void onCancel() {
+                                Toast.makeText(SearchActivity.this,"SHARE CANCEL ",Toast.LENGTH_SHORT).show();
+
+                            }
+
+                            @Override
+                            public void onError(FacebookException error) {
+                                Toast.makeText(SearchActivity.this,"SOMETHING IS NOT RIGHT ",Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+//                Picasso.with(getApplicationContext())
+//                        .load(model.getImage())
+//                        .into(target);
+                        ShareLinkContent linkContent = new ShareLinkContent.Builder()
+                                .setQuote("This is useful")
+                                .setContentUrl(Uri.parse("https://youtube.com"))
+                                .build();
+                        if(ShareDialog.canShow(ShareLinkContent.class))
+                        {
+                            shareDialog.show(linkContent);
+                        }
+
+
+                        Toast.makeText(SearchActivity.this,"Getting Ready ",Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+
+
 
                 //quick cart button here
                 viewHolder.add_to_cart.setOnClickListener(new View.OnClickListener() {
@@ -366,7 +417,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public FoodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View itemView = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.food_item,parent,false);
+                        .inflate(R.layout.food_item_plain,parent,false);
                 return new FoodViewHolder(itemView);
             }
         };

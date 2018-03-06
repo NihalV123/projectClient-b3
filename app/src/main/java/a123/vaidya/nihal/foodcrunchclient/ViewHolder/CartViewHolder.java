@@ -21,6 +21,7 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public final ImageView img_cart_count;
     public final ElegantNumberButton add_to_cart;
     public ImageView cart_image;
+//    public final ImageView share;
     private ItemClickListener itemClickListener;
     public RelativeLayout viewBackground;
     public LinearLayout view_foreground;
@@ -33,6 +34,7 @@ public class CartViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         super(itemView);
         txt_cart_name= (TextView) itemView.findViewById(R.id.cart_item_name);
         txt_price= (TextView) itemView.findViewById(R.id.cart_item_Price);
+//        share = itemView.findViewById(R.id.share);
         img_cart_count= (ImageView) itemView.findViewById(R.id.cart_item_count);
         add_to_cart =(ElegantNumberButton) itemView.findViewById(R.id.cart_number);
         cart_image = (ImageView) itemView.findViewById(R.id.cartimage);
