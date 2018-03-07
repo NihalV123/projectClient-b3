@@ -22,7 +22,7 @@ public class About extends AppCompatActivity {
         View about = new AboutPage(this)
                 .isRTL(false)
                 //.setImage(R.drawable.box)
-                .setDescription("THIS PROJECT WAS CREATED BY \n  NIHAL VAIDYA TYCS ROLL NO 518\n AND DEDICATED TO MY MOM")
+                .setDescription("THIS PROJECT WAS CREATED BY \n  NIHAL VAIDYA TYCS ROLL NO 518\n SPECIAL THANKS TO MY MOM")
                 .addItem(new Element().setTitle("VERSION 0.8"))
                 .addItem(addsElement)
                 .addGroup("CONNECT WITH US ")

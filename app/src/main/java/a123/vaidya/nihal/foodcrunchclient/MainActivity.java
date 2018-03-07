@@ -3,11 +3,13 @@ package a123.vaidya.nihal.foodcrunchclient;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
@@ -102,6 +104,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
             printKeyHash();
+
+
+
+        //app intro
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                SharedPreferences getPref = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+                boolean isFirstStart = getPref.getBoolean("firstStart",true);
+                if(isFirstStart)
+                {
+                    startActivity(new Intent(MainActivity.this,MyIntro.class));
+                    SharedPreferences.Editor e= getPref.edit();
+                    e.putBoolean("firstStart",false);
+                    e.apply();
+                }
+
+            }
+        });
+
+        thread.start();
+
+
         txtSlogan= findViewById(R.id.txtslogan);
         Typeface face = Typeface.createFromAsset(getAssets(),"fonts/NABILA.TTF");
         txtSlogan.setTypeface(face);

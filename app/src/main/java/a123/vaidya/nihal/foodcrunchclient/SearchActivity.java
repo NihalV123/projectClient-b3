@@ -257,7 +257,7 @@ public class SearchActivity extends AppCompatActivity {
                         boolean isExist =new Database(getBaseContext()).checkFoodExist(adapter.getRef(position).getKey(), Common.currentUser.getPhone());
                         //clicker code strt
                         clickcount = clickcount + 1;
-                        if (model.getQuantity() > clickcount) {
+                        if ((model.getQuantity()+50) > clickcount) {
                             double balance = model.getQuantity() - clickcount;
                             Map<String, Object> update_balance = new HashMap<>();
                             update_balance.put("quantity", balance);

@@ -636,6 +636,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                         Toast.makeText(Cart.this, "YOU HAVE INSUFFICIENT BALANCE FOR THIS" +
                                         " TRANSACTION \n PLEASE CHOOSE ANOTHER PAYMENT OPTION!!!",
                                 Toast.LENGTH_LONG).show();
+                        return;
 
                     }
                 }
@@ -785,9 +786,9 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                             try {
                                 startActivity(Intent.createChooser(emailIntent, "Send mail..."));
                             } catch (android.content.ActivityNotFoundException ex) {
-                                Toast.makeText(Cart.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(Cart.this, "There are no email clients installed.", Toast.LENGTH_SHORT);
                             }
-                        }                                Toast.makeText(Cart.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                        }     Toast.makeText(Cart.this, "There are no email clients installed.", Toast.LENGTH_SHORT);
 
                     }
 
@@ -796,7 +797,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
                     }
 
-                });                                Toast.makeText(Cart.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                });         //                       Toast.makeText(Cart.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
 
 
     }

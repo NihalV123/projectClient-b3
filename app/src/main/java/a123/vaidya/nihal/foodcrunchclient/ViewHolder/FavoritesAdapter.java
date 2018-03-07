@@ -130,7 +130,7 @@ public class FavoritesAdapter  extends RecyclerView.Adapter<FavoritesViewHolder>
                 favoritesList.get(position).setFoodQuantity(item);
                 //clicker code strt
                 clickcount = clickcount - 1;
-                if (favoritesList.get(position).getFoodQuantity() > clickcount) {
+                if ((favoritesList.get(position).getFoodQuantity()+50) > clickcount) {
                     double balance =item + clickcount;
                     Map<String, Object> update_balance = new HashMap<>();
                     update_balance.put("quantity", balance);
@@ -161,7 +161,7 @@ public class FavoritesAdapter  extends RecyclerView.Adapter<FavoritesViewHolder>
                                     }
                                 }
                             });
-//                    Toast.makeText(context, "Item was added to cart", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Item was added to cart", Toast.LENGTH_LONG).show();
                 } else {
                     Toast.makeText(context, "INVENTORY EMPTY", Toast.LENGTH_LONG).show();
                 }

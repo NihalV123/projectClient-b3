@@ -1,12 +1,17 @@
 
 package a123.vaidya.nihal.foodcrunchclient;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +41,9 @@ import info.hoang8f.widget.FButton;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
+import com.luseen.autolinklibrary.AutoLinkMode;
+import com.luseen.autolinklibrary.AutoLinkOnClickListener;
+import com.luseen.autolinklibrary.AutoLinkTextView;
 import com.squareup.picasso.Picasso;
 import com.stepstone.apprating.AppRatingDialog;
 import com.stepstone.apprating.listener.RatingDialogListener;
@@ -57,7 +65,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
     private TextView food_price;
     private TextView food_description;
     private TextView food_video;
-    private TextView food_recepie;
+    private AutoLinkTextView food_recepie;
     private ImageView food_image;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private FloatingActionButton btnRating;
@@ -151,7 +159,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                                 currentFood.getImage()
 
                 ));
-                if(currentFood.getQuantity() > Integer.valueOf(numberButton.getNumber()) )
+                if((currentFood.getQuantity()+50.0) > Integer.valueOf(numberButton.getNumber()) )
                 {
                     double balance = currentFood.getQuantity() - Integer.valueOf(numberButton.getNumber());
                     //set to database
@@ -201,7 +209,87 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         food_description = findViewById(R.id.food_description);
         food_price = findViewById(R.id.food_price);
         food_video = findViewById(R.id.food_video);
-        food_recepie = findViewById(R.id.food_recepie);
+        food_recepie = (AutoLinkTextView) findViewById(R.id.food_recepie);
+        food_recepie.setHashtagModeColor(ContextCompat.getColor(this, R.color.com_facebook_blue));
+        food_recepie.setPhoneModeColor(ContextCompat.getColor(this, R.color.fbutton_color_green_sea));
+       // food_recepie.setCustomModeColor(ContextCompat.getColor(this, R.color.yourColor));
+        food_recepie.setUrlModeColor(ContextCompat.getColor(this, R.color.fbutton_color_sun_flower));
+        food_recepie.setMentionModeColor(ContextCompat.getColor(this, R.color.fbutton_color_wisteria));
+        food_recepie.setEmailModeColor(ContextCompat.getColor(this, R.color.fbutton_color_pomegranate));
+//        food_recepie.enableUnderLine();
+        food_recepie.setSelectedStateColor(ContextCompat.getColor(this, R.color.fbutton_color_concrete));
+        food_recepie.addAutoLinkMode(
+                AutoLinkMode.MODE_HASHTAG,
+                AutoLinkMode.MODE_EMAIL,
+                AutoLinkMode.MODE_PHONE,
+                AutoLinkMode.MODE_URL,
+                AutoLinkMode.MODE_MENTION);
+        food_recepie.setAutoLinkOnClickListener(new AutoLinkOnClickListener() {
+            @Override
+            public void onAutoLinkTextClick(AutoLinkMode autoLinkMode, String matchedText) {
+                    if(autoLinkMode == AutoLinkMode.MODE_EMAIL)
+                    {
+                        String[] TO = {matchedText};
+                        String[] CC = {matchedText};
+                        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+
+                        emailIntent.setData(Uri.parse("mailto:"));
+                        emailIntent.setType("text/plain");
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Feedback reguarding your app ");
+//                        emailIntent.putExtra(Intent.EXTRA_TEXT, "Here are your order details \n"+
+//                                "The order for user  \t" +
+//                                (Common.currentUser.getName())+
+//                                "\nwith email  \t" +
+//                                (Common.currentUser.getEmail())+
+//                                "\nand phone no \t" +
+//                                (Common.currentUser.getPhone())+
+//                                "\n \n HAS BEEN PLACED!!  \t" +
+////                                    "\n  It will be delivered to address  \t" +
+////                                    (Common.currentUser.get)+
+//                                "\n\nTHANK YOU FOR SHOPPING WITH US!!")
+                                    ;
+                        try {
+                            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(getApplicationContext(), "There are no email clients installed.", Toast.LENGTH_SHORT);
+                        }
+
+
+                    }else if(autoLinkMode == AutoLinkMode.MODE_HASHTAG)
+                    {
+
+
+
+                    }else if(autoLinkMode == AutoLinkMode.MODE_MENTION)
+                    {
+
+
+
+                    } else if(autoLinkMode == AutoLinkMode.MODE_PHONE)
+                    {
+                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+                        callIntent.setData(Uri.parse("tel:0377778888"));
+
+                        if (ActivityCompat.checkSelfPermission(getApplicationContext(),
+                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                            return;
+                        }
+                        startActivity(callIntent);
+
+
+                    } else if(autoLinkMode == AutoLinkMode.MODE_URL)
+                    {
+
+
+
+                    }
+
+            }
+        });
+
+
         food_name = findViewById(R.id.food_name);
         food_image= findViewById(R.id.img_food);
         collapsingToolbarLayout= findViewById(R.id.collapsing);
@@ -279,7 +367,9 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 food_name.setText(currentFood.getName ());
                 food_description.setText(currentFood.getDescription());
                 food_video.setText(currentFood.getVideo ());
-                food_recepie.setText(currentFood.getRecepixes());
+                food_recepie.setAutoLinkText(currentFood.getRecepixes()+"\n\n#foodie IF THE INFO NEEDS TO BE" +
+                        " UPDATED YOU CAN CONTACT ME ON 7208680470 OR EMAIL ME ON nhlvcam@gmail.com ALL INFO IS FROM" +
+                        " @Wikipedia ARTICLES IN  https://www.wikipedia.org/ ");
 
 
             }
