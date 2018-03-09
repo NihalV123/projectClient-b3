@@ -48,7 +48,7 @@
     <string name="ordersreport">MY ORDER STATUS</string>
     <string name="refresh">REFRESH</string>
     <string name="RememberMe">REMEMBER ME</string>
-    <string name="SecureCode">SECURE CODE</string>
+    <string name="SecureCode">SECURE CODE FOR PASSWORD RECOVERY</string>
     <string name="forget_pwd"><u>FORGOT YOUR PASSWORD ?</u></string>
     <string name="Please_enter_your_address">ENTER YOUR EMAIL ADDRESS</string>
     <string name="Write_comment">COMMENT HERE</string>
@@ -142,7 +142,7 @@
     <string name="add_to_cart_fav_list_quickly">ADD TO CART/FAV LIST/SHARE TO FB </string>
     <string name="SEARCH">SEARCH ALL</string>
     <string name="TUTORIAL">TUTORIAL</string>
-    <string name="add_to_cart">ADD CART/SHARE TO FACEBOOK AND SWIPE FROM RIGHT TO LEFT TO DELETE</string>
+    <string name="add_to_cart">ALL YOUR FAVORITES ALL THE TIME TO DELETE SWIPE LEFT</string>
     <string name="favoritelist">YOUR FAVORITES</string>
     <string name="search_all_food_at_once">SEARCH ALL FOOD AT ONCE</string>
 </resources>

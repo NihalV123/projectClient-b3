@@ -133,7 +133,7 @@
             android:inputType="text"
             android:text=""
             android:textColor="@android:color/white"
-            android:textSize="36sp"
+            android:textSize="19sp"
             android:gravity="center"
             app:met_baseColor="@android:color/white"
             app:met_floatingLabel="highlight"
