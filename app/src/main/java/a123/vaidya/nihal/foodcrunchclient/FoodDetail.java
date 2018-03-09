@@ -44,6 +44,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 import com.luseen.autolinklibrary.AutoLinkMode;
 import com.luseen.autolinklibrary.AutoLinkOnClickListener;
 import com.luseen.autolinklibrary.AutoLinkTextView;
+import com.muddzdev.styleabletoastlibrary.ToastDurationWatcher;
 import com.squareup.picasso.Picasso;
 import com.stepstone.apprating.AppRatingDialog;
 import com.stepstone.apprating.listener.RatingDialogListener;
@@ -260,28 +261,35 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                     }else if(autoLinkMode == AutoLinkMode.MODE_HASHTAG)
                     {
 
-
+                        Toast.makeText(FoodDetail.this,matchedText, Toast.LENGTH_LONG).show();
 
                     }else if(autoLinkMode == AutoLinkMode.MODE_MENTION)
                     {
 
-
+                        Toast.makeText(FoodDetail.this,matchedText, Toast.LENGTH_LONG).show();
 
                     } else if(autoLinkMode == AutoLinkMode.MODE_PHONE)
                     {
-                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse("tel:0377778888"));
+                        Toast.makeText(FoodDetail.this,matchedText, Toast.LENGTH_LONG).show();
 
-                        if (ActivityCompat.checkSelfPermission(getApplicationContext(),
-                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                            return;
-                        }
-                        startActivity(callIntent);
+//                        Intent callIntent = new Intent(Intent.ACTION_CALL);
+//                        callIntent.setData(Uri.parse(matchedText));
+//
+//                        if (ActivityCompat.checkSelfPermission(getApplicationContext(),
+//                                Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//                            Toast.makeText(FoodDetail.this,"PLEASE GIVE PERMISSION TO CALL FROM SETTINGS", Toast.LENGTH_LONG).show();
+//
+//                            return;
+//                        }
+//                        startActivity(callIntent);
 
 
                     } else if(autoLinkMode == AutoLinkMode.MODE_URL)
                     {
 
+                        Toast.makeText(FoodDetail.this,matchedText, Toast.LENGTH_LONG).show();
+//                        Intent intent= new Intent(Intent.ACTION_VIEW,Uri.parse(matchedText));
+//                        startActivity(intent);
 
 
                     }
@@ -369,7 +377,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 food_video.setText(currentFood.getVideo ());
                 food_recepie.setAutoLinkText(currentFood.getRecepixes()+"\n\n#foodie IF THE INFO NEEDS TO BE" +
                         " UPDATED YOU CAN CONTACT ME ON 7208680470 OR EMAIL ME ON nhlvcam@gmail.com ALL INFO IS FROM" +
-                        " @Wikipedia ARTICLES IN  https://www.wikipedia.org/ ");
+                        " @Wikipedia ARTICLES IN  http://www.wikipedia.org ");
 
 
             }

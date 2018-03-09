@@ -16,7 +16,8 @@ public class Tutorial extends TutorialActivity {
                 .setContent("YOU CAN SEARCH ALL FOOD USING SEARCH")
                 .setBackgroundColor(R.color.colorPrimary) // int background color
                 .setDrawable(R.drawable.ic_search_black_24dp) // int top drawable
-                .setSummary("YOU CAN TYPE TO GET SUGGESTIONS OR CLICK ON RECENT SUGGESTIONS AND PRESS ENTER")
+                .setSummary("YOU CAN TYPE TO GET SUGGESTIONS OR CLICK ON RECENT SUGGESTIONS AND " +
+                        "PRESS ENTER THIS IS ALSO AVAILABLE FOR EACH FOOD CATEGORY AND PRE POPULATED WITH TOP SEARCHES")
                 .build());
         addFragment(new Step.Builder().setTitle("REFRESH BUTTON")
                 .setContent("YOU CAN REFRESH LAYOUT USING REFRESH BUTTON")
@@ -24,58 +25,54 @@ public class Tutorial extends TutorialActivity {
                 .setDrawable(R.drawable.ic_refresh_black_24dp) // int top drawable
                 .setSummary("YOU CAN REFRESH WHEN ADDING OR REMOVING CATEGORIES OR WHEN IMAGE IS NOT BEING ETCHED FROM SERVER ")
                 .build());
-        addFragment(new Step.Builder().setTitle("ADD CATEGORY BUTTON")
-                .setContent("YOU CAN ADD NEW CATEGORY USING GREEN FLOATING ACTION BUTTON")
+        addFragment(new Step.Builder().setTitle("GO TO CART BUTTON")
+                .setContent("YOU CAN QUICKLY GO TO CART USING THIS BUTTON")
                 .setBackgroundColor(R.color.colorPrimary)  // int background color
-                .setDrawable(R.drawable.ic_playlist_add_black_24dp) // int top drawable
-                .setSummary("---YOU NEED TO PROVIDE NAME AND IMAGE AND UPLOAD TO DATABASE TO SUCCESSFULLY ADD OR UPDATE CATEGORY\n---YOU " +
-                        "CAN ALSO UPDATE OR REMOVE CATEGORY USING THE UPDATE OR REMOVE BUTTONS")
+                .setDrawable(R.drawable.ic_shopping_cart_black_24dp) // int top drawable
+                .setSummary("THIS BUTTON SHOWS NUMBER OF ITEMS IN CART IN SMALL AND IS ALSO AVAILABLE IN CATEGORIES AT TOP LEFT")
                 .build());
-        addFragment(new Step.Builder().setTitle("ADD FOOD BUTTON")
-                .setContent("WHEN YOU ENTER CATEGORY YOU CAN ADD NEW FOOD ITEM USING RED FLOATING ACTION BUTTON")
+        addFragment(new Step.Builder().setTitle("BANNER")
+                .setContent("QUICKLY SELECT FROM TOP SELLING FOOD ITEMS FROM TODAY")
                 .setBackgroundColor(R.color.about_instagram_color)  // int background color
-                .setDrawable(R.drawable.ic_playlist_add_black_24dp) // int top drawable
-                .setSummary("---YOU NEED NAME DESCRIPTION PRICE DISCOUNT RECEPIE QUANTITY AND IMAGE AND UPLOAD TO DATABASE TO SUCCESSFULLY ADD OR UPDATE NEW FOOD ITEM\n---YOU " +
-                        "CAN ALSO REMOVE FOOD ITEM USING REMOVE BUTTON")
-                .build());
-        addFragment(new Step.Builder().setTitle("ALL ORDERS MENU PART 1")
-                .setContent("YOU CAN VIEW AND UPDATE AND REMOVE ALL ORDERS FROM ALL USERS USING ALL ORDERS")
-                        .setBackgroundColor(R.color.colorPrimary)  // int background color
-                .setDrawable(R.drawable.ic_access_time_black_24dp) // int top drawable
-                .setSummary("---YOU CAN USE EDIT BUTTON TO CHANGE DELIVERY STATE OF THE ORDER FROM JUST PLACED TO ON THE WAY TO " +
-                        "SHIPPED WHICH WILL TRIGGER NOTIFICATION AND EMAIL CLIENT CHOOSER TO SEND EMAIL")
-                .build());
-        addFragment(new Step.Builder().setTitle("ALL ORDERS MENU PART 2")
-                .setContent("ONCE SHIPPED YOU CAN REMOVE ORDER BY USING REMOVE BUTTON ")
-                     .setBackgroundColor(R.color.about_instagram_color)  // int background color
-                .setDrawable(R.drawable.ic_access_time_black_24dp) // int top drawable
-                .setSummary("---YOU CAN ALSO VIEW THE DETAILS OF ORDER AND ALL ITEMS IN THE ORDER USING DETAILS BUTTON \n ---WHILE DELIVERY" +
-                        " YOU CAN USE DIRECTIONS BUTTON TO GET A ROUTE FROM YOUR CURRENT LOCATION TO THE ADDRESS OF THE CUSTOMER")
-                .build());
-        addFragment(new Step.Builder().setTitle("BANNER MENU")
-                .setContent("VIEW UPDATE AND REMOVE ITEMS IN BANNER ON THE CLIENT SIDE")
-                      .setBackgroundColor(R.color.colorPrimary)  // int background color
                 .setDrawable(R.drawable.ic_theaters_black_24dp) // int top drawable
-                .setSummary("---YOU NEED NAME AND IMAGE WHICH USER CAN ONLY SEE ON THE BANNER AND A FOOD ID PRESENT IN DATABASE " +
-                        "TO LINK THE SPECIAL FOOD ITEM TO THE DATABASE AND CLICK CREATE TO SUCCESSFULLY ADD OR UPDATE NEW BANNER ITEM\n---YOU CAN REMOVE BANNER ITEMS USING REMOVE BUTTON")
+                .setSummary("TAP TO SEE DETAILS OF ITEMS")
                 .build());
-        addFragment(new Step.Builder().setTitle("UPDATE EMAIL OPTION")
-                .setContent("YOU CAN CHANGE YOUR EMAIL USING THIS OPTION")
+        addFragment(new Step.Builder().setTitle("QUICK ADD TO CART BUTTON")
+                .setContent("YOU CAN QUICKLY ADD THE DESIRED ITEM TO CART WITHOUT LOOKING AT ITS DETAILS")
+                        .setBackgroundColor(R.color.colorPrimary)  // int background color
+                .setDrawable(R.drawable.ic_add_shopping_cart_black_24dp) // int top drawable
+                .setSummary("ITEM QUANTITY IN CART WILL INCREASE THE NUMBER OF TIMES YOU CLICK IF YOU GO IN THE" +
+                        " DETAILS THE SELECTED QUANTITY WILL OVERRIDE YOUR PREVIOUS QUANTITY OF THAT ITEM")
+                .build());
+        addFragment(new Step.Builder().setTitle("FAVORITE BUTTON")
+                .setContent("YOU CAN QUICKLY ADD AND REMOVE ANY ITEM FROM FAVORITE LIST")
+                     .setBackgroundColor(R.color.about_instagram_color)  // int background color
+                .setDrawable(R.drawable.ic_favorite_black_24dp) // int top drawable
+                .setSummary("ONCE YOU ADD TO FAVORITES ICON WILL CHANGE TO WHITE AND ITEMS WILL BE STORED IN FAVORITE LIST FOR QUICK BUY")
+                .build());
+        addFragment(new Step.Builder().setTitle("SHARE TO FACEBOOK BUTTON")
+                .setContent("OPENS DAILOG TO SHARE FOOD TO FACEBOOK")
+                      .setBackgroundColor(R.color.colorPrimary)  // int background color
+                .setDrawable(R.drawable.ic_share_black_24dp) // int top drawable
+                .setSummary("SHARE DAILOG IS COMPLETELY ISOLATED WE DO NOT STORE YOUR INFO")
+                .build());
+        addFragment(new Step.Builder().setTitle("FOOD DETAILS SCREEN")
+                .setContent("LETS YOU CHHOSE ITEMS GET DETAILS AND RECEPIES ABOUT IT ALSO RATE AND VIEW WHAT OTHER PEOPLE SAID")
                        .setBackgroundColor(R.color.about_instagram_color)  // int background color
-                .setDrawable(R.drawable.ic_email_black_24dp) // int top drawable
-                .setSummary("YOU NEED TO PROVIDE A CORRECT EMAIL AND CLICK UPDATE FOR SUCCESSFULLY UPDATING EMAIL")
+                .setDrawable(R.drawable.ic_add_shopping_cart_black_24dp) // int top drawable
+                .setSummary("CART BUTTON ADDS SELECTED QUANTITY TO CART QUANTITY CAN BE CHANGED IN CART TOO ")
                 .build());
-        addFragment(new Step.Builder().setTitle("CHANGE PASSWORD OPTION")
-                .setContent("YOU CAN CHANGE YOUR PASSWORD USING THIS OPTION")
+        addFragment(new Step.Builder().setTitle("RATING BUTTON")
+                .setContent("YOU CAN GIVE RATING AND PROVIDE FEEDBACK FOR THE FOOD WITH THIS BUTTON")
                      .setBackgroundColor(R.color.colorPrimary)  // int background color
                 .setDrawable(R.drawable.ic_security_black_24dp) // int top drawable
-                .setSummary("YOU NEED TO ENTER CURRENT PASSWORD AND ENTER NEW PASSWORD TWICE AND CLICK UPDATE FOR SUCCESSFULLY UPDATING PASSWORD")
+                .setSummary("YOU CAN PROVIDE FEEDBACK AS MANY TIMES AS YOU WANT AND PREVIOUS FEEDBACK CAN BE VIEWED IN SHOW REVIEWS BUTTON")
                 .build());
-        addFragment(new Step.Builder().setTitle("CHANGE NAME OPTION")
-                .setContent("YOU CAN CHANGE THE NAME SEEN ON HEADER USING THIS OPTION")
+        addFragment(new Step.Builder().setTitle("CART SCREEN")
+                .setContent("YOU CAN CHANGE QUANTITY DELETE ONE OR ALL ITEMS IN CART")
                      .setBackgroundColor(R.color.about_instagram_color)  // int background color
                 .setDrawable(R.drawable.ic_child_care_black_24dp) // int top drawable
-                .setSummary("YOU NEED TO ENTER NEW NAME EXCEEDING MINIMUM LENGTH AND CLICK UPDATE FOR SUCCESSFULLY UPDATING NAME")
+                .setSummary("YOU NEED TO CLCIK PLACE OREDERENTER NEW NAME EXCEEDING MINIMUM LENGTH AND CLICK UPDATE FOR SUCCESSFULLY UPDATING NAME")
                 .build());
         addFragment(new Step.Builder().setTitle("TO DO LIST OPTION")
                 .setContent("YOU CAN TEMPORARILY WRITE DOWN A LIST OF THINGS TO BE DONE USING THIS OPTION")
