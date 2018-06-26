@@ -46,13 +46,14 @@
         android:layout_height="wrap_content"
         android:background="@color/transparentBlack"
         android:orientation="horizontal">
+
         <ImageButton
             android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:background="@color/transparentBlack"
             android:paddingLeft="20dp"
-            android:src="@drawable/ic_menu_black_24dp"
-            android:tint="@color/white"
-            android:layout_height="match_parent" />
+            android:src="@drawable/ic_local_dining_black_24dp"
+            android:tint="@color/white" />
         <TextView
         android:id="@+id/txtmanconetnthome"
         android:layout_width="match_parent"
