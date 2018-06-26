@@ -8,41 +8,14 @@
 @rem Set local scope for the variables with windows NT shell
 if "%OS%"=="Windows_NT" setlocal
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
-set DEFAULT_JVM_OPTS=
-
->>>>>>> old3/master
-=======
-@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
-set DEFAULT_JVM_OPTS=
-
->>>>>>> old1/master
-=======
-@rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
-set DEFAULT_JVM_OPTS=
-
->>>>>>> old2/master
 set DIRNAME=%~dp0
 if "%DIRNAME%" == "" set DIRNAME=.
 set APP_BASE_NAME=%~n0
 set APP_HOME=%DIRNAME%
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 @rem Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
 set DEFAULT_JVM_OPTS=
 
-=======
->>>>>>> old3/master
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
 @rem Find java.exe
 if defined JAVA_HOME goto findJavaFromJavaHome
 
@@ -73,28 +46,9 @@ echo location of your Java installation.
 goto fail
 
 :init
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 @rem Get command-line arguments, handling Windows variants
 
 if not "%OS%" == "Windows_NT" goto win9xME_args
-=======
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
-@rem Get command-line arguments, handling Windowz variants
-
-if not "%OS%" == "Windows_NT" goto win9xME_args
-if "%@eval[2+2]" == "4" goto 4NT_args
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> old3/master
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
 
 :win9xME_args
 @rem Slurp the command line arguments.
@@ -105,26 +59,6 @@ set _SKIP=2
 if "x%~1" == "x" goto execute
 
 set CMD_LINE_ARGS=%*
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
-goto execute
-
-:4NT_args
-@rem Get arguments from the 4NT Shell from JP Software
-set CMD_LINE_ARGS=%$
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> old3/master
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
 
 :execute
 @rem Setup the command line

@@ -5,9 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     tools:context="a123.vaidya.nihal.foodcrunchclient.MainActivity">
 
     <LinearLayout
@@ -16,35 +13,11 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingBottom="20dp"
-=======
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
-    tools:context="com.nihalvaidya123.foodcrunch.MainActivity">
-
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_centerInParent="true"
-        android:orientation="vertical"
-        android:paddingBottom="200dp"
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> old3/master
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
         android:paddingTop="10dp">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/appCompatImageView"
             android:layout_width="match_parent"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             android:layout_height="200dp"
             android:gravity="center"
             android:src="@drawable/untitled" />
@@ -71,80 +44,10 @@
 
 
     </LinearLayout>
-=======
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
-            android:layout_height="166dp"
-            android:gravity="center"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:src="@drawable/untitled" />
-
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/txtslogan"
-            android:layout_width="403dp"
-            android:layout_height="274dp"
-            android:gravity="center"
-            android:paddingLeft="40dp"
-            android:paddingRight="40dp"
-            android:text="@string/slogan"
-            android:textColor="@android:color/white"
-            android:textSize="25sp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:gravity="bottom"
-        android:weightSum="2"
-        android:orientation="horizontal"
-        android:paddingBottom="100dp">
-
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btnSignup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:text="@string/Signup"
-            android:textColor="@android:color/white"
-            app:buttonColor="@color/colorAccent"
-            app:shadowColor="@android:color/black"
-            app:shadowHeight="5dp" />
-
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btnSignin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:text="@string/Signin"
-            android:textColor="@android:color/white"
-            app:shadowColor="@android:color/black"
-            app:shadowHeight="5dp" />
-
-    </LinearLayout>
-
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> old3/master
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         android:gravity="bottom"
@@ -176,69 +79,10 @@
 
         <info.hoang8f.widget.FButton
             android:id="@+id/btnSignup"
-=======
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:gravity="bottom"
-        android:weightSum="2"
-        android:orientation="horizontal"
-        android:paddingBottom="5dp">
-
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btntest1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="@string/test1"
-            android:textColor="@android:color/white"
-            app:buttonColor="@color/colorAccent"
-            app:shadowColor="@android:color/black"
-            app:shadowHeight="5dp" />
-
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btntest2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:text="@string/test2"
-            android:textColor="@android:color/white"
-            app:shadowColor="@android:color/black"
-            app:shadowHeight="5dp" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:gravity="bottom"
-        android:weightSum="2"
-        android:orientation="horizontal"
-        android:paddingBottom="150dp">
-
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btntest3"
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> old3/master
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             android:text="@string/Signup"
             android:textColor="@android:color/white"
             app:buttonColor="@color/colorAccent"
@@ -248,41 +92,18 @@
 
         <info.hoang8f.widget.FButton
             android:id="@+id/btnSignin"
-=======
-=======
-            android:paddingRight="75dp"
->>>>>>> old1/master
-=======
-            android:paddingRight="75dp"
->>>>>>> old2/master
-            android:text="@string/test3"
-            android:textColor="@android:color/white"
-            app:buttonColor="@color/colorAccent"
-            app:shadowColor="@android:color/black"
-            app:shadowHeight="5dp" />
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btntest4"
->>>>>>> old3/master
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-<<<<<<< HEAD
             android:textSize="20sp"
             android:text="@string/Signin"
-=======
-            android:text="@string/test4"
->>>>>>> old3/master
             android:textColor="@android:color/white"
             app:shadowColor="@android:color/black"
             app:shadowHeight="5dp" />
 
     </LinearLayout>
 
-<<<<<<< HEAD
     <!--<LinearLayout-->
         <!--android:id="@+id/linearLayout3"-->
         <!--android:layout_width="match_parent"-->
@@ -354,104 +175,4 @@
 
     <!--</LinearLayout>-->
 
-=======
-=======
-=======
->>>>>>> old2/master
-        <com.twitter.sdk.android.core.identity.TwitterLoginButton
-            android:id="@+id/login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingRight="20dp" />
-    </LinearLayout>
-
-<<<<<<< HEAD
->>>>>>> old1/master
-=======
->>>>>>> old2/master
-    <LinearLayout
-        android:id="@+id/linearLayout5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:gravity="bottom"
-        android:weightSum="2"
-        android:orientation="horizontal"
-        android:paddingBottom="50dp">
-
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btntest5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:text="@string/test5"
-            android:textColor="@android:color/white"
-            app:buttonColor="@color/colorAccent"
-            app:shadowColor="@android:color/black"
-            app:shadowHeight="5dp" />
-
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btntest6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:text="@string/test6"
-            android:textColor="@android:color/white"
-            app:shadowColor="@android:color/black"
-            app:shadowHeight="5dp" />
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:id="@+id/linearLayout6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_alignParentBottom="true"
-        android:gravity="bottom"
-        android:weightSum="2"
-        android:orientation="horizontal"
-        android:paddingBottom="200dp">
-
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btntest7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-            android:text="@string/test7"
-            android:textColor="@android:color/white"
-            app:buttonColor="@color/colorAccent"
-            app:shadowColor="@android:color/black"
-            app:shadowHeight="5dp" />
-
-        <info.hoang8f.widget.FButton
-            android:id="@+id/btntest8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:layout_weight="1"
-<<<<<<< HEAD
-<<<<<<< HEAD
-            android:text="@string/test8"
-=======
-            android:text="qr code test"
->>>>>>> old1/master
-=======
-            android:text="qr code test"
->>>>>>> old2/master
-            android:textColor="@android:color/white"
-            app:shadowColor="@android:color/black"
-            app:shadowHeight="5dp" />
-    </LinearLayout>
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> old3/master
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
 </RelativeLayout>

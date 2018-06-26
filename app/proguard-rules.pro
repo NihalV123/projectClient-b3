@@ -19,33 +19,3 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
--keep public class * implements com.bumptech.glide.module.GlideModule
--keep public class * extends com.bumptech.glide.module.AppGlideModule
--keep public enum com.bumptech.glide.load.resource.bitmap.ImageHeaderParser$** {
-  **[] $VALUES;
-  public *;
-}
-
--dontwarn icepick.**
--keep class icepick.** { *; }
--keep class **$$Icepick { *; }
--keepclasseswithmembernames class * {
-    @icepick.* <fields>;
-}
--keepnames class * { @icepick.State *;}
-# for DexGuard only
-
--keep class .R
--keep class **.R$* {
-    <fields>;
-}
-
-
--keepresourcexmlelements manifest/application/meta-data@value=GlideModule
->>>>>>> old1/master
-=======
->>>>>>> old2/master

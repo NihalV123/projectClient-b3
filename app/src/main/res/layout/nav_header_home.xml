@@ -12,9 +12,6 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
         android:layout_width="wrap_content"
         android:text="@string/welcome"
         android:gravity="left"
@@ -46,24 +43,5 @@
         android:textColor="@android:color/white"
         android:text="@string/enter_your_email_addressil"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-=======
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
-        android:layout_width="match_parent"
-        android:id="@+id/txtFullName"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:textColor="@android:color/white"
-        android:text="@string/nihal"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> old3/master
-=======
->>>>>>> old1/master
-=======
->>>>>>> old2/master
 
 </LinearLayout>
