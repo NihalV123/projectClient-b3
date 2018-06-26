@@ -7,6 +7,7 @@
     android:background="@drawable/background"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     android:layout_margin="2dp"
     app:cardCornerRadius="25dp"
     app:cardElevation="4dp"
@@ -106,6 +107,8 @@
 =======
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
     android:layout_margin="10dp"
     app:cardElevation="5dp"
     >
@@ -148,13 +151,17 @@
                 android:text="@string/_50"
                 />
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> old3/master
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
 
         </LinearLayout>
 
         <ImageView
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             android:id="@+id/cart_item_count"
@@ -177,6 +184,8 @@
 =======
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
             android:layout_width="20dp"
             android:id="@+id/cart_item_count"
             android:layout_gravity="center_vertical"
@@ -186,9 +195,12 @@
             android:contentDescription="@string/todo" />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> old3/master
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
 
     </LinearLayout>
 

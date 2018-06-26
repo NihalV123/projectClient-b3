@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -47,6 +48,8 @@
 =======
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -64,9 +67,12 @@
 
         >
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> old3/master
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
 
     </android.support.v7.widget.RecyclerView>
 
@@ -74,8 +80,11 @@
 </RelativeLayout>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 </android.support.v4.widget.SwipeRefreshLayout>
 =======
 >>>>>>> old3/master
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master

@@ -1,9 +1,13 @@
 package com.nihalvaidya123.foodcrunch;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import android.content.Intent;
 >>>>>>> old1/master
+=======
+import android.content.Intent;
+>>>>>>> old2/master
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -20,9 +24,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import com.nihalvaidya123.foodcrunch.Common.Common;
 >>>>>>> old1/master
+=======
+import com.nihalvaidya123.foodcrunch.Common.Common;
+>>>>>>> old2/master
 import com.nihalvaidya123.foodcrunch.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -75,10 +83,13 @@ public class Signup extends AppCompatActivity {
                             DatabaseReference myRef = database.getReference("message");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
                             myRef.setValue("everythink ok");
                             Toast.makeText(Signup.this, "SIGN UP successfull welcome to the crew!", Toast.LENGTH_SHORT).show();
                             finish();
 =======
+=======
+>>>>>>> old2/master
 
 
                             myRef.setValue("everythink ok");
@@ -87,7 +98,10 @@ public class Signup extends AppCompatActivity {
                             Common.currentUser = user;
                             startActivity(homeIntent);
                            // finish();
+<<<<<<< HEAD
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
                         }
                     }
 
@@ -103,6 +117,7 @@ public class Signup extends AppCompatActivity {
         mAuth =FirebaseAuth.getInstance();
 
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 
     }
@@ -123,5 +138,8 @@ public class Signup extends AppCompatActivity {
 =======
     }
 >>>>>>> old1/master
+=======
+    }
+>>>>>>> old2/master
 }
 

@@ -7,6 +7,7 @@
     android:background="@drawable/background"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     tools:context="a123.vaidya.nihal.foodcrunchclient.Signup">
 =======
     tools:context="com.nihalvaidya123.foodcrunch.Signup">
@@ -14,12 +15,16 @@
 =======
     tools:context="com.nihalvaidya123.foodcrunch.Signup">
 >>>>>>> old1/master
+=======
+    tools:context="com.nihalvaidya123.foodcrunch.Signup">
+>>>>>>> old2/master
 
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         android:layout_alignParentTop="true"
@@ -29,10 +34,14 @@
 =======
         android:layout_alignParentBottom="true"
 >>>>>>> old1/master
+=======
+        android:layout_alignParentBottom="true"
+>>>>>>> old2/master
         android:layout_centerInParent="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:orientation="vertical"
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 
@@ -42,6 +51,9 @@
 =======
         android:paddingBottom="200dp"
 >>>>>>> old1/master
+=======
+        android:paddingBottom="200dp"
+>>>>>>> old2/master
         android:weightSum="2">
 
 
@@ -51,6 +63,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/enter_your_phone_number"
             android:inputType="phone"
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             android:text=""
@@ -64,6 +77,8 @@
 =======
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
             android:text="@string/_7208680470"
             android:textColor="@android:color/white"
             android:textSize="40sp"
@@ -71,14 +86,18 @@
             app:met_floatingLabel="highlight"
             app:met_maxCharacters="11"
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> old3/master
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
             app:met_primaryColor="@android:color/white"
             app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtName"
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
             android:gravity="center"
@@ -185,6 +204,8 @@
 =======
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_your_name"
@@ -215,13 +236,17 @@
             app:met_singleLineEllipsis="true" />
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> old3/master
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
 
     </LinearLayout>
 
     <info.hoang8f.widget.FButton
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         android:id="@+id/btnSignup"
@@ -239,6 +264,8 @@
 =======
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnSignup"
@@ -253,9 +280,12 @@
         app:shadowHeight="5dp"
         />
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> old3/master
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
 
 
 

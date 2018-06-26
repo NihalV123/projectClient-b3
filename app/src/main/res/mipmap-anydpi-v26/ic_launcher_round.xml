@@ -2,6 +2,7 @@
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     <background android:drawable="@drawable/ic_launcher_background"/>
     <foreground android:drawable="@mipmap/ic_launcher_foreground"/>
 =======
@@ -12,4 +13,8 @@
     <background android:drawable="@drawable/ic_launcher_background" />
     <foreground android:drawable="@drawable/ic_launcher_foreground" />
 >>>>>>> old1/master
+=======
+    <background android:drawable="@drawable/ic_launcher_background" />
+    <foreground android:drawable="@drawable/ic_launcher_foreground" />
+>>>>>>> old2/master
 </adaptive-icon>

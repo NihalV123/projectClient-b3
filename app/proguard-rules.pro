@@ -20,6 +20,7 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 -keep public class * implements com.bumptech.glide.module.GlideModule
@@ -46,3 +47,5 @@
 
 -keepresourcexmlelements manifest/application/meta-data@value=GlideModule
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master

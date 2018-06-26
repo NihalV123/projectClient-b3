@@ -23,6 +23,7 @@
     </style>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Material.Medium">
         <item name="android:textSize">24sp</item>
@@ -32,21 +33,27 @@
 =======
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
 <style name="CollapsedAppBar" parent="@android:style/TextAppearance.Material.Medium">
     <item name="android:textSize">24sp</item>
     <item name="android:textColor">@android:color/white</item>
     <item name="android:textStyle">normal</item>
 </style>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> old3/master
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
 
     <style name="ExpandededAppBar" parent="@android:style/TextAppearance.Material.Title">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textStyle">normal</item>
     </style>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     <style name="AppTheme.NoActionBar">
@@ -56,11 +63,15 @@
 =======
 <style name="AppTheme.NoActionBar">
 >>>>>>> old1/master
+=======
+<style name="AppTheme.NoActionBar">
+>>>>>>> old2/master
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
     <style name="RatingDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
@@ -86,4 +97,6 @@
 >>>>>>> old3/master
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
 </resources>

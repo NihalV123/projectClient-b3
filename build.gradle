@@ -2,10 +2,14 @@
 
 buildscript {
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> old2/master
     
     repositories {
         google()
         jcenter()
+<<<<<<< HEAD
 <<<<<<< HEAD
         mavenCentral()
         maven { url 'https://mave.google.com' }
@@ -14,11 +18,14 @@ buildscript {
         classpath 'com.android.tools.build:gradle:3.2.0-beta01'
         classpath 'com.google.gms:google-services:3.2.0'
 =======
+=======
+>>>>>>> old2/master
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.google.gms:google-services:3.1.0'
         
+<<<<<<< HEAD
 >>>>>>> old3/master
 =======
 
@@ -36,6 +43,8 @@ buildscript {
 
         //classpath 'com.jakewharton:butterknife-gradle-plugin:8.6.0'
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -48,6 +57,7 @@ allprojects {
         jcenter()
         mavenCentral()
         maven { url 'https://jitpack.io' }
+<<<<<<< HEAD
 <<<<<<< HEAD
         maven { url 'https://maven.fabric.io/public' }
 <<<<<<< HEAD
@@ -92,6 +102,13 @@ allprojects {
 //}
 
 >>>>>>> old1/master
+=======
+        maven { url 'https://maven.fabric.io/public' }
+
+    }
+}
+
+>>>>>>> old2/master
 task clean(type: Delete) {
     delete rootProject.buildDir
 }

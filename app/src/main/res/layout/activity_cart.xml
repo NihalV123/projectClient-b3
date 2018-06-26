@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -163,6 +164,8 @@
 =======
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -236,6 +239,9 @@
 
 </RelativeLayout>
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> old3/master
 =======
 >>>>>>> old1/master
+=======
+>>>>>>> old2/master
