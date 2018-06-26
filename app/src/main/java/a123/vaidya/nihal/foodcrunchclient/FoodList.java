@@ -3,10 +3,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-<<<<<<< HEAD
 import android.net.Uri;
-=======
->>>>>>> old/master
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -21,32 +18,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-<<<<<<< HEAD
 import android.widget.RatingBar;
-=======
->>>>>>> old/master
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andremion.counterfab.CounterFab;
 import com.facebook.CallbackManager;
-<<<<<<< HEAD
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.share.Sharer;
 import com.facebook.share.model.ShareLinkContent;
-=======
->>>>>>> old/master
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-<<<<<<< HEAD
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-=======
->>>>>>> old/master
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -62,27 +50,18 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-=======
-import java.util.List;
->>>>>>> old/master
 import java.util.Objects;
 
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
-<<<<<<< HEAD
 import a123.vaidya.nihal.foodcrunchclient.Model.Favorites;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.Model.Rating;
-=======
-import a123.vaidya.nihal.foodcrunchclient.Model.Food;
-import a123.vaidya.nihal.foodcrunchclient.Model.Order;
->>>>>>> old/master
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.FoodViewHolder;
 import dmax.dialog.SpotsDialog;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -96,7 +75,6 @@ public class FoodList extends AppCompatActivity {
     private FirebaseDatabase database;
     private DatabaseReference foodList;
     private String categoryId="";
-<<<<<<< HEAD
     private String categoryId2="";
 
     private FirebaseRecyclerAdapter<Food,FoodViewHolder> adapter;
@@ -122,27 +100,6 @@ public class FoodList extends AppCompatActivity {
     private RatingBar ratingbar;
     private ImageView add_to_cart;
     private CounterFab fab;
-=======
-
-    private FirebaseRecyclerAdapter<Food,FoodViewHolder> adapter;
-
-    //for searching firebase
-    private FirebaseRecyclerAdapter<Food,FoodViewHolder> searchAdapter;
-    private final List<String> suggestList = new ArrayList<>();
-    private MaterialSearchBar materialSearchBar;
-    private Database localDB;
-    private SwipeRefreshLayout rootLayout;
-    private ImageView fav_image;
-    private ImageView like;
-    private ImageView share;
-    private ImageView add_to_cart;
-    private CounterFab fab;
-    //Facebook share
-    private CallbackManager callbackManager;
-    private TextView textView;
-    private ShareDialog shareDialog;
-
->>>>>>> old/master
 
     //create bitmap from picaso
     private final Target target = new Target() {
@@ -197,7 +154,6 @@ public class FoodList extends AppCompatActivity {
 
             }
         });
-<<<<<<< HEAD
         fab.setCount(new Database(this).getCountCart(Common.currentUser.getPhone()));
 
         //init facebook
@@ -206,12 +162,6 @@ public class FoodList extends AppCompatActivity {
         shareDialog = new ShareDialog(this);
 
         //twitter init
-=======
-        fab.setCount(new Database(this).getCountCart());
-        //firebase code
-        callbackManager = new CallbackManager.Factory().create();
-        shareDialog = new ShareDialog(this);
->>>>>>> old/master
         Twitter.initialize(this);
         TwitterConfig config = new TwitterConfig.Builder(this)
                 .logger(new DefaultLogger(Log.DEBUG))
@@ -219,7 +169,6 @@ public class FoodList extends AppCompatActivity {
                 .debug(true)
                 .build();
         Twitter.initialize(config);
-<<<<<<< HEAD
 
         //firebase
         database = FirebaseDatabase.getInstance();
@@ -228,16 +177,6 @@ public class FoodList extends AppCompatActivity {
         localDB = new Database(this);
 
 
-=======
-        database = FirebaseDatabase.getInstance();
-        foodList =database.getReference("Foods");
-
-        recycler_menu = findViewById(R.id.recycler_food);
-        recycler_menu.setHasFixedSize(true);
-        layoutManager = new LinearLayoutManager(this);
-        recycler_menu.setLayoutManager(layoutManager);
-        localDB = new Database(this);
->>>>>>> old/master
         rootLayout = findViewById(R.id.rootLayout);
         rootLayout.setColorSchemeResources(R.color.colorPrimary,
                 android.R.color.holo_green_dark,
@@ -262,17 +201,13 @@ public class FoodList extends AppCompatActivity {
         rootLayout.post(new Runnable() {
             @Override
             public void run() {
-<<<<<<< HEAD
                 //get intent and search from here
-=======
->>>>>>> old/master
                 if (getIntent()!=null)
                     categoryId = getIntent().getStringExtra("CategoryId");
                 if (!categoryId.isEmpty())
                 {
                     if (Common.isConnectedToInternet(getBaseContext()))
                         loadListFood(categoryId);
-<<<<<<< HEAD
 
                     else
                     {Toast.makeText(FoodList.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
@@ -368,17 +303,6 @@ public class FoodList extends AppCompatActivity {
         share = (ImageView)findViewById(R.id.share);
        // like =(ImageView) findViewById(R.id.like);
         add_to_cart=(ImageView) findViewById(R.id.add_to_crat);
-=======
-                    else
-                        Toast.makeText(FoodList.this,"Please check your internet connection",Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-        fav_image = findViewById(R.id.fav);
-        share = findViewById(R.id.share);
-        like = findViewById(R.id.like);
-        add_to_cart= findViewById(R.id.add_to_crat);
->>>>>>> old/master
 
         //get intent
         if (getIntent()!=null)
@@ -392,69 +316,12 @@ public class FoodList extends AppCompatActivity {
             return;
         }
 
-<<<<<<< HEAD
 
-=======
-        //search
-        materialSearchBar = findViewById(R.id.searchBar);
-        textView = findViewById(R.id.textView3);
-        textView = findViewById(R.id.textView2);
-        materialSearchBar.setHint("Enter the name of your food");
-//        materialSearchBar.setSpeechMode(false);
-        loadSuggest();
-        materialSearchBar.setLastSuggestions(suggestList);
-        materialSearchBar.setCardViewElevation(10);
-        materialSearchBar.addTextChangeListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                List<String> suggest = new ArrayList<>();
-                for(String search:suggestList)
-                {
-                    if (search.toLowerCase().contains(materialSearchBar.getText().toLowerCase()))
-                        suggest.add(search);
-                }
-                materialSearchBar.setLastSuggestions(suggest);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        materialSearchBar.setOnSearchActionListener(new MaterialSearchBar.OnSearchActionListener() {
-            @Override
-            public void onSearchStateChanged(boolean enabled) {
-                //disable and enable for ui effect
-                if(!enabled)
-                    recycler_menu.setAdapter(adapter);
-            }
-
-            @Override
-            public void onSearchConfirmed(CharSequence text) {
-                startSearch(text);
-            }
-
-            @Override
-            public void onButtonClicked(int buttonCode) {
-
-            }
-        });
->>>>>>> old/master
     }
 
     private void startSearch(CharSequence text) {
         //query search by name
-<<<<<<< HEAD
         Query searchbyname =foodList.orderByChild("name").equalTo(text.toString());
-=======
-        Query searchbyname =foodList.orderByChild("Name").equalTo(text.toString());
->>>>>>> old/master
         //options
         FirebaseRecyclerOptions<Food> foodoptions = new FirebaseRecyclerOptions.Builder<Food>()
                 .setQuery(searchbyname,Food.class)
@@ -484,11 +351,7 @@ public class FoodList extends AppCompatActivity {
             @Override
             public FoodViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
                 View itemView = LayoutInflater.from(parent.getContext())
-<<<<<<< HEAD
                         .inflate(R.layout.food_item_plain,parent,false);
-=======
-                        .inflate(R.layout.food_item,parent,false);
->>>>>>> old/master
                 return new FoodViewHolder(itemView);
             }
         };
@@ -508,7 +371,6 @@ public class FoodList extends AppCompatActivity {
                             Food item = postDnapshot.getValue(Food.class);
                             suggestList.add(Objects.requireNonNull(item).getName());
                         }
-<<<<<<< HEAD
                         materialSearchBar.setLastSuggestions(suggestList);
 //                        {
 //                            Rating item = postSnapshot.getValue(Rating.class);
@@ -519,8 +381,6 @@ public class FoodList extends AppCompatActivity {
 //                            float average = sum / count;
 //                            ratingBar.setRating(average);
 //                        }
-=======
->>>>>>> old/master
                     }
 
                     @Override
@@ -539,7 +399,6 @@ public class FoodList extends AppCompatActivity {
                 .build();
         adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(foodoptions) {
             @Override
-<<<<<<< HEAD
             protected void onBindViewHolder(@NonNull final FoodViewHolder viewHolder,
                                             final int position, @NonNull final Food model) {
                 viewHolder.food_name.setText(model.getName());
@@ -659,49 +518,10 @@ public class FoodList extends AppCompatActivity {
                 if(localDB.isFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone()))
                     viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
 
-=======
-            protected void onBindViewHolder(@NonNull final FoodViewHolder viewHolder, final int position, @NonNull final Food model) {
-                viewHolder.food_name.setText(model.getName());
-                viewHolder.food_price.setText(String.format("INR :  %s",model.getPrice()));
-                Picasso.with(getBaseContext()).load(model.getImage()).into(viewHolder.food_image);
-
-                //add to cart
-                viewHolder.add_to_cart.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        new Database(getBaseContext()).addToCart(new Order(adapter.getRef(position).getKey(), model.getName(),"1",
-                                model.getPrice(), model.getDiscount(),model.getImage(),model.getEmail()
-                        ));
-                        Toast.makeText(FoodList.this,"Item was added to cart",Toast.LENGTH_LONG).show();
-                    }
-                });
-
-                //change fav icon
-                if(localDB.isFavorites(adapter.getRef(position).getKey()))
-                    viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
-
-                viewHolder.share.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Picasso.with(getApplicationContext())
-                                .load(model.getImage())
-                                .into(target);
-                        Toast.makeText(FoodList.this,"Getting Ready \nShare To FACEBOOK \n Unless " +
-                                "the sdk got updated \nOne food once per session",Toast.LENGTH_SHORT).show();
-                    }
-                });
-                viewHolder.like.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Toast.makeText(FoodList.this,"Comming soon!",Toast.LENGTH_SHORT).show();
-                    }
-                });
->>>>>>> old/master
 
                 viewHolder.fav_image.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-<<<<<<< HEAD
 
                         Favorites favorites = new Favorites();
                         favorites.setFoodId(adapter.getRef(position).getKey());
@@ -718,11 +538,6 @@ public class FoodList extends AppCompatActivity {
                         if(!localDB.isFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone()))
                         {
                             localDB.addToFavorites(favorites);
-=======
-                        if(!localDB.isFavorites(adapter.getRef(position).getKey()))
-                        {
-                            localDB.addToFavorites(adapter.getRef(position).getKey());
->>>>>>> old/master
                             viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_black_24dp);
                             Toast.makeText(FoodList.this,"The"+model.getName()+"\n was added to " +
                                     "favorites",Toast.LENGTH_SHORT).show();
@@ -731,11 +546,7 @@ public class FoodList extends AppCompatActivity {
 
                         }else
                         {
-<<<<<<< HEAD
                             localDB.removeFromFavorites(adapter.getRef(position).getKey(),Common.currentUser.getPhone());
-=======
-                            localDB.removeFromFavorites(adapter.getRef(position).getKey());
->>>>>>> old/master
                             viewHolder.fav_image.setImageResource(R.drawable.ic_favorite_border_black_24dp);
                             Toast.makeText(FoodList.this,"The"+model.getName()+"\n was removed from " +
                                     " favorites",Toast.LENGTH_SHORT).show();

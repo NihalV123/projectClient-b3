@@ -53,7 +53,6 @@
                     android:textAllCaps="true"
                     android:textStyle="italic" />
 
-<<<<<<< HEAD
                 <TextView
                     android:id="@+id/order_phone"
                     android:layout_width="match_parent"
@@ -75,29 +74,6 @@
                     android:text="@string/Write_comment"
                     android:textAllCaps="true"
                     android:textStyle="italic" />
-=======
-                <!--<TextView-->
-                    <!--android:id="@+id/order_phone"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_marginEnd="10dp"-->
-                    <!--android:layout_marginStart="10dp"-->
-                    <!--android:text="@string/_7208680470"-->
-                    <!--android:textAllCaps="true"-->
-                    <!--android:textStyle="italic" />-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/comment_details"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_gravity="center_vertical"-->
-                    <!--android:layout_marginEnd="10dp"-->
-                    <!--android:layout_marginStart="10dp"-->
-                    <!--android:text="@string/Write_comment"-->
-                    <!--android:textAllCaps="true"-->
-                    <!--android:textStyle="italic" />-->
->>>>>>> old/master
 
                 <TextView
                     android:id="@+id/order_address"

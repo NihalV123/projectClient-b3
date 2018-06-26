@@ -21,13 +21,9 @@ public class MyFireBaseIdService extends FirebaseInstanceIdService {
         FirebaseDatabase db = FirebaseDatabase.getInstance();
         DatabaseReference tokens = db.getReference("Tokens");
         Token token = new Token(tokenRefreshed,false); //true as this reads frm server
-<<<<<<< HEAD
         try{
         tokens.child(Common.currentUser.getPhone()).setValue(token);}
         catch (Exception e){}
 
-=======
-        tokens.child(Common.currentUser.getPhone()).setValue(token);
->>>>>>> old/master
     }
 }

@@ -51,7 +51,6 @@ public class NotificationHelper extends ContextWrapper {
                 .setSound(sounddUri)
                 .setAutoCancel(false);
     }
-<<<<<<< HEAD
 
     @TargetApi(Build.VERSION_CODES.O)
     public android.app.Notification.Builder foodcrunchChannelNotification(String title, String body,Uri sounddUri)
@@ -64,6 +63,4 @@ public class NotificationHelper extends ContextWrapper {
                 .setSound(sounddUri)
                 .setAutoCancel(false);
     }
-=======
->>>>>>> old/master
 }

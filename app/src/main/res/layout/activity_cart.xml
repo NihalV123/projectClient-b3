@@ -24,35 +24,23 @@
             android:textColor="@android:color/white"
             app:shadowColor="@android:color/black"
             app:shadowHeight="5dp" />
-<<<<<<< HEAD
 
-=======
->>>>>>> old/master
         <TextView
             android:id="@+id/txtmanconetnthom3e"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/transparentBlack"
             android:gravity="center"
-<<<<<<< HEAD
             android:paddingTop="150dp"
-=======
-            android:paddingTop="100dp"
->>>>>>> old/master
             android:text="@string/EMPTY_LIST"
             android:textColor="@color/white"
             android:textSize="25sp" />
 
-<<<<<<< HEAD
         <RelativeLayout
-=======
-        <LinearLayout
->>>>>>> old/master
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="45dp">
 
-<<<<<<< HEAD
             <LinearLayout
                 android:id="@+id/q23"
                 android:layout_width="40dp"
@@ -78,13 +66,10 @@
                     android:tint="@color/white" />
 
             </LinearLayout>
-=======
->>>>>>> old/master
             <TextView
                 android:id="@+id/txtmanconesdstnthome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-<<<<<<< HEAD
                 android:background="@color/transparentBlack"
                 android:gravity="center"
            android:layout_marginLeft="40dp"
@@ -93,14 +78,6 @@
                 android:textColor="@color/white"
                 android:textSize="25sp" />
         </RelativeLayout>
-=======
-                android:gravity="center"
-                android:text="@string/Your_cart"
-                android:textColor="@color/white"
-                android:textSize="25sp" />
-
-        </LinearLayout>
->>>>>>> old/master
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/listCart"
@@ -109,11 +86,7 @@
             android:layout_centerInParent="true"
             android:background="@android:color/transparent"
             android:paddingBottom="130dp"
-<<<<<<< HEAD
             android:paddingTop="140dp">
-=======
-            android:paddingTop="100dp">
->>>>>>> old/master
 
         </android.support.v7.widget.RecyclerView>
 

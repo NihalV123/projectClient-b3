@@ -7,30 +7,21 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.app.AlertDialog;
 import android.content.pm.PackageManager;
-<<<<<<< HEAD
 import android.graphics.Color;
-=======
->>>>>>> old/master
 import android.location.Location;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-<<<<<<< HEAD
 import android.support.design.widget.Snackbar;
-=======
->>>>>>> old/master
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-<<<<<<< HEAD
 import android.support.v7.widget.helper.ItemTouchHelper;
-=======
->>>>>>> old/master
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,10 +35,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
-<<<<<<< HEAD
 import com.firebase.ui.database.FirebaseRecyclerOptions;
-=======
->>>>>>> old/master
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -74,10 +62,7 @@ import com.paypal.android.sdk.payments.PayPalService;
 import com.paypal.android.sdk.payments.PaymentActivity;
 import com.paypal.android.sdk.payments.PaymentConfirmation;
 import com.rengwuxian.materialedittext.MaterialEditText;
-<<<<<<< HEAD
 import com.stepstone.apprating.AppRatingDialog;
-=======
->>>>>>> old/master
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
@@ -89,7 +74,6 @@ import org.json.JSONObject;
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Common.Config;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
-<<<<<<< HEAD
 import a123.vaidya.nihal.foodcrunchclient.Helper.RecyclerItemTouchHelper;
 import a123.vaidya.nihal.foodcrunchclient.Interface.RecyclerItemTouchHelperListener;
 import a123.vaidya.nihal.foodcrunchclient.Model.DataMessage;
@@ -101,23 +85,12 @@ import a123.vaidya.nihal.foodcrunchclient.Model.Request;
 //import a123.vaidya.nihal.foodcrunchclient.Model.Sender;
 import a123.vaidya.nihal.foodcrunchclient.Model.Token;
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
-=======
-import a123.vaidya.nihal.foodcrunchclient.Model.MyResponse;
-import a123.vaidya.nihal.foodcrunchclient.Model.Notification;
-import a123.vaidya.nihal.foodcrunchclient.Model.Order;
-import a123.vaidya.nihal.foodcrunchclient.Model.Request;
-import a123.vaidya.nihal.foodcrunchclient.Model.Sender;
-import a123.vaidya.nihal.foodcrunchclient.Model.Token;
->>>>>>> old/master
 import a123.vaidya.nihal.foodcrunchclient.Remote.APIService;
 import a123.vaidya.nihal.foodcrunchclient.Remote.iGeoCoordinates;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.CartAdapter;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
-<<<<<<< HEAD
 import java.text.ParseException;
-=======
->>>>>>> old/master
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -125,10 +98,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
-<<<<<<< HEAD
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.CartViewHolder;
-=======
->>>>>>> old/master
 import dmax.dialog.SpotsDialog;
 import info.hoang8f.widget.FButton;
 import retrofit2.Call;
@@ -138,11 +108,7 @@ import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class Cart extends AppCompatActivity implements GoogleApiClient.ConnectionCallbacks,
-<<<<<<< HEAD
         LocationListener,GoogleApiClient.OnConnectionFailedListener, RecyclerItemTouchHelperListener {
-=======
-        LocationListener,GoogleApiClient.OnConnectionFailedListener {
->>>>>>> old/master
     private static final int PAYPAL_REQUEST_CODE = 9999;
     private RecyclerView recyclerView;
     iGeoCoordinates mGoogleMApService;
@@ -275,14 +241,10 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-<<<<<<< HEAD
 //       swipe to delete view init
         ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new
                 RecyclerItemTouchHelper(0,ItemTouchHelper.LEFT,this);
             new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
-=======
-//        cart_number= findViewById(R.id.cart_number);//change layout partent all4
->>>>>>> old/master
 
         txtTotalPrice = findViewById(R.id.total);
         btnPlace = findViewById(R.id.btnPlaceOrder);
@@ -292,7 +254,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         clear_cart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
                 new Database(getBaseContext()).clearCart(Common.currentUser.getPhone());
                 loadListFood();
                 for(Order order:cart) {
@@ -313,11 +274,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 //                            .replace(",",""));//do not add replaceor cart will not work
                 }
                 Toast.makeText(Cart.this, "Your shopping cart is empty\n Inventory updated", Toast.LENGTH_LONG).show();
-=======
-                new Database(getBaseContext()).clearCart();
-                loadListFood();
-                Toast.makeText(Cart.this, "Your shopping cart is empty", Toast.LENGTH_LONG).show();
->>>>>>> old/master
             }
         });
 
@@ -395,11 +351,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
         AlertDialog.Builder alertdailog = new AlertDialog.Builder(Cart.this);
         alertdailog.setTitle("One Last Step!!");
-<<<<<<< HEAD
         alertdailog.setMessage("Enter address or select option");
-=======
-        alertdailog.setMessage("Please enter address or select options  ");
->>>>>>> old/master
         alertdailog.setCancelable(false);
 
         final LayoutInflater inflater = this.getLayoutInflater();
@@ -436,7 +388,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                 Toast.makeText(Cart.this, "The place deosnt exist", Toast.LENGTH_LONG).show();
             }
         });
-<<<<<<< HEAD
         final MaterialEditText edtemail = order_address_comment.findViewById(R.id.edtemail22);
         final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
         final RadioButton rbshiphere =(RadioButton)order_address_comment.findViewById(R.id.rbcurentaddress);
@@ -446,12 +397,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         final RadioButton rbsmcod =(RadioButton)order_address_comment.findViewById(R.id.codpm);
         final RadioButton rbsmfcb =(RadioButton)order_address_comment.findViewById(R.id.foodcrunchbalance);
 
-=======
-        final MaterialEditText edtemail = email_address_layout.findViewById(R.id.edtEmailAddress);
-        final MaterialEditText edtComment = order_address_comment.findViewById(R.id.edtComment);
-        final RadioButton rbshiphere =(RadioButton)order_address_comment.findViewById(R.id.rbcurentaddress);
-        final RadioButton rbshiphome =(RadioButton)order_address_comment.findViewById(R.id.rbhomeaddress);
->>>>>>> old/master
         rbshiphome.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -462,13 +407,8 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
 
                     { address =Common.currentUser.getHomeAddress();
-<<<<<<< HEAD
                         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
                                 .setText(address);}
-=======
-                    ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
-                            .setText(address);}
->>>>>>> old/master
                     else
                         Toast.makeText(Cart.this,"Please  update your home address",Toast.LENGTH_LONG).show();
 
@@ -493,15 +433,9 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                                     JSONObject jsonObject = new JSONObject(response.body().toString());
                                         JSONArray resultArray = jsonObject.getJSONArray("results");
                                         JSONObject firstObject = resultArray.getJSONObject(0);
-<<<<<<< HEAD
                                         address = firstObject.getString("formatted_address");try{
                                         ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
                                                 .setText(address);}catch(Exception e){}
-=======
-                                        address = firstObject.getString("formatted_address");
-                                        ((EditText)edtAddress.getView().findViewById(R.id.place_autocomplete_search_input))
-                                                .setText(address);
->>>>>>> old/master
 
                                     } catch (JSONException e) {
                                         e.printStackTrace();
@@ -528,13 +462,9 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         alertdailog.setPositiveButton("YES!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-<<<<<<< HEAD
                 comment = edtComment.getText().toString();
                 email = edtemail.getText().toString();
                 if(!rbshiphere.isChecked()&&!rbshiphome.isChecked()&&!rbsmfcb.isChecked())
-=======
-                if(!rbshiphere.isChecked()&&!rbshiphome.isChecked())
->>>>>>> old/master
                 if(shippingAddress != null)
                     address = shippingAddress.getAddress().toString();
                 else
@@ -545,7 +475,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                     return;
 
                 }
-<<<<<<< HEAD
 //                if(rbshiphome.isChecked() && shippingAddress == null)
 //                {
 //                    Toast.makeText(Cart.this,"ADDRESS CANNOT BE EMPTY ",Toast.LENGTH_LONG).show();
@@ -555,8 +484,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
 //                }
 
-=======
->>>>>>> old/master
                 if(TextUtils.isEmpty(address))
                 {
                     Toast.makeText(Cart.this,"Please enter options or address from text utils",Toast.LENGTH_LONG).show();
@@ -564,7 +491,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                             (R.id.place_autocomplete_fragment)).commit();
                     return;
                 }
-<<<<<<< HEAD
 
                         //check payment
                 if(!rbsmpaypal.isChecked() && !rbsmcod.isChecked() && !rbsmfcb.isChecked())
@@ -575,11 +501,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                             (R.id.place_autocomplete_fragment)).commit();
                 }else if(rbsmpaypal.isChecked())
                 {
-=======
-                    comment = edtComment.getText().toString();
-                    email = edtemail.getText().toString();
-
->>>>>>> old/master
                     String formatAmmount = txtTotalPrice.getText().toString()
                             .replace("¤","")
                             .replace("$","")//replace regional barriers
@@ -591,7 +512,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                     intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION,config);
                     intent.putExtra(PaymentActivity.EXTRA_PAYMENT,payPalPayment);
                     startActivityForResult(intent,PAYPAL_REQUEST_CODE);
-<<<<<<< HEAD
 
 //                    String order_number = String.valueOf(System.currentTimeMillis());
 //                    requests.child(order_number)
@@ -720,9 +640,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
                     }
                 }
-=======
-//                }
->>>>>>> old/master
                 //remove fragment after close
                 getFragmentManager().beginTransaction().remove(getFragmentManager().findFragmentById
                         (R.id.place_autocomplete_fragment)).commit();
@@ -765,15 +682,10 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                                             .replace("¤", "")
                                             .replace(",", ""),
                                     "0",  //for status in request model
-<<<<<<< HEAD
                                     comment,"PayPal",email,
                                     //error solve now
                                     String.format("%s,%s",mLastLocation.getLatitude(),
                                             mLastLocation.getLongitude()),
-=======
-                                    comment,email,String.format("%s,%s",shippingAddress.getLatLng()
-                                    .latitude,shippingAddress.getLatLng().longitude),
->>>>>>> old/master
                                     jsonObject.getJSONObject("response").getString("state"),
                                     cart);
 
@@ -787,11 +699,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
                             sendNotificatinOrder(order_number);
                             sendordersemailUSER(order_number);
-<<<<<<< HEAD
                             new Database(getBaseContext()).clearCart(Common.currentUser.getPhone());
-=======
-                            new Database(getBaseContext()).clearCart();
->>>>>>> old/master
                             loadListFood();
                             finish();
 
@@ -813,7 +721,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         }
     }
 
-<<<<<<< HEAD
     @Override
     protected void onPause() {
         super.onPause();
@@ -841,8 +748,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
       //  new Database(getBaseContext()).clearCart();
     }
 
-=======
->>>>>>> old/master
     private void sendordersemailUSER(String order_number) {
         DatabaseReference tokens = database.getReference("Tokens");
         tokens.orderByKey().equalTo(Common.currentUser.getPhone())
@@ -875,26 +780,15 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                                     "\nand phone no \t" +
                                     (Common.currentUser.getPhone())+
                                     "\n \n HAS BEEN PLACED!!  \t" +
-<<<<<<< HEAD
 //                                    "\n  It will be delivered to address  \t" +
 //                                    (Common.currentUser.get)+
-=======
-                                    "\n  It will be delivered to address  \t" +
-                                    (Common.currentUser.getHomeAddress())+
->>>>>>> old/master
                                     "\n\nTHANK YOU FOR SHOPPING WITH US!!");
                             try {
                                 startActivity(Intent.createChooser(emailIntent, "Send mail..."));
                             } catch (android.content.ActivityNotFoundException ex) {
-<<<<<<< HEAD
                                 Toast.makeText(Cart.this, "There are no email clients installed.", Toast.LENGTH_SHORT);
                             }
                         }     Toast.makeText(Cart.this, "There are no email clients installed.", Toast.LENGTH_SHORT);
-=======
-                                Toast.makeText(Cart.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-                            }
-                        }                                Toast.makeText(Cart.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
->>>>>>> old/master
 
                     }
 
@@ -903,11 +797,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
                     }
 
-<<<<<<< HEAD
                 });         //                       Toast.makeText(Cart.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-=======
-                });                                Toast.makeText(Cart.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
->>>>>>> old/master
 
 
     }
@@ -971,7 +861,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                 {
                     Token serverToken = postSnapShot.getValue(Token.class);
                     //create raw payload
-<<<<<<< HEAD
 //                    Notification notification = new Notification("From "+Common.currentUser.getName().toString()+" tap to manage it!!!","You have new Order : "+order_number);
 //                    Sender content = new Sender(serverToken.getToken(),notification);
                     Map<String,String> datasend = new HashMap<>();
@@ -980,11 +869,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
                     DataMessage dataMessage = new DataMessage(serverToken.getToken(),datasend);
 
                     mservice.sendNotification(dataMessage)
-=======
-                    Notification notification = new Notification("From "+Common.currentUser.getName().toString()+" tap to manage it!!!","You have new Order : "+order_number);
-                    Sender content = new Sender(serverToken.getToken(),notification);
-                    mservice.sendNotification(content)
->>>>>>> old/master
                             .enqueue(new Callback<MyResponse>() {
                                 @Override
                                 public void onResponse(Call<MyResponse> call,  Response<MyResponse> response) {
@@ -1017,11 +901,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
     }
 
     private void loadListFood() {
-<<<<<<< HEAD
         cart = new Database(this).getCarts(Common.currentUser.getPhone());
-=======
-        cart = new Database(this).getCarts();
->>>>>>> old/master
         adapter = new CartAdapter(cart,this);
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
@@ -1030,13 +910,10 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
         int total = 0;
         for(Order order:cart)
             total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
-<<<<<<< HEAD
 //        Request orderm=;
 //        (Integer.parseInt(order.getQuantity()))
         //add substraction code here
 
-=======
->>>>>>> old/master
         Locale locale = new Locale("en","BU");
         NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
         txtTotalPrice.setText(fmt.format(total)
@@ -1057,11 +934,7 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
     private void deleteCart(int position) {
         cart.remove(position);//remove from ui
-<<<<<<< HEAD
         new Database(this).clearCart(Common.currentUser.getPhone());//remove from firebase
-=======
-        new Database(this).clearCart();//remove from firebase
->>>>>>> old/master
         //update database
         for(Order item:cart)
             new Database(this).addToCart(item);
@@ -1128,7 +1001,6 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
 
     }
-<<<<<<< HEAD
 
     @Override
     public void onSwipe(RecyclerView.ViewHolder viewHolder, int direction, int position) {
@@ -1181,6 +1053,4 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
 
         }
     }
-=======
->>>>>>> old/master
 }

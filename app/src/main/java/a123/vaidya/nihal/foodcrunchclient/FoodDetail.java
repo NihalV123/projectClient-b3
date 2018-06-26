@@ -1,7 +1,6 @@
 
 package a123.vaidya.nihal.foodcrunchclient;
 
-<<<<<<< HEAD
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
@@ -13,12 +12,6 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-=======
-import android.content.Context;
-import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
->>>>>>> old/master
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -29,11 +22,8 @@ import android.widget.Toast;
 
 import com.andremion.counterfab.CounterFab;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
-<<<<<<< HEAD
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-=======
->>>>>>> old/master
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -46,7 +36,6 @@ import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Model.Food;
 import a123.vaidya.nihal.foodcrunchclient.Model.Order;
 import a123.vaidya.nihal.foodcrunchclient.Model.Rating;
-<<<<<<< HEAD
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
 import info.hoang8f.widget.FButton;
 import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
@@ -56,11 +45,6 @@ import com.luseen.autolinklibrary.AutoLinkMode;
 import com.luseen.autolinklibrary.AutoLinkOnClickListener;
 import com.luseen.autolinklibrary.AutoLinkTextView;
 import com.muddzdev.styleabletoastlibrary.ToastDurationWatcher;
-=======
-import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
-import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
-
->>>>>>> old/master
 import com.squareup.picasso.Picasso;
 import com.stepstone.apprating.AppRatingDialog;
 import com.stepstone.apprating.listener.RatingDialogListener;
@@ -72,11 +56,8 @@ import com.twitter.sdk.android.core.TwitterConfig;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
-<<<<<<< HEAD
 import java.util.HashMap;
 import java.util.Map;
-=======
->>>>>>> old/master
 import java.util.Objects;
 
 public class FoodDetail extends AppCompatActivity implements RatingDialogListener{
@@ -84,11 +65,8 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
     private TextView food_name;
     private TextView food_price;
     private TextView food_description;
-<<<<<<< HEAD
     private TextView food_video;
     private AutoLinkTextView food_recepie;
-=======
->>>>>>> old/master
     private ImageView food_image;
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private FloatingActionButton btnRating;
@@ -102,15 +80,10 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
     private String foodId="";
-<<<<<<< HEAD
     String categoryId ="";
     private FirebaseDatabase database;
     private DatabaseReference foods;
     FButton btnSohowComment;
-=======
-    private FirebaseDatabase database;
-    private DatabaseReference foods;
->>>>>>> old/master
     private DatabaseReference ratingTbl;
 
     private Food currentFood;
@@ -125,7 +98,6 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 .build());
         setContentView(R.layout.activity_food_detail);
 
-<<<<<<< HEAD
         btnSohowComment = (FButton)findViewById(R.id.bthshowcomments);
         btnSohowComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,8 +108,6 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
             }
         });
 
-=======
->>>>>>> old/master
         //Firebase code
         Twitter.initialize(this);
         TwitterConfig config = new TwitterConfig.Builder(this)
@@ -160,11 +130,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
             @Override
             public void onClick(View v) {
                 showRatingDialog();
-<<<<<<< HEAD
 
-=======
-                btnRating.setEnabled(false);
->>>>>>> old/master
             }
         });
 
@@ -172,7 +138,6 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
             @Override
             public void onClick(View v) {
 
-<<<<<<< HEAD
 //               Common.currentUser.getPhone(),
 //                                        adapter.getRef(position).getKey(),//this gets the random id of food id this took me 2 days to debug lol
 //                                        model.getName(),
@@ -333,29 +298,13 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         });
 
 
-=======
-                new Database(getBaseContext()).addToCart(new Order(foodId, currentFood.getName(), numberButton.getNumber(),
-                        currentFood.getPrice(), currentFood.getDiscount(),currentFood.getImage(),currentFood.getEmail()
-                ));
-                Toast.makeText(FoodDetail.this,"Item was added to cart",Toast.LENGTH_LONG).show();
-
-            }
-        });
-        btnCart.setCount(new Database(this).getCountCart());
-        food_description = findViewById(R.id.food_description);
-        food_price = findViewById(R.id.food_price);
->>>>>>> old/master
         food_name = findViewById(R.id.food_name);
         food_image= findViewById(R.id.img_food);
         collapsingToolbarLayout= findViewById(R.id.collapsing);
         collapsingToolbarLayout.setExpandedTitleTextAppearance(R.style.ExpandededAppBar);
         collapsingToolbarLayout.setCollapsedTitleTextAppearance(R.style.CollapsedAppBar);
 
-<<<<<<< HEAD
 
-=======
-        //get food id
->>>>>>> old/master
         if (getIntent()!= null)
             foodId=getIntent().getStringExtra("FoodId");
         if(!foodId.isEmpty())
@@ -400,11 +349,7 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 .setNoteDescriptions(Arrays.asList("Very bad","Needs Improvement","OK","Very Good","Above Expectations"))
                 .setDefaultRating(1)
                 .setTitle("Please Rate Our Food!")
-<<<<<<< HEAD
                 .setDescription("Select a star and give review")
-=======
-                .setDescription("Select a star and give feedback\nOne time per food item per session")
->>>>>>> old/master
                 .setTitleTextColor(R.color.colorPrimary)
                 .setDescriptionTextColor(R.color.colorPrimary)
                 .setHint("Provide Feedback Here")
@@ -417,11 +362,8 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
 
     }
 
-<<<<<<< HEAD
 
 
-=======
->>>>>>> old/master
     private void getDetailFood(String foodId) {
         foods.child(foodId).addValueEventListener(new ValueEventListener() {
             @Override
@@ -432,13 +374,10 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
                 food_price.setText(currentFood.getPrice());
                 food_name.setText(currentFood.getName ());
                 food_description.setText(currentFood.getDescription());
-<<<<<<< HEAD
                 food_video.setText(currentFood.getVideo ());
                 food_recepie.setAutoLinkText(currentFood.getRecepixes()+"\n\n#foodie IF THE INFO NEEDS TO BE" +
                         " UPDATED YOU CAN CONTACT ME ON 7208680470 OR EMAIL ME ON nhlvcam@gmail.com ALL INFO IS FROM" +
                         " @Wikipedia ARTICLES IN  http://www.wikipedia.org ");
-=======
->>>>>>> old/master
 
 
             }
@@ -454,7 +393,6 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
         //upload rating to firebase
         final Rating rating = new Rating(Common.currentUser.getName(),
                 foodId,String.valueOf(value),comments);
-<<<<<<< HEAD
         ratingTbl.push()
                 .setValue(rating)
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -491,33 +429,6 @@ public class FoodDetail extends AppCompatActivity implements RatingDialogListene
 //
 //
 //            });
-=======
-            ratingTbl.child(Common.currentUser.getPhone()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.child(Common.currentUser.getPhone()).exists())
-                    {
-                        //remove old and update
-                        ratingTbl.child(Common.currentUser.getPhone()).removeValue();
-                        ratingTbl.child(Common.currentUser.getPhone()).setValue(rating);
-
-                    }else
-                    {
-                        ratingTbl.child(Common.currentUser.getPhone()).setValue(rating);
-                    }
-                Toast.makeText(FoodDetail.this,"Thank you for your feedback!!",Toast.LENGTH_LONG).show();
-
-                }
-
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-
-
-            });
->>>>>>> old/master
     }
 
     @Override

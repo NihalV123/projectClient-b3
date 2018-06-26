@@ -25,21 +25,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
-<<<<<<< HEAD
 import android.widget.CheckBox;
-=======
->>>>>>> old/master
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.andremion.counterfab.CounterFab;
-<<<<<<< HEAD
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
-=======
->>>>>>> old/master
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -51,13 +45,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.iid.FirebaseInstanceId;
-<<<<<<< HEAD
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.rey.material.widget.Slider;
-=======
-import com.rengwuxian.materialedittext.MaterialEditText;
->>>>>>> old/master
 import com.squareup.picasso.Picasso;
 import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Twitter;
@@ -71,20 +61,12 @@ import java.util.Objects;
 import a123.vaidya.nihal.foodcrunchclient.Common.Common;
 import a123.vaidya.nihal.foodcrunchclient.Database.Database;
 import a123.vaidya.nihal.foodcrunchclient.Interface.ItemClickListener;
-<<<<<<< HEAD
 import a123.vaidya.nihal.foodcrunchclient.Model.Banner;
 import a123.vaidya.nihal.foodcrunchclient.Model.Category;
 import a123.vaidya.nihal.foodcrunchclient.Model.MyResponse;
 //import a123.vaidya.nihal.foodcrunchclient.Model.Notification;
 import a123.vaidya.nihal.foodcrunchclient.Model.Request;
 //import a123.vaidya.nihal.foodcrunchclient.Model.Sender;
-=======
-import a123.vaidya.nihal.foodcrunchclient.Model.Category;
-import a123.vaidya.nihal.foodcrunchclient.Model.MyResponse;
-import a123.vaidya.nihal.foodcrunchclient.Model.Notification;
-import a123.vaidya.nihal.foodcrunchclient.Model.Request;
-import a123.vaidya.nihal.foodcrunchclient.Model.Sender;
->>>>>>> old/master
 import a123.vaidya.nihal.foodcrunchclient.Model.Token;
 import a123.vaidya.nihal.foodcrunchclient.Remote.APIService;
 import a123.vaidya.nihal.foodcrunchclient.ViewHolder.MenuViewHolder;
@@ -101,11 +83,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private FirebaseDatabase database;
     private DatabaseReference category;
     private TextView txtFullName,txtemail,txtPhone;
-<<<<<<< HEAD
     MaterialEditText edtHomeAddress,edtPassword,edtEmail,edtName;
-=======
-    MaterialEditText edtHomeAddress,edtPassword,edtEmail;
->>>>>>> old/master
     //caligraphy font install
     @Override
     protected void attachBaseContext(Context newBase) {
@@ -117,13 +95,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     private SwipeRefreshLayout swipeRefreshLayout;
     private CounterFab fab;
     APIService mAPIService;
-<<<<<<< HEAD
     //slider
     HashMap<String,String>img_list;
     SliderLayout mslider;
 
-=======
->>>>>>> old/master
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -133,10 +108,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 .setFontAttrId(R.attr.fontPath)
                 .build());
         setContentView(R.layout.activity_home);
-<<<<<<< HEAD
 
-=======
->>>>>>> old/master
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("MENU");
         setSupportActionBar(toolbar);
@@ -229,11 +201,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
             }
         });
-<<<<<<< HEAD
         fab.setCount(new Database(this).getCountCart(Common.currentUser.getPhone()));
-=======
-        fab.setCount(new Database(this).getCountCart());
->>>>>>> old/master
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -244,13 +212,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         navigationView.setNavigationItemSelectedListener(this);
 
         View headerView = navigationView.getHeaderView(0);
-<<<<<<< HEAD
         txtFullName = headerView.findViewById(R.id.txtFullName);try{
         txtemail = headerView.findViewById(R.id.txtEmail);}catch (Exception e){}
-=======
-        txtFullName = headerView.findViewById(R.id.txtFullName);
-        txtemail = headerView.findViewById(R.id.txtEmail);
->>>>>>> old/master
         txtPhone = headerView.findViewById(R.id.txtPhone);
         txtFullName.setText(Common.currentUser.getName());//slider name
         txtemail.setText(Common.currentUser.getEmail());
@@ -273,7 +236,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }
         //registeration of notification service
         updateToken(FirebaseInstanceId.getInstance().getToken());
-<<<<<<< HEAD
 
         //set slider call last after inti database or carsh
         setupSlider();
@@ -338,8 +300,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         mslider.setDuration(4000);
 
 
-=======
->>>>>>> old/master
     }
 
 
@@ -412,11 +372,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onResume() {
         super.onResume();
-<<<<<<< HEAD
         fab.setCount(new Database(this).getCountCart(Common.currentUser.getPhone()));
-=======
-        fab.setCount(new Database(this).getCountCart());
->>>>>>> old/master
         loadMenu();
         if (adapter!= null){
         adapter.startListening();}
@@ -428,10 +384,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     protected void onStop() {
         super.onStop();
-<<<<<<< HEAD
         mslider.stopAutoCycle();
-=======
->>>>>>> old/master
         //adapter.stopListening();
     }
 
@@ -458,7 +411,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         if (item.getItemId() == R.id.refresh)
         {
             loadMenu();
-<<<<<<< HEAD
         }else if (item.getItemId() == R.id.menu_search)
         {
             startActivity(new Intent(Home.this,SearchActivity.class));
@@ -467,8 +419,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             Intent tutorial = new Intent(Home.this, Tutorial.class);
             startActivity(tutorial);
 
-=======
->>>>>>> old/master
         }
         return super.onOptionsItemSelected(item);
     }
@@ -501,7 +451,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 sendemailUSER();
                 break;
             }
-<<<<<<< HEAD
             case R.id.nav_list: {
                 final SpotsDialog dialog = new SpotsDialog(Home.this);
                 Intent orderIntent = new Intent(Home.this, TodoList.class);
@@ -515,8 +464,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 dialog.dismiss();
                 break;
             }
-=======
->>>>>>> old/master
             case R.id.nav_about: {
                 final SpotsDialog dialog = new SpotsDialog(Home.this);
                 Intent about = new Intent(Home.this, About.class);
@@ -529,10 +476,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 final SpotsDialog dialog = new SpotsDialog(Home.this);
                 Toast.makeText(Home.this, "Logging out", Toast.LENGTH_LONG).show();
                 Paper.book().destroy();
-<<<<<<< HEAD
 
-=======
->>>>>>> old/master
                 Intent signIn = new Intent(Home.this, Signin.class);
                 signIn.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(signIn);
@@ -541,22 +485,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             }
             case R.id.nav_favorites: {
                 final SpotsDialog dialog = new SpotsDialog(Home.this);
-<<<<<<< HEAD
                 Intent orderIntent = new Intent(Home.this, ShowFavorites.class);
-=======
-                Intent orderIntent = new Intent(Home.this, OrderStatus.class);
->>>>>>> old/master
                 startActivity(orderIntent);
                 dialog.dismiss();
                 break;
             }
-<<<<<<< HEAD
             case R.id.nav_settings: {
                 showSettingsDailog();
                 break;
             }
-=======
->>>>>>> old/master
             case R.id.nav_homeaddress:{
                 showHomeAddressDialog();
                 break;}
@@ -566,12 +503,9 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             case R.id.nav_password:{
                 showChangePasswordDialog();
                 break;}
-<<<<<<< HEAD
             case R.id.nav_name:{
                 showChangeNameDialog();
                 break;}
-=======
->>>>>>> old/master
 
         }
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
@@ -579,7 +513,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         return true;
     }
 
-<<<<<<< HEAD
     private void showSettingsDailog() {
 
         AlertDialog.Builder alertDailog = new AlertDialog.Builder(Home.this);
@@ -669,8 +602,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         alertDialog.show();
     }
 
-=======
->>>>>>> old/master
     private void sendemailUSER() {
         Toast.makeText(Home.this,"Please select the way you want tor recieve detaisl",Toast.LENGTH_LONG).show();
         String[] TO = {Common.currentUser.getEmail().toString()};
@@ -704,7 +635,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         alertDailog.setTitle("CHANGE EMAIL ADDRESS");
         alertDailog.setCancelable(false);
         alertDailog.setIcon(R.drawable.ic_email_black_24dp);
-<<<<<<< HEAD
         alertDailog.setMessage("LOG OUT FOR EFFECT");
         LayoutInflater inflater = LayoutInflater.from(this);
 //        final SpotsDialog dialog1 = new SpotsDialog(Home.this);
@@ -712,18 +642,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         View layout_email = inflater.inflate(R.layout.email_address_layout,null);
         final MaterialEditText edtEmail = layout_email.findViewById(R.id.edtEmailAddress);
         alertDailog.setView(layout_email);
-=======
-        alertDailog.setMessage("One time per session");
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View layout_home = inflater.inflate(R.layout.email_address_layout,null);
-        final MaterialEditText edtEmail = layout_home.findViewById(R.id.edtEmailAddress);
-        alertDailog.setView(layout_home);
->>>>>>> old/master
         alertDailog.setPositiveButton("UPDATE!!", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-<<<<<<< HEAD
                 Map<String, Object> EmailUpdate = new HashMap<>();
                 EmailUpdate.put("email", edtEmail.getText().toString());
                 DatabaseReference user = FirebaseDatabase.getInstance().getReference("User");
@@ -738,31 +660,13 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
                             }
                         });
-=======
-                //set new home address
-                Common.currentUser.setEmail(edtEmail.getText().toString());
-                //update database
-                FirebaseDatabase.getInstance().getReference("User")//this is how to remove user try in future
-                        .child(Common.currentUser.getPhone())
-                        .setValue(Common.currentUser)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(getBaseContext(),"Update address successful",Toast.LENGTH_LONG).show();
-                            }
-                        });
-
->>>>>>> old/master
             }
         });
         alertDailog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
-<<<<<<< HEAD
 
-=======
->>>>>>> old/master
             }
         });
         alertDailog.show();
@@ -773,11 +677,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     alertDialog.setTitle("CHANGE PASSWORD");
     alertDialog.setCancelable(false);
     alertDialog.setIcon(R.drawable.ic_security_black_24dp);
-<<<<<<< HEAD
     alertDialog.setMessage("LOG OUT FOR EFFECT");
-=======
-    alertDialog.setMessage("One time per session");
->>>>>>> old/master
 
         LayoutInflater inflater = LayoutInflater.from(this);
         View email_address_layout = inflater.inflate(R.layout.email_address_layout,null);
@@ -857,7 +757,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         alertDailog.setTitle("CHANGE HOME ADDRESS");
         alertDailog.setCancelable(false);
         alertDailog.setIcon(R.drawable.ic_home_black_24dp);
-<<<<<<< HEAD
         alertDailog.setMessage("LOG OUT FOR EFFECT");
         LayoutInflater inflater = LayoutInflater.from(this);
         View layout_home = inflater.inflate(R.layout.home_address_layout,null);
@@ -887,37 +786,6 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                                 });
                     }
                 });
-=======
-        alertDailog.setMessage("One time per session");
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View layout_home = inflater.inflate(R.layout.home_address_layout,null);
-        final MaterialEditText edtHomeAddress = layout_home.findViewById(R.id.edtHomeAddress);
-        alertDailog.setView(layout_home);
-        alertDailog.setPositiveButton("UPDATE!!", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                //set new home address
-             //   if((edtHomeAddress.getText().toString() != null) &&(!TextUtils.isEmpty((CharSequence) edtHomeAddress)) ){
-                    Common.currentUser.setHomeAddress(edtHomeAddress.getText().toString());
-                    //update database
-                    FirebaseDatabase.getInstance().getReference("User")//this is how to remove user try in future
-                            .child(Common.currentUser.getPhone())
-                            .setValue(Common.currentUser)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    Toast.makeText(getBaseContext(), "Update address successful", Toast.LENGTH_LONG).show();
-                                }
-                            });
-//            }else
-//                {
-//                    Toast.makeText(getBaseContext(), "Email cannot be empty!!", Toast.LENGTH_LONG).show();
-//
-//                }
-                   }
-        });
->>>>>>> old/master
         alertDailog.setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

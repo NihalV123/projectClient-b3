@@ -4,15 +4,12 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
-<<<<<<< HEAD
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Locale;
 
-=======
->>>>>>> old/master
 import a123.vaidya.nihal.foodcrunchclient.Model.Request;
 import a123.vaidya.nihal.foodcrunchclient.Model.User;
 import a123.vaidya.nihal.foodcrunchclient.Remote.APIService;
@@ -26,18 +23,11 @@ import a123.vaidya.nihal.foodcrunchclient.Remote.iGeoCoordinates;
 
 public class Common {
     public static User currentUser;
-<<<<<<< HEAD
     public static String topicName = "News";
     public static Request currentRequest;
     public static final String PHONE_TEXT = "userPhone";
     private static final String BASE_URL = "https://maps.googleapis.com";
     public static final String INTENT_FOOD_ID="FoodId";
-=======
-    public static Request currentRequest;
-    public static final String PHONE_TEXT = "userPhone";
-    private static final String BASE_URL = "https://maps.googleapis.com";
-
->>>>>>> old/master
     private static final String fcmUrl = "https://fcm.googleapis.com";
 
     public static APIService getFCMService()
@@ -88,7 +78,6 @@ public class Common {
 
         return false;
     }
-<<<<<<< HEAD
 
     //convert currency to locale
     public static BigDecimal formatCurrency(String amount, Locale locale)throws ParseException
@@ -98,6 +87,4 @@ public class Common {
             ((DecimalFormat)format).setParseBigDecimal(true);
         return (BigDecimal)format.parse(amount.replace("[^\\d.,]",""));
     }
-=======
->>>>>>> old/master
 }

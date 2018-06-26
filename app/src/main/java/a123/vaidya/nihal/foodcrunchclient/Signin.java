@@ -102,16 +102,10 @@ public class Signin extends AppCompatActivity {
                             //check if user doesnt exist in db
                             if (dataSnapshot.child(edtPhone.getText().toString()).exists()) {
                                 //get user info
-<<<<<<< HEAD
 
                                     User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
 
                                     user.setPhone(edtPhone.getText().toString());
-=======
-                                User user = dataSnapshot.child(edtPhone.getText().toString()).getValue(User.class);
-
-                                user.setPhone(edtPhone.getText().toString());
->>>>>>> old/master
 
                                 if ((Objects.requireNonNull(user).getPassword().equals(edtPasswd.getText().toString()))
                                     //&&(Common.currentUser.getName().equals(edtNmae.getText().toString())) //for verifying name and password
