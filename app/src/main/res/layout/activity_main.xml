@@ -22,6 +22,7 @@
             android:gravity="center"
             android:src="@drawable/untitled" />
 
+<<<<<<< HEAD
         <com.antonionicolaspina.revealtextview.RevealTextView
         android:id="@+id/txtslogan"
         android:layout_width="match_parent"
@@ -43,6 +44,16 @@
 
 
 
+=======
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/txtslogan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/slogan"
+            android:textColor="@android:color/white"
+            android:textSize="25sp" />
+>>>>>>> old/master
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linearLayout3"

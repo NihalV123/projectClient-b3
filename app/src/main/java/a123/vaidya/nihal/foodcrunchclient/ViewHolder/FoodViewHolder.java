@@ -3,7 +3,10 @@ package a123.vaidya.nihal.foodcrunchclient.ViewHolder;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+<<<<<<< HEAD
 import android.widget.RatingBar;
+=======
+>>>>>>> old/master
 import android.widget.TextView;
 
 
@@ -20,8 +23,12 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     public final ImageView food_image;
     public final ImageView fav_image;
     public final ImageView share;
+<<<<<<< HEAD
 //    public final ImageView like;
     public final RatingBar ratingbar;
+=======
+    public final ImageView like;
+>>>>>>> old/master
     public final ImageView add_to_cart;
     private ItemClickListener itemClickListener;
 
@@ -37,8 +44,12 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         food_name = itemView.findViewById(R.id.food_name);
         food_image = itemView.findViewById(R.id.food_image);
         share = itemView.findViewById(R.id.share);
+<<<<<<< HEAD
         ratingbar = itemView.findViewById(R.id.ratingbarrr);
 //        like = itemView.findViewById(R.id.like);
+=======
+        like = itemView.findViewById(R.id.like);
+>>>>>>> old/master
         add_to_cart= itemView.findViewById(R.id.add_to_crat);
         fav_image = itemView.findViewById(R.id.fav);
         food_price = itemView.findViewById(R.id.food_Price);

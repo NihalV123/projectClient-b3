@@ -48,7 +48,11 @@
     <string name="ordersreport">MY ORDER STATUS</string>
     <string name="refresh">REFRESH</string>
     <string name="RememberMe">REMEMBER ME</string>
+<<<<<<< HEAD
     <string name="SecureCode">SECURE CODE FOR PASSWORD RECOVERY</string>
+=======
+    <string name="SecureCode">SECURE CODE</string>
+>>>>>>> old/master
     <string name="forget_pwd"><u>FORGOT YOUR PASSWORD ?</u></string>
     <string name="Please_enter_your_address">ENTER YOUR EMAIL ADDRESS</string>
     <string name="Write_comment">COMMENT HERE</string>
@@ -58,13 +62,21 @@
     <string name="Please_select_a_category">SELECT CATEGORY</string>
     <string name="Todays_Speciality">TODAYS SPECIALITY</string>
     <string name="Your_cart">Long click to remove</string>
+<<<<<<< HEAD
     <string name="Your_orders_from_Today">YOUR ORDER HISTORY TAP FOR MORE</string>
+=======
+    <string name="Your_orders_from_Today">TAP FOR DETAILS</string>
+>>>>>>> old/master
     <string name="SELECT_YOUR_FOOD">SELECT YOUR FOOD !!!</string>
     <string name="product_name">product name</string>
     <string name="product_quantity">product quantity</string>
     <string name="product_discount">product discount</string>
     <string name="product_price">product price</string>
+<<<<<<< HEAD
     <string name="Details">ITEMS IN YOUR ORDER </string>
+=======
+    <string name="Details">DETAILS OF YOUR ORDER </string>
+>>>>>>> old/master
     <string name="enter_your_email">ENTER YOUR EMAIL</string>
     <string name="nhlvcam">nhlvcam@gmail.com</string>
     <string name="enter_your_home_address">ENTER YOUR HOME ADDRESS</string>
@@ -101,6 +113,7 @@
     <string name="ship_to_CurrentLocation">SHIP TO CURRENT LOCATION</string>
     <string name="enter_your_email_addressil">EMAIL ENTER</string>
     <string name="MY_home_address">UPDATE HOME ADDRESS</string>
+<<<<<<< HEAD
     <string name="shopping_list">GRODERY LIST</string>
     <string name="about">ABOUT</string>
     <string name="simsimi_api">627475a9-4868-44fb-b8f8-c791b35f13c5</string>
@@ -145,4 +158,11 @@
     <string name="add_to_cart">ALL YOUR FAVORITES ALL THE TIME TO DELETE SWIPE LEFT</string>
     <string name="favoritelist">YOUR FAVORITES</string>
     <string name="search_all_food_at_once">SEARCH ALL FOOD AT ONCE</string>
+=======
+    <string name="shopping_list">TO DO LIST</string>
+    <string name="about">ABOUT</string>
+    <string name="chat">CHAT</string>
+    <string name="utilities">UTILITIES</string>
+    <string name="tips_and_tricks">TIPS AND TRICKS</string>
+>>>>>>> old/master
 </resources>

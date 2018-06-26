@@ -2,11 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
+<<<<<<< HEAD
     <item android:id="@+id/nav_menu1"
         android:iconTint="@color/white"
         android:icon="@drawable/ic_menu_black_24dp"
         android:title="">
     <menu>
+=======
+
+    <group android:checkableBehavior="single">
+>>>>>>> old/master
         <item
             android:id="@+id/nav_menu"
             android:icon="@drawable/ic_restaurant_black_24dp"
@@ -16,6 +21,7 @@
             android:id="@+id/nav_favorites"
             android:icon="@drawable/ic_star_half_black_24dp"
             android:title="@string/MY_favorites" />
+<<<<<<< HEAD
     </menu></item>
     <item android:id="@+id/nav_menu2"
         android:iconTint="@color/white"
@@ -111,6 +117,68 @@
                 <!--android:title="@string/delete_user_data" />-->
 </menu></item>
 
+=======
+        <item
+            android:id="@+id/nav_homeaddress"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/MY_home_address" />
+        <item
+            android:id="@+id/nav_emailaddress"
+            android:icon="@drawable/ic_email_black_24dp"
+            android:title="@string/chanhe_email_address" />
+        <item
+        android:id="@+id/nav_password"
+        android:icon="@drawable/ic_security_black_24dp"
+        android:title="@string/change_password" />
+
+        <item
+            android:id="@+id/nav_cart"
+            android:icon="@drawable/ic_shopping_cart_black_24dp"
+            android:title="@string/cart" />
+
+        <item
+            android:id="@+id/nav_orders"
+            android:icon="@drawable/ic_access_time_black_24dp"
+            android:title="@string/ordersreport" />
+
+        <item
+            android:id="@+id/nav_utilities"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="@string/utilities" />
+
+
+        <item
+            android:id="@+id/nav_chat"
+            android:icon="@drawable/ic_announcement_black_24dp"
+            android:title="@string/chat" />
+
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_info_black_24dp"
+            android:title="@string/about" />
+
+        <item
+            android:id="@+id/nav_list"
+            android:icon="@drawable/ic_bookmark_black_24dp"
+            android:title="@string/shopping_list" />
+
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_exit_to_app_black_24dp"
+            android:title="@string/sign_out" />
+
+        <item
+            android:id="@+id/nav_send_login_details"
+            android:icon="@drawable/ic_supervisor_account_black_24dp"
+            android:title="RESEND LOGIN" />
+
+        <!--<item-->
+            <!--android:id="@+id/nav_removeuser"-->
+            <!--android:icon="@drawable/ic_delete_forever_black_24dp"-->
+            <!--android:title="@string/delete_user_data" />-->
+    </group>
+>>>>>>> old/master
 
 
 </menu>

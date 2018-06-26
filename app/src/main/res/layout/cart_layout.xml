@@ -10,6 +10,7 @@
     app:cardElevation="4dp"
     >
 
+<<<<<<< HEAD
     <RelativeLayout
         android:id="@+id/viewBackground"
         android:layout_width="match_parent"
@@ -43,6 +44,9 @@
     <LinearLayout
         android:id="@+id/view_foreground"
         android:background="@color/white"
+=======
+    <LinearLayout
+>>>>>>> old/master
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -54,18 +58,28 @@
 
         <ImageView
             android:id="@+id/cartimage"
+<<<<<<< HEAD
             android:layout_width="50dp"
+=======
+            android:layout_width="70dp"
+>>>>>>> old/master
             android:layout_height="80dp"
             android:layout_weight="1"
             android:contentDescription="@string/todo"
             android:src="@drawable/ic_action_name" />
 
         <LinearLayout
+<<<<<<< HEAD
             android:id="@+id/ll1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="7"
             android:minWidth="70dp"
+=======
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="7"
+>>>>>>> old/master
             android:orientation="vertical">
 
             <TextView
@@ -85,7 +99,11 @@
                 android:orientation="horizontal">
 
                 <ImageView
+<<<<<<< HEAD
                     android:layout_width="115dp"
+=======
+                    android:layout_width="0dp"
+>>>>>>> old/master
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:contentDescription="@string/todo"

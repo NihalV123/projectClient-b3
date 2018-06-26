@@ -1,5 +1,6 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
+<<<<<<< HEAD
 import android.content.Context;
 import android.os.AsyncTask;
 import android.support.design.widget.FloatingActionButton;
@@ -83,5 +84,16 @@ public class ChatActivity extends AppCompatActivity {
             CustomAdapter adapter = new CustomAdapter(models,getApplicationContext());
             listView.setAdapter(adapter);
         }
+=======
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class ChatActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_chat);
+>>>>>>> old/master
     }
 }

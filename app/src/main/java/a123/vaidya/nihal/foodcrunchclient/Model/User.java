@@ -9,24 +9,34 @@ public class User {
     private String secureCode;
     private String HomeAddress;
     private String Email;
+<<<<<<< HEAD
     private Object balance;
     private String Extra;
+=======
+>>>>>>> old/master
 
     public User (){
     }
 
+<<<<<<< HEAD
     public User (String name, String password, String secureCode,String homeAddress,String email,
 
                  String extra
     ) {
+=======
+    public User (String name, String password, String secureCode,String homeAddress,String email) {
+>>>>>>> old/master
         Name = name;
         Password = password;
         IsStaff="false";
         this.secureCode = secureCode;
         HomeAddress = homeAddress;
         Email = email;
+<<<<<<< HEAD
 
         Extra = extra;
+=======
+>>>>>>> old/master
     }
 
     public String getHomeAddress() {
@@ -86,6 +96,7 @@ public class User {
     }
 
 
+<<<<<<< HEAD
     public String getExtra() {
         return Extra;
     }
@@ -102,3 +113,6 @@ public class User {
         this.balance = balance;
     }
 }
+=======
+}
+>>>>>>> old/master

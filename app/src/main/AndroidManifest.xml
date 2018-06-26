@@ -3,6 +3,7 @@
     package="a123.vaidya.nihal.foodcrunchclient">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+<<<<<<< HEAD
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
@@ -49,6 +50,8 @@
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
 
+=======
+>>>>>>> old/master
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
@@ -59,17 +62,24 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
         <activity android:name=".SplashScreen">
 
 
+=======
+        <activity android:name=".MainActivity">
+>>>>>>> old/master
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".MyIntro" />
+=======
+>>>>>>> old/master
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -108,19 +118,30 @@
 
         <activity android:name=".OrderDetail" />
 
+<<<<<<< HEAD
         <!--<service-->
             <!--android:name=".Remote.RetrofitGoogleApi"-->
             <!--android:enabled="true"-->
             <!--android:exported="true" />-->
+=======
+        <service
+            android:name=".Remote.RetrofitGoogleApi"
+            android:enabled="true"
+            android:exported="true" />
+>>>>>>> old/master
 
         <activity android:name=".ShowComment" />
         <activity android:name=".ShowFavorites" />
         <activity android:name=".Utilities" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".About" />
+<<<<<<< HEAD
         <activity android:name=".TodoList" />
         <activity android:name=".SearchActivity" />
         <activity android:name=".Tutorial" />
+=======
+        <activity android:name=".TodoList"></activity>
+>>>>>>> old/master
     </application>
 
 </manifest>

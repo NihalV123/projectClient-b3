@@ -1,5 +1,6 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
+<<<<<<< HEAD
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -193,4 +194,16 @@ public class TodoList extends AppCompatActivity {
        // dbHelper.clearTask();
     }
 
+=======
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class TodoList extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_todo_list);
+    }
+>>>>>>> old/master
 }

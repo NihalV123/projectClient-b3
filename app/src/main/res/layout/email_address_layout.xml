@@ -18,9 +18,15 @@
             android:layout_height="wrap_content"
             android:id="@+id/edtEmailAddress"
             android:hint="@string/enter_your_email_address"
+<<<<<<< HEAD
             android:text=""
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
+=======
+            android:text="@string/nhlvcam"
+            android:textColor="@color/colorPrimary"
+            android:textSize="36sp"
+>>>>>>> old/master
             android:gravity="center"
             android:inputType="textMultiLine"
             app:met_baseColor="@color/colorPrimary"

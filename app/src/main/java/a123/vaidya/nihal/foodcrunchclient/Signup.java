@@ -31,7 +31,10 @@ public class Signup extends AppCompatActivity {
     private MaterialEditText edtNmae;
     private MaterialEditText edtPhone;
     private MaterialEditText edtPasswd;
+<<<<<<< HEAD
     public Double edtBalance = 100.0;
+=======
+>>>>>>> old/master
     private MaterialEditText edtSecureCode;
     MaterialEditText edtEmail;
     MaterialEditText edtHomeAddress;
@@ -53,7 +56,10 @@ public class Signup extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         edtEmail= findViewById(R.id.edtEmail);
         edtNmae= findViewById(R.id.edtName);
+<<<<<<< HEAD
 
+=======
+>>>>>>> old/master
         edtHomeAddress= findViewById(R.id.edtHomeAddress);
         edtPasswd= findViewById(R.id.edtPasswd1);
         edtPhone= findViewById(R.id.edtPhone);
@@ -93,6 +99,7 @@ public class Signup extends AppCompatActivity {
                             } else {
                                 Toast.makeText(Signup.this, "Select the way you want to be notified",
                                         Toast.LENGTH_SHORT).show();
+<<<<<<< HEAD
                                 User user = new User(edtNmae.getText().toString(),
                                         edtPasswd.getText().toString(),
                                         edtSecureCode.getText().toString(),
@@ -106,6 +113,14 @@ public class Signup extends AppCompatActivity {
                                 //user.setBalance(100.0);
                                 user.setPhone(edtPhone.getText().toString());
                                 user.setExtra("EXTRA");
+=======
+                                User user = new User(edtNmae.getText().toString(), edtPasswd.getText().toString(),
+                                        edtSecureCode.getText().toString(),
+                                        edtHomeAddress.getText().toString(),
+                                        edtEmail.getText().toString()
+
+                                        );
+>>>>>>> old/master
                                 table_user.child(edtPhone.getText().toString()).setValue(user);
                                 DatabaseReference myRef = database.getReference("message");
 
@@ -159,3 +174,7 @@ public class Signup extends AppCompatActivity {
     }
 
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> old/master

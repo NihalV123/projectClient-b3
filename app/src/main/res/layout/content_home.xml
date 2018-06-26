@@ -22,7 +22,11 @@
         android:layout_height="wrap_content"
         android:background="@color/transparentBlack"
         android:gravity="center"
+<<<<<<< HEAD
         android:paddingTop="60dp"
+=======
+        android:paddingTop="65dp"
+>>>>>>> old/master
         android:text="@string/EMPTY_LIST"
         android:textColor="@color/white"
         android:textSize="25sp" />
@@ -32,7 +36,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+<<<<<<< HEAD
         android:paddingTop="49dp"
+=======
+        android:paddingTop="55dp"
+>>>>>>> old/master
         android:scrollbars="vertical"
         tools:layout_editor_absoluteY="300dp">
 
@@ -41,6 +49,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+<<<<<<< HEAD
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -54,17 +63,28 @@
             android:paddingLeft="20dp"
             android:src="@drawable/ic_local_dining_black_24dp"
             android:tint="@color/white" />
+=======
+
+>>>>>>> old/master
         <TextView
         android:id="@+id/txtmanconetnthome"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
 
+=======
+        android:background="@color/transparentBlack"
+>>>>>>> old/master
         android:gravity="center"
         android:text="@string/Please_select_a_category"
         android:textColor="@color/white"
         android:textSize="25sp" />
 
+<<<<<<< HEAD
     </LinearLayout>
+=======
+
+>>>>>>> old/master
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

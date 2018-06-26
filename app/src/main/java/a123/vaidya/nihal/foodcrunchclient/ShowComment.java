@@ -1,5 +1,6 @@
 package a123.vaidya.nihal.foodcrunchclient;
 
+<<<<<<< HEAD
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -147,5 +148,16 @@ public class ShowComment extends AppCompatActivity {
     recyclerView.setAdapter(adapter);
     swipeRefreshLayout.setRefreshing(false);
 
+=======
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
+public class ShowComment extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_show_comment);
+>>>>>>> old/master
     }
 }

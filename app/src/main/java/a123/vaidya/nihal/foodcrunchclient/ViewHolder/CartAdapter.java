@@ -1,7 +1,10 @@
 package a123.vaidya.nihal.foodcrunchclient.ViewHolder;
 
+<<<<<<< HEAD
 import android.app.Activity;
 import android.content.Context;
+=======
+>>>>>>> old/master
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextMenu;
@@ -13,8 +16,11 @@ import android.widget.TextView;
 
 import com.amulyakhare.textdrawable.TextDrawable;
 import com.cepheuen.elegantnumberbutton.view.ElegantNumberButton;
+<<<<<<< HEAD
 import com.facebook.CallbackManager;
 import com.facebook.share.widget.ShareDialog;
+=======
+>>>>>>> old/master
 import com.squareup.picasso.Picasso;
 
 import java.text.NumberFormat;
@@ -33,6 +39,7 @@ import a123.vaidya.nihal.foodcrunchclient.R;
  * Created by nnnn on 27/12/2017.
  */
 
+<<<<<<< HEAD
 
 
 public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
@@ -43,6 +50,50 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
     private TextView textView;
     private final Cart cart;
 
+=======
+class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,View.OnCreateContextMenuListener {
+
+    public TextView txt_cart_name;
+    public final TextView txt_price;
+    public final ImageView img_cart_count;
+    public final ElegantNumberButton add_to_cart;
+    public ImageView cart_image;
+    private ItemClickListener itemClickListener;
+
+    public void setTxt_cart_name(TextView txt_cart_name) {
+        this.txt_cart_name = txt_cart_name;
+    }
+
+    public CartViewHolder(View itemView) {
+        super(itemView);
+        txt_cart_name= (TextView) itemView.findViewById(R.id.cart_item_name);
+        txt_price= (TextView) itemView.findViewById(R.id.cart_item_Price);
+        img_cart_count= (ImageView) itemView.findViewById(R.id.cart_item_count);
+        add_to_cart =(ElegantNumberButton) itemView.findViewById(R.id.cart_number);
+        cart_image = (ImageView) itemView.findViewById(R.id.cartimage);
+        itemView.setOnCreateContextMenuListener(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("Select Action");
+        menu.add(0,0,getAdapterPosition(), Common.DELETE);
+    }
+}
+
+public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
+
+    private List<Order> listData;
+    private final Cart cart;
+
+
+
+>>>>>>> old/master
     public CartAdapter(List<Order> listData, Cart cart) {
         this.listData = listData;
         this.cart = cart;
@@ -52,9 +103,12 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
     public CartViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(cart);
         View itemView = inflater.inflate(R.layout.cart_layout,parent,false);
+<<<<<<< HEAD
 //        new CallbackManager.Factory();
 //        callbackManager = CallbackManager.Factory.create();
 //        shareDialog = new ShareDialog((Activity) context);
+=======
+>>>>>>> old/master
         return new CartViewHolder(itemView);
     }
 
@@ -79,7 +133,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
 
                 //update total on button press
                 int total = 0;
+<<<<<<< HEAD
                 List<Order> orders = new Database(cart).getCarts(Common.currentUser.getPhone());
+=======
+                List<Order> orders = new Database(cart).getCarts();
+>>>>>>> old/master
                 for(Order item:orders)
                     total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
                 Locale locale = new Locale("en","BU");
@@ -103,6 +161,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
     public int getItemCount() {
         return listData.size();
     }
+<<<<<<< HEAD
 
     public Order getItem(int position)
     {
@@ -123,4 +182,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder>{
         notifyItemInserted(position);
 
     }
+=======
+>>>>>>> old/master
 }

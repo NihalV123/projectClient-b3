@@ -2,6 +2,7 @@ package a123.vaidya.nihal.foodcrunchclient.Model;
 
 
 public class Food {
+<<<<<<< HEAD
     private String FoodId,Name,Image,Description,Price,Discount,MenuId,Email,Video,Recepixes,rateValue;
     private Double Quantity;
     public Food() {
@@ -12,6 +13,14 @@ public class Food {
                 Double quantity
     ) {
         FoodId = foodId;
+=======
+    private String Name,Image,Description,Price,Discount,MenuId,Email,Video,Recepixes;
+
+    public Food() {
+    }
+
+    public Food(String name, String image, String description, String price, String discount, String menuId, String email, String video, String recepixes) {
+>>>>>>> old/master
         Name = name;
         Image = image;
         Description = description;
@@ -21,8 +30,11 @@ public class Food {
         Email = email;
         Video = video;
         Recepixes = recepixes;
+<<<<<<< HEAD
         Quantity = quantity;
 
+=======
+>>>>>>> old/master
     }
 
     public String getName() {
@@ -33,6 +45,7 @@ public class Food {
         Name = name;
     }
 
+<<<<<<< HEAD
     public Double getQuantity() {
         return Quantity;
     }
@@ -49,6 +62,8 @@ public class Food {
         FoodId = foodId;
     }
 
+=======
+>>>>>>> old/master
     public String getImage() {
         return Image;
     }
@@ -65,6 +80,7 @@ public class Food {
         Description = description;
     }
 
+<<<<<<< HEAD
     public String getRateValue() {
         return rateValue;
     }
@@ -73,6 +89,8 @@ public class Food {
         this.rateValue = rateValue;
     }
 
+=======
+>>>>>>> old/master
     public String getPrice() {
         return Price;
     }
