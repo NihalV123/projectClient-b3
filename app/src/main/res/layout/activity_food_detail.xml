@@ -3,9 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+<<<<<<< HEAD
     android:background="@drawable/background"
     android:layout_height="match_parent"
     tools:context="a123.vaidya.nihal.foodcrunchclient.FoodDetail">
+=======
+    android:layout_height="match_parent"
+    tools:context="com.nihalvaidya123.foodcrunch.FoodDetail">
+>>>>>>> old3/master
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -33,6 +38,7 @@
                 />
 
             <android.support.v7.widget.Toolbar
+<<<<<<< HEAD
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
@@ -40,15 +46,30 @@
                 app:layout_collapseMode="parallax"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
+=======
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:id="@+id/toolbar"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                app:layout_collapseMode="parallax"
+                android:title="@string/food_name">
+>>>>>>> old3/master
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.CollapsingToolbarLayout>
 
     </android.support.design.widget.AppBarLayout>
 
+<<<<<<< HEAD
     <com.andremion.counterfab.CounterFab
         android:id="@+id/btnCart"
         android:layout_width="60dp"
         android:layout_height="60dp"
+=======
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/btnCart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+>>>>>>> old3/master
         android:layout_gravity="bottom"
         android:src="@drawable/ic_shopping_cart_black_24dp"
         app:elevation="6dp"
@@ -57,7 +78,10 @@
         app:pressedTranslationZ="12dp"
         app:useCompatPadding="true" />
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> old3/master
 <android.support.v4.widget.NestedScrollView
     android:layout_width="match_parent"
     android:id="@+id/nestedScrollView"
@@ -73,21 +97,34 @@
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:layout_margin="2dp"
         app:cardCornerRadius="2dp"
         app:cardElevation="4dp"
+=======
+        app:cardElevation="5dp"
+>>>>>>> old3/master
         app:cardUseCompatPadding="true"
         >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:orientation="vertical">
 
 
             <TextView
                 android:id="@+id/food_name"
                 android:layout_width="wrap_content"
+=======
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/food_name"
+                android:layout_width="300dp"
+>>>>>>> old3/master
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:padding="12dp"
@@ -106,6 +143,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:contentDescription="@string/todo"
+<<<<<<< HEAD
                     android:src="@drawable/ic_action_name" />
 
                 <TextView
@@ -114,6 +152,16 @@
                     android:layout_height="match_parent"
                     android:layout_weight="9"
                     android:text="@string/_100"
+=======
+                    android:src="@drawable/ic_attach_money_black_24dp" />
+
+                <TextView
+                    android:id="@+id/food_price"
+                    android:layout_width="97dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="9"
+                    android:text="@string/_9000"
+>>>>>>> old3/master
                     android:textColor="@color/colorPrimary"
                     android:textSize="25sp"
                     android:textStyle="bold" />
@@ -123,13 +171,21 @@
 
             <com.cepheuen.elegantnumberbutton.view.ElegantNumberButton
                 android:id="@+id/number_button"
+<<<<<<< HEAD
                 android:layout_width="150dp"
+=======
+                android:layout_width="179dp"
+>>>>>>> old3/master
                 android:layout_height="60dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 app:backGroundColor="@color/colorAccent"
+<<<<<<< HEAD
                 app:finalNumber="100"
+=======
+                app:finalNumber="50"
+>>>>>>> old3/master
                 app:initialNumber="1"
                 app:textSize="13sp"
 
@@ -147,14 +203,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardUseCompatPadding="true"
+<<<<<<< HEAD
             android:layout_margin="2dp"
             app:cardCornerRadius="2dp"
             app:cardElevation="4dp"
+=======
+            app:cardElevation="5dp"
+>>>>>>> old3/master
             >
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+<<<<<<< HEAD
                 android:id="@+id/food_descriptio"
                 android:layout_marginTop="10dp"
                 android:lineSpacingMultiplier="1.5"
@@ -304,6 +365,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/food_video"
                 android:visibility="gone"
+=======
+                android:id="@+id/food_description"
+>>>>>>> old3/master
                 android:layout_marginTop="10dp"
                 android:lineSpacingMultiplier="1.5"
                 android:padding="10dp"
@@ -312,6 +376,10 @@
                 android:textSize="14sp"
                 />
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> old3/master
         </android.support.v7.widget.CardView>
 
     </LinearLayout>

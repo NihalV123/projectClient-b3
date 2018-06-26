@@ -5,12 +5,20 @@ buildscript {
     repositories {
         google()
         jcenter()
+<<<<<<< HEAD
         mavenCentral()
         maven { url 'https://mave.google.com' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0-beta01'
         classpath 'com.google.gms:google-services:3.2.0'
+=======
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.google.gms:google-services:3.1.0'
+        
+>>>>>>> old3/master
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -24,7 +32,11 @@ allprojects {
         mavenCentral()
         maven { url 'https://jitpack.io' }
         maven { url 'https://maven.fabric.io/public' }
+<<<<<<< HEAD
         maven { url 'https://github.com/500px/greedo-layout-for-android/raw/master/releases/' }
+=======
+
+>>>>>>> old3/master
     }
 }
 

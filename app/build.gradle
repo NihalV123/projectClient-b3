@@ -3,6 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
     defaultConfig {
+<<<<<<< HEAD
         applicationId "a123.vaidya.nihal.foodcrunchclient"
         minSdkVersion 21
         targetSdkVersion 27
@@ -11,6 +12,14 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled true
+=======
+        applicationId "com.nihalvaidya123.foodcrunch"
+        minSdkVersion 19
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+>>>>>>> old3/master
     }
     buildTypes {
         release {
@@ -18,6 +27,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+<<<<<<< HEAD
     packagingOptions {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
         exclude 'META-INF/rxjava.properties'
@@ -162,3 +172,53 @@ dependencies {
 
 }
 apply plugin: 'com.google.gms.google-services'
+=======
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.cepheuen.elegant-number-button:lib:1.0.2'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.support:design:27.0.2'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    implementation 'info.hoang8f:fbutton:1.0.5'
+    implementation 'com.google.firebase:firebase-database:11.8.0'
+    implementation 'com.google.firebase:firebase-core:11.8.0'
+    implementation 'com.rengwuxian.materialedittext:library:2.1.4'
+    implementation 'com.google.firebase:firebase-auth:11.8.0'
+    implementation 'com.google.firebase:firebase-firestore:11.8.0'
+    implementation 'com.google.firebase:firebase-storage:11.8.0'
+    implementation 'com.google.firebase:firebase-crash:11.8.0'
+    implementation 'com.google.firebase:firebase-messaging:11.8.0'
+    implementation 'com.google.firebase:firebase-invites:11.8.0'
+    implementation 'com.google.firebase:firebase-ads:11.8.0'
+    implementation 'com.google.firebase:firebase-appindexing:11.8.0'
+    implementation 'com.google.firebase:firebase-perf:11.8.0'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.firebaseui:firebase-ui-database:1.2.0'
+    implementation 'com.android.support:gridlayout-v7:27.0.2'
+    implementation 'com.google.android.gms:play-services-maps:11.8.0'
+    implementation 'com.android.support:cardview-v7:27.0.2'
+    implementation "com.amulyakhare:com.amulyakhare.textdrawable:1.0.1"
+    implementation "com.muddzdev:styleabletoast:1.0.8"
+    implementation "com.github.mancj:MaterialSearchBar:0.7.1"
+    implementation "com.readystatesoftware.sqliteasset:sqliteassethelper:2.0.1"
+}
+
+
+
+
+
+
+
+
+
+apply plugin: 'com.google.gms.google-services'
+>>>>>>> old3/master
