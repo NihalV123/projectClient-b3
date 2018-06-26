@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 include ':app'
+=======
+include ':app', ':linkedin-sdk', ':eventsapp', ':sampleapp'
+>>>>>>> old1/master

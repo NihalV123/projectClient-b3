@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
 <<<<<<< HEAD
+<<<<<<< HEAD
     tools:context="a123.vaidya.nihal.foodcrunchclient.MainActivity">
 
     <LinearLayout
@@ -15,6 +16,8 @@
         android:orientation="vertical"
         android:paddingBottom="20dp"
 =======
+=======
+>>>>>>> old1/master
     tools:context="com.nihalvaidya123.foodcrunch.MainActivity">
 
     <LinearLayout
@@ -24,12 +27,16 @@
         android:layout_centerInParent="true"
         android:orientation="vertical"
         android:paddingBottom="200dp"
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
         android:paddingTop="10dp">
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/appCompatImageView"
             android:layout_width="match_parent"
+<<<<<<< HEAD
 <<<<<<< HEAD
             android:layout_height="200dp"
             android:gravity="center"
@@ -58,6 +65,8 @@
 
     </LinearLayout>
 =======
+=======
+>>>>>>> old1/master
             android:layout_height="166dp"
             android:gravity="center"
             android:paddingLeft="10dp"
@@ -113,11 +122,15 @@
 
     </LinearLayout>
 
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
 <<<<<<< HEAD
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
@@ -151,6 +164,8 @@
         <info.hoang8f.widget.FButton
             android:id="@+id/btnSignup"
 =======
+=======
+>>>>>>> old1/master
         android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
         android:gravity="bottom"
@@ -195,11 +210,15 @@
 
         <info.hoang8f.widget.FButton
             android:id="@+id/btntest3"
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
+<<<<<<< HEAD
 <<<<<<< HEAD
             android:text="@string/Signup"
             android:textColor="@android:color/white"
@@ -211,12 +230,16 @@
         <info.hoang8f.widget.FButton
             android:id="@+id/btnSignin"
 =======
+=======
+            android:paddingRight="75dp"
+>>>>>>> old1/master
             android:text="@string/test3"
             android:textColor="@android:color/white"
             app:buttonColor="@color/colorAccent"
             app:shadowColor="@android:color/black"
             app:shadowHeight="5dp" />
 
+<<<<<<< HEAD
         <info.hoang8f.widget.FButton
             android:id="@+id/btntest4"
 >>>>>>> old3/master
@@ -309,6 +332,15 @@
     <!--</LinearLayout>-->
 
 =======
+=======
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="20dp" />
+    </LinearLayout>
+
+>>>>>>> old1/master
     <LinearLayout
         android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
@@ -374,10 +406,17 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
+<<<<<<< HEAD
             android:text="@string/test8"
+=======
+            android:text="qr code test"
+>>>>>>> old1/master
             android:textColor="@android:color/white"
             app:shadowColor="@android:color/black"
             app:shadowHeight="5dp" />
     </LinearLayout>
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
 </RelativeLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -160,6 +161,8 @@
     </RelativeLayout>
 </android.support.v4.widget.SwipeRefreshLayout>
 =======
+=======
+>>>>>>> old1/master
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -232,4 +235,7 @@
     </android.support.v7.widget.CardView>
 
 </RelativeLayout>
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master

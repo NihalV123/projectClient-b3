@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 <<<<<<< HEAD
+<<<<<<< HEAD
     <item android:id="@+id/nav_menu1"
         android:iconTint="@color/white"
         android:icon="@drawable/ic_menu_black_24dp"
@@ -12,10 +13,15 @@
 
     <group android:checkableBehavior="single">
 >>>>>>> old3/master
+=======
+
+    <group android:checkableBehavior="single">
+>>>>>>> old1/master
         <item
             android:id="@+id/nav_menu"
             android:icon="@drawable/ic_restaurant_black_24dp"
             android:title="@string/menu" />
+<<<<<<< HEAD
 <<<<<<< HEAD
 
         <item
@@ -119,6 +125,8 @@
 
 
 =======
+=======
+>>>>>>> old1/master
             <!--android:iconTint="@android:color/white"-->
 
 
@@ -163,6 +171,9 @@
                 <!--android:title="Send" />-->
         <!--</menu>-->
     <!--</item>-->
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
 
 </menu>

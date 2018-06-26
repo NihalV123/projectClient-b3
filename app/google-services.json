@@ -1,20 +1,27 @@
 {
   "project_info": {
 <<<<<<< HEAD
+<<<<<<< HEAD
     "project_number": "967134510557",
     "firebase_url": "https://foodcrunchproject.firebaseio.com",
     "project_id": "foodcrunchproject",
     "storage_bucket": "foodcrunchproject.appspot.com"
 =======
+=======
+>>>>>>> old1/master
     "project_number": "753189746480",
     "firebase_url": "https://foodcrunch-d6e64.firebaseio.com",
     "project_id": "foodcrunch-d6e64",
     "storage_bucket": "foodcrunch-d6e64.appspot.com"
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
   },
   "client": [
     {
       "client_info": {
+<<<<<<< HEAD
 <<<<<<< HEAD
         "mobilesdk_app_id": "1:967134510557:android:a5127ca7726ac8db",
         "android_client_info": {
@@ -24,40 +31,59 @@
         "android_client_info": {
           "package_name": "com.nihalvaidya123.foodcrunch"
 >>>>>>> old3/master
+=======
+        "mobilesdk_app_id": "1:753189746480:android:64d09084ab2420bb",
+        "android_client_info": {
+          "package_name": "com.nihalvaidya123.foodcrunch"
+>>>>>>> old1/master
         }
       },
       "oauth_client": [
         {
+<<<<<<< HEAD
 <<<<<<< HEAD
           "client_id": "967134510557-n4r1hr1nt881osgfdi5ds6jn6ai8v0bu.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "a123.vaidya.nihal.foodcrunchclient",
 =======
+=======
+>>>>>>> old1/master
           "client_id": "753189746480-nkhu03v2uvop0a9rhjtr7kp0g0r30l74.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.nihalvaidya123.foodcrunch",
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
             "certificate_hash": "77b7e434212a0d9bd7d08c33c071d862b7257a04"
           }
         },
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
           "client_id": "967134510557-m1avh10sh5k287ha5t6nkgl0ivob5b9a.apps.googleusercontent.com",
 =======
           "client_id": "753189746480-iq3tv9gi8rbl5cj23p0je2pqo8l4fq5v.apps.googleusercontent.com",
 >>>>>>> old3/master
+=======
+          "client_id": "753189746480-iq3tv9gi8rbl5cj23p0je2pqo8l4fq5v.apps.googleusercontent.com",
+>>>>>>> old1/master
           "client_type": 3
         }
       ],
       "api_key": [
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
           "current_key": "AIzaSyDDbKaZ6MzfDGKKoFeBoT3qsJ4ghcvGWsI"
 =======
           "current_key": "AIzaSyBNkTEjQGHM4ch-OICDbBogLEmwBbIiqwU"
 >>>>>>> old3/master
+=======
+          "current_key": "AIzaSyBNkTEjQGHM4ch-OICDbBogLEmwBbIiqwU"
+>>>>>>> old1/master
         }
       ],
       "services": {
@@ -69,10 +95,14 @@
           "other_platform_oauth_client": [
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
               "client_id": "967134510557-m1avh10sh5k287ha5t6nkgl0ivob5b9a.apps.googleusercontent.com",
 =======
               "client_id": "753189746480-iq3tv9gi8rbl5cj23p0je2pqo8l4fq5v.apps.googleusercontent.com",
 >>>>>>> old3/master
+=======
+              "client_id": "753189746480-iq3tv9gi8rbl5cj23p0je2pqo8l4fq5v.apps.googleusercontent.com",
+>>>>>>> old1/master
               "client_type": 3
             }
           ]

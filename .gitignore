@@ -2,6 +2,7 @@
 .gradle
 /local.properties
 <<<<<<< HEAD
+<<<<<<< HEAD
 /.idea/libraries
 /.idea/modules.xml
 /.idea/workspace.xml
@@ -9,6 +10,10 @@
 /.idea/workspace.xml
 /.idea/libraries
 >>>>>>> old3/master
+=======
+/.idea/workspace.xml
+/.idea/libraries
+>>>>>>> old1/master
 .DS_Store
 /build
 /captures

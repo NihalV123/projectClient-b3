@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 <<<<<<< HEAD
+<<<<<<< HEAD
     package="a123.vaidya.nihal.foodcrunchclient">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -63,11 +64,40 @@
     <application
         android:allowBackup="true"
 >>>>>>> old3/master
+=======
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.nihalvaidya123.foodcrunch"
+    tools:ignore="MissingLeanbackLauncher">
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera"
+        android:required="false" />
+    <uses-feature android:name="android.hardware.camera2"
+        android:required="false" />
+    <uses-feature android:name="android.hardware.camera.autofocus"
+        android:required="false" />
+    <uses-feature
+        android:name="android.software.leanback"
+        android:required="false" />
+    <uses-feature
+        android:name="android.hardware.touchscreen"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <application
+        android:allowBackup="true"
+>>>>>>> old1/master
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+<<<<<<< HEAD
 <<<<<<< HEAD
         <activity android:name=".SplashScreen">
 
@@ -75,6 +105,8 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 =======
+=======
+>>>>>>> old1/master
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -86,11 +118,15 @@
                 <data
                     android:host="java-lang-programming"
                     android:scheme="android-app-google-plus-demo" />
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
 <<<<<<< HEAD
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".MyIntro" />
@@ -105,12 +141,15 @@
         <!-- </meta-data> -->
 =======
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
         <activity android:name=".Signin" />
         <activity android:name=".Signup" />
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
             android:theme="@style/AppTheme.NoActionBar" />
+<<<<<<< HEAD
 <<<<<<< HEAD
         <activity android:name=".Cart" />
         <activity android:name=".FoodList" />
@@ -154,6 +193,13 @@
         <activity android:name=".Cart" />
         <activity android:name=".OrderStatus"></activity>
 >>>>>>> old3/master
+=======
+        <activity android:name=".FoodList" />
+        <activity android:name=".FoodDetail" />
+        <activity android:name=".Cart" />
+        <activity android:name=".OrderStatus" />
+        <activity android:name=".qrMainActivity"></activity>
+>>>>>>> old1/master
     </application>
 
 </manifest>

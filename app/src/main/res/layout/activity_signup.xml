@@ -6,10 +6,14 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
 <<<<<<< HEAD
+<<<<<<< HEAD
     tools:context="a123.vaidya.nihal.foodcrunchclient.Signup">
 =======
     tools:context="com.nihalvaidya123.foodcrunch.Signup">
 >>>>>>> old3/master
+=======
+    tools:context="com.nihalvaidya123.foodcrunch.Signup">
+>>>>>>> old1/master
 
 
     <LinearLayout
@@ -17,19 +21,27 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 <<<<<<< HEAD
+<<<<<<< HEAD
         android:layout_alignParentTop="true"
 =======
         android:layout_alignParentBottom="true"
 >>>>>>> old3/master
+=======
+        android:layout_alignParentBottom="true"
+>>>>>>> old1/master
         android:layout_centerInParent="true"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:orientation="vertical"
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
         android:paddingBottom="200dp"
 >>>>>>> old3/master
+=======
+        android:paddingBottom="200dp"
+>>>>>>> old1/master
         android:weightSum="2">
 
 
@@ -40,6 +52,7 @@
             android:hint="@string/enter_your_phone_number"
             android:inputType="phone"
 <<<<<<< HEAD
+<<<<<<< HEAD
             android:text=""
             android:textColor="@android:color/white"
             android:textSize="24sp"
@@ -49,18 +62,24 @@
             app:met_maxCharacters="12"
             app:met_minCharacters="10"
 =======
+=======
+>>>>>>> old1/master
             android:text="@string/_7208680470"
             android:textColor="@android:color/white"
             android:textSize="40sp"
             app:met_baseColor="@android:color/white"
             app:met_floatingLabel="highlight"
             app:met_maxCharacters="11"
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
             app:met_primaryColor="@android:color/white"
             app:met_singleLineEllipsis="true" />
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/edtName"
+<<<<<<< HEAD
 <<<<<<< HEAD
             android:gravity="center"
             android:layout_width="match_parent"
@@ -164,6 +183,8 @@
             app:met_primaryColor="@android:color/white"
             app:met_singleLineEllipsis="true" />
 =======
+=======
+>>>>>>> old1/master
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/enter_your_name"
@@ -193,11 +214,15 @@
             app:met_primaryColor="@android:color/white"
             app:met_singleLineEllipsis="true" />
 
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
 
     </LinearLayout>
 
     <info.hoang8f.widget.FButton
+<<<<<<< HEAD
 <<<<<<< HEAD
         android:id="@+id/btnSignup"
         android:layout_width="match_parent"
@@ -212,6 +237,8 @@
         app:shadowColor="@android:color/black"
         app:shadowHeight="5dp" />
 =======
+=======
+>>>>>>> old1/master
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnSignup"
@@ -225,7 +252,10 @@
         app:buttonColor="@color/colorAccent"
         app:shadowHeight="5dp"
         />
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
 
 
 

@@ -1,8 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #!/usr/bin/env sh
 =======
 #!/usr/bin/env bash
 >>>>>>> old3/master
+=======
+#!/usr/bin/env bash
+>>>>>>> old1/master
 
 ##############################################################################
 ##
@@ -10,6 +14,7 @@
 ##
 ##############################################################################
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # Attempt to set APP_HOME
 # Resolve links: $0 may be a link
@@ -32,10 +37,15 @@ cd "$SAVED" >/dev/null
 # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
 DEFAULT_JVM_OPTS=""
 >>>>>>> old3/master
+=======
+# Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
+DEFAULT_JVM_OPTS=""
+>>>>>>> old1/master
 
 APP_NAME="Gradle"
 APP_BASE_NAME=`basename "$0"`
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 # Add default JVM options here. You can also use JAVA_OPTS and GRADLE_OPTS to pass JVM options to this script.
 DEFAULT_JVM_OPTS=""
@@ -49,6 +59,8 @@ warn () {
 
 die () {
 =======
+=======
+>>>>>>> old1/master
 # Use the maximum available, or set MAX_FD != -1 to use that value.
 MAX_FD="maximum"
 
@@ -57,7 +69,10 @@ warn ( ) {
 }
 
 die ( ) {
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
     echo
     echo "$*"
     echo
@@ -69,9 +84,12 @@ cygwin=false
 msys=false
 darwin=false
 <<<<<<< HEAD
+<<<<<<< HEAD
 nonstop=false
 =======
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
 case "`uname`" in
   CYGWIN* )
     cygwin=true
@@ -83,12 +101,15 @@ case "`uname`" in
     msys=true
     ;;
 <<<<<<< HEAD
+<<<<<<< HEAD
   NONSTOP* )
     nonstop=true
     ;;
 esac
 
 =======
+=======
+>>>>>>> old1/master
 esac
 
 # Attempt to set APP_HOME
@@ -109,7 +130,10 @@ cd "`dirname \"$PRG\"`/" >/dev/null
 APP_HOME="`pwd -P`"
 cd "$SAVED" >/dev/null
 
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
 CLASSPATH=$APP_HOME/gradle/wrapper/gradle-wrapper.jar
 
 # Determine the Java command to use to start the JVM.
@@ -136,10 +160,14 @@ fi
 
 # Increase the maximum file descriptors if we can.
 <<<<<<< HEAD
+<<<<<<< HEAD
 if [ "$cygwin" = "false" -a "$darwin" = "false" -a "$nonstop" = "false" ] ; then
 =======
 if [ "$cygwin" = "false" -a "$darwin" = "false" ] ; then
 >>>>>>> old3/master
+=======
+if [ "$cygwin" = "false" -a "$darwin" = "false" ] ; then
+>>>>>>> old1/master
     MAX_FD_LIMIT=`ulimit -H -n`
     if [ $? -eq 0 ] ; then
         if [ "$MAX_FD" = "maximum" -o "$MAX_FD" = "max" ] ; then
@@ -205,6 +233,7 @@ if $cygwin ; then
 fi
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Escape application args
 save () {
     for i do printf %s\\n "$i" | sed "s/'/'\\\\''/g;1s/^/'/;\$s/\$/' \\\\/" ; done
@@ -222,6 +251,8 @@ fi
 
 exec "$JAVACMD" "$@"
 =======
+=======
+>>>>>>> old1/master
 # Split up the JVM_OPTS And GRADLE_OPTS values into an array, following the shell quoting and substitution rules
 function splitJvmOpts() {
     JVM_OPTS=("$@")
@@ -230,4 +261,7 @@ eval splitJvmOpts $DEFAULT_JVM_OPTS $JAVA_OPTS $GRADLE_OPTS
 JVM_OPTS[${#JVM_OPTS[*]}]="-Dorg.gradle.appname=$APP_BASE_NAME"
 
 exec "$JAVACMD" "${JVM_OPTS[@]}" -classpath "$CLASSPATH" org.gradle.wrapper.GradleWrapperMain "$@"
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master

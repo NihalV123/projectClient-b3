@@ -9,6 +9,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+<<<<<<< HEAD
+=======
+            <option value="$PROJECT_DIR$/eventsapp" />
+            <option value="$PROJECT_DIR$/linkedin-sdk" />
+            <option value="$PROJECT_DIR$/sampleapp" />
+>>>>>>> old1/master
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -6,15 +6,20 @@
     android:layout_height="match_parent"
     android:background="@drawable/background"
 <<<<<<< HEAD
+<<<<<<< HEAD
     tools:context="a123.vaidya.nihal.foodcrunchclient.Signin">
 =======
     tools:context="com.nihalvaidya123.foodcrunch.Signin">
 >>>>>>> old3/master
+=======
+    tools:context="com.nihalvaidya123.foodcrunch.Signin">
+>>>>>>> old1/master
 
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
 <<<<<<< HEAD
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
@@ -89,6 +94,8 @@
 
         </LinearLayout>
 =======
+=======
+>>>>>>> old1/master
         android:layout_centerInParent="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="10dp"
@@ -146,13 +153,17 @@
             app:met_primaryColor="@android:color/white"
             app:met_singleLineEllipsis="true"
             />
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
 
 
     </LinearLayout>
 
 
     <info.hoang8f.widget.FButton
+<<<<<<< HEAD
 <<<<<<< HEAD
         android:id="@+id/btnSignin"
         android:layout_width="match_parent"
@@ -166,6 +177,8 @@
         app:shadowColor="@android:color/black"
         app:shadowHeight="5dp" />
 =======
+=======
+>>>>>>> old1/master
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btnSignin"
@@ -178,7 +191,10 @@
         app:shadowColor="@android:color/black"
         app:shadowHeight="5dp"
         />
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
 
 
 

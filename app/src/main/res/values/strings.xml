@@ -1,5 +1,6 @@
 <resources>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <string name="app_name">Food Crunch Client</string>
     <string name="slogan">No matter the time or place we will find you and we will feed you!</string>
     <string name="Signup">no account ? SIGN UP !</string>
@@ -9,6 +10,8 @@
     <string name="enter_your_name">ENTER YOUR NAME</string>
     <string name="enter_your_password">ENTER PASSWORD</string>
 =======
+=======
+>>>>>>> old1/master
     <string name="app_name">FoodCrunch</string>
     <string name="slogan">No matter the time or place we will find you and we will feed you!</string>
     <string name="Signup">no account ? SIGN UP !</string>
@@ -17,7 +20,10 @@
     <string name="_7208680470">7208680470</string>
     <string name="enter_your_name">Enter your Name</string>
     <string name="enter_your_password">Enter Password</string>
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
     <string name="_11111111">11111111</string>
     <string name="test1">sign in with   .   .   .google</string>
     <string name="test2">sign in with facebook</string>
@@ -29,12 +35,20 @@
     <string name="test8">test8</string>
     <string name="title_activity_home">Home</string>
 
+<<<<<<< HEAD
+=======
+    <string name="com.twitter.sdk.android.CONSUMER_KEY">	6ep60jj09lvUcHncYM3yCoIMr</string>
+    <string name="com.twitter.sdk.android.CONSUMER_SECRET">	WXvH93jw1urHD9IzIk6FDRmKW0X5LGZgmMCDo67XFk2uDf2LGJ
+</string>
+
+>>>>>>> old1/master
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="food_crunch">Food Crunch</string>
     <string name="name_of_food">Name of Food</string>
     <string name="name_of_menu">Name of Menu</string>
     <string name="nihal">Nihal</string>
+<<<<<<< HEAD
 <<<<<<< HEAD
     <string name="menu">MENU</string>
     <string name="cart">MY CART</string>
@@ -158,6 +172,8 @@
     <string name="favoritelist">YOUR FAVORITES</string>
     <string name="search_all_food_at_once">SEARCH ALL FOOD AT ONCE</string>
 =======
+=======
+>>>>>>> old1/master
     <string name="menu">Menu</string>
     <string name="cart">Cart</string>
     <string name="orders">Orders</string>
@@ -176,5 +192,8 @@
     <string name="_11111">11111</string>
     <string name="b_604_mai_bhuvan_dadi_seth_rd_malad_west_mumbai_maharashtra">B/604,Mai Bhuvan Dadi Seth Rd Malad West Mumbai Maharashtra</string>
     <string name="status">status</string>
+<<<<<<< HEAD
 >>>>>>> old3/master
+=======
+>>>>>>> old1/master
 </resources>

@@ -7,6 +7,7 @@
     <color name="Signup">#39796b</color>
     <color name="btnSignin">#A9d440</color>
 <<<<<<< HEAD
+<<<<<<< HEAD
     <color name="Signup2">#e74c3c</color>
     <color name="btnSignin2">#c0392b</color>
 
@@ -19,4 +20,9 @@
     <color name="overlayBackground">#7f333639</color>
     <color name="overlayActionBar">#0e0d0e</color>
 >>>>>>> old3/master
+=======
+
+    <color name="overlayBackground">#7f333639</color>
+    <color name="overlayActionBar">#0e0d0e</color>
+>>>>>>> old1/master
 </resources>

@@ -1,5 +1,9 @@
 package com.nihalvaidya123.foodcrunch;
 
+<<<<<<< HEAD
+=======
+import android.content.Intent;
+>>>>>>> old1/master
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,6 +19,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+<<<<<<< HEAD
+=======
+import com.nihalvaidya123.foodcrunch.Common.Common;
+>>>>>>> old1/master
 import com.nihalvaidya123.foodcrunch.Model.User;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -66,9 +74,20 @@ public class Signup extends AppCompatActivity {
                             table_user.child(edtPhone.getText().toString()).setValue(user);
                             DatabaseReference myRef = database.getReference("message");
 
+<<<<<<< HEAD
                             myRef.setValue("everythink ok");
                             Toast.makeText(Signup.this, "SIGN UP successfull welcome to the crew!", Toast.LENGTH_SHORT).show();
                             finish();
+=======
+
+
+                            myRef.setValue("everythink ok");
+                            Toast.makeText(Signup.this, "SIGN UP successfull welcome to the crew!", Toast.LENGTH_SHORT).show();
+                            Intent homeIntent = new Intent(Signup.this,Home.class);
+                            Common.currentUser = user;
+                            startActivity(homeIntent);
+                           // finish();
+>>>>>>> old1/master
                         }
                     }
 
@@ -84,6 +103,7 @@ public class Signup extends AppCompatActivity {
         mAuth =FirebaseAuth.getInstance();
 
 
+<<<<<<< HEAD
 
     }
 //private void registerUser(){
@@ -100,5 +120,8 @@ public class Signup extends AppCompatActivity {
 //                break;
 //        }
 //    }
+=======
+    }
+>>>>>>> old1/master
 }
 
