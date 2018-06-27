@@ -490,10 +490,10 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 dialog.dismiss();
                 break;
             }
-            case R.id.nav_settings: {
-                showSettingsDailog();
-                break;
-            }
+//            case R.id.nav_settings: {
+//                showSettingsDailog();
+//                break;
+//            }
             case R.id.nav_homeaddress:{
                 showHomeAddressDialog();
                 break;}

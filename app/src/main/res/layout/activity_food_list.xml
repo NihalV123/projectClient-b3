@@ -3,30 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@color/fbutton_color_green_sea"
     android:id="@+id/rootLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="a123.vaidya.nihal.foodcrunchclient.FoodList">
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:background="@drawable/background"
+        android:orientation="vertical"
+        android:background="@color/fbutton_color_green_sea"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="135dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-
-            android:background="@color/transparentBlack"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:text="@string/EMPTY_LIST"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
         <com.mancj.materialsearchbar.MaterialSearchBar
             android:id="@+id/searchBar"
             android:layout_width="match_parent"
@@ -35,7 +21,49 @@
             app:mt_hint="Enter the name of your food!"
             app:mt_speechMode="false">
 
+            <com.andremion.counterfab.CounterFab
+                android:id="@+id/fab"
+                android:layout_width="76dp"
+                android:layout_height="55dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_gravity="bottom|end"
+                android:layout_marginTop="100dp"
+                android:src="@drawable/ic_shopping_cart_black_24dp"
+                android:visibility="gone" />
+
         </com.mancj.materialsearchbar.MaterialSearchBar>
+
+        <LinearLayout
+            android:id="@+id/q23"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/searchBar"
+            android:background="@color/transparentBlack"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/transparentBlack"
+                android:paddingLeft="20dp"
+                android:src="@drawable/ic_view_list_black_24dp"
+                android:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/textViewcatid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:background="@color/transparentBlack"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:text="@string/add_to_cart_fav_list_quickly"
+                android:textColor="@color/white"
+                android:textSize="25sp" />
+
+        </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_food"
@@ -47,47 +75,6 @@
 
         </android.support.v7.widget.RecyclerView>
 
-        <com.andremion.counterfab.CounterFab
-            android:id="@+id/fab"
-            android:layout_width="76dp"
-            android:layout_height="55dp"
-            android:layout_marginTop="100dp"
-            android:layout_gravity="bottom|end"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_shopping_cart_black_24dp" />
-
-        <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-            android:id="@+id/q23"
-        android:layout_below="@+id/searchBar"
-        android:background="@color/transparentBlack"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:background="@color/transparentBlack"
-            android:paddingLeft="20dp"
-            android:src="@drawable/ic_view_list_black_24dp"
-            android:tint="@color/white"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:id="@+id/textViewcatid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/transparentBlack"
-            android:layout_alignParentStart="true"
-            android:gravity="center"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp"
-            android:text="@string/add_to_cart_fav_list_quickly"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    </LinearLayout>
 
 </android.support.v4.widget.SwipeRefreshLayout>

@@ -2,18 +2,18 @@
 <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/swipelayout2"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:padding="15dp"
+    android:background="@color/fbutton_color_green_sea"
+    android:padding="5dp"
     tools:context="a123.vaidya.nihal.foodcrunchclient.Cart">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/background"
-        android:padding="2dp">
+        android:background="@color/fbutton_color_green_sea"
+        android:orientation="vertical">
 
         <info.hoang8f.widget.FButton
             android:id="@+id/btnClerCart"
@@ -25,84 +25,43 @@
             app:shadowColor="@android:color/black"
             app:shadowHeight="5dp" />
 
+        <!--<TextView-->
+            <!--android:id="@+id/txtmanconetnthom3e"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@color/transparentBlack"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/EMPTY_LIST"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="25sp"-->
+            <!--android:visibility="invisible" />-->
+
         <TextView
-            android:id="@+id/txtmanconetnthom3e"
+            android:id="@+id/txtmanconesdstnthome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/transparentBlack"
             android:gravity="center"
-            android:paddingTop="150dp"
-            android:text="@string/EMPTY_LIST"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:text="@string/Your_cart"
             android:textColor="@color/white"
             android:textSize="25sp" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="45dp">
-
-            <LinearLayout
-                android:id="@+id/q23"
-                android:layout_width="40dp"
-                android:layout_height="79dp"
-                android:layout_marginEnd="15dp"
-                android:background="@color/transparentBlack"
-
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@color/transparentBlack"
-                    android:src="@drawable/ic_touch_app_black_24dp"
-                    android:tint="@color/white" />
-
-                <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@color/transparentBlack"
-                    android:paddingTop="15dp"
-                    android:src="@drawable/ic_subdirectory_arrow_left_black_24dp"
-                    android:tint="@color/white" />
-
-            </LinearLayout>
-            <TextView
-                android:id="@+id/txtmanconesdstnthome"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/transparentBlack"
-                android:gravity="center"
-           android:layout_marginLeft="40dp"
-                android:paddingRight="10dp"
-                android:text="@string/Your_cartS"
-                android:textColor="@color/white"
-                android:textSize="25sp" />
-        </RelativeLayout>
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/listCart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true"
-            android:background="@android:color/transparent"
-            android:paddingBottom="130dp"
-            android:paddingTop="140dp">
-
-        </android.support.v7.widget.RecyclerView>
-
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="120dp"
-            android:layout_margin="2dp"
-            android:layout_alignParentStart="true"
+            android:layout_height="130dp"
+            android:layout_alignParentStart="false"
             android:layout_alignParentBottom="true"
+            android:layout_margin="2dp"
+            android:minHeight="30dp"
             app:cardBackgroundColor="@color/colorPrimary"
             app:cardCornerRadius="25dp"
             app:cardElevation="4dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -141,10 +100,10 @@
                     android:id="@+id/btnPlaceOrder"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
                     android:layout_margin="5dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_alignParentBottom="true"
                     android:text="@string/place_order"
                     android:textColor="@android:color/white"
                     android:textSize="30dp"
@@ -156,5 +115,15 @@
 
         </android.support.v7.widget.CardView>
 
-    </RelativeLayout>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/listCart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:background="@android:color/transparent"
+            android:minHeight="200dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
 </android.support.v4.widget.SwipeRefreshLayout>

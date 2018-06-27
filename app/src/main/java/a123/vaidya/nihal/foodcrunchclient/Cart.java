@@ -350,8 +350,8 @@ public class Cart extends AppCompatActivity implements GoogleApiClient.Connectio
     private void showAlertDailog() {
 
         AlertDialog.Builder alertdailog = new AlertDialog.Builder(Cart.this);
-        alertdailog.setTitle("One Last Step!!");
-        alertdailog.setMessage("Enter address or select option");
+//        alertdailog.setTitle("One Last Step!!");
+//        alertdailog.setMessage("Enter address or select option");
         alertdailog.setCancelable(false);
 
         final LayoutInflater inflater = this.getLayoutInflater();

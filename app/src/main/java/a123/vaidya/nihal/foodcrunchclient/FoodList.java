@@ -242,7 +242,7 @@ public class FoodList extends AppCompatActivity {
 
              //search
                 materialSearchBar = findViewById(R.id.searchBar);
-                textView = findViewById(R.id.textView3);
+
                 textView = findViewById(R.id.textView2);
                 materialSearchBar.setHint("Enter the name of your food");
 //        materialSearchBar.setSpeechMode(false);
