@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/task_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/example"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+<android.support.v7.widget.LinearLayoutCompat
+    android:layout_width="wrap_content"
+    android:layout_alignParentEnd="true"
+    android:layout_height="wrap_content">
+
+    <info.hoang8f.widget.FButton
+        android:id="@+id/btndelete2"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColorHighlight="@color/fbutton_color_orange"
+        android:text="@string/delete"
+        android:onClick="deleteTask"
+        android:textColor="@android:color/white"
+        app:shadowColor="@android:color/black"
+        app:shadowHeight="5dp" />
+
+
+
+</android.support.v7.widget.LinearLayoutCompat>
+
+</RelativeLayout>
